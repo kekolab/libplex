@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'eclipse'
 }
 
 repositories {
@@ -19,4 +20,6 @@ repositories {
 dependencies {
     implementation group: 'org.jboss.resteasy', name: 'resteasy-client', version: '6.0.0.Final'
     implementation group: 'org.jboss.resteasy', name: 'resteasy-jaxb-provider', version: '6.0.0.Final'
+    
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.8.2'
 }

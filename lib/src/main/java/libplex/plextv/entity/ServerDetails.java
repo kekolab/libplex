@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.NONE)
-public class MediaContainer_Server {
+public class ServerDetails {
 
 @XmlAttribute private int size;
 @XmlAttribute private int allowCameraUpload;

@@ -1,15 +1,31 @@
 package libplex.plextv.entity;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttachmentRef;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
-public class Directory {
-    @XmlAttribute private int count;
-    @XmlAttribute private String key;
-    @XmlAttribute private String title;
+@XmlJavaTypeAdapter(DirectoryAdapter.class)
+public abstract class Directory {
+    private int count;
+    private String key;
+    private String title;
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+    
+    
+    
 }
