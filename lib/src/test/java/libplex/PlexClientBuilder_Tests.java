@@ -8,10 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import libplex.Plex.Builder;
-import libplex.plextv.entity.Directory;
-import libplex.plextv.entity.LibraryDetails;
-import libplex.plextv.entity.LibraryDirectory;
-import libplex.plextv.entity.Server;
+import libplex.plextv.entity.RemotelyAccessibleServerInfo;
 
 class PlexClientBuilder_Tests {
 	private Builder builder;
@@ -28,21 +25,12 @@ class PlexClientBuilder_Tests {
 
 	@Test
 	void tests() throws IOException {
-		List<Server> servers = plex.fetchMyPlex()
+		List<RemotelyAccessibleServerInfo> servers = plex.fetchMyPlex()
 				.getServers();
-		for (Server server : servers) {
-			LibraryDetails ld = server.fetchDetails()
-					.getDirectories()
-					.stream()
-					.filter(d -> d instanceof LibraryDirectory)
-					.map(d -> (LibraryDirectory) d)
-					.findAny()
-					.get()
-					.fetchDetails();
-			for (Directory<?> d : ld.getDirectories()) {
-				d.fetchDetails();
-			}
-		}
+		System.out.println(servers.get(0)
+				.server()
+				.library()
+				.getArt());
 	}
 
 	@Test

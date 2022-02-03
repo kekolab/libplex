@@ -17,109 +17,110 @@ import libplex.plextv.entity.MyPlex;
 import libplex.plextv.entity.User;
 
 public class Plex implements AutoCloseable {
-    private Client client;
-
-    private Plex(Client client, String xPlexToken) {
-	this.client = client;
-	this.client.register((ClientRequestFilter) requestContext -> {
-	    URI updatedUri = UriBuilder.fromUri(requestContext.getUri())
-		    .queryParam("X-Plex-Token", xPlexToken)
-		    .build();
-	    requestContext.setUri(updatedUri);
-	});
-    }
-
-    public MyPlex fetchMyPlex() {
-	MyPlex myPlex = client.target("https://plex.tv/pms/servers.xml")
-		.request()
-		.get(MyPlex.class);
-	myPlex.getServers()
-		.forEach(s -> s.setClient(client));
-	return myPlex;
-    }
-
-    @Override
-    public void close() {
-	client.close();
-    }
-
-    public static class Builder {
 	private Client client;
 
-	public Builder(String plexProduct, String plexVersion, String plexClientIdentifier) {
-	    this.client = ClientBuilder.newClient()
-		    .register((ClientRequestFilter) requestContext -> {
-			MultivaluedMap<String, Object> headers = requestContext.getHeaders();
-			headers.add("X-Plex-Product", plexProduct);
-			headers.add("X-Plex-Version", plexVersion);
-			headers.add("X-Plex-Client-Identifier", plexClientIdentifier);
-		    })
-		    .register((ClientResponseFilter) (requestContext, responseContext) -> {
-			String payload = IOUtils.toString(responseContext.getEntityStream(), "UTF-8");
-			responseContext.setEntityStream(IOUtils.toInputStream(payload, "UTF-8"));
-			System.out.println(payload);
-		    });
+	private Plex(Client client, String xPlexToken) {
+		this.client = client;
+		this.client.register((ClientRequestFilter) requestContext -> {
+			URI updatedUri = UriBuilder.fromUri(requestContext.getUri())
+					.queryParam("X-Plex-Token", xPlexToken)
+					.build();
+			requestContext.setUri(updatedUri);
+		});
 	}
 
-	public Builder setPlexPlatform(String plexPlatform) {
-	    this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
-		    .putSingle("X-Plex-Platform", plexPlatform));
-	    return this;
+	public MyPlex fetchMyPlex() {
+		MyPlex myPlex = client.target("https://plex.tv/pms/servers.xml")
+				.request()
+				.get(MyPlex.class);
+		myPlex.getServers()
+				.stream()
+				.forEach(s -> s.setClient(client));
+		return myPlex;
 	}
 
-	public Builder setPlexPlatformVersion(String plexPlatformVersion) {
-	    this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
-		    .putSingle("X-Plex-Platform-Version", plexPlatformVersion));
-	    return this;
+	@Override
+	public void close() {
+		client.close();
 	}
 
-	/**
-	 * 
-	 * @param plexProvides or more of [player, controller, server]
-	 * @return
-	 */
-	public Builder addPlexProvides(String plexProvides) {
-	    this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
-		    .add("X-Plex-Provides", plexProvides));
-	    return this;
-	}
+	public static class Builder {
+		private Client client;
 
-	public Builder setPlexDevice(String plexDevice) {
-	    this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
-		    .add("X-Plex-Device", plexDevice));
-	    return this;
-	}
+		public Builder(String plexProduct, String plexVersion, String plexClientIdentifier) {
+			this.client = ClientBuilder.newClient()
+					.register((ClientRequestFilter) requestContext -> {
+						MultivaluedMap<String, Object> headers = requestContext.getHeaders();
+						headers.add("X-Plex-Product", plexProduct);
+						headers.add("X-Plex-Version", plexVersion);
+						headers.add("X-Plex-Client-Identifier", plexClientIdentifier);
+					})
+					.register((ClientResponseFilter) (requestContext, responseContext) -> {
+						String payload = IOUtils.toString(responseContext.getEntityStream(), "UTF-8");
+						responseContext.setEntityStream(IOUtils.toInputStream(payload, "UTF-8"));
+						System.out.println(payload);
+					});
+		}
 
-	public Builder setPlexDeviceName(String plexDeviceName) {
-	    this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
-		    .add("X-Plex-Device-Name", plexDeviceName));
-	    return this;
-	}
+		public Builder setPlexPlatform(String plexPlatform) {
+			this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
+					.putSingle("X-Plex-Platform", plexPlatform));
+			return this;
+		}
 
-	public Plex signIn(String username, char[] password) {
-	    Form form = new Form().param("user[login]", username)
-		    .param("user[password]", new String(password));
-	    User user = client.target("https://plex.tv/users/sign_in.xml")
-		    .request()
-		    .post(Entity.form(form), User.class);
-	    return withAuthenticationToken(user.getAuthenticationToken());
-	}
+		public Builder setPlexPlatformVersion(String plexPlatformVersion) {
+			this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
+					.putSingle("X-Plex-Platform-Version", plexPlatformVersion));
+			return this;
+		}
 
-	public Plex withAuthenticationToken(String authenticationToken) {
-	    return new Plex(client, authenticationToken);
-	}
+		/**
+		 * 
+		 * @param plexProvides or more of [player, controller, server]
+		 * @return
+		 */
+		public Builder addPlexProvides(String plexProvides) {
+			this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
+					.add("X-Plex-Provides", plexProvides));
+			return this;
+		}
 
-	public Pin requestPIN() {
-	    return client.target("https://plex.tv/pins.xml")
-		    .request()
-		    .post(null, Pin.class);
-	}
+		public Builder setPlexDevice(String plexDevice) {
+			this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
+					.add("X-Plex-Device", plexDevice));
+			return this;
+		}
 
-	public Pin verifyPin(int pinId) {
-	    return client.target("https://plex.tv/pins/".concat(Integer.toString(pinId))
-		    .concat(".xml"))
-		    .request()
-		    .get(Pin.class);
+		public Builder setPlexDeviceName(String plexDeviceName) {
+			this.client.register((ClientRequestFilter) requestContext -> requestContext.getHeaders()
+					.add("X-Plex-Device-Name", plexDeviceName));
+			return this;
+		}
+
+		public Plex signIn(String username, char[] password) {
+			Form form = new Form().param("user[login]", username)
+					.param("user[password]", new String(password));
+			User user = client.target("https://plex.tv/users/sign_in.xml")
+					.request()
+					.post(Entity.form(form), User.class);
+			return withAuthenticationToken(user.getAuthenticationToken());
+		}
+
+		public Plex withAuthenticationToken(String authenticationToken) {
+			return new Plex(client, authenticationToken);
+		}
+
+		public Pin requestPIN() {
+			return client.target("https://plex.tv/pins.xml")
+					.request()
+					.post(null, Pin.class);
+		}
+
+		public Pin verifyPin(int pinId) {
+			return client.target("https://plex.tv/pins/".concat(Integer.toString(pinId))
+					.concat(".xml"))
+					.request()
+					.get(Pin.class);
+		}
 	}
-    }
 }
