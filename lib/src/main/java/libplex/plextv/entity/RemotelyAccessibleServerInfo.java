@@ -3,6 +3,7 @@ package libplex.plextv.entity;
 import java.io.IOException;
 import java.net.URI;
 import java.security.cert.X509Certificate;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -13,6 +14,7 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -26,10 +28,13 @@ public class RemotelyAccessibleServerInfo {
 	@XmlAttribute private String host;
 	@XmlAttribute private String localAddresses;
 	@XmlAttribute private String machineIdentifier;
-	@XmlAttribute private long createdAt;
-	@XmlAttribute private long updatedAt;
+	@XmlAttribute
+	@XmlJavaTypeAdapter(TimestampAdapter.class) private Date createdAt;
+	@XmlAttribute
+	@XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
 	@XmlAttribute private int owned;
 	@XmlAttribute private int synced;
+
 	private URI baseUri;
 	private Client client;
 

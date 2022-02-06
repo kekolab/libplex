@@ -34,7 +34,7 @@ class PlexClientBuilder_Tests {
 				.sections()
 				.artistSections()
 				.get(0)
-				.searchForTracks("Bruno");
+				.searchForTracks("don't");
 		System.out.println();
 	}
 
