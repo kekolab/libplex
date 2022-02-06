@@ -58,12 +58,9 @@ public class RemotelyAccessibleServerInfo {
 	}
 
 	public Server server() throws IOException {
-		Server server = client.target(uri())
+		return new Server(client.target(uri())
 				.request()
-				.get(Server.class);
-		server.setUri(uri());
-		server.setClient(client);
-		return server;
+				.get(MediaContainer.class), uri(), client);
 	}
 
 	public void setClient(Client client) {

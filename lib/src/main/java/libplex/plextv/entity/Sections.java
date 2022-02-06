@@ -5,48 +5,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jakarta.ws.rs.client.Client;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "MediaContainer")
-@XmlAccessorType(XmlAccessType.NONE)
-public class Sections implements MediaContainer {
-	@XmlAttribute private int size;
-	@XmlAttribute private int allowSync;
-	@XmlAttribute private String identifier;
-	@XmlAttribute private String mediaTagPrefix;
-	@XmlAttribute private String mediaTagVersion;
-	@XmlAttribute private String title1;
-	@XmlElement(name = "Directory") private List<Directory<? extends MediaContainer>> directories;
+public class Sections implements Parent {
+	private int size;
+	private int allowSync;
+	private String identifier;
+	private String mediaTagPrefix;
+	private int mediaTagVersion;
+	private String title1;
+	private Location location;
 
-	private Client client;
-	private Server server;
+	private MediaContainer mc;
 	private URI uri;
-	private List<Directory<ArtistSection>> artistSections;
+	private Server server;
+	private Client client;
 
-	public List<Directory<ArtistSection>> artistSections() {
-		if (artistSections == null) {
-			artistSections = directories.stream()
-					.filter(d -> d.getType()
-							.equals("artist"))
-					.map(d -> {
-						Directory<ArtistSection> das = (Directory<ArtistSection>) d;
-						das.setClient(client);
-						das.setParent(this);
-						das.setServer(server);
-						return das;
-					})
-					.collect(Collectors.toList());
-		}
-		return artistSections;
-	}
-
-	@Override
-	public void setUri(URI uri) {
+	public Sections(MediaContainer mc, URI uri, Server server, Client client) {
+		this.mc = mc;
 		this.uri = uri;
+		this.server = server;
+		this.client = client;
 	}
 
 	@Override
@@ -54,59 +32,26 @@ public class Sections implements MediaContainer {
 		return uri;
 	}
 
-	@Override
-	public void setClient(Client client) {
-		this.client = client;
+	public List<ArtistSection> artistSections() {
+		return mc.getDirectories()
+				.stream()
+				.filter(d -> "artist".equals(d.getType()))
+				.map(d -> {
+					MediaContainer mc = d.get(this, server, MediaContainer.class, client);
+					return new ArtistSection(mc, d.getUri(), server, client);
+				})
+				.collect(Collectors.toList());
 	}
 
-	@Override
-	public Server getServer() {
-		return server;
-	}
-
-	@Override
-	public void setServer(Server server) {
-		this.server = server;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	public int getAllowSync() {
-		return allowSync;
-	}
-
-	public void setAllowSync(int allowSync) {
-		this.allowSync = allowSync;
-	}
-
-	public String getIdentifier() {
-		return identifier;
-	}
-
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
-
-	public String getMediaTagPrefix() {
-		return mediaTagPrefix;
-	}
-
-	public void setMediaTagPrefix(String mediaTagPrefix) {
-		this.mediaTagPrefix = mediaTagPrefix;
-	}
-
-	public String getMediaTagVersion() {
-		return mediaTagVersion;
-	}
-
-	public void setMediaTagVersion(String mediaTagVersion) {
-		this.mediaTagVersion = mediaTagVersion;
+	public List<MovieSection> movieSections() {
+		return mc.getDirectories()
+				.stream()
+				.filter(d -> "movie".equals(d.getType()))
+				.map(d -> {
+					MediaContainer mc = d.get(this, server, MediaContainer.class, client);
+					return new MovieSection(mc, d.getUri(), server, client);
+				})
+				.collect(Collectors.toList());
 	}
 
 }
