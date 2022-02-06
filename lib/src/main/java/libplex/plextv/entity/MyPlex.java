@@ -2,6 +2,7 @@ package libplex.plextv.entity;
 
 import java.util.List;
 
+import jakarta.ws.rs.client.Client;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -11,13 +12,20 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.NONE)
 public class MyPlex {
-	private String friendlyName;
-	private String identifier;
-	private String machineIdentifier;
-	private int size;
-	private List<RemotelyAccessibleServerInfo> servers;
+	@XmlAttribute private String friendlyName;
+	@XmlAttribute private String identifier;
+	@XmlAttribute private String machineIdentifier;
+	@XmlAttribute private int size;
+	@XmlElement(name = "Server") private List<RemotelyAccessibleServerInfo> servers;
 
-	@XmlAttribute
+	private Client client;
+	private boolean serversInitialised;
+
+	public MyPlex setClient(Client client) {
+		this.client = client;
+		return this;
+	}
+
 	public String getFriendlyName() {
 		return friendlyName;
 	}
@@ -26,7 +34,6 @@ public class MyPlex {
 		this.friendlyName = friendlyName;
 	}
 
-	@XmlAttribute
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -35,7 +42,6 @@ public class MyPlex {
 		this.identifier = identifier;
 	}
 
-	@XmlAttribute
 	public String getMachineIdentifier() {
 		return machineIdentifier;
 	}
@@ -44,7 +50,6 @@ public class MyPlex {
 		this.machineIdentifier = machineIdentifier;
 	}
 
-	@XmlAttribute
 	public int getSize() {
 		return size;
 	}
@@ -53,8 +58,11 @@ public class MyPlex {
 		this.size = size;
 	}
 
-	@XmlElement(name = "Server")
 	public List<RemotelyAccessibleServerInfo> getServers() {
+		if (!serversInitialised) {
+			servers.forEach(s -> s.setClient(client));
+			serversInitialised = true;
+		}
 		return servers;
 	}
 

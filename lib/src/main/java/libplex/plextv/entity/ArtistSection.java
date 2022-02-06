@@ -12,38 +12,42 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.NONE)
-public class Library implements MediaContainer {
+public class ArtistSection implements MediaContainer {
 	@XmlAttribute private int size;
 	@XmlAttribute private int allowSync;
 	@XmlAttribute private String art;
 	@XmlAttribute private String content;
 	@XmlAttribute private String identifier;
+	@XmlAttribute private int librarySectionID;
 	@XmlAttribute private String mediaTagPrefix;
 	@XmlAttribute private String mediaTagVersion;
+	@XmlAttribute private int nocache;
+	@XmlAttribute private String thumb;
 	@XmlAttribute private String title1;
-	@XmlAttribute private String title2;
-	@XmlElement(name = "Directory") private List<Directory<?>> directories;
-
+	@XmlAttribute private String viewGroup;
+	@XmlAttribute private int viewMode;
+	@XmlElement(name = "Directory") List<Directory<? extends MediaContainer>> directories;
 	private URI uri;
-	private Client client;
 	private Server server;
-	private Directory<Sections> sectionsDirectory;
+	private Client client;
+	private SearchDirectory<Tracks> searchTracks;
 
-	public Directory<Sections> sections() {
-		if (sectionsDirectory == null)
-			sectionsDirectory = directories.stream()
-					.filter(d -> d.getKey()
-							.equals("sections"))
+	public SearchDirectory<Tracks> searchTracks() {
+		if (searchTracks == null) {
+			searchTracks = directories.stream()
+					.filter(d -> "Search for Tracks".equals(d.getPrompt()))
 					.map(d -> {
-						Directory<Sections> ds = (Directory<Sections>) d;
-						ds.setClient(client);
-						ds.setParent(this);
-						ds.setServer(server);
-						return ds;
+						SearchDirectory<Tracks> sd = new SearchDirectory<>();
+						sd.setClient(client);
+						sd.setParent(this);
+						sd.setServer(server);
+						sd.setKey(d.getKey());
+						return sd;
 					})
 					.findAny()
 					.orElse(null);
-		return sectionsDirectory;
+		}
+		return searchTracks;
 	}
 
 	@Override
@@ -59,6 +63,16 @@ public class Library implements MediaContainer {
 	@Override
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	@Override
+	public Server getServer() {
+		return server;
+	}
+
+	@Override
+	public void setServer(Server server) {
+		this.server = server;
 	}
 
 	public int getSize() {
@@ -101,6 +115,14 @@ public class Library implements MediaContainer {
 		this.identifier = identifier;
 	}
 
+	public int getLibrarySectionID() {
+		return librarySectionID;
+	}
+
+	public void setLibrarySectionID(int librarySectionID) {
+		this.librarySectionID = librarySectionID;
+	}
+
 	public String getMediaTagPrefix() {
 		return mediaTagPrefix;
 	}
@@ -117,6 +139,22 @@ public class Library implements MediaContainer {
 		this.mediaTagVersion = mediaTagVersion;
 	}
 
+	public int getNocache() {
+		return nocache;
+	}
+
+	public void setNocache(int nocache) {
+		this.nocache = nocache;
+	}
+
+	public String getThumb() {
+		return thumb;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
 	public String getTitle1() {
 		return title1;
 	}
@@ -125,22 +163,20 @@ public class Library implements MediaContainer {
 		this.title1 = title1;
 	}
 
-	public String getTitle2() {
-		return title2;
+	public String getViewGroup() {
+		return viewGroup;
 	}
 
-	public void setTitle2(String title2) {
-		this.title2 = title2;
+	public void setViewGroup(String viewGroup) {
+		this.viewGroup = viewGroup;
 	}
 
-	@Override
-	public Server getServer() {
-		return server;
+	public int getViewMode() {
+		return viewMode;
 	}
 
-	@Override
-	public void setServer(Server server) {
-		this.server = server;
+	public void setViewMode(int viewMode) {
+		this.viewMode = viewMode;
 	}
 
 }

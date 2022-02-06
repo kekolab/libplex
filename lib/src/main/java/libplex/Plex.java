@@ -29,14 +29,11 @@ public class Plex implements AutoCloseable {
 		});
 	}
 
-	public MyPlex fetchMyPlex() {
-		MyPlex myPlex = client.target("https://plex.tv/pms/servers.xml")
+	public MyPlex myPlex() {
+		return client.target("https://plex.tv/pms/servers.xml")
 				.request()
-				.get(MyPlex.class);
-		myPlex.getServers()
-				.stream()
-				.forEach(s -> s.setClient(client));
-		return myPlex;
+				.get(MyPlex.class)
+				.setClient(client);
 	}
 
 	@Override

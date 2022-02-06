@@ -1,6 +1,5 @@
 package libplex.plextv.entity;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.NONE)
-public class Server implements Parent {
+public class Server implements MediaContainer {
 	@XmlAttribute private int size;
 	@XmlAttribute private int allowCameraUpload;
 	@XmlAttribute private int allowChannelAccess;
@@ -64,9 +63,34 @@ public class Server implements Parent {
 	@XmlAttribute private int updater;
 	@XmlAttribute private String version;
 	@XmlAttribute private int voiceSearch;
-	@XmlElement(name = "Directory") private List<Directory> directories;
+	@XmlElement(name = "Directory") private List<Directory<? extends MediaContainer>> directories;
+
 	private URI uri;
 	private Client client;
+	private Directory<Library> library;
+
+	public Directory<Library> getLibraryDirectory() {
+		if (library == null) {
+			library = directories.stream()
+					.filter(d -> d.getKey()
+							.equals("library"))
+					.map(d -> {
+						Directory<Library> ld = (Directory<Library>) d;
+						ld.setClient(client);
+						ld.setServer(this);
+						ld.setParent(this);
+						return ld;
+					})
+					.findAny()
+					.orElse(null);
+		}
+		return library;
+	}
+
+	@Override
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
 	public int getSize() {
 		return size;
@@ -468,14 +492,15 @@ public class Server implements Parent {
 		this.voiceSearch = voiceSearch;
 	}
 
-	public List<Directory> getDirectories() {
+	public List<Directory<? extends MediaContainer>> getDirectories() {
 		return directories;
 	}
 
-	public void setDirectories(List<Directory> directories) {
+	public void setDirectories(List<Directory<? extends MediaContainer>> directories) {
 		this.directories = directories;
 	}
 
+	@Override
 	public void setUri(URI uri) {
 		this.uri = uri;
 	}
@@ -485,20 +510,13 @@ public class Server implements Parent {
 		return uri;
 	}
 
-	public Library library() throws IOException {
-		return directories.stream()
-				.filter(d -> d.getKey()
-						.equals("library"))
-				.map(d -> new DirectoryService<Library>(client, d, this, this))
-				.findAny()
-				.get()
-				.get(Library.class)
-				.setClient(client)
-				.setParent(this)
-				.setServer(this);
+	@Override
+	public Server getServer() {
+		return this;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	@Override
+	public void setServer(Server server) {
+
 	}
 }
