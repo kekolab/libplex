@@ -7,21 +7,7 @@ import java.util.Map;
 
 import libplex.Plex;
 
-public class ArtistSection implements Parent {
-    private int size;
-    private int allowSync;
-    private String art;
-    private String content;
-    private String identifier;
-    private int librarySectionID;
-    private String mediaTagPrefix;
-    private int mediaTagVersion;
-    private int nocache;
-    private String thumb;
-    private String title1;
-    private String viewGroup;
-    private int viewMode;
-
+public class ArtistSection extends MediaSection {
     private MediaContainer mc;
     private URI uri;
     private Server server;
@@ -29,15 +15,7 @@ public class ArtistSection implements Parent {
     private Plex plex;
 
     public ArtistSection(MediaContainer mc, URI uri, Server server, Plex plex) {
-	this.mc = mc;
-	this.uri = uri;
-	this.server = server;
-	this.plex = plex;
-    }
-
-    @Override
-    public URI getUri() {
-	return uri;
+	super(mc, uri, server, plex);
     }
 
     // TODO
@@ -62,7 +40,6 @@ public class ArtistSection implements Parent {
 
     // TODO
     public List<Void> allArtists() {
-
 	return null;
     }
 

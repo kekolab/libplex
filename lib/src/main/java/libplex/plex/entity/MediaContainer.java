@@ -68,6 +68,7 @@ public class MediaContainer {
     @XmlAttribute private Integer updater;
     @XmlAttribute private String version;
     @XmlAttribute private Integer voiceSearch;
+
     @XmlElement(name = "Directory") private List<Directory> directories;
     @XmlAttribute private String art;
     @XmlAttribute private String content;
