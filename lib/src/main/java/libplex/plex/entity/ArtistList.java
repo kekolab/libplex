@@ -6,48 +6,16 @@ import java.util.stream.Collectors;
 
 import libplex.Plex;
 
-public class ArtistList implements Parent {
-    private int size;
-    private int allowSync;
-    private String art;
-    private String identifier;
-    private int librarySectionID;
-    private String librarySectionTitle;
-    private String librarySectionUUID;
-    private String mediaTagPrefix;
-    private int mediaTagVersion;
-    private int nocache;
-    private String thumb;
-    private String title1;
-    private String title2;
-    private String viewGroup;
-    private int viewMode;
-
-    private List<Artist> artists;
-    private URI uri;
-    private MediaContainer mc;
-    private Server server;
-    private Plex plex;
-
+public class ArtistList extends MediaList<Artist> {
     public ArtistList(MediaContainer mc, URI uri, Server server, Plex plex) {
-	this.mc = mc;
-	this.uri = uri;
-	this.server = server;
-	this.plex = plex;
-    }
-
-    public List<Artist> list() {
-	if (artists == null)
-	    artists = mc.getDirectories()
-		    .stream()
-		    .map(d -> new Artist(d, uri, this, server, plex))
-		    .collect(Collectors.toList());
-	return artists;
+	super(mc, uri, server, plex);
     }
 
     @Override
-    public URI getUri() {
-	return uri;
+    public List<Artist> list() {
+	return getMediaContainer().getDirectories()
+		.stream()
+		.map(d -> new Artist(d, getUri(), this, getServer(), getPlex()))
+		.collect(Collectors.toList());
     }
-
 }
