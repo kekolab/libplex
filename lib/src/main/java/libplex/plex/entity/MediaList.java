@@ -5,59 +5,34 @@ import java.util.List;
 
 import libplex.Plex;
 
-public abstract class MediaList<A extends Medium> implements Parent {
-    private MediaContainer mediaContainer;
-    private URI uri;
-    private Server server;
-    private Plex plex;
+public abstract class MediaList<A extends Medium> extends ParentServerItem {
+	protected MediaList(MediaContainer mediaContainer, URI uri, Server server, Plex plex) {
+		super(plex, mediaContainer, server, uri);
+	}
 
-    protected MediaList(MediaContainer mediaContainer, URI uri, Server server, Plex plex) {
-	this.mediaContainer = mediaContainer;
-	this.uri = uri;
-	this.server = server;
-	this.plex = plex;
-    }
+	public URI getArtUri() {
+		return getPlex().uri(getMediaContainer().getArt(), this, getServer(), null);
+	}
 
-    @Override
-    public URI getUri() {
-	return uri;
-    }
+	public Integer getLibrarySectionID() {
+		return getMediaContainer().getLibrarySectionID();
+	}
 
-    public URI getArtUri() {
-	return plex.uri(mediaContainer.getArt(), this, server, null);
-    }
+	public String getLibrarySectionTitle() {
+		return getMediaContainer().getLibrarySectionTitle();
+	}
 
-    public Integer getLibrarySectionID() {
-	return mediaContainer.getLibrarySectionID();
-    }
+	public URI getThumbUri() {
+		return getPlex().uri(getMediaContainer().getThumb(), this, getServer(), null);
+	}
 
-    public String getLibrarySectionTitle() {
-	return mediaContainer.getLibrarySectionTitle();
-    }
+	public String getTitle() {
+		return getMediaContainer().getTitle1();
+	}
 
-    public URI getThumbUri() {
-	return plex.uri(mediaContainer.getThumb(), this, server, null);
-    }
+	public String getSubtitle() {
+		return getMediaContainer().getTitle2();
+	}
 
-    public String getTitle() {
-	return mediaContainer.getTitle1();
-    }
-
-    public String getSubtitle() {
-	return mediaContainer.getTitle2();
-    }
-
-    protected MediaContainer getMediaContainer() {
-	return mediaContainer;
-    }
-
-    protected Server getServer() {
-	return server;
-    }
-
-    protected Plex getPlex() {
-	return plex;
-    }
-
-    public abstract List<A> list();
+	public abstract List<A> list();
 }

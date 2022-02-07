@@ -1,49 +1,21 @@
 package libplex.plex.entity;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import libplex.Plex;
 
-public class TrackList implements Parent {
-    private int size;
-    private int allowSync;
-    private String art;
-    private int grandparentRatingKey;
-    private String grandparentThumb;
-    private String grandparentTitle;
-    private String identifier;
-    private int key;
-    private int librarySectionID;
-    private String librarySectionTitle;
-    private String librarySectionUUID;
-    private String mediaTagPrefix;
-    private int mediaTagVersion;
-    private int nocache;
-    private int parentIndex;
-    private String parentTitle;
-    private int parentYear;
-    private String summary;
-    private String thumb;
-    private String title1;
-    private String title2;
-    private String viewGroup;
-    private int viewMode;
+public class TrackList extends MediaList<Track> {
+	public TrackList(MediaContainer mc, URI uri, Server server, Plex plex) {
+		super(mc, uri, server, plex);
+	}
 
-    private MediaContainer mc;
-    private URI uri;
-    private Server server;
-    private Plex plex;
-
-    public TrackList(MediaContainer mc, URI uri, Server server, Plex plex) {
-	this.mc = mc;
-	this.uri = uri;
-	this.server = server;
-	this.plex = plex;
-    }
-
-    @Override
-    public URI getUri() {
-	return uri;
-    }
-
+	@Override
+	public List<Track> list() {
+		return getMediaContainer().getDirectories()
+				.stream()
+				.map(d -> new Track(d, getServer(), getPlex()))
+				.collect(Collectors.toList());
+	}
 }

@@ -4,32 +4,29 @@ import java.net.URI;
 
 import libplex.Plex;
 
-public class Server implements Parent {
-    private URI uri;
-    private MediaContainer mc;
-    private Directory libraryDirectory;
-    private Plex plex;
+public class Server extends MediaContainerItem implements Parent {
+	private URI uri;
+	private Directory libraryDirectory;
 
-    public Server(MediaContainer mc, URI uri, Plex plex) {
-	this.uri = uri;
-	this.mc = mc;
-	this.plex = plex;
-    }
+	public Server(MediaContainer mc, URI uri, Plex plex) {
+		super(plex, mc);
+		this.uri = uri;
+	}
 
-    public Library library() {
-	if (libraryDirectory == null)
-	    libraryDirectory = mc.getDirectories()
-		    .stream()
-		    .filter(d -> "library".equals(d.getKey()))
-		    .findAny()
-		    .orElse(null);
-	URI uri = plex.uri(libraryDirectory.getKey(), this, this, null);
-	MediaContainer mc = plex.executeGet(uri, MediaContainer.class);
-	return new Library(mc, uri, this, plex);
-    }
+	public Library library() {
+		if (libraryDirectory == null)
+			libraryDirectory = getMediaContainer().getDirectories()
+					.stream()
+					.filter(d -> "library".equals(d.getKey()))
+					.findAny()
+					.orElse(null);
+		URI uri = getPlex().uri(libraryDirectory.getKey(), this, this, null);
+		MediaContainer mc = getPlex().executeGet(uri, MediaContainer.class);
+		return new Library(mc, uri, this, getPlex());
+	}
 
-    @Override
-    public URI getUri() {
-	return uri;
-    }
+	@Override
+	public URI getUri() {
+		return uri;
+	}
 }
