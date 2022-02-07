@@ -1,4 +1,4 @@
-package libplex.plextv.entity;
+package libplex.plex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
