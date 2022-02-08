@@ -8,7 +8,7 @@ public class Artist extends Medium implements Parent {
     private URI uri;
 
     public Artist(Directory d, URI uri, Parent parent, Server server, Plex plex) {
-	super(d, server, plex);
+	super(plex, server, d);
 	this.uri = uri;
     }
 

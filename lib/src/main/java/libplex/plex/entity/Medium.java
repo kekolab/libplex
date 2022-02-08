@@ -4,46 +4,59 @@ import java.util.Date;
 
 import libplex.Plex;
 
-public abstract class Medium extends ServerDirectoryItem {
-	protected Medium(Directory d, Server server, Plex plex) {
-		super(plex, server, d);
-	}
+public abstract class Medium extends PlexItem {
+    private Server server;
+    private Directory directory;
 
-	public String name() {
-		return getDirectory().getTitle();
-	}
+    protected Medium(Plex plex, Server server, Directory directory) {
+	super(plex);
+	this.server = server;
+	this.directory = directory;
+    }
 
-	public String summary() {
-		return getDirectory().getSummary();
-	}
+    protected Server getServer() {
+	return server;
+    }
 
-	public int viewCount() {
-		return getDirectory().getViewCount();
-	}
+    protected Directory getDirectory() {
+	return directory;
+    }
 
-	public int skipCount() {
-		return getDirectory().getSkipCount();
-	}
+    public String name() {
+	return getDirectory().getTitle();
+    }
 
-	public Date lastViewedAt() {
-		return getDirectory().getLastViewedAt();
-	}
+    public String summary() {
+	return getDirectory().getSummary();
+    }
 
-	public Void thumb() {
-		// TODO
-		return null;
-	}
+    public int viewCount() {
+	return getDirectory().getViewCount();
+    }
 
-	public Void art() {
-		// TODO
-		return null;
-	}
+    public int skipCount() {
+	return getDirectory().getSkipCount();
+    }
 
-	public Date addedAt() {
-		return getDirectory().getAddedAt();
-	}
+    public Date lastViewedAt() {
+	return getDirectory().getLastViewedAt();
+    }
 
-	public Date updatedAt() {
-		return getDirectory().getUpdatedAt();
-	}
+    public Void thumb() {
+	// TODO
+	return null;
+    }
+
+    public Void art() {
+	// TODO
+	return null;
+    }
+
+    public Date addedAt() {
+	return getDirectory().getAddedAt();
+    }
+
+    public Date updatedAt() {
+	return getDirectory().getUpdatedAt();
+    }
 }

@@ -6,33 +6,33 @@ import java.util.List;
 import libplex.Plex;
 
 public abstract class MediaList<A extends Medium> extends ParentServerItem {
-	protected MediaList(MediaContainer mediaContainer, URI uri, Server server, Plex plex) {
-		super(plex, mediaContainer, server, uri);
-	}
+    protected MediaList(MediaContainer mediaContainer, URI uri, Server server, Plex plex) {
+        super(plex, mediaContainer, server, uri);
+    }
 
-	public URI getArtUri() {
-		return getPlex().uri(getMediaContainer().getArt(), this, getServer(), null);
-	}
+    public URI getArt() {
+        return getPlex().uri(getMediaContainer().getArt(), this, getServer(), null);
+    }
 
-	public Integer getLibrarySectionID() {
-		return getMediaContainer().getLibrarySectionID();
-	}
+    public Integer getLibrarySectionID() {
+        return getMediaContainer().getLibrarySectionID();
+    }
 
-	public String getLibrarySectionTitle() {
-		return getMediaContainer().getLibrarySectionTitle();
-	}
+    public String getLibrarySectionTitle() {
+        return getMediaContainer().getLibrarySectionTitle();
+    }
 
-	public URI getThumbUri() {
-		return getPlex().uri(getMediaContainer().getThumb(), this, getServer(), null);
-	}
+    public URI getThumb() {
+        return getPlex().uri(getMediaContainer().getThumb(), this, getServer(), null);
+    }
 
-	public String getTitle() {
-		return getMediaContainer().getTitle1();
-	}
+    public String getTitle() {
+        return getMediaContainer().getTitle1();
+    }
 
-	public String getSubtitle() {
-		return getMediaContainer().getTitle2();
-	}
+    public String getSubtitle() {
+        return getMediaContainer().getTitle2();
+    }
 
-	public abstract List<A> list();
+    public abstract List<A> list();
 }
