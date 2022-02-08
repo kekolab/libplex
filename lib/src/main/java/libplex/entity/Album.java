@@ -6,20 +6,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.Plex;
-import libplex.plex.entity.Directory;
 import libplex.plex.entity.MediaContainer;
 
-public class Album extends ServerMediaContainerPlexItem {
-    private Directory directory;
+public class Album extends MediaDirectory {
 
     public Album(Plex plex, URI uri, Server server) {
         super(plex, uri, server);
-        this.directory = getMediaContainer().getDirectories()
-                .get(0);
     }
 
     public List<Track> getTracks() {
-        return getPlex().executeGet(directory.getKey(), null, getServer(), MediaContainer.class, null)
+        return getPlex().executeGet(getDirectory().getKey(), null, getServer(), MediaContainer.class, null)
                 .getTracks()
                 .stream()
                 .map(t -> new Track(getPlex(),
@@ -30,40 +26,69 @@ public class Album extends ServerMediaContainerPlexItem {
     }
 
     public String getStudio() {
-        return directory.getStudio();
+        return getDirectory().getStudio();
     }
 
     public Artist getArtist() {
-        return new Artist(getPlex(), getPlex().uri(directory.getParentKey(), null, getServer(), null), getServer());
+        return new Artist(getPlex(), getPlex().uri(getDirectory().getParentKey(), null, getServer(), null),
+                getServer());
     }
 
     public double getRating() {
-        return directory.getRating();
+        return getDirectory().getRating();
     }
 
     public int getYear() {
-        return directory.getYear();
+        return getDirectory().getYear();
     }
 
-    public Date getOriginallyAvailable() {
-        return directory.getOriginallyAvailableAt();
+    public Date getOriginallyAvailableAt() {
+        return getDirectory().getOriginallyAvailableAt();
     }
 
     public int getLoudnessAnalysisVersion() {
-        return directory.getLoudnessAnalysisVersion();
+        return getDirectory().getLoudnessAnalysisVersion();
+    }
+
+    public int getLeafCount() {
+        return getDirectory().getLeafCount();
+    }
+
+    public int getViewedLeafCount() {
+        return getDirectory().getViewedtLeafCount();
     }
 
     public List<String> getGenres() {
-        return directory.getGenres()
+        return getDirectory().getGenres()
                 .stream()
                 .map(g -> g.getTag())
                 .collect(Collectors.toList());
     }
 
     public List<String> getDirectors() {
-        return directory.getDirectors()
+        return getDirectory().getDirectors()
                 .stream()
                 .map(g -> g.getTag())
                 .collect(Collectors.toList());
+    }
+
+    public List<String> getStyles() {
+        return getDirectory().getStyles()
+                .stream()
+                .map(g -> g.getTag())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getMoods() {
+        return getDirectory().getMoods()
+                .stream()
+                .map(g -> g.getTag())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ArtistSection getSection() {
+        return new ArtistSection(getPlex(),
+                getPlex().uri(getDirectory().getLibrarySectionKey(), null, getServer(), null), getServer());
     }
 }

@@ -72,6 +72,8 @@ public class Directory {
     @XmlElement(name = "Director") private List<Tag> directors;
     @XmlAttribute private String librarySectionKey;
     @XmlAttribute private Integer librarySectionID;
+    @XmlAttribute private Integer leafCount;
+    @XmlAttribute private Integer viewedLeafCount;
 
     public String getKey() {
         return key;
@@ -279,5 +281,13 @@ public class Directory {
 
     public Integer getLibrarySectionID() {
         return librarySectionID;
+    }
+
+    public Integer getLeafCount() {
+        return leafCount;
+    }
+
+    public Integer getViewedtLeafCount() {
+        return viewedLeafCount;
     }
 }
