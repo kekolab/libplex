@@ -4,31 +4,47 @@ import java.net.URI;
 
 import libplex.Plex;
 import libplex.plex.entity.Directory;
-import libplex.plex.entity.MediaContainer;
 
-public class Server extends MediaContainerItem implements Parent {
-	private URI uri;
-	private Directory libraryDirectory;
+public class Server extends MediaContainerPlexItem {
+    public Server(Plex plex, URI uri) {
+        super(plex, uri);
+    }
 
-	public Server(MediaContainer mc, URI uri, Plex plex) {
-		super(plex, mc);
-		this.uri = uri;
-	}
+    public Library library() {
+        Directory library = getMediaContainer().getDirectories()
+                .stream()
+                .filter(d -> "library".equals(d.getKey()))
+                .findAny()
+                .orElse(null);
+        URI uri = getPlex().uri(library.getKey(), this, this, null);
+        return new Library(getPlex(), uri, this);
+    }
 
-	public Library library() {
-		if (libraryDirectory == null)
-			libraryDirectory = getMediaContainer().getDirectories()
-					.stream()
-					.filter(d -> "library".equals(d.getKey()))
-					.findAny()
-					.orElse(null);
-		URI uri = getPlex().uri(libraryDirectory.getKey(), this, this, null);
-		MediaContainer mc = getPlex().executeGet(uri, MediaContainer.class);
-		return new Library(mc, uri, this, getPlex());
-	}
-
-	@Override
-	public URI getUri() {
-		return uri;
-	}
+    /*
+     * TODO
+     * - All properties
+     * - Actions
+     * - Activities
+     * - Butler
+     * - Channela
+     * - Clients
+     * - Devices
+     * - Diagnostics
+     * - Hubs
+     * - Livetv
+     * - Media
+     * - Metadata
+     * - Neighboorhood
+     * - playQueues
+     * - player
+     * - playlists
+     * - resources
+     * - search
+     * - servers
+     * - statistics
+     * - system
+     * - transcode
+     * - updater
+     * - user
+     */
 }

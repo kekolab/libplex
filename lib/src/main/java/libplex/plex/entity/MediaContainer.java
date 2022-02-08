@@ -27,7 +27,8 @@ public class MediaContainer {
     @XmlAttribute private Integer certificate;
     @XmlAttribute private Integer companionProxy;
     @XmlAttribute private String countryCode;
-    @XmlAttribute private String diagnostics;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(StringListAdapter.class) private List<String> diagnostics;
     @XmlAttribute private Integer eventStream;
     @XmlAttribute private String friendlyName;
     @XmlAttribute private Integer hubSearch;
@@ -141,7 +142,7 @@ public class MediaContainer {
         return countryCode;
     }
 
-    public String getDiagnostics() {
+    public List<String> getDiagnostics() {
         return diagnostics;
     }
 

@@ -9,61 +9,61 @@ import libplex.Plex;
 import libplex.plex.entity.Directory;
 import libplex.plex.entity.MediaContainer;
 
-public class Album extends Medium implements Parent {
-    private URI uri;
+public class Album extends ServerMediaContainerPlexItem {
+    private Directory directory;
 
-    public Album(Directory d, URI uri, Parent parent, Server server, Plex plex) {
-	super(plex, server, d);
-	this.uri = uri;
+    public Album(Plex plex, URI uri, Server server) {
+        super(plex, uri, server);
+        this.directory = getMediaContainer().getDirectories()
+                .get(0);
     }
 
-    public ArtistList artist() {
-	// TODO get directory.parentKey
-	return null;
+    public List<Track> getTracks() {
+        return getPlex().executeGet(directory.getKey(), null, getServer(), MediaContainer.class, null)
+                .getTracks()
+                .stream()
+                .map(t -> new Track(getPlex(),
+                        getPlex().uri("/library/metadata/".concat(Integer.toString(t.getRatingKey())), null,
+                                getServer(), null),
+                        getServer()))
+                .collect(Collectors.toList());
     }
 
-    public String studio() {
-	return getDirectory().getStudio();
+    public String getStudio() {
+        return directory.getStudio();
     }
 
-    public double rating() {
-	return getDirectory().getRating();
+    public Artist getArtist() {
+        return new Artist(getPlex(), getPlex().uri(directory.getParentKey(), null, getServer(), null), getServer());
     }
 
-    public int year() {
-	return getDirectory().getYear();
+    public double getRating() {
+        return directory.getRating();
     }
 
-    public Date originallyAvailable() {
-	return getDirectory().getOriginallyAvailableAt();
+    public int getYear() {
+        return directory.getYear();
     }
 
-    public int loudnessAnalysisVersion() {
-	return getDirectory().getLoudnessAnalysisVersion();
+    public Date getOriginallyAvailable() {
+        return directory.getOriginallyAvailableAt();
     }
 
-    public List<String> genres() {
-	return getDirectory().getGenres()
-		.stream()
-		.map(g -> g.getTag())
-		.collect(Collectors.toList());
+    public int getLoudnessAnalysisVersion() {
+        return directory.getLoudnessAnalysisVersion();
     }
 
-    public List<String> directors() {
-	return getDirectory().getDirectors()
-		.stream()
-		.map(g -> g.getTag())
-		.collect(Collectors.toList());
+    public List<String> getGenres() {
+        return directory.getGenres()
+                .stream()
+                .map(g -> g.getTag())
+                .collect(Collectors.toList());
     }
 
-    public TrackList tracks() {
-	MediaContainer mc = getPlex().executeGet(getDirectory().getKey(), this, getServer(), MediaContainer.class,
-		null);
-	return new TrackList(mc, uri, getServer(), getPlex());
-    }
-
-    @Override
-    public URI getUri() {
-	return uri;
+    public List<String> getDirectors() {
+        return directory.getDirectors()
+                .stream()
+                .map(g -> g.getTag())
+                .collect(Collectors.toList());
     }
 }

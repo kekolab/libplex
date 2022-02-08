@@ -9,8 +9,6 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import libplex.entity.Parent;
-import libplex.entity.Server;
 import libplex.plex.entity.adapter.TimestampAdapter;
 
 @XmlRootElement
@@ -57,7 +55,10 @@ public class Directory {
     @XmlAttribute private int albumSort;
     @XmlElement(name = "Genre") private List<Tag> genres;
     @XmlElement(name = "Country") private List<Tag> countries;
-    @XmlAttribute private String parentRatingKey;
+    @XmlElement(name = "Style") private List<Tag> styles;
+    @XmlElement(name = "Similar") private List<Tag> similars;
+    @XmlElement(name = "Mood") private List<Tag> moods;
+    @XmlAttribute private Integer parentRatingKey;
     @XmlAttribute private String parentGuid;
     @XmlAttribute private String studio;
     @XmlAttribute private String parentKey;
@@ -69,203 +70,214 @@ public class Directory {
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date originallyAvailableAt;
     @XmlAttribute private Integer loudnessAnalysisVersion;
     @XmlElement(name = "Director") private List<Tag> directors;
-
-    private Parent parent;
-    private Server server;
+    @XmlAttribute private String librarySectionKey;
+    @XmlAttribute private Integer librarySectionID;
 
     public String getKey() {
-	return key;
+        return key;
     }
 
     public String getTitle() {
-	return title;
+        return title;
     }
 
     public int getCount() {
-	return count;
+        return count;
     }
 
     public int getAllowSync() {
-	return allowSync;
+        return allowSync;
     }
 
     public String getArt() {
-	return art;
+        return art;
     }
 
     public String getComposite() {
-	return composite;
+        return composite;
     }
 
     public int getFilters() {
-	return filters;
+        return filters;
     }
 
     public int getRefreshing() {
-	return refreshing;
+        return refreshing;
     }
 
     public String getThumb() {
-	return thumb;
+        return thumb;
     }
 
     public String getType() {
-	return type;
+        return type;
     }
 
     public String getAgent() {
-	return agent;
+        return agent;
     }
 
     public String getScanner() {
-	return scanner;
+        return scanner;
     }
 
     public String getLanguage() {
-	return language;
+        return language;
     }
 
     public String getUuid() {
-	return uuid;
+        return uuid;
     }
 
     public Date getUpdatedAt() {
-	return updatedAt;
+        return updatedAt;
     }
 
     public Date getCreatedAt() {
-	return createdAt;
+        return createdAt;
     }
 
     public Date getScannedAt() {
-	return scannedAt;
+        return scannedAt;
     }
 
     public int getContent() {
-	return content;
+        return content;
     }
 
     public int getDirectory() {
-	return directory;
+        return directory;
     }
 
     public String getContentChangedAt() {
-	return contentChangedAt;
+        return contentChangedAt;
     }
 
     public int getHidden() {
-	return hidden;
+        return hidden;
     }
 
     public int getSecondary() {
-	return secondary;
+        return secondary;
     }
 
     public String getPrompt() {
-	return prompt;
+        return prompt;
     }
 
     public int getSearch() {
-	return search;
-    }
-
-    public String getSummary() {
-	return summary;
-    }
-
-    public int getViewCount() {
-	return viewCount;
-    }
-
-    public Date getLastViewedAt() {
-	return lastViewedAt;
-    }
-
-    public Date getAddedAt() {
-	return addedAt;
+        return search;
     }
 
     public Location getLocation() {
-	return location;
+        return location;
     }
 
     public int getRatingKey() {
-	return ratingKey;
+        return ratingKey;
     }
 
     public String getGuid() {
-	return guid;
+        return guid;
+    }
+
+    public String getSummary() {
+        return summary;
     }
 
     public int getIndex() {
-	return index;
+        return index;
+    }
+
+    public int getViewCount() {
+        return viewCount;
     }
 
     public int getSkipCount() {
-	return skipCount;
+        return skipCount;
+    }
+
+    public Date getLastViewedAt() {
+        return lastViewedAt;
+    }
+
+    public Date getAddedAt() {
+        return addedAt;
     }
 
     public int getAlbumSort() {
-	return albumSort;
+        return albumSort;
     }
 
     public List<Tag> getGenres() {
-	return genres;
+        return genres;
     }
 
     public List<Tag> getCountries() {
-	return countries;
+        return countries;
     }
 
-    public String getParentRatingKey() {
-	return parentRatingKey;
+    public Integer getParentRatingKey() {
+        return parentRatingKey;
     }
 
     public String getParentGuid() {
-	return parentGuid;
+        return parentGuid;
     }
 
     public String getStudio() {
-	return studio;
+        return studio;
     }
 
     public String getParentKey() {
-	return parentKey;
+        return parentKey;
     }
 
     public String getParentTitle() {
-	return parentTitle;
+        return parentTitle;
     }
 
     public double getRating() {
-	return rating;
+        return rating;
     }
 
     public int getYear() {
-	return year;
+        return year;
     }
 
     public String getParentThumb() {
-	return parentThumb;
+        return parentThumb;
     }
 
     public Date getOriginallyAvailableAt() {
-	return originallyAvailableAt;
+        return originallyAvailableAt;
     }
 
-    public int getLoudnessAnalysisVersion() {
-	return loudnessAnalysisVersion;
+    public Integer getLoudnessAnalysisVersion() {
+        return loudnessAnalysisVersion;
     }
 
     public List<Tag> getDirectors() {
-	return directors;
+        return directors;
     }
 
-    protected Parent getParent() {
-	return parent;
+    public List<Tag> getStyles() {
+        return styles;
     }
 
-    protected Server getServer() {
-	return server;
+    public List<Tag> getSimilars() {
+        return similars;
+    }
+
+    public List<Tag> getMoods() {
+        return moods;
+    }
+
+    public String getLibrarySectionKey() {
+        return librarySectionKey;
+    }
+
+    public Integer getLibrarySectionID() {
+        return librarySectionID;
     }
 }

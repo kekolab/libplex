@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import libplex.Plex.Builder;
 import libplex.entity.Server;
+import libplex.entity.Track;
 import libplex.plex.entity.RemotelyAccessibleServerInfo;
 
 class PlexClientBuilder_Tests {
@@ -18,45 +19,43 @@ class PlexClientBuilder_Tests {
 
     @BeforeEach
     void init() throws IOException {
-	builder = new Builder("myPlexProduct", "v1.0", "myPlexClientIdentifier");
-	properties = new Properties();
-	properties.load(getClass().getResourceAsStream("/testVariables.properties"));
-	String authToken = properties.getProperty("authToken");
-	plex = builder.withAuthenticationToken(authToken);
+        builder = new Builder("myPlexProduct", "v1.0", "myPlexClientIdentifier");
+        properties = new Properties();
+        properties.load(getClass().getResourceAsStream("/testVariables.properties"));
+        String authToken = properties.getProperty("authToken");
+        plex = builder.withAuthenticationToken(authToken);
     }
 
     @Test
     void tests() throws IOException {
-	List<RemotelyAccessibleServerInfo> servers = plex.myPlex()
-		.getServers();
-	Server server = servers.get(0)
-		.server();
-	server.library()
-		.sections()
-		.artistSections()
-		.get(0)
-		.searchForArtists("Alanis")
-		.list()
-		.get(0)
-		.albums()
-		.list()
-		.get(0)
-		.tracks();
-	System.out.println();
+        List<RemotelyAccessibleServerInfo> servers = plex.myPlex()
+                .getServers();
+        Server server = servers.get(0)
+                .server();
+        List<Track> tracks = server.library()
+                .sections()
+                .artistSections()
+                .get(0)
+                .searchForArtists("Alanis")
+                .get(0)
+                .albums()
+                .get(0)
+                .getTracks();
+        System.out.println();
     }
 
     @Test
     void testRequestPIN() throws IOException {
-	int pinId = builder.requestPIN()
-		.getId();
-	System.in.read();
-	Plex client = builder.withAuthenticationToken(builder.verifyPin(pinId)
-		.getAuthToken());
+        int pinId = builder.requestPIN()
+                .getId();
+        System.in.read();
+        Plex client = builder.withAuthenticationToken(builder.verifyPin(pinId)
+                .getAuthToken());
     }
 
     @Test
     void testLocalServer() {
-	Server server = plex.localServer(properties.getProperty("localServerHost"),
-		Integer.parseInt(properties.getProperty("localServerPort")));
+        Server server = plex.localServer(properties.getProperty("localServerHost"),
+                Integer.parseInt(properties.getProperty("localServerPort")));
     }
 }

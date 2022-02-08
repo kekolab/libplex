@@ -41,35 +41,35 @@ public class RemotelyAccessibleServerInfo {
     private Plex plex;
 
     public URI uri() throws IOException {
-	if (baseUri == null) {
-	    HttpsURLConnection connection = (HttpsURLConnection) UriBuilder.newInstance()
-		    .scheme("https")
-		    .host(host)
-		    .port(port)
-		    .build()
-		    .toURL()
-		    .openConnection();
-	    connection.setHostnameVerifier((arg0, arg1) -> true);
-	    connection.connect();
-	    X509Certificate serverCertificate = (X509Certificate) connection.getServerCertificates()[0];
-	    String cn = serverCertificate.getSubjectX500Principal()
-		    .getName();
-	    this.baseUri = UriBuilder.newInstance()
-		    .scheme("https")
-		    .host(host.replaceAll(Pattern.quote("."), "-")
-			    .concat(cn.substring(4)))
-		    .port(port)
-		    .build();
-	}
-	return baseUri;
+        if (baseUri == null) {
+            HttpsURLConnection connection = (HttpsURLConnection) UriBuilder.newInstance()
+                    .scheme("https")
+                    .host(host)
+                    .port(port)
+                    .build()
+                    .toURL()
+                    .openConnection();
+            connection.setHostnameVerifier((arg0, arg1) -> true);
+            connection.connect();
+            X509Certificate serverCertificate = (X509Certificate) connection.getServerCertificates()[0];
+            String cn = serverCertificate.getSubjectX500Principal()
+                    .getName();
+            this.baseUri = UriBuilder.newInstance()
+                    .scheme("https")
+                    .host(host.replaceAll(Pattern.quote("."), "-")
+                            .concat(cn.substring(4)))
+                    .port(port)
+                    .build();
+        }
+        return baseUri;
     }
 
     public Server server() throws IOException {
-	return new Server(plex.executeGet(uri(), MediaContainer.class), uri(), plex);
+        return new Server(plex, uri());
     }
 
     public void setPlex(Plex plex) {
-	this.plex = plex;
+        this.plex = plex;
     }
 
 }

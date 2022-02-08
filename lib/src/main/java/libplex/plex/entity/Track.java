@@ -6,16 +6,13 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import libplex.Plex;
-import libplex.entity.Medium;
-import libplex.entity.Server;
 import libplex.plex.entity.adapter.TimestampAdapter;
 
-public class Track extends Medium {
-    @XmlAttribute private int ratingKey;
+public class Track {
+    @XmlAttribute private Integer ratingKey;
     @XmlAttribute private String key;
-    @XmlAttribute private int parentRatingKey;
-    @XmlAttribute private int grandparentRatingKey;
+    @XmlAttribute private Integer parentRatingKey;
+    @XmlAttribute private Integer grandparentRatingKey;
     @XmlAttribute private String guid;
     @XmlAttribute private String parentGuid;
     @XmlAttribute private String grandparentGuid;
@@ -27,27 +24,79 @@ public class Track extends Medium {
     @XmlAttribute private String grandparentTitle;
     @XmlAttribute private String parentTitle;
     @XmlAttribute private String summary;
-    @XmlAttribute private int index;
-    @XmlAttribute private int parentIndex;
-    @XmlAttribute private int ratingCount;
-    @XmlAttribute private int parentYear;
+    @XmlAttribute private Integer index;
+    @XmlAttribute private Integer parentIndex;
+    @XmlAttribute private Integer ratingCount;
+    @XmlAttribute private Integer parentYear;
     @XmlAttribute private String thumb;
     @XmlAttribute private String art;
     @XmlAttribute private String parentThumb;
     @XmlAttribute private String grandparentThumb;
     @XmlAttribute private String grandparentArt;
-    @XmlAttribute private int duration;
+    @XmlAttribute private Integer duration;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date addedAt;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
     @XmlElement(name = "Media") private List<Media> media;
     @XmlAttribute private String librarySectionTitle;
-    @XmlAttribute private int librarySectionID;
+    @XmlAttribute private Integer librarySectionID;
     @XmlAttribute private String librarySectionKey;
-    @XmlAttribute private int hasPremiumLyrics;
+    @XmlAttribute private Integer hasPremiumLyrics;
 
-    public Track(Directory d, Server server, Plex plex) {
-	super(plex, server, d);
+    public String getKey() {
+        return key;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getGrandParentKey() {
+        return grandparentKey;
+    }
+
+    public String getParentKey() {
+        return parentKey;
+    }
+
+    public String getLibrarySectionKey() {
+        return librarySectionKey;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public String getArt() {
+        return art;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public Date getAddedAt() {
+        return addedAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public int getHasPremiumLyrics() {
+        return hasPremiumLyrics;
+    }
+
+    public Integer getRatingKey() {
+        return ratingKey;
+    }
+
+    public Integer getGrandParentRatingKey() {
+        return grandparentRatingKey;
+    }
+
+    public Integer getParentRatingKey() {
+        return parentRatingKey;
     }
 }

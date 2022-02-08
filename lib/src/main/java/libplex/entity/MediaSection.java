@@ -3,11 +3,10 @@ package libplex.entity;
 import java.net.URI;
 
 import libplex.Plex;
-import libplex.plex.entity.MediaContainer;
 
-public abstract class MediaSection extends ParentServerItem {
-    public MediaSection(MediaContainer mc, URI uri, Server server, Plex plex) {
-        super(plex, mc, server, uri);
+public abstract class MediaSection extends ServerMediaContainerPlexItem {
+    public MediaSection(Plex plex, URI uri, Server server) {
+        super(plex, uri, server);
     }
 
     public URI getArt() {
