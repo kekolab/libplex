@@ -15,6 +15,8 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import libplex.Plex;
+import libplex.entity.Server;
+import libplex.plex.entity.adapter.TimestampAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)

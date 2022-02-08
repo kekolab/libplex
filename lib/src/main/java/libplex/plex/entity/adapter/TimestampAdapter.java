@@ -1,4 +1,4 @@
-package libplex.plex.entity;
+package libplex.plex.entity.adapter;
 
 import java.util.Date;
 

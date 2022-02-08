@@ -1,4 +1,4 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 import java.util.Date;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.Plex;
+import libplex.plex.entity.Directory;
+import libplex.plex.entity.MediaContainer;
 
 public class Album extends Medium implements Parent {
     private URI uri;

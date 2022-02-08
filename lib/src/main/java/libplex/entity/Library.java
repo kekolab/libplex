@@ -1,8 +1,10 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 
 import libplex.Plex;
+import libplex.plex.entity.Directory;
+import libplex.plex.entity.MediaContainer;
 
 public class Library extends ParentServerItem {
 	private Directory sectionsDirectory;

@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import libplex.Plex.Builder;
+import libplex.entity.Server;
 import libplex.plex.entity.RemotelyAccessibleServerInfo;
-import libplex.plex.entity.Server;
 
 class PlexClientBuilder_Tests {
     private Builder builder;

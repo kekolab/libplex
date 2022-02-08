@@ -1,8 +1,9 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 
 import libplex.Plex;
+import libplex.plex.entity.MediaContainer;
 
 public abstract class ParentServerItem extends MediaContainerItem implements Parent {
     private Server server;

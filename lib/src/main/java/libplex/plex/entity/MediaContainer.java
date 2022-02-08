@@ -9,6 +9,9 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import libplex.plex.entity.adapter.IntegerListAdapter;
+import libplex.plex.entity.adapter.StringListAdapter;
+import libplex.plex.entity.adapter.TimestampAdapter;
 
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.NONE)
@@ -68,7 +71,6 @@ public class MediaContainer {
     @XmlAttribute private Integer updater;
     @XmlAttribute private String version;
     @XmlAttribute private Integer voiceSearch;
-
     @XmlElement(name = "Directory") private List<Directory> directories;
     @XmlAttribute private String art;
     @XmlAttribute private String content;
@@ -96,302 +98,302 @@ public class MediaContainer {
     @XmlElement(name = "Track") private List<Track> tracks;
 
     public Integer getSize() {
-	return size;
+        return size;
     }
 
     public Integer getAllowCameraUpload() {
-	return allowCameraUpload;
+        return allowCameraUpload;
     }
 
     public Integer getAllowChannelAccess() {
-	return allowChannelAccess;
+        return allowChannelAccess;
     }
 
     public Integer getAllowMediaDeletion() {
-	return allowMediaDeletion;
+        return allowMediaDeletion;
     }
 
     public Integer getAllowSharing() {
-	return allowSharing;
+        return allowSharing;
     }
 
     public Integer getAllowSync() {
-	return allowSync;
+        return allowSync;
     }
 
     public Integer getAllowTuners() {
-	return allowTuners;
+        return allowTuners;
     }
 
     public Integer getBackgroundProcessing() {
-	return backgroundProcessing;
+        return backgroundProcessing;
     }
 
     public Integer getCertificate() {
-	return certificate;
+        return certificate;
     }
 
     public Integer getCompanionProxy() {
-	return companionProxy;
+        return companionProxy;
     }
 
     public String getCountryCode() {
-	return countryCode;
+        return countryCode;
     }
 
     public String getDiagnostics() {
-	return diagnostics;
+        return diagnostics;
     }
 
     public Integer getEventStream() {
-	return eventStream;
+        return eventStream;
     }
 
     public String getFriendlyName() {
-	return friendlyName;
+        return friendlyName;
     }
 
     public Integer getHubSearch() {
-	return hubSearch;
+        return hubSearch;
     }
 
     public Integer getItemClusters() {
-	return itemClusters;
+        return itemClusters;
     }
 
     public Integer getLivetv() {
-	return livetv;
+        return livetv;
     }
 
     public String getMachineIdentifier() {
-	return machineIdentifier;
+        return machineIdentifier;
     }
 
     public Integer getMediaProviders() {
-	return mediaProviders;
+        return mediaProviders;
     }
 
     public Integer getMultiuser() {
-	return multiuser;
+        return multiuser;
     }
 
     public Integer getMyPlex() {
-	return myPlex;
+        return myPlex;
     }
 
     public String getMyPlexMappingState() {
-	return myPlexMappingState;
+        return myPlexMappingState;
     }
 
     public String getMyPlexSigninState() {
-	return myPlexSigninState;
+        return myPlexSigninState;
     }
 
     public Integer getMyPlexSubscription() {
-	return myPlexSubscription;
+        return myPlexSubscription;
     }
 
     public String getMyPlexUsername() {
-	return myPlexUsername;
+        return myPlexUsername;
     }
 
     public Integer getOfflineTranscode() {
-	return offlineTranscode;
+        return offlineTranscode;
     }
 
     public List<String> getOwnerFeatures() {
-	return ownerFeatures;
+        return ownerFeatures;
     }
 
     public Integer getPhotoAutoTag() {
-	return photoAutoTag;
+        return photoAutoTag;
     }
 
     public String getPlatform() {
-	return platform;
+        return platform;
     }
 
     public String getPlatformVersion() {
-	return platformVersion;
+        return platformVersion;
     }
 
     public Integer getPluginHost() {
-	return pluginHost;
+        return pluginHost;
     }
 
     public Integer getPushNotifications() {
-	return pushNotifications;
+        return pushNotifications;
     }
 
     public Integer getReadOnlyLibraries() {
-	return readOnlyLibraries;
+        return readOnlyLibraries;
     }
 
     public Integer getRequestParametersInCookie() {
-	return requestParametersInCookie;
+        return requestParametersInCookie;
     }
 
     public Integer getStreamingBrainABRVersion() {
-	return streamingBrainABRVersion;
+        return streamingBrainABRVersion;
     }
 
     public Integer getStreamingBrainVersion() {
-	return streamingBrainVersion;
+        return streamingBrainVersion;
     }
 
     public Integer getSync() {
-	return sync;
+        return sync;
     }
 
     public Integer getTranscoderActiveVideoSessions() {
-	return transcoderActiveVideoSessions;
+        return transcoderActiveVideoSessions;
     }
 
     public Integer getTranscoderAudio() {
-	return transcoderAudio;
+        return transcoderAudio;
     }
 
     public Integer getTranscoderLyrics() {
-	return transcoderLyrics;
+        return transcoderLyrics;
     }
 
     public Integer getTranscoderPhoto() {
-	return transcoderPhoto;
+        return transcoderPhoto;
     }
 
     public Integer getTranscoderSubtitles() {
-	return transcoderSubtitles;
+        return transcoderSubtitles;
     }
 
     public Integer getTranscoderVideo() {
-	return transcoderVideo;
+        return transcoderVideo;
     }
 
     public List<Integer> getTranscoderVideoBitrates() {
-	return transcoderVideoBitrates;
+        return transcoderVideoBitrates;
     }
 
     public List<Integer> getTranscoderVideoQualities() {
-	return transcoderVideoQualities;
+        return transcoderVideoQualities;
     }
 
     public List<Integer> getTranscoderVideoResolutions() {
-	return transcoderVideoResolutions;
+        return transcoderVideoResolutions;
     }
 
     public Date getUpdatedAt() {
-	return updatedAt;
+        return updatedAt;
     }
 
     public Integer getUpdater() {
-	return updater;
+        return updater;
     }
 
     public String getVersion() {
-	return version;
+        return version;
     }
 
     public Integer getVoiceSearch() {
-	return voiceSearch;
+        return voiceSearch;
     }
 
     public List<Directory> getDirectories() {
-	return directories;
+        return directories;
     }
 
     public String getArt() {
-	return art;
+        return art;
     }
 
     public String getContent() {
-	return content;
+        return content;
     }
 
     public String getIdentifier() {
-	return identifier;
+        return identifier;
     }
 
     public String getMediaTagPrefix() {
-	return mediaTagPrefix;
+        return mediaTagPrefix;
     }
 
     public Integer getMediaTagVersion() {
-	return mediaTagVersion;
+        return mediaTagVersion;
     }
 
     public String getTitle1() {
-	return title1;
+        return title1;
     }
 
     public String getTitle2() {
-	return title2;
+        return title2;
     }
 
     public Integer getLibrarySectionID() {
-	return librarySectionID;
+        return librarySectionID;
     }
 
     public Integer getNocache() {
-	return nocache;
+        return nocache;
     }
 
     public String getThumb() {
-	return thumb;
+        return thumb;
     }
 
     public String getViewGroup() {
-	return viewGroup;
+        return viewGroup;
     }
 
     public Integer getViewMode() {
-	return viewMode;
+        return viewMode;
     }
 
     public Integer getMixedParents() {
-	return mixedParents;
+        return mixedParents;
     }
 
-    protected String getLibrarySectionTitle() {
-	return librarySectionTitle;
+    public String getLibrarySectionTitle() {
+        return librarySectionTitle;
     }
 
-    protected String getLibrarySectionUUID() {
-	return librarySectionUUID;
+    public String getLibrarySectionUUID() {
+        return librarySectionUUID;
     }
 
-    protected Integer getGrandparentRatingKey() {
-	return grandparentRatingKey;
+    public Integer getGrandparentRatingKey() {
+        return grandparentRatingKey;
     }
 
-    protected String getGrandparentThumb() {
-	return grandparentThumb;
+    public String getGrandparentThumb() {
+        return grandparentThumb;
     }
 
-    protected String getGrandparentTitle() {
-	return grandparentTitle;
+    public String getGrandparentTitle() {
+        return grandparentTitle;
     }
 
-    protected Integer getKey() {
-	return key;
+    public Integer getKey() {
+        return key;
     }
 
-    protected Integer getParentIndex() {
-	return parentIndex;
+    public Integer getParentIndex() {
+        return parentIndex;
     }
 
-    protected String getParentTitle() {
-	return parentTitle;
+    public String getParentTitle() {
+        return parentTitle;
     }
 
-    protected Integer getParentYear() {
-	return parentYear;
+    public Integer getParentYear() {
+        return parentYear;
     }
 
-    protected String getSummary() {
-	return summary;
+    public String getSummary() {
+        return summary;
     }
 
-    protected List<Track> getTracks() {
-	return tracks;
+    public List<Track> getTracks() {
+        return tracks;
     }
 }

@@ -1,8 +1,9 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.util.Date;
 
 import libplex.Plex;
+import libplex.plex.entity.Directory;
 
 public abstract class Medium extends PlexItem {
     private Server server;

@@ -1,8 +1,10 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 
 import libplex.Plex;
+import libplex.plex.entity.Directory;
+import libplex.plex.entity.MediaContainer;
 
 public class Server extends MediaContainerItem implements Parent {
 	private URI uri;

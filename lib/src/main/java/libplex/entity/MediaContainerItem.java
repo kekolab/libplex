@@ -1,6 +1,7 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import libplex.Plex;
+import libplex.plex.entity.MediaContainer;
 
 public abstract class MediaContainerItem extends PlexItem {
 	private MediaContainer mediaContainer;

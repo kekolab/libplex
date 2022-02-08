@@ -1,4 +1,4 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 

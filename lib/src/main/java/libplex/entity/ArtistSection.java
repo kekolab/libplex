@@ -1,4 +1,4 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import libplex.Plex;
+import libplex.plex.entity.Directory;
+import libplex.plex.entity.MediaContainer;
 
 public class ArtistSection extends MediaSection {
 	private Directory searchForArtists;

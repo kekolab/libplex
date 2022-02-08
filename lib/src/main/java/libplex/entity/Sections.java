@@ -1,10 +1,11 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.Plex;
+import libplex.plex.entity.MediaContainer;
 
 public class Sections extends ParentServerItem {
 	public Sections(MediaContainer mediaContainer, URI uri, Server server, Plex plex) {

@@ -1,9 +1,10 @@
-package libplex.plex.entity;
+package libplex.entity;
 
 import java.net.URI;
 import java.util.List;
 
 import libplex.Plex;
+import libplex.plex.entity.MediaContainer;
 
 public abstract class MediaList<A extends Medium> extends ParentServerItem {
     protected MediaList(MediaContainer mediaContainer, URI uri, Server server, Plex plex) {
