@@ -57,4 +57,19 @@ public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
 
     public abstract MediaSection getSection();
 
+    public Integer getAllowSync() {
+        return getMediaContainer().getAllowSync();
+    }
+
+    public Integer getLibrarySectionID() { // TODO getLibrary?
+        return getMediaContainer().getLibrarySectionID();
+    }
+
+    public String getLibrarySectionTitle() { // TODO getSection?
+        return getMediaContainer().getLibrarySectionTitle();
+    }
+
+    public String getLibrarySectionUUID() {
+        return getMediaContainer().getLibrarySectionUUID();
+    }
 }

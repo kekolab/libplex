@@ -15,24 +15,6 @@ public class ArtistSection extends MediaSection {
         super(plex, uri, server);
     }
 
-    public List<Artist> searchForArtists(String query) {
-        Directory searchForArtists = getMediaContainer().getDirectories()
-                .stream()
-                .filter(d -> "Search for Artists".equals(d.getPrompt()))
-                .findAny()
-                .orElse(null);
-        Map<String, Object[]> queryParams = new HashMap<>();
-        queryParams.put("query", new Object[] { query });
-        return getPlex().executeGet(searchForArtists.getKey(), this, getServer(), MediaContainer.class, queryParams)
-                .getDirectories()
-                .stream()
-                .map(d -> new Artist(getPlex(),
-                        getPlex().uri("/library/metadata/".concat(Integer.toString(d.getRatingKey())), this,
-                                getServer(), null),
-                        getServer()))
-                .collect(Collectors.toList());
-    }
-
     public List<Artist> all() {
         Directory allArtists = getMediaContainer().getDirectories()
                 .stream()
@@ -81,6 +63,24 @@ public class ArtistSection extends MediaSection {
                 .collect(Collectors.toList());
     }
 
+    public List<Artist> searchForArtists(String query) {
+        Directory searchForArtists = getMediaContainer().getDirectories()
+                .stream()
+                .filter(d -> "Search for Artists".equals(d.getPrompt()))
+                .findAny()
+                .orElse(null);
+        Map<String, Object[]> queryParams = new HashMap<>();
+        queryParams.put("query", new Object[] { query });
+        return getPlex().executeGet(searchForArtists.getKey(), this, getServer(), MediaContainer.class, queryParams)
+                .getDirectories()
+                .stream()
+                .map(d -> new Artist(getPlex(),
+                        getPlex().uri("/library/metadata/".concat(Integer.toString(d.getRatingKey())), this,
+                                getServer(), null),
+                        getServer()))
+                .collect(Collectors.toList());
+    }
+
     public List<Album> searchForAlbums(String query) {
         Directory searchForAlbums = getMediaContainer().getDirectories()
                 .stream()
@@ -119,7 +119,6 @@ public class ArtistSection extends MediaSection {
 
     /*
      * TODO
-     * properties/attributes
      * by genre
      * by decade
      * by year
