@@ -15,52 +15,52 @@ public class MyPlex {
     @XmlAttribute private String friendlyName;
     @XmlAttribute private String identifier;
     @XmlAttribute private String machineIdentifier;
-    @XmlAttribute private int size;
+    @XmlAttribute private Integer size;
     @XmlElement(name = "Server") private List<RemotelyAccessibleServerInfo> servers;
     private Plex plex;
 
     public String getFriendlyName() {
-	return friendlyName;
+        return friendlyName;
     }
 
     public void setFriendlyName(String friendlyName) {
-	this.friendlyName = friendlyName;
+        this.friendlyName = friendlyName;
     }
 
     public String getIdentifier() {
-	return identifier;
+        return identifier;
     }
 
     public void setIdentifier(String identifier) {
-	this.identifier = identifier;
+        this.identifier = identifier;
     }
 
     public String getMachineIdentifier() {
-	return machineIdentifier;
+        return machineIdentifier;
     }
 
     public void setMachineIdentifier(String machineIdentifier) {
-	this.machineIdentifier = machineIdentifier;
+        this.machineIdentifier = machineIdentifier;
     }
 
-    public int getSize() {
-	return size;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setSize(int size) {
-	this.size = size;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     public List<RemotelyAccessibleServerInfo> getServers() {
-	servers.forEach(s -> s.setPlex(plex));
-	return servers;
+        servers.forEach(s -> s.setPlex(plex));
+        return servers;
     }
 
     public void setServers(List<RemotelyAccessibleServerInfo> servers) {
-	this.servers = servers;
+        this.servers = servers;
     }
 
     public void setPlex(Plex plex) {
-	this.plex = plex;
+        this.plex = plex;
     }
 }

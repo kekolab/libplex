@@ -10,84 +10,84 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Pin {
-    private int id;
+    private Integer id;
     private String code;
     private Date expiresAt;
     private String clientIdentifier;
-    private boolean trusted;
-    private int userId;
+    private Boolean trusted;
+    private Integer userId;
     private String authToken;
     private String auth_Token;
 
     @XmlElement(name = "user-id")
-    public int getUserId() {
-	return userId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserId(int userId) {
-	this.userId = userId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @XmlElement
-    public int getId() {
-	return id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId(int id) {
-	this.id = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @XmlElement
     public String getCode() {
-	return code;
+        return code;
     }
 
     public void setCode(String code) {
-	this.code = code;
+        this.code = code;
     }
 
     @XmlElement(name = "expires-at")
     public Date getExpiresAt() {
-	return expiresAt;
+        return expiresAt;
     }
 
     public void setExpiresAt(Date expiresAt) {
-	this.expiresAt = expiresAt;
+        this.expiresAt = expiresAt;
     }
 
     @XmlElement(name = "client-identifier")
     public String getClientIdentifier() {
-	return clientIdentifier;
+        return clientIdentifier;
     }
 
     public void setClientIdentifier(String clientIdentifier) {
-	this.clientIdentifier = clientIdentifier;
+        this.clientIdentifier = clientIdentifier;
     }
 
     @XmlElement
-    public boolean isTrusted() {
-	return trusted;
+    public Boolean isTrusted() {
+        return trusted;
     }
 
-    public void setTrusted(boolean trusted) {
-	this.trusted = trusted;
+    public void setTrusted(Boolean trusted) {
+        this.trusted = trusted;
     }
 
     @XmlElement(name = "auth-token")
     public String getAuthToken() {
-	return authToken;
+        return authToken;
     }
 
     public void setAuthToken(String authToken) {
-	this.authToken = authToken;
+        this.authToken = authToken;
     }
 
     @XmlElement(name = "auth_token")
     public String getAuth_Token() {
-	return auth_Token;
+        return auth_Token;
     }
 
     public void setAuth_Token(String auth_Token) {
-	this.auth_Token = auth_Token;
+        this.auth_Token = auth_Token;
     }
 }

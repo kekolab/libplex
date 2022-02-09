@@ -16,12 +16,12 @@ import libplex.plex.entity.adapter.TimestampAdapter;
 public class Directory {
     @XmlAttribute private String key;
     @XmlAttribute private String title;
-    @XmlAttribute private int count;
-    @XmlAttribute private int allowSync;
+    @XmlAttribute private Integer count;
+    @XmlAttribute private Integer allowSync;
     @XmlAttribute private String art;
     @XmlAttribute private String composite;
-    @XmlAttribute private int filters;
-    @XmlAttribute private int refreshing;
+    @XmlAttribute private Integer filters;
+    @XmlAttribute private Integer refreshing;
     @XmlAttribute private String thumb;
     @XmlAttribute private String type;
     @XmlAttribute private String agent;
@@ -34,25 +34,25 @@ public class Directory {
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date createdAt;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date scannedAt;
-    @XmlAttribute private int content;
-    @XmlAttribute private int directory;
+    @XmlAttribute private Integer content;
+    @XmlAttribute private Integer directory;
     @XmlAttribute private String contentChangedAt;
-    @XmlAttribute private int hidden;
-    @XmlAttribute private int secondary;
+    @XmlAttribute private Integer hidden;
+    @XmlAttribute private Integer secondary;
     @XmlAttribute private String prompt;
-    @XmlAttribute private int search;
+    @XmlAttribute private Integer search;
     @XmlElement(name = "Location") private Location location;
-    @XmlAttribute private int ratingKey;
+    @XmlAttribute private Integer ratingKey;
     @XmlAttribute private String guid;
     @XmlAttribute private String summary;
-    @XmlAttribute private int index;
-    @XmlAttribute private int viewCount;
-    @XmlAttribute private int skipCount;
+    @XmlAttribute private Integer index;
+    @XmlAttribute private Integer viewCount;
+    @XmlAttribute private Integer skipCount;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date lastViewedAt;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date addedAt;
-    @XmlAttribute private int albumSort;
+    @XmlAttribute private Integer albumSort;
     @XmlElement(name = "Genre") private List<Tag> genres;
     @XmlElement(name = "Country") private List<Tag> countries;
     @XmlElement(name = "Style") private List<Tag> styles;
@@ -63,11 +63,10 @@ public class Directory {
     @XmlAttribute private String studio;
     @XmlAttribute private String parentKey;
     @XmlAttribute private String parentTitle;
-    @XmlAttribute private double rating;
-    @XmlAttribute private int year;
+    @XmlAttribute private Double rating;
+    @XmlAttribute private Integer year;
     @XmlAttribute private String parentThumb;
-    @XmlAttribute
-    @XmlJavaTypeAdapter(TimestampAdapter.class) private Date originallyAvailableAt;
+    @XmlAttribute private Date originallyAvailableAt;
     @XmlAttribute private Integer loudnessAnalysisVersion;
     @XmlElement(name = "Director") private List<Tag> directors;
     @XmlAttribute private String librarySectionKey;
@@ -83,11 +82,11 @@ public class Directory {
         return title;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public int getAllowSync() {
+    public Integer getAllowSync() {
         return allowSync;
     }
 
@@ -99,11 +98,11 @@ public class Directory {
         return composite;
     }
 
-    public int getFilters() {
+    public Integer getFilters() {
         return filters;
     }
 
-    public int getRefreshing() {
+    public Integer getRefreshing() {
         return refreshing;
     }
 
@@ -143,11 +142,11 @@ public class Directory {
         return scannedAt;
     }
 
-    public int getContent() {
+    public Integer getContent() {
         return content;
     }
 
-    public int getDirectory() {
+    public Integer getDirectory() {
         return directory;
     }
 
@@ -155,11 +154,11 @@ public class Directory {
         return contentChangedAt;
     }
 
-    public int getHidden() {
+    public Integer getHidden() {
         return hidden;
     }
 
-    public int getSecondary() {
+    public Integer getSecondary() {
         return secondary;
     }
 
@@ -167,7 +166,7 @@ public class Directory {
         return prompt;
     }
 
-    public int getSearch() {
+    public Integer getSearch() {
         return search;
     }
 
@@ -175,7 +174,7 @@ public class Directory {
         return location;
     }
 
-    public int getRatingKey() {
+    public Integer getRatingKey() {
         return ratingKey;
     }
 
@@ -187,15 +186,15 @@ public class Directory {
         return summary;
     }
 
-    public int getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
-    public int getViewCount() {
+    public Integer getViewCount() {
         return viewCount;
     }
 
-    public int getSkipCount() {
+    public Integer getSkipCount() {
         return skipCount;
     }
 
@@ -207,7 +206,7 @@ public class Directory {
         return addedAt;
     }
 
-    public int getAlbumSort() {
+    public Integer getAlbumSort() {
         return albumSort;
     }
 
@@ -239,11 +238,11 @@ public class Directory {
         return parentTitle;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 

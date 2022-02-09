@@ -8,7 +8,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Tag {
-    @XmlAttribute private int id;
+    @XmlAttribute private Integer id;
     @XmlAttribute private String filter;
     @XmlAttribute private String tag;
 

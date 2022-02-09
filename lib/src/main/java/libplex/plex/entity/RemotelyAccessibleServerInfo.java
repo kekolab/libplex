@@ -24,7 +24,7 @@ public class RemotelyAccessibleServerInfo {
     @XmlAttribute private String accessToken;
     @XmlAttribute private String name;
     @XmlAttribute private String address;
-    @XmlAttribute private int port;
+    @XmlAttribute private Integer port;
     @XmlAttribute private String version;
     @XmlAttribute private String scheme;
     @XmlAttribute private String host;
@@ -34,8 +34,8 @@ public class RemotelyAccessibleServerInfo {
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date createdAt;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
-    @XmlAttribute private int owned;
-    @XmlAttribute private int synced;
+    @XmlAttribute private Integer owned;
+    @XmlAttribute private Integer synced;
 
     private URI baseUri;
     private Plex plex;

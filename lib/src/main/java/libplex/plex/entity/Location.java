@@ -8,7 +8,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Location {
-    @XmlAttribute private int id;
+    @XmlAttribute private Integer id;
     @XmlAttribute private String path;
 
     public String getPath() {
