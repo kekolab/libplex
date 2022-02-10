@@ -4,19 +4,19 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import libplex.Plex;
+import libplex.PlexClient;
 import libplex.plex.entity.MediaContainer;
 
 public class Artist extends MediaDirectory {
-    public Artist(Plex plex, URI uri, Server server) {
+    public Artist(PlexClient plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 
     public List<Album> albums() {
-        return getPlex().executeGet(getDirectory().getKey(), null, getServer(), MediaContainer.class, null)
+        return getPlexClient().executeGet(getDirectory().getKey(), null, getServer(), MediaContainer.class, null)
                 .getDirectories()
                 .stream()
-                .map(d -> new Album(getPlex(), getPlex().uri(getDirectory().getKey(), this, getServer(), null),
+                .map(d -> new Album(getPlexClient(), getPlexClient().uri(getDirectory().getKey(), this, getServer(), null),
                         getServer()))
                 .collect(Collectors.toList());
     }
@@ -63,7 +63,7 @@ public class Artist extends MediaDirectory {
 
     @Override
     public ArtistSection getSection() {
-        return new ArtistSection(getPlex(),
-                getPlex().uri(getDirectory().getLibrarySectionKey(), null, getServer(), null), getServer());
+        return new ArtistSection(getPlexClient(),
+                getPlexClient().uri(getDirectory().getLibrarySectionKey(), null, getServer(), null), getServer());
     }
 }

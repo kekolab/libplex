@@ -3,13 +3,13 @@ package libplex.entity;
 import java.net.URI;
 import java.util.Date;
 
-import libplex.Plex;
+import libplex.PlexClient;
 import libplex.plex.entity.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
     private Directory directory;
 
-    protected MediaDirectory(Plex plex, URI uri, Server server) {
+    protected MediaDirectory(PlexClient plex, URI uri, Server server) {
         super(plex, uri, server);
         this.directory = getMediaContainer().getDirectories()
                 .get(0);
@@ -32,7 +32,7 @@ public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
     }
 
     public URI getArt() {
-        return getPlex().uri(directory.getArt(), this, getServer(), null);
+        return getPlexClient().uri(directory.getArt(), this, getServer(), null);
     }
 
     public Date getUpdatedAt() {
@@ -52,7 +52,7 @@ public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
     }
 
     public URI getThumb() {
-        return getPlex().uri(directory.getThumb(), this, getServer(), null);
+        return getPlexClient().uri(directory.getThumb(), this, getServer(), null);
     }
 
     public abstract MediaSection getSection();

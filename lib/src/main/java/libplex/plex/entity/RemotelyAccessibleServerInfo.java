@@ -14,7 +14,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import libplex.Plex;
+import libplex.PlexClient;
 import libplex.entity.Server;
 import libplex.plex.entity.adapter.TimestampAdapter;
 
@@ -38,7 +38,7 @@ public class RemotelyAccessibleServerInfo {
     @XmlAttribute private Integer synced;
 
     private URI baseUri;
-    private Plex plex;
+    private PlexClient plex;
 
     public URI uri() throws IOException {
         if (baseUri == null) {
@@ -68,7 +68,7 @@ public class RemotelyAccessibleServerInfo {
         return new Server(plex, uri());
     }
 
-    public void setPlex(Plex plex) {
+    public void setPlexClient(PlexClient plex) {
         this.plex = plex;
     }
 

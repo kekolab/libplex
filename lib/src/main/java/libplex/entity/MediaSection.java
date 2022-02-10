@@ -2,10 +2,10 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.Plex;
+import libplex.PlexClient;
 
 public abstract class MediaSection extends ServerMediaContainerPlexItem {
-    public MediaSection(Plex plex, URI uri, Server server) {
+    public MediaSection(PlexClient plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 
@@ -14,7 +14,7 @@ public abstract class MediaSection extends ServerMediaContainerPlexItem {
     }
 
     public URI getArt() {
-        return getPlex().uri(getMediaContainer().getArt(), this, getServer(), null);
+        return getPlexClient().uri(getMediaContainer().getArt(), this, getServer(), null);
     }
 
     public Integer getLibrarySectionID() {
@@ -22,7 +22,7 @@ public abstract class MediaSection extends ServerMediaContainerPlexItem {
     }
 
     public URI getThumb() {
-        return getPlex().uri(getMediaContainer().getThumb(), this, getServer(), null);
+        return getPlexClient().uri(getMediaContainer().getThumb(), this, getServer(), null);
     }
 
     public String getTitle() {

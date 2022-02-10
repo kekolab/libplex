@@ -4,11 +4,11 @@ import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
-import libplex.Plex;
+import libplex.PlexClient;
 import libplex.plex.entity.Directory;
 
 public class Server extends MediaContainerPlexItem {
-    public Server(Plex plex, URI uri) {
+    public Server(PlexClient plex, URI uri) {
         super(plex, uri);
     }
 
@@ -18,8 +18,8 @@ public class Server extends MediaContainerPlexItem {
                 .filter(d -> "library".equals(d.getKey()))
                 .findAny()
                 .orElse(null);
-        URI uri = getPlex().uri(library.getKey(), this, this, null);
-        return new Library(getPlex(), uri, this);
+        URI uri = getPlexClient().uri(library.getKey(), this, this, null);
+        return new Library(getPlexClient(), uri, this);
     }
 
     public Integer getAllowCameraUpload() {

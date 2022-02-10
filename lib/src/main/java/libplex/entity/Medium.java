@@ -3,14 +3,14 @@ package libplex.entity;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import libplex.Plex;
+import libplex.PlexClient;
 import libplex.plex.entity.Media;
 
 public class Medium {
     private Media media;
     private List<Part> parts;
 
-    public Medium(Plex plex, Server server, Media media) {
+    public Medium(PlexClient plex, Server server, Media media) {
         this.media = media;
         this.parts = media.getParts()
                 .stream()

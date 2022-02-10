@@ -2,11 +2,11 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.Plex;
+import libplex.PlexClient;
 
 public class MovieSection extends MediaSection {
 
-    protected MovieSection(Plex plex, URI uri, Server server) {
+    protected MovieSection(PlexClient plex, URI uri, Server server) {
         super(plex, uri, server);
         // TODO Auto-generated constructor stub
     }

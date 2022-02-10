@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import libplex.Plex;
+import libplex.PlexClient;
 
 public class Sections extends ServerMediaContainerPlexItem {
-    public Sections(Plex plex, URI uri, Server server) {
+    public Sections(PlexClient plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 
@@ -21,7 +21,7 @@ public class Sections extends ServerMediaContainerPlexItem {
         return getMediaContainer().getDirectories()
                 .stream()
                 .filter(d -> "artist".equals(d.getType()))
-                .map(d -> new ArtistSection(getPlex(), getPlex().uri(d.getKey(), this, getServer(), null), getServer()))
+                .map(d -> new ArtistSection(getPlexClient(), getPlexClient().uri(d.getKey(), this, getServer(), null), getServer()))
                 .collect(Collectors.toList());
     }
 
@@ -29,7 +29,7 @@ public class Sections extends ServerMediaContainerPlexItem {
         return getMediaContainer().getDirectories()
                 .stream()
                 .filter(d -> "movie".equals(d.getType()))
-                .map(d -> new MovieSection(getPlex(), getPlex().uri(d.getKey(), this, getServer(), null), getServer()))
+                .map(d -> new MovieSection(getPlexClient(), getPlexClient().uri(d.getKey(), this, getServer(), null), getServer()))
                 .collect(Collectors.toList());
     }
 

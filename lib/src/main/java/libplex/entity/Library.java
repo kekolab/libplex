@@ -2,11 +2,11 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.Plex;
+import libplex.PlexClient;
 import libplex.plex.entity.Directory;
 
 public class Library extends ServerMediaContainerPlexItem {
-    public Library(Plex plex, URI uri, Server server) {
+    public Library(PlexClient plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 
@@ -16,8 +16,8 @@ public class Library extends ServerMediaContainerPlexItem {
                 .filter(d -> "sections".equals(d.getKey()))
                 .findAny()
                 .orElse(null);
-        URI uri = getPlex().uri(sections.getKey(), this, getServer(), null);
-        return new Sections(getPlex(), uri, getServer());
+        URI uri = getPlexClient().uri(sections.getKey(), this, getServer(), null);
+        return new Sections(getPlexClient(), uri, getServer());
     }
 
     public OnDeck onDeck() {
@@ -26,8 +26,8 @@ public class Library extends ServerMediaContainerPlexItem {
                 .filter(d -> "onDeck".equals(d.getKey()))
                 .findAny()
                 .orElse(null);
-        URI uri = getPlex().uri(onDeck.getKey(), this, getServer(), null);
-        return new OnDeck(getPlex(), uri, getServer());
+        URI uri = getPlexClient().uri(onDeck.getKey(), this, getServer(), null);
+        return new OnDeck(getPlexClient(), uri, getServer());
     }
 
     /*

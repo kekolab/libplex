@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import libplex.Plex;
+import libplex.PlexClient;
 
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.NONE)
@@ -17,7 +17,7 @@ public class MyPlex {
     @XmlAttribute private String machineIdentifier;
     @XmlAttribute private Integer size;
     @XmlElement(name = "Server") private List<RemotelyAccessibleServerInfo> servers;
-    private Plex plex;
+    private PlexClient plex;
 
     public String getFriendlyName() {
         return friendlyName;
@@ -52,7 +52,7 @@ public class MyPlex {
     }
 
     public List<RemotelyAccessibleServerInfo> getServers() {
-        servers.forEach(s -> s.setPlex(plex));
+        servers.forEach(s -> s.setPlexClient(plex));
         return servers;
     }
 
@@ -60,7 +60,7 @@ public class MyPlex {
         this.servers = servers;
     }
 
-    public void setPlex(Plex plex) {
+    public void setPlex(PlexClient plex) {
         this.plex = plex;
     }
 }
