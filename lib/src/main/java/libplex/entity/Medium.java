@@ -14,7 +14,7 @@ public class Medium {
         this.media = media;
         this.parts = media.getParts()
                 .stream()
-                .map(p -> new Part(plex, server, p))
+                .map(p -> new Part(server, p))
                 .collect(Collectors.toList());
     }
 

@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Date;
 
 import libplex.PlexClient;
+import libplex.PlexUriBuilder;
 import libplex.plex.entity.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
@@ -20,39 +21,41 @@ public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
     }
 
     public String getTitle() {
-        return directory.getTitle();
+        return getDirectory().getTitle();
     }
 
     public String getSummary() {
-        return directory.getSummary();
+        return getDirectory().getSummary();
     }
 
     public int getViewCount() {
-        return directory.getViewCount();
+        return getDirectory().getViewCount();
     }
 
     public URI getArt() {
-        return getPlexClient().uri(directory.getArt(), this, getServer(), null);
+        return PlexUriBuilder.fromKey(getDirectory().getArt(), this, getServer())
+                .build();
     }
 
     public Date getUpdatedAt() {
-        return directory.getUpdatedAt();
+        return getDirectory().getUpdatedAt();
     }
 
     public int getSkipCount() {
-        return directory.getSkipCount();
+        return getDirectory().getSkipCount();
     }
 
     public Date getLastViewedAt() {
-        return directory.getLastViewedAt();
+        return getDirectory().getLastViewedAt();
     }
 
     public Date getAddedAt() {
-        return directory.getAddedAt();
+        return getDirectory().getAddedAt();
     }
 
     public URI getThumb() {
-        return getPlexClient().uri(directory.getThumb(), this, getServer(), null);
+        return PlexUriBuilder.fromKey(getDirectory().getThumb(), this, getServer())
+                .build();
     }
 
     public abstract MediaSection getSection();

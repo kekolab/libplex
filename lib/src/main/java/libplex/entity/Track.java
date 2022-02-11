@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.PlexClient;
+import libplex.PlexUriBuilder;
 
 public class Track extends ServerMediaContainerPlexItem {
     private libplex.plex.entity.Track track;
@@ -26,25 +27,30 @@ public class Track extends ServerMediaContainerPlexItem {
     }
 
     public Artist getArtist() {
-        return new Artist(getPlexClient(), getPlexClient().uri(getTrack().getGrandParentKey(), null, getServer(), null),
-                getServer());
+        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(getTrack().getGrandParentKey(), null, getServer())
+                .build(), getServer());
     }
 
     public Album getAlbum() {
-        return new Album(getPlexClient(), getPlexClient().uri(getTrack().getParentKey(), null, getServer(), null), getServer());
+        return new Album(getPlexClient(), PlexUriBuilder.fromKey(getTrack().getParentKey(), null, getServer())
+                .build(), getServer());
     }
 
     public ArtistSection getSection() {
-        return new ArtistSection(getPlexClient(), getPlexClient().uri(getTrack().getLibrarySectionKey(), null, getServer(), null),
+        return new ArtistSection(getPlexClient(),
+                PlexUriBuilder.fromKey(getTrack().getLibrarySectionKey(), null, getServer())
+                        .build(),
                 getServer());
     }
 
     public URI getThumb() {
-        return getPlexClient().uri(getTrack().getThumb(), null, getServer(), null);
+        return PlexUriBuilder.fromKey(getTrack().getThumb(), null, getServer())
+                .build();
     }
 
     public URI getArt() {
-        return getPlexClient().uri(getTrack().getArt(), null, getServer(), null);
+        return PlexUriBuilder.fromKey(getTrack().getArt(), null, getServer())
+                .build();
     }
 
     public int getDuration() {

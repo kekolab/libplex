@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.PlexClient;
+import libplex.PlexUriBuilder;
 import libplex.plex.entity.MediaContainer;
 
 public class Artist extends MediaDirectory {
@@ -13,11 +14,12 @@ public class Artist extends MediaDirectory {
     }
 
     public List<Album> albums() {
-        return getPlexClient().executeGet(getDirectory().getKey(), null, getServer(), MediaContainer.class, null)
+        return getPlexClient().executeGet(PlexUriBuilder.fromKey(getDirectory().getKey(), null, getServer())
+                .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Album(getPlexClient(), getPlexClient().uri(getDirectory().getKey(), this, getServer(), null),
-                        getServer()))
+                .map(d -> new Album(getPlexClient(), PlexUriBuilder.fromKey(getDirectory().getKey(), this, getServer())
+                        .build(), getServer()))
                 .collect(Collectors.toList());
     }
 
@@ -64,6 +66,8 @@ public class Artist extends MediaDirectory {
     @Override
     public ArtistSection getSection() {
         return new ArtistSection(getPlexClient(),
-                getPlexClient().uri(getDirectory().getLibrarySectionKey(), null, getServer(), null), getServer());
+                PlexUriBuilder.fromKey(getDirectory().getLibrarySectionKey(), this, getServer())
+                        .build(),
+                getServer());
     }
 }

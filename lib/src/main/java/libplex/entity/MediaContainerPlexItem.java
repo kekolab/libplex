@@ -27,6 +27,16 @@ public abstract class MediaContainerPlexItem extends PlexItem {
                 .equals(key));
     }
 
+    protected List<Directory> directoriesByPrompt(String prompt) {
+        return filterDirectories(d -> d.getPrompt() != null && d.getPrompt()
+                .equals(prompt));
+    }
+
+    protected List<Directory> directoriesByType(String type) {
+        return filterDirectories(d -> d.getType() != null && d.getType()
+                .equals(type));
+    }
+
     private List<Directory> filterDirectories(Predicate<? super Directory> filter) {
         List<Directory> directories = getMediaContainer().getDirectories();
         if (directories != null && directories.size() > 0)
@@ -34,10 +44,5 @@ public abstract class MediaContainerPlexItem extends PlexItem {
                     .filter(filter)
                     .collect(Collectors.toList());
         return Collections.emptyList();
-    }
-
-    protected List<Directory> directoriesByPrompt(String prompt) {
-        return filterDirectories(d -> d.getPrompt() != null && d.getPrompt()
-                .equals(prompt));
     }
 }

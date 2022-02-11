@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.PlexClient;
+import libplex.PlexUriBuilder;
 import libplex.plex.entity.MediaContainer;
 
 public class Album extends MediaDirectory {
@@ -15,12 +16,13 @@ public class Album extends MediaDirectory {
     }
 
     public List<Track> getTracks() {
-        return getPlexClient().executeGet(getDirectory().getKey(), null, getServer(), MediaContainer.class, null)
+        return getPlexClient().executeGet(PlexUriBuilder.fromKey(getDirectory().getKey(), null, getServer())
+                .build(), MediaContainer.class)
                 .getTracks()
                 .stream()
                 .map(t -> new Track(getPlexClient(),
-                        getPlexClient().uri("/library/metadata/".concat(Integer.toString(t.getRatingKey())), null,
-                                getServer(), null),
+                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
+                                .build(t.getRatingKey()),
                         getServer()))
                 .collect(Collectors.toList());
     }
@@ -30,8 +32,8 @@ public class Album extends MediaDirectory {
     }
 
     public Artist getArtist() {
-        return new Artist(getPlexClient(), getPlexClient().uri(getDirectory().getParentKey(), null, getServer(), null),
-                getServer());
+        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(getDirectory().getParentKey(), null, getServer())
+                .build(), getServer());
     }
 
     public double getRating() {
@@ -89,6 +91,8 @@ public class Album extends MediaDirectory {
     @Override
     public ArtistSection getSection() {
         return new ArtistSection(getPlexClient(),
-                getPlexClient().uri(getDirectory().getLibrarySectionKey(), null, getServer(), null), getServer());
+                PlexUriBuilder.fromKey(getDirectory().getLibrarySectionKey(), null, getServer())
+                        .build(),
+                getServer());
     }
 }

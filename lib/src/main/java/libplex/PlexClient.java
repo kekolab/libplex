@@ -1,9 +1,6 @@
 package libplex;
 
 import java.net.URI;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
 
@@ -14,8 +11,6 @@ import jakarta.ws.rs.client.ClientResponseFilter;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.UriBuilder;
-import libplex.entity.PlexItem;
-import libplex.entity.Server;
 
 public class PlexClient implements AutoCloseable {
     private Client client;
@@ -94,11 +89,6 @@ public class PlexClient implements AutoCloseable {
         return this;
     }
 
-    public <A> A executeGet(String key, PlexItem parent, Server server, Class<A> outputClass,
-            Map<String, Object[]> queryParams) {
-        return executeGet(uri(key, parent, server, queryParams), outputClass);
-    }
-
     public <A> A executeGet(URI uri, Class<A> outputClass) {
         return getClient().target(uri)
                 .request()
@@ -109,20 +99,6 @@ public class PlexClient implements AutoCloseable {
         return getClient().target(uri)
                 .request()
                 .post(entity, cls);
-    }
-
-    @Deprecated
-    public URI uri(String key, PlexItem parent, Server server, Map<String, Object[]> queryParams) {
-        UriBuilder uriBuilder = PlexUriBuilder.fromKey(key, parent, server);
-        if (queryParams != null) {
-            Iterator<Entry<String, Object[]>> iterator = queryParams.entrySet()
-                    .iterator();
-            while (iterator.hasNext()) {
-                Entry<String, Object[]> entry = iterator.next();
-                uriBuilder.queryParam(entry.getKey(), entry.getValue());
-            }
-        }
-        return uriBuilder.build();
     }
 
     @Override

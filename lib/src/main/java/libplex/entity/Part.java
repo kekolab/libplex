@@ -2,21 +2,20 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.PlexClient;
+import libplex.PlexUriBuilder;
 
 public class Part {
     private libplex.plex.entity.Part part;
-    private PlexClient plexClient;
     private Server server;
 
-    public Part(PlexClient plex, Server server, libplex.plex.entity.Part part) {
-        this.plexClient = plex;
+    public Part(Server server, libplex.plex.entity.Part part) {
         this.server = server;
         this.part = part;
     }
 
     public URI getURI() {
-        return getPlexClient().uri(getPart().getKey(), null, getServer(), null);
+        return PlexUriBuilder.fromKey(getPart().getKey(), null, getServer())
+                .build();
     }
 
     public int getDuration() {
@@ -37,10 +36,6 @@ public class Part {
 
     public int getHasThumbnail() {
         return getPart().getHasThumbnail();
-    }
-
-    private PlexClient getPlexClient() {
-        return plexClient;
     }
 
     private libplex.plex.entity.Part getPart() {

@@ -11,7 +11,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import jakarta.ws.rs.core.UriBuilder;
 import libplex.PlexClient;
-import libplex.plex.entity.Directory;
+import libplex.PlexUriBuilder;
 import libplex.plex.entity.RemoteServer;
 
 public class Server extends MediaContainerPlexItem {
@@ -57,13 +57,9 @@ public class Server extends MediaContainerPlexItem {
     }
 
     public Library library() {
-        Directory library = getMediaContainer().getDirectories()
-                .stream()
-                .filter(d -> "library".equals(d.getKey()))
-                .findAny()
-                .orElse(null);
-        URI uri = getPlexClient().uri(library.getKey(), this, this, null);
-        return new Library(getPlexClient(), uri, this);
+        return new Library(getPlexClient(), PlexUriBuilder.fromKey(directoriesByKey("library").get(0)
+                .getKey(), this, this)
+                .build(), this);
     }
 
     public Integer getAllowCameraUpload() {

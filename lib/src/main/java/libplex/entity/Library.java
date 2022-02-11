@@ -3,7 +3,7 @@ package libplex.entity;
 import java.net.URI;
 
 import libplex.PlexClient;
-import libplex.plex.entity.Directory;
+import libplex.PlexUriBuilder;
 
 public class Library extends ServerMediaContainerPlexItem {
     public Library(PlexClient plex, URI uri, Server server) {
@@ -11,23 +11,15 @@ public class Library extends ServerMediaContainerPlexItem {
     }
 
     public Sections sections() {
-        Directory sections = getMediaContainer().getDirectories()
-                .stream()
-                .filter(d -> "sections".equals(d.getKey()))
-                .findAny()
-                .orElse(null);
-        URI uri = getPlexClient().uri(sections.getKey(), this, getServer(), null);
-        return new Sections(getPlexClient(), uri, getServer());
+        return new Sections(getPlexClient(), PlexUriBuilder.fromKey(directoriesByKey("sections").get(0)
+                .getKey(), this, getServer())
+                .build(), getServer());
     }
 
     public OnDeck onDeck() {
-        Directory onDeck = getMediaContainer().getDirectories()
-                .stream()
-                .filter(d -> "onDeck".equals(d.getKey()))
-                .findAny()
-                .orElse(null);
-        URI uri = getPlexClient().uri(onDeck.getKey(), this, getServer(), null);
-        return new OnDeck(getPlexClient(), uri, getServer());
+        return new OnDeck(getPlexClient(), PlexUriBuilder.fromKey(directoriesByKey("onDeck").get(0)
+                .getKey(), this, getServer())
+                .build(), getServer());
     }
 
     /*
