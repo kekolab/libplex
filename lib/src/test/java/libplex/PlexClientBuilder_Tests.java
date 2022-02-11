@@ -1,18 +1,16 @@
 package libplex;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import libplex.entity.RemoteServers;
 import libplex.entity.Server;
-import libplex.entity.Track;
-import libplex.plex.entity.RemotelyAccessibleServerInfo;
 
 class PlexClientBuilder_Tests {
-    private PlexClient plex;
+    private PlexClient plexClient;
     private Properties properties;
 
     @BeforeEach
@@ -20,16 +18,15 @@ class PlexClientBuilder_Tests {
         properties = new Properties();
         properties.load(getClass().getResourceAsStream("/testVariables.properties"));
         String authToken = properties.getProperty("authToken");
-        plex = new PlexClient(authToken, "myPlexProduct", "v1.0", "myPlexClientIdentifier");
+        plexClient = new PlexClient(authToken, "myPlexProduct", "v1.0", "myPlexClientIdentifier");
     }
 
     @Test
     void tests() throws IOException {
-        List<RemotelyAccessibleServerInfo> servers = plex.myPlex()
-                .getServers();
-        Server server = servers.get(0)
-                .server();
-        List<Track> tracks = server.library()
+        RemoteServers remoteServers = new RemoteServers(plexClient);
+        Server server = Server.buildRemote(plexClient, remoteServers.getSummaries()
+                .get(0));
+        server.library()
                 .sections()
                 .artistSections()
                 .get(0)
@@ -38,7 +35,6 @@ class PlexClientBuilder_Tests {
                 .albums()
                 .get(0)
                 .getTracks();
-        System.out.println();
     }
 
     @Test

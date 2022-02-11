@@ -27,6 +27,7 @@ public class MediaContainer {
     @XmlAttribute private Integer certificate;
     @XmlAttribute private Integer companionProxy;
     @XmlAttribute private String countryCode;
+    @XmlElement(name = "Server") private List<RemoteServer> remoteServers;
     @XmlAttribute
     @XmlJavaTypeAdapter(StringListAdapter.class) private List<String> diagnostics;
     @XmlAttribute private Integer eventStream;
@@ -396,5 +397,9 @@ public class MediaContainer {
 
     public List<Track> getTracks() {
         return tracks;
+    }
+
+    public List<RemoteServer> getRemoteServers() {
+        return remoteServers;
     }
 }

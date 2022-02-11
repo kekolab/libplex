@@ -16,7 +16,6 @@ import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.UriBuilder;
 import libplex.entity.PlexItem;
 import libplex.entity.Server;
-import libplex.plex.entity.MyPlex;
 
 public class PlexClient implements AutoCloseable {
     private Client client;
@@ -46,13 +45,8 @@ public class PlexClient implements AutoCloseable {
     }
 
     public PlexClient(String plexToken, String plexProduct, String plexVersion, String plexClientIdentifier) {
-        this(plexToken);
-        getClient().register((ClientRequestFilter) requestContext -> {
-            MultivaluedMap<String, Object> headers = requestContext.getHeaders();
-            headers.add("X-Plex-Product", plexProduct);
-            headers.add("X-Plex-Version", plexVersion);
-            headers.add("X-Plex-Client-Identifier", plexClientIdentifier);
-        });
+        this(plexProduct, plexVersion, plexClientIdentifier);
+        setPlexToken(plexToken);
     }
 
     public PlexClient setPlexToken(String plexToken) {
@@ -129,13 +123,6 @@ public class PlexClient implements AutoCloseable {
             }
         }
         return uriBuilder.build();
-    }
-
-    public MyPlex myPlex() {
-        MyPlex mp = executeGet(UriBuilder.fromPath("https://plex.tv/pms/servers.xml")
-                .build(), MyPlex.class);
-        mp.setPlex(this);
-        return mp;
     }
 
     @Override
