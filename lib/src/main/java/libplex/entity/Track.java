@@ -9,67 +9,67 @@ import libplex.PlexClient;
 import libplex.PlexUriBuilder;
 
 public class Track extends ServerMediaContainerPlexItem {
-    private libplex.plex.entity.Track track;
-    private List<Medium> media;
+	private List<AudioMedium> media;
+	private libplex.plex.entity.Track track;
 
-    public Track(PlexClient plex, URI uri, Server server) {
-        super(plex, uri, server);
-        this.track = getMediaContainer().getTracks()
-                .get(0);
-        this.media = track.getMedia()
-                .stream()
-                .map(m -> new Medium(plex, server, m))
-                .collect(Collectors.toList());
-    }
+	public Track(PlexClient plex, URI uri, Server server) {
+		super(plex, uri, server);
+		this.track = getMediaContainer().getTracks()
+				.get(0);
+		this.media = track.getMedia()
+				.stream()
+				.map(m -> new AudioMedium(plex, server, m))
+				.collect(Collectors.toList());
+	}
 
-    public String getTitle() {
-        return track.getTitle();
-    }
+	public Date getAddedAt() {
+		return track.getAddedAt();
+	}
 
-    public Artist getArtist() {
-        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(track.getGrandParentKey(), null, getServer())
-                .build(), getServer());
-    }
+	public Album getAlbum() {
+		return new Album(getPlexClient(), PlexUriBuilder.fromKey(track.getParentKey(), null, getServer())
+				.build(), getServer());
+	}
 
-    public Album getAlbum() {
-        return new Album(getPlexClient(), PlexUriBuilder.fromKey(track.getParentKey(), null, getServer())
-                .build(), getServer());
-    }
+	public URI getArt() {
+		return PlexUriBuilder.fromKey(track.getArt(), null, getServer())
+				.build();
+	}
 
-    public ArtistSection getSection() {
-        return new ArtistSection(getPlexClient(),
-                PlexUriBuilder.fromKey(track.getLibrarySectionKey(), null, getServer())
-                        .build(),
-                getServer());
-    }
+	public Artist getArtist() {
+		return new Artist(getPlexClient(), PlexUriBuilder.fromKey(track.getGrandParentKey(), null, getServer())
+				.build(), getServer());
+	}
 
-    public URI getThumb() {
-        return PlexUriBuilder.fromKey(track.getThumb(), null, getServer())
-                .build();
-    }
+	public int getDuration() {
+		return track.getDuration();
+	}
 
-    public URI getArt() {
-        return PlexUriBuilder.fromKey(track.getArt(), null, getServer())
-                .build();
-    }
+	public boolean getHasPremiumLyrics() {
+		return track.getHasPremiumLyrics() == 1;
+	}
 
-    public int getDuration() {
-        return track.getDuration();
-    }
+	public List<AudioMedium> getMedia() {
+		return media;
+	}
 
-    public Date getAddedAt() {
-        return track.getAddedAt();
-    }
+	public ArtistSection getSection() {
+		return new ArtistSection(getPlexClient(),
+				PlexUriBuilder.fromKey(track.getLibrarySectionKey(), null, getServer())
+						.build(),
+				getServer());
+	}
 
-    public Date getUpdatedAt() {
-        return track.getUpdatedAt();
-    }
+	public URI getThumb() {
+		return PlexUriBuilder.fromKey(track.getThumb(), null, getServer())
+				.build();
+	}
 
-    public boolean getHasPremiumLyrics() {
-        return track.getHasPremiumLyrics() == 1;
-    }
+	public String getTitle() {
+		return track.getTitle();
+	}
 
-    public List<Medium> getMedia() {
-        return media;
-    }
+	public Date getUpdatedAt() {
+		return track.getUpdatedAt();
+	}
 }
