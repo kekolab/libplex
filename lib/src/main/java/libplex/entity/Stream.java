@@ -1,85 +1,81 @@
 package libplex.entity;
 
 public class Stream {
-    private libplex.plex.entity.Stream stream;
+	private libplex.plex.entity.Stream stream;
 
-    public Stream(libplex.plex.entity.Stream stream) {
-        this.stream = stream;
-    }
+	public Stream(libplex.plex.entity.Stream stream) {
+		this.stream = stream;
+	}
 
-    public int getStreamType() {
-        return getStream().getStreamType();
-    }
+	public int getStreamType() {
+		return stream.getStreamType();
+	}
 
-    public int getSelected() {
-        return getStream().getSelected();
-    }
+	public int getSelected() {
+		return stream.getSelected();
+	}
 
-    public String getCodec() {
-        return getStream().getCodec();
-    }
+	public String getCodec() {
+		return stream.getCodec();
+	}
 
-    public int getIndex() {
-        return getStream().getIndex();
-    }
+	public int getIndex() {
+		return stream.getIndex();
+	}
 
-    public int getChannels() {
-        return getStream().getChannels();
-    }
+	public int getChannels() {
+		return stream.getChannels();
+	}
 
-    public int getBitrate() {
-        return getStream().getBitrate();
-    }
+	public int getBitrate() {
+		return stream.getBitrate();
+	}
 
-    public double getAlbumGain() {
-        return getStream().getAlbumGain();
-    }
+	public double getAlbumGain() {
+		return stream.getAlbumGain();
+	}
 
-    public double getAlbumPeak() {
-        return getStream().getAlbumPeak();
-    }
+	public double getAlbumPeak() {
+		return stream.getAlbumPeak();
+	}
 
-    public double getAlbumRange() {
-        return getStream().getAlbumRange();
-    }
+	public double getAlbumRange() {
+		return stream.getAlbumRange();
+	}
 
-    public String getAudioChannelLayout() {
-        return getStream().getAudioChannelLayout();
-    }
+	public String getAudioChannelLayout() {
+		return stream.getAudioChannelLayout();
+	}
 
-    public int getBitDepth() {
-        return getStream().getBitDepth();
-    }
+	public int getBitDepth() {
+		return stream.getBitDepth();
+	}
 
-    public double getGain() {
-        return getStream().getGain();
-    }
+	public double getGain() {
+		return stream.getGain();
+	}
 
-    public double getLoudness() {
-        return getStream().getLoudness();
-    }
+	public double getLoudness() {
+		return stream.getLoudness();
+	}
 
-    public double getLra() {
-        return getStream().getLra();
-    }
+	public double getLra() {
+		return stream.getLra();
+	}
 
-    public double getPeak() {
-        return getStream().getPeak();
-    }
+	public double getPeak() {
+		return stream.getPeak();
+	}
 
-    public int getSamplingRate() {
-        return getStream().getSamplingRate();
-    }
+	public int getSamplingRate() {
+		return stream.getSamplingRate();
+	}
 
-    public String getDisplayTitle() {
-        return getStream().getDisplayTitle();
-    }
+	public String getDisplayTitle() {
+		return stream.getDisplayTitle();
+	}
 
-    public String getExtendedDisplayTitle() {
-        return getStream().getExtendedDisplayTitle();
-    }
-
-    private libplex.plex.entity.Stream getStream() {
-        return stream;
-    }
+	public String getExtendedDisplayTitle() {
+		return stream.getExtendedDisplayTitle();
+	}
 }

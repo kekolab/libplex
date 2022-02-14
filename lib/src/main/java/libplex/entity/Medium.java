@@ -19,30 +19,26 @@ public class Medium {
     }
 
     public int getDuration() {
-        return getMedia().getDuration();
+        return media.getDuration();
     }
 
     public int getBitrate() {
-        return getMedia().getBitrate();
+        return media.getBitrate();
     }
 
     public int getAudioChannels() {
-        return getMedia().getAudioChannels();
+        return media.getAudioChannels();
     }
 
     public String getAudioCodec() {
-        return getMedia().getAudioCodec();
+        return media.getAudioCodec();
     }
 
     public String getContainer() {
-        return getMedia().getContainer();
+        return media.getContainer();
     }
 
     public List<Part> getParts() {
         return parts;
-    }
-
-    private Media getMedia() {
-        return media;
     }
 }

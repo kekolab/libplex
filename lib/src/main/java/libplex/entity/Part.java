@@ -14,35 +14,27 @@ public class Part {
     }
 
     public URI getURI() {
-        return PlexUriBuilder.fromKey(getPart().getKey(), null, getServer())
+        return PlexUriBuilder.fromKey(part.getKey(), null, server)
                 .build();
     }
 
     public int getDuration() {
-        return getPart().getDuration();
+        return part.getDuration();
     }
 
     public String getFile() {
-        return getPart().getFile();
+        return part.getFile();
     }
 
     public int getSize() {
-        return getPart().getSize();
+        return part.getSize();
     }
 
     public String getContainer() {
-        return getPart().getContainer();
+        return part.getContainer();
     }
 
     public int getHasThumbnail() {
-        return getPart().getHasThumbnail();
-    }
-
-    private libplex.plex.entity.Part getPart() {
-        return part;
-    }
-
-    private Server getServer() {
-        return server;
+        return part.getHasThumbnail();
     }
 }

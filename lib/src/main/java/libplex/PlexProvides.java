@@ -1,20 +1,16 @@
 package libplex;
 
 public enum PlexProvides {
-    PLAYER("player"), CONTROLLER("controller"), SERVER("server");
+	PLAYER("player"), CONTROLLER("controller"), SERVER("server");
 
-    private String plexProvides;
+	private String plexProvides;
 
-    private PlexProvides(String plexProvides) {
-        setPlexProvides(plexProvides);
-    }
+	private PlexProvides(String plexProvides) {
+		this.plexProvides = plexProvides;
+	}
 
-    public String getPlexProvides() {
-        return plexProvides;
-    }
-
-    private void setPlexProvides(String plexProvides) {
-        this.plexProvides = plexProvides;
-    }
+	public String getPlexProvides() {
+		return plexProvides;
+	}
 
 }

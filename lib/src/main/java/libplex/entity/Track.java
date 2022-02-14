@@ -16,64 +16,60 @@ public class Track extends ServerMediaContainerPlexItem {
         super(plex, uri, server);
         this.track = getMediaContainer().getTracks()
                 .get(0);
-        this.media = getTrack().getMedia()
+        this.media = track.getMedia()
                 .stream()
                 .map(m -> new Medium(plex, server, m))
                 .collect(Collectors.toList());
     }
 
     public String getTitle() {
-        return getTrack().getTitle();
+        return track.getTitle();
     }
 
     public Artist getArtist() {
-        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(getTrack().getGrandParentKey(), null, getServer())
+        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(track.getGrandParentKey(), null, getServer())
                 .build(), getServer());
     }
 
     public Album getAlbum() {
-        return new Album(getPlexClient(), PlexUriBuilder.fromKey(getTrack().getParentKey(), null, getServer())
+        return new Album(getPlexClient(), PlexUriBuilder.fromKey(track.getParentKey(), null, getServer())
                 .build(), getServer());
     }
 
     public ArtistSection getSection() {
         return new ArtistSection(getPlexClient(),
-                PlexUriBuilder.fromKey(getTrack().getLibrarySectionKey(), null, getServer())
+                PlexUriBuilder.fromKey(track.getLibrarySectionKey(), null, getServer())
                         .build(),
                 getServer());
     }
 
     public URI getThumb() {
-        return PlexUriBuilder.fromKey(getTrack().getThumb(), null, getServer())
+        return PlexUriBuilder.fromKey(track.getThumb(), null, getServer())
                 .build();
     }
 
     public URI getArt() {
-        return PlexUriBuilder.fromKey(getTrack().getArt(), null, getServer())
+        return PlexUriBuilder.fromKey(track.getArt(), null, getServer())
                 .build();
     }
 
     public int getDuration() {
-        return getTrack().getDuration();
+        return track.getDuration();
     }
 
     public Date getAddedAt() {
-        return getTrack().getAddedAt();
+        return track.getAddedAt();
     }
 
     public Date getUpdatedAt() {
-        return getTrack().getUpdatedAt();
+        return track.getUpdatedAt();
     }
 
     public boolean getHasPremiumLyrics() {
-        return getTrack().getHasPremiumLyrics() == 1;
+        return track.getHasPremiumLyrics() == 1;
     }
 
     public List<Medium> getMedia() {
         return media;
-    }
-
-    private libplex.plex.entity.Track getTrack() {
-        return track;
     }
 }
