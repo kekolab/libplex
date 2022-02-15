@@ -4,11 +4,11 @@ import java.net.URI;
 
 import libplex.PlexUriBuilder;
 
-public class AudioPart {
+public class Part {
     private libplex.plex.entity.Part part;
     private Server server;
 
-    public AudioPart(Server server, libplex.plex.entity.Part part) {
+    public Part(Server server, libplex.plex.entity.Part part) {
         this.server = server;
         this.part = part;
     }

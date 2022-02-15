@@ -1,9 +1,9 @@
 package libplex.entity;
 
-public class AudioStream {
+public class Stream {
 	private libplex.plex.entity.Stream stream;
 
-	public AudioStream(libplex.plex.entity.Stream stream) {
+	public Stream(libplex.plex.entity.Stream stream) {
 		this.stream = stream;
 	}
 

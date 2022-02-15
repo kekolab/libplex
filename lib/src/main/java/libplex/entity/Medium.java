@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 import libplex.PlexClient;
 import libplex.plex.entity.Media;
 
-public class AudioMedium {
+public class Medium {
     private Media media;
-    private List<AudioPart> parts;
+    private List<Part> parts;
 
-    public AudioMedium(PlexClient plex, Server server, Media media) {
+    public Medium(PlexClient plex, Server server, Media media) {
         this.media = media;
         this.parts = media.getParts()
                 .stream()
-                .map(p -> new AudioPart(server, p))
+                .map(p -> new Part(server, p))
                 .collect(Collectors.toList());
     }
 
@@ -38,7 +38,7 @@ public class AudioMedium {
         return media.getContainer();
     }
 
-    public List<AudioPart> getParts() {
+    public List<Part> getParts() {
         return parts;
     }
 }
