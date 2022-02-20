@@ -1,4 +1,4 @@
-package libplex.plex.entity.adapter;
+package libplex.plex.adapter;
 
 import java.util.List;
 import java.util.regex.Pattern;

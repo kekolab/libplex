@@ -1,4 +1,4 @@
-package libplex.plex.entity;
+package libplex.plex.tag;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import libplex.plex.entity.adapter.TimestampAdapter;
+import libplex.plex.adapter.TimestampAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)

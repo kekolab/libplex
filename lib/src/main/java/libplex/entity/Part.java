@@ -5,10 +5,10 @@ import java.net.URI;
 import libplex.PlexUriBuilder;
 
 public class Part {
-    private libplex.plex.entity.Part part;
+    private libplex.plex.tag.Part part;
     private Server server;
 
-    public Part(Server server, libplex.plex.entity.Part part) {
+    public Part(Server server, libplex.plex.tag.Part part) {
         this.server = server;
         this.part = part;
     }

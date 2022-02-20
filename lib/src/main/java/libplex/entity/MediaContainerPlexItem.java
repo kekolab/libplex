@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import libplex.PlexClient;
-import libplex.plex.entity.Directory;
-import libplex.plex.entity.MediaContainer;
+import libplex.plex.tag.Directory;
+import libplex.plex.tag.MediaContainer;
 
 public abstract class MediaContainerPlexItem extends PlexItem {
 	private MediaContainer mediaContainer;

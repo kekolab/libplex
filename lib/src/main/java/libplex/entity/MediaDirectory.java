@@ -5,7 +5,7 @@ import java.util.Date;
 
 import libplex.PlexClient;
 import libplex.PlexUriBuilder;
-import libplex.plex.entity.Directory;
+import libplex.plex.tag.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
 	private Directory directory;

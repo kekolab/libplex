@@ -1,4 +1,4 @@
-package libplex.plex.entity;
+package libplex.plex.tag;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;

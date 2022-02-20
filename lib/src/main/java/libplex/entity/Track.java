@@ -10,7 +10,7 @@ import libplex.PlexUriBuilder;
 
 public class Track extends ServerMediaContainerPlexItem {
 	private List<Medium> media;
-	private libplex.plex.entity.Track track;
+	private libplex.plex.tag.Track track;
 
 	public Track(PlexClient plex, URI uri, Server server) {
 		super(plex, uri, server);
@@ -26,8 +26,9 @@ public class Track extends ServerMediaContainerPlexItem {
 		return track.getAddedAt();
 	}
 
-	public String getArt() {
-		return track.getArt();
+	public URI getArt() {
+		return PlexUriBuilder.fromKey(track.getArt(), null, getServer())
+				.build();
 	}
 
 	public Integer getDuration() {

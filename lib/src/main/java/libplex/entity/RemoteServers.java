@@ -5,7 +5,7 @@ import java.util.List;
 
 import jakarta.ws.rs.core.UriBuilder;
 import libplex.PlexClient;
-import libplex.plex.entity.RemoteServer;
+import libplex.plex.tag.RemoteServer;
 
 public class RemoteServers extends MediaContainerPlexItem {
     public static final URI URI = UriBuilder.fromUri("https://plex.tv/pms/servers.xml")

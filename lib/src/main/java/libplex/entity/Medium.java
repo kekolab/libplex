@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import libplex.PlexClient;
-import libplex.plex.entity.Media;
+import libplex.plex.tag.Media;
 
 public class Medium {
     private Media media;

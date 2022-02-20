@@ -1,9 +1,9 @@
 package libplex.entity;
 
 public class Stream {
-	private libplex.plex.entity.Stream stream;
+	private libplex.plex.tag.Stream stream;
 
-	public Stream(libplex.plex.entity.Stream stream) {
+	public Stream(libplex.plex.tag.Stream stream) {
 		this.stream = stream;
 	}
 

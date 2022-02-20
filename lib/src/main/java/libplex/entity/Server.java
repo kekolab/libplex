@@ -12,7 +12,7 @@ import javax.net.ssl.HttpsURLConnection;
 import jakarta.ws.rs.core.UriBuilder;
 import libplex.PlexClient;
 import libplex.PlexUriBuilder;
-import libplex.plex.entity.RemoteServer;
+import libplex.plex.tag.RemoteServer;
 
 public class Server extends MediaContainerPlexItem {
     public static Server buildRemote(PlexClient plexClient, RemoteServer summary) throws IOException {

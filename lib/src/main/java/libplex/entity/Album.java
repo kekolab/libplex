@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import libplex.PlexClient;
 import libplex.PlexUriBuilder;
-import libplex.plex.entity.MediaContainer;
+import libplex.plex.tag.MediaContainer;
 
 public class Album extends MediaDirectory {
 

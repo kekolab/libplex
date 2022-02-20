@@ -1,12 +1,13 @@
-package libplex.plex.entity;
+package libplex.plex.tag;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import libplex.plex.entity.adapter.TimestampAdapter;
+import libplex.plex.adapter.TimestampAdapter;
 
 public class Track {
 	@XmlAttribute
@@ -109,7 +110,7 @@ public class Track {
 	}
 
 	public List<Media> getMedia() {
-		return media;
+		return media != null ? media : Collections.emptyList();
 	}
 
 	public String getParentGuid() {
