@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.plex.tag.Directory;
 import libplex.plex.tag.MediaContainer;
 
 public abstract class MediaContainerPlexItem extends PlexItem {
 	private MediaContainer mediaContainer;
 
-	protected MediaContainerPlexItem(PlexClient plex, URI uri) {
+	protected MediaContainerPlexItem(PlexService plex, URI uri) {
 		super(plex, uri);
 		this.mediaContainer = plex.executeGet(uri, MediaContainer.class);
 	}

@@ -1,6 +1,7 @@
 package libplex.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
@@ -13,30 +14,32 @@ import libplex.PlexAuthenticator;
 import libplex.plex.tag.Pin;
 
 public class PlexAuthenticatorTests {
-	private PlexAuthenticator authenticator;
+    private PlexAuthenticator authenticator;
 
-	@BeforeEach
-	void init() throws IOException {
-		authenticator = new PlexAuthenticator("myPlexProduct", "v1.0", "myPlexClientIdentifier");
-	}
+    @BeforeEach
+    void init() throws IOException {
+        authenticator = new PlexAuthenticator("myPlexProduct", "v1.0", "myPlexClientIdentifier");
+    }
 
-	@Test
-	void testRequestPIN() throws IOException {
-		Pin pin = authenticator.requestPIN();
-		assertNotNull(pin);
-		assertEquals(pin.getClientIdentifier(), "myPlexClientIdentifier");
-		assertNotNull(pin.getCode());
-		assertNotNull(pin.getExpiresAt());
-		assertNotNull(pin.getId());
-		System.in.read();
-		pin = authenticator.verifyPin(pin);
-		assertNotNull(pin);
-		assertNotNull(pin.getAuth_Token());
-		assertNotNull(pin.getAuthToken());
-	}
+    @Test
+    void testRequestPIN() throws IOException {
+        Pin pin = authenticator.requestPIN();
+        assertNotNull(pin);
+        assertEquals(pin.getClientIdentifier(), "myPlexClientIdentifier");
+        assertNotNull(pin.getCode());
+        assertNotNull(pin.getExpiresAt());
+        assertNotNull(pin.getId());
+        System.in.read();
+        pin = authenticator.verifyPin(pin);
+        assertNotNull(pin);
+        assertFalse(pin.getAuth_Token()
+                .isEmpty());
+        assertFalse(pin.getAuthToken()
+                .isEmpty());
+    }
 
-	@AfterEach
-	void close() throws Exception {
-		authenticator.close();
-	}
+    @AfterEach
+    void close() throws Exception {
+        authenticator.close();
+    }
 }

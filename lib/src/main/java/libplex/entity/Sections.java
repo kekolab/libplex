@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 
 public class Sections extends ServerMediaContainerPlexItem {
-    public Sections(PlexClient plex, URI uri, Server server) {
+    public Sections(PlexService plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 

@@ -2,11 +2,11 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 
 public abstract class MediaSection extends ServerMediaContainerPlexItem {
-    public MediaSection(PlexClient plex, URI uri, Server server) {
+    public MediaSection(PlexService plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 

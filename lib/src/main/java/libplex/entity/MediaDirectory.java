@@ -3,14 +3,14 @@ package libplex.entity;
 import java.net.URI;
 import java.util.Date;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 import libplex.plex.tag.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
 	private Directory directory;
 
-	protected MediaDirectory(PlexClient plex, URI uri, Server server) {
+	protected MediaDirectory(PlexService plex, URI uri, Server server) {
 		super(plex, uri, server);
 		this.directory = getMediaContainer().getDirectories()
 				.get(0);

@@ -10,41 +10,45 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.entity.Library;
-import libplex.entity.RemoteServers;
 import libplex.entity.Sections;
-import libplex.entity.Server;
 
 public class SectionsTest {
-	private static PlexClient client;
-	private static Library library;
+    private static PlexService client;
+    private static Library library;
 
-	@BeforeAll
-	static void init() throws IOException {
-		Properties props = new Properties();
-		props.load(SectionsTest.class.getResourceAsStream("/testVariables.properties"));
-		client = new PlexClient(props.getProperty("authToken"));
-		library = Server.buildRemote(client, new RemoteServers(client).getSummaries()
-				.get(0))
-				.library();
-	}
+    @BeforeAll
+    static void init() throws IOException {
+        Properties props = new Properties();
+        props.load(SectionsTest.class.getResourceAsStream("/testVariables.properties"));
+        client = new PlexService.Builder().setPlexToken(props.getProperty("authToken"))
+                .setPlexProduct("myPlexProduct")
+                .setPlexVersion("v1.0")
+                .setPlexClientIdentifier("myPlexClientIdentifier")
+                .build();
+        library = client.remoteServers()
+                .getRemoteServers()
+                .get(0)
+                .server()
+                .library();
+    }
 
-	@AfterAll
-	static void close() throws Exception {
-		client.close();
-	}
+    @AfterAll
+    static void close() throws Exception {
+        client.close();
+    }
 
-	@Test
-	void sectionsTest() {
-		Sections sections = library.sections();
-		assertNotNull(sections);
-		assertNotNull(sections.getUri());
-		assertTrue(sections.all()
-				.size() > 0);
-		assertTrue(sections.artistSections()
-				.size() > 0);
-		assertTrue(sections.movieSections()
-				.size() > 0);
-	}
+    @Test
+    void sectionsTest() {
+        Sections sections = library.sections();
+        assertNotNull(sections);
+        assertNotNull(sections.getUri());
+        assertTrue(sections.all()
+                .size() > 0);
+        assertTrue(sections.artistSections()
+                .size() > 0);
+        assertTrue(sections.movieSections()
+                .size() > 0);
+    }
 }

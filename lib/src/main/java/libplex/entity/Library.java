@@ -2,11 +2,11 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 
 public class Library extends ServerMediaContainerPlexItem {
-    public Library(PlexClient plex, URI uri, Server server) {
+    public Library(PlexService plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 

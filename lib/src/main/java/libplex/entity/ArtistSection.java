@@ -4,12 +4,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 import libplex.plex.tag.MediaContainer;
 
 public class ArtistSection extends MediaSection {
-	public ArtistSection(PlexClient plex, URI uri, Server server) {
+	public ArtistSection(PlexService plex, URI uri, Server server) {
 		super(plex, uri, server);
 	}
 

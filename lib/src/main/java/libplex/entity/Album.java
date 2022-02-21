@@ -5,13 +5,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 import libplex.plex.tag.MediaContainer;
 
 public class Album extends MediaDirectory {
 
-    public Album(PlexClient plex, URI uri, Server server) {
+    public Album(PlexService plex, URI uri, Server server) {
         super(plex, uri, server);
     }
 

@@ -9,41 +9,36 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import libplex.PlexClient;
-import libplex.entity.RemoteServers;
+import libplex.PlexService;
+import libplex.entity.Servers;
 import libplex.entity.Server;
 
 class ServersTests {
-	private PlexClient client;
-	private Properties properties;
+    private PlexService client;
+    private Properties props;
 
-	@BeforeEach
-	void init() throws IOException {
-		properties = new Properties();
-		properties.load(getClass().getResourceAsStream("/testVariables.properties"));
-		String authToken = properties.getProperty("authToken");
-		client = new PlexClient(authToken, "myPlexProduct", "v1.0", "myPlexClientIdentifier");
-	}
+    @BeforeEach
+    void init() throws IOException {
+        props = new Properties();
+        props.load(getClass().getResourceAsStream("/testVariables.properties"));
+        client = new PlexService.Builder().setPlexToken(props.getProperty("authToken"))
+                .setPlexProduct("myPlexProduct")
+                .setPlexVersion("v1.0")
+                .setPlexClientIdentifier("myPlexClientIdentifier")
+                .build();
+    }
 
-	@AfterEach
-	void close() throws Exception {
-		client.close();
-	}
+    @AfterEach
+    void close() throws Exception {
+        client.close();
+    }
 
-	@Test
-	void testLocalServer() throws Exception {
-		client.close();
-		client = new PlexClient();
-		Server server = Server.buildLocal(client, properties.getProperty("localServerHost"),
-				Integer.parseInt(properties.getProperty("localServerPort")));
-		assertNotNull(server);
-	}
-
-	@Test
-	void fetchRemoteServer() throws IOException {
-		RemoteServers remoteServers = new RemoteServers(client);
-		Server remoteServer = Server.buildRemote(client, remoteServers.getSummaries()
-				.get(0));
-		assertNotNull(remoteServer);
-	}
+    @Test
+    void fetchRemoteServer() throws IOException {
+        Servers remoteServers = client.remoteServers();
+        Server remoteServer = remoteServers.getRemoteServers()
+                .get(0)
+                .server();
+        assertNotNull(remoteServer);
+    }
 }

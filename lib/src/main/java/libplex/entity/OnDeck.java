@@ -2,11 +2,11 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 
 public class OnDeck {
 
-    public OnDeck(PlexClient plex, URI uri, Server server) {
+    public OnDeck(PlexService plex, URI uri, Server server) {
         // TODO Auto-generated constructor stub
     }
 

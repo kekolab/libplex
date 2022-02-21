@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
 
 public class Track extends ServerMediaContainerPlexItem {
 	private List<Medium> media;
 	private libplex.plex.tag.Track track;
 
-	public Track(PlexClient plex, URI uri, Server server) {
+	public Track(PlexService plex, URI uri, Server server) {
 		super(plex, uri, server);
 		this.track = getMediaContainer().getTracks()
 				.get(0);

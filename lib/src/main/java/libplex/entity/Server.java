@@ -1,58 +1,14 @@
 package libplex.entity;
 
-import java.io.IOException;
 import java.net.URI;
-import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import jakarta.ws.rs.core.UriBuilder;
-import libplex.PlexClient;
+import libplex.PlexService;
 import libplex.PlexUriBuilder;
-import libplex.plex.tag.RemoteServer;
 
 public class Server extends MediaContainerPlexItem {
-    public static Server buildRemote(PlexClient plexClient, RemoteServer summary) throws IOException {
-        /*
-         * TODO Qui potrei verificare se il client va bene per navigare il server remoto
-         */
-        return new Server(plexClient, uri(summary));
-    }
-
-    public static Server buildLocal(PlexClient plexClient, String host, int port) throws IOException {
-        return new Server(plexClient, uri("http", host, port));
-    }
-
-    private static URI uri(String scheme, String host, int port) throws IOException {
-        return UriBuilder.newInstance()
-                .scheme(scheme)
-                .host(host)
-                .port(port)
-                .build();
-    }
-
-    private static URI uri(RemoteServer summary) throws IOException {
-        HttpsURLConnection connection = (HttpsURLConnection) UriBuilder.newInstance()
-                .scheme("https")
-                .host(summary.getHost())
-                .port(summary.getPort())
-                .build()
-                .toURL()
-                .openConnection();
-        connection.setHostnameVerifier((hostname, session) -> true);
-        connection.connect();
-        X509Certificate serverCertificate = (X509Certificate) connection.getServerCertificates()[0];
-        String cn = serverCertificate.getSubjectX500Principal()
-                .getName();
-        return uri("https", summary.getHost()
-                .replaceAll(Pattern.quote("."), "-")
-                .concat(cn.substring(4)), summary.getPort());
-    }
-
-    private Server(PlexClient plex, URI uri) {
+    public Server(PlexService plex, URI uri) {
         super(plex, uri);
     }
 

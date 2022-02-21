@@ -2,18 +2,18 @@ package libplex.entity;
 
 import java.net.URI;
 
-import libplex.PlexClient;
+import libplex.PlexService;
 
 public abstract class PlexItem {
-    private PlexClient plexClient;
+    private PlexService plexClient;
     private URI uri;
 
-    protected PlexItem(PlexClient plex, URI uri) {
+    protected PlexItem(PlexService plex, URI uri) {
         this.plexClient = plex;
         this.uri = uri;
     }
 
-    protected PlexClient getPlexClient() {
+    protected PlexService getPlexClient() {
         return plexClient;
     }
 
