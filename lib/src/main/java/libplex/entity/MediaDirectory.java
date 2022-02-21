@@ -8,71 +8,59 @@ import libplex.PlexUriBuilder;
 import libplex.plex.tag.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
-	private Directory directory;
+    private Directory directory;
 
-	protected MediaDirectory(PlexService plex, URI uri, Server server) {
-		super(plex, uri, server);
-		this.directory = getMediaContainer().getDirectories()
-				.get(0);
-	}
+    protected MediaDirectory(PlexService plex, URI uri, Server server) {
+        super(plex, uri, server);
+        this.directory = getMediaContainer().getDirectories()
+                .get(0);
+    }
 
-	protected Directory getDirectory() {
-		return directory;
-	}
+    protected Directory getDirectory() {
+        return directory;
+    }
 
-	public String getTitle() {
-		return directory.getTitle();
-	}
+    public String getTitle() {
+        return directory.getTitle();
+    }
 
-	public String getSummary() {
-		return directory.getSummary();
-	}
+    public String getSummary() {
+        return directory.getSummary();
+    }
 
-	public int getViewCount() {
-		return directory.getViewCount();
-	}
+    public int getViewCount() {
+        return directory.getViewCount();
+    }
 
-	public URI getArt() {
-		return PlexUriBuilder.fromKey(directory.getArt(), this, getServer())
-				.build();
-	}
+    public URI getArt() {
+        return PlexUriBuilder.fromKey(directory.getArt(), this, getServer())
+                .build();
+    }
 
-	public Date getUpdatedAt() {
-		return directory.getUpdatedAt();
-	}
+    public Date getUpdatedAt() {
+        return directory.getUpdatedAt();
+    }
 
-	public int getSkipCount() {
-		return directory.getSkipCount();
-	}
+    public int getSkipCount() {
+        return directory.getSkipCount();
+    }
 
-	public Date getLastViewedAt() {
-		return directory.getLastViewedAt();
-	}
+    public Date getLastViewedAt() {
+        return directory.getLastViewedAt();
+    }
 
-	public Date getAddedAt() {
-		return directory.getAddedAt();
-	}
+    public Date getAddedAt() {
+        return directory.getAddedAt();
+    }
 
-	public URI getThumb() {
-		return PlexUriBuilder.fromKey(directory.getThumb(), this, getServer())
-				.build();
-	}
+    public URI getThumb() {
+        return PlexUriBuilder.fromKey(directory.getThumb(), this, getServer())
+                .build();
+    }
 
-	public abstract MediaSection getSection();
+    public abstract MediaSection getSection();
 
-	public Integer getAllowSync() {
-		return getMediaContainer().getAllowSync();
-	}
-
-	public Integer getLibrarySectionID() { // TODO getLibrary?
-		return getMediaContainer().getLibrarySectionID();
-	}
-
-	public String getLibrarySectionTitle() { // TODO getSection?
-		return getMediaContainer().getLibrarySectionTitle();
-	}
-
-	public String getLibrarySectionUUID() {
-		return getMediaContainer().getLibrarySectionUUID();
-	}
+    public Integer getAllowSync() {
+        return getMediaContainer().getAllowSync();
+    }
 }
