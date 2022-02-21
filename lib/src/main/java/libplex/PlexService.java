@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
@@ -12,10 +14,11 @@ import jakarta.ws.rs.client.ClientRequestFilter;
 import jakarta.ws.rs.client.ClientResponseFilter;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.UriBuilder;
-import libplex.entity.Servers;
 import libplex.entity.Server;
+import libplex.entity.Servers;
 
 public class PlexService implements AutoCloseable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlexService.class);
     private Client client;
     private String token;
     private String product;
@@ -75,34 +78,33 @@ public class PlexService implements AutoCloseable {
 
                 })
                 .register((ClientResponseFilter) (requestContext, responseContext) -> {
-                    System.out.println("REQUEST");
-                    System.out.println(requestContext.getMethod()
+                    LOGGER.debug("REQUEST");
+                    LOGGER.debug(requestContext.getMethod()
                             .concat(" ")
                             .concat(requestContext.getUri()
                                     .toString()));
                     requestContext.getHeaders()
                             .forEach((t, u) -> {
-                                System.out.print(t.concat(": "));
+                                LOGGER.debug(t.concat(": "));
                                 u.stream()
                                         .map(o -> o.toString())
                                         .reduce((arg0, arg1) -> arg0 != null ? arg0.concat(", ")
                                                 .concat(arg1) : arg1)
-                                        .ifPresent(System.out::println);
+                                        .ifPresent(LOGGER::debug);
                             });
-                    System.out.println();
-                    System.out.println("RESPONSE");
-                    System.out.println("Status: ".concat(Integer.toString(responseContext.getStatus())));
+                    LOGGER.debug("RESPONSE");
+                    LOGGER.debug("Status: ".concat(Integer.toString(responseContext.getStatus())));
                     responseContext.getHeaders()
                             .forEach((t, u) -> {
-                                System.out.print(t.concat(": "));
+                                LOGGER.debug(t.concat(": "));
                                 u.stream()
                                         .map(o -> o.toString())
                                         .reduce((arg0, arg1) -> arg0 != null ? arg0.concat(", ")
                                                 .concat(arg1) : arg1)
-                                        .ifPresent(System.out::println);
+                                        .ifPresent(LOGGER::debug);
                             });
                     String payload = IOUtils.toString(responseContext.getEntityStream(), "UTF-8");
-                    System.out.println(payload);
+                    LOGGER.debug(payload);
                     responseContext.setEntityStream(IOUtils.toInputStream(payload, "UTF-8"));
                 });
 
