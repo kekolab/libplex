@@ -21,7 +21,6 @@ dependencies {
     implementation group: 'org.jboss.resteasy', name: 'resteasy-client', version: '6.0.0.Final'
     implementation group: 'org.jboss.resteasy', name: 'resteasy-jaxb-provider', version: '6.0.0.Final'
     implementation 'org.slf4j:slf4j-api:1.7.36'
-    
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.8.2'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'    
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.8.2'   
 }
