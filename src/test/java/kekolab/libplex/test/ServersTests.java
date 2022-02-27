@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import kekolab.libplex.PlexService;
-import kekolab.libplex.entity.Server;
+import kekolab.libplex.entity.ServerContent;
 import kekolab.libplex.entity.Servers;
 
 class ServersTests {
@@ -35,10 +35,10 @@ class ServersTests {
 
     @Test
     void fetchRemoteServer() throws IOException {
-        Servers remoteServers = client.remoteServers();
-        Server remoteServer = remoteServers.getRemoteServers()
+        Servers remoteServers = client.servers();
+        ServerContent remoteServer = remoteServers.getServers()
                 .get(0)
-                .server();
+                .content();
         assertNotNull(remoteServer);
     }
 }

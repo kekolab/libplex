@@ -1,243 +1,99 @@
 package kekolab.libplex.entity;
 
-import java.net.URI;
+import java.io.IOException;
+import java.security.cert.X509Certificate;
 import java.util.Date;
-import java.util.List;
+import java.util.regex.Pattern;
 
+import javax.net.ssl.HttpsURLConnection;
+
+import jakarta.ws.rs.core.UriBuilder;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import kekolab.libplex.PlexService;
-import kekolab.libplex.PlexUriBuilder;
 
-public class Server extends MediaContainerPlexItem {
-    public Server(PlexService plex, URI uri) {
-        super(plex, uri);
-    }
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Server {
+	private kekolab.libplex.plex.tag.Server server;
+	private PlexService plex;
 
-    public Library library() {
-        return new Library(getPlexClient(), PlexUriBuilder.fromKey(directoriesByKey("library").get(0)
-                .getKey(), this, this)
-                .build(), this);
-    }
+	public Server(PlexService plex, kekolab.libplex.plex.tag.Server server) {
+		this.plex = plex;
+		this.server = server;
+	}
 
-    public Integer getAllowCameraUpload() {
-        return getMediaContainer().getAllowCameraUpload();
-    }
+	public ServerContent content() throws IOException {
+		HttpsURLConnection connection = (HttpsURLConnection) UriBuilder.newInstance()
+				.scheme("https")
+				.host(getHost())
+				.port(getPort())
+				.build()
+				.toURL()
+				.openConnection();
+		connection.setHostnameVerifier((hostname, session) -> true);
+		connection.connect();
+		X509Certificate serverCertificate = (X509Certificate) connection.getServerCertificates()[0];
+		String cn = serverCertificate.getSubjectX500Principal()
+				.getName();
+		return new ServerContent(plex, UriBuilder.newInstance()
+				.scheme("https")
+				.host(getHost().replaceAll(Pattern.quote("."), "-")
+						.concat(cn.substring(4)))
+				.port(getPort())
+				.build());
+	}
 
-    public Integer getAllowChannelAccess() {
-        return getMediaContainer().getAllowChannelAccess();
-    }
+	public String getAccessToken() {
+		return server.getAccessToken();
+	}
 
-    public Integer getAllowMediaDeletion() {
-        return getMediaContainer().getAllowMediaDeletion();
-    }
+	public String getName() {
+		return server.getName();
+	}
 
-    public Integer getAllowSharing() {
-        return getMediaContainer().getAllowSharing();
-    }
+	public String getAddress() {
+		return server.getAddress();
+	}
 
-    public Integer getAllowSync() {
-        return getMediaContainer().getAllowSync();
-    }
+	public Integer getPort() {
+		return server.getPort();
+	}
 
-    public Integer getAllowTuners() {
-        return getMediaContainer().getAllowTuners();
-    }
+	public String getVersion() {
+		return server.getVersion();
+	}
 
-    public Integer getBackgroundProcessing() {
-        return getMediaContainer().getBackgroundProcessing();
-    }
+	public String getScheme() {
+		return server.getScheme();
+	}
 
-    public Integer getCertificate() {
-        return getMediaContainer().getCertificate();
-    }
+	public String getHost() {
+		return server.getHost();
+	}
 
-    public Integer getCompanionProxy() {
-        return getMediaContainer().getCompanionProxy();
-    }
+	public String getLocalAddresses() {
+		return server.getLocalAddresses();
+	}
 
-    public String getCountryCode() {
-        return getMediaContainer().getCountryCode();
-    }
+	public String getMachineIdentifier() {
+		return server.getMachineIdentifier();
+	}
 
-    public List<String> getDiagnostics() {
-        return getMediaContainer().getDiagnostics();
-    }
+	public Date getCreatedAt() {
+		return server.getCreatedAt();
+	}
 
-    public Integer getEventStream() {
-        return getMediaContainer().getEventStream();
-    }
+	public Date getUpdatedAt() {
+		return server.getUpdatedAt();
+	}
 
-    public String getFriendlyName() {
-        return getMediaContainer().getFriendlyName();
-    }
+	public Integer getOwned() {
+		return server.getOwned();
+	}
 
-    public Integer getHubSearch() {
-        return getMediaContainer().getHubSearch();
-    }
-
-    public Integer getItemClusters() {
-        return getMediaContainer().getItemClusters();
-    }
-
-    public Integer getLivetv() {
-        return getMediaContainer().getLivetv();
-    }
-
-    public String getMachineIdentifier() {
-        return getMediaContainer().getMachineIdentifier();
-    }
-
-    public Integer getMediaProviders() {
-        return getMediaContainer().getMediaProviders();
-    }
-
-    public Integer getMultiuser() {
-        return getMediaContainer().getMultiuser();
-    }
-
-    public Integer getMyPlex() {
-        return getMediaContainer().getMyPlex();
-    }
-
-    public String getMyPlexMappingState() {
-        return getMediaContainer().getMyPlexMappingState();
-    }
-
-    public String getMyPlexSigninState() {
-        return getMediaContainer().getMyPlexSigninState();
-    }
-
-    public Integer getMyPlexSubscription() {
-        return getMediaContainer().getMyPlexSubscription();
-    }
-
-    public String getMyPlexUsername() {
-        return getMediaContainer().getMyPlexUsername();
-    }
-
-    public Integer getOfflineTranscode() {
-        return getMediaContainer().getOfflineTranscode();
-    }
-
-    public List<String> getOwnerFeatures() {
-        return getMediaContainer().getOwnerFeatures();
-    }
-
-    public Integer getPhotoAutoTag() {
-        return getMediaContainer().getPhotoAutoTag();
-    }
-
-    public String getPlatform() {
-        return getMediaContainer().getPlatform();
-    }
-
-    public String getPlatformVersion() {
-        return getMediaContainer().getPlatformVersion();
-    }
-
-    public Integer getPluginHost() {
-        return getMediaContainer().getPluginHost();
-    }
-
-    public Integer getPushNotifications() {
-        return getMediaContainer().getPushNotifications();
-    }
-
-    public Integer getReadOnlyLibraries() {
-        return getMediaContainer().getReadOnlyLibraries();
-    }
-
-    public Integer getRequestParametersInCookie() {
-        return getMediaContainer().getRequestParametersInCookie();
-    }
-
-    public Integer getStreamingBrainABRVersion() {
-        return getMediaContainer().getStreamingBrainABRVersion();
-    }
-
-    public Integer getStreamingBrainVersion() {
-        return getMediaContainer().getStreamingBrainVersion();
-    }
-
-    public Integer getSync() {
-        return getMediaContainer().getSync();
-    }
-
-    public Integer getTranscoderActiveVideoSessions() {
-        return getMediaContainer().getTranscoderActiveVideoSessions();
-    }
-
-    public Integer getTranscoderAudio() {
-        return getMediaContainer().getTranscoderAudio();
-    }
-
-    public Integer getTranscoderLyrics() {
-        return getMediaContainer().getTranscoderLyrics();
-    }
-
-    public Integer getTranscoderPhoto() {
-        return getMediaContainer().getTranscoderPhoto();
-    }
-
-    public Integer getTranscoderSubtitles() {
-        return getMediaContainer().getTranscoderSubtitles();
-    }
-
-    public Integer getTranscoderVideo() {
-        return getMediaContainer().getTranscoderVideo();
-    }
-
-    public List<Integer> getTranscoderVideoBitrates() {
-        return getMediaContainer().getTranscoderVideoBitrates();
-    }
-
-    public List<Integer> getTranscoderVideoQualities() {
-        return getMediaContainer().getTranscoderVideoQualities();
-    }
-
-    public List<Integer> getTranscoderVideoResolutions() {
-        return getMediaContainer().getTranscoderVideoResolutions();
-    }
-
-    public Date getUpdatedAt() {
-        return getMediaContainer().getUpdatedAt();
-    }
-
-    public Integer getUpdater() {
-        return getMediaContainer().getUpdater();
-    }
-
-    public String getVersion() {
-        return getMediaContainer().getVersion();
-    }
-
-    public Integer getVoiceSearch() {
-        return getMediaContainer().getVoiceSearch();
-    }
-
-    /*
-     * TODO
-     * - Actions
-     * - Activities
-     * - Butler
-     * - Channela
-     * - Clients
-     * - Devices
-     * - Diagnostics
-     * - Hubs
-     * - Livetv
-     * - Media
-     * - Metadata
-     * - Neighboorhood
-     * - playQueues
-     * - player
-     * - playlists
-     * - resources
-     * - search
-     * - servers
-     * - statistics
-     * - system
-     * - transcode
-     * - updater
-     * - user
-     */
+	public Integer getSynced() {
+		return server.getSynced();
+	}
 }

@@ -11,88 +11,109 @@ import kekolab.libplex.plex.tag.MediaContainer;
 
 public class Album extends MediaDirectory {
 
-    public Album(PlexService plex, URI uri, Server server) {
-        super(plex, uri, server);
-    }
+	public Album(PlexService plex, URI uri, ServerContent server) {
+		super(plex, uri, server);
+	}
 
-    public List<Track> getTracks() {
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(getDirectory().getKey(), null, getServer())
-                .build(), MediaContainer.class)
-                .getTracks()
-                .stream()
-                .map(t -> new Track(getPlexClient(),
-                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
-                                .build(t.getRatingKey()),
-                        getServer()))
-                .collect(Collectors.toList());
-    }
+	public Integer getParentRatingKey() {
+		return getDirectory().getParentRatingKey();
+	}
 
-    public String getStudio() {
-        return getDirectory().getStudio();
-    }
+	public String getParentGuid() {
+		return getDirectory().getParentGuid();
+	}
 
-    public Artist getArtist() {
-        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(getDirectory().getParentKey(), null, getServer())
-                .build(), getServer());
-    }
+	public String getStudio() {
+		return getDirectory().getStudio();
+	}
 
-    public double getRating() {
-        return getDirectory().getRating();
-    }
+	public String getParentKey() {
+		return getDirectory().getParentKey();
+	}
 
-    public int getYear() {
-        return getDirectory().getYear();
-    }
+	public String getParentTitle() {
+		return getDirectory().getParentTitle();
+	}
 
-    public Date getOriginallyAvailableAt() {
-        return getDirectory().getOriginallyAvailableAt();
-    }
+	public Double getRating() {
+		return getDirectory().getRating();
+	}
 
-    public int getLoudnessAnalysisVersion() {
-        return getDirectory().getLoudnessAnalysisVersion();
-    }
+	public Integer getYear() {
+		return getDirectory().getYear();
+	}
 
-    public int getLeafCount() {
-        return getDirectory().getLeafCount();
-    }
+	public URI getParentThumb() {
+		return PlexUriBuilder.fromKey(getDirectory().getParentThumb(), null, getServer())
+				.build();
+	}
 
-    public int getViewedLeafCount() {
-        return getDirectory().getViewedtLeafCount();
-    }
+	public Date getOriginallyAvailableAt() {
+		return getDirectory().getOriginallyAvailableAt();
+	}
 
-    public List<String> getGenres() {
-        return getDirectory().getGenres()
-                .stream()
-                .map(g -> g.getTag())
-                .collect(Collectors.toList());
-    }
+	public int getLeafCount() {
+		return getDirectory().getLeafCount();
+	}
 
-    public List<String> getDirectors() {
-        return getDirectory().getDirectors()
-                .stream()
-                .map(g -> g.getTag())
-                .collect(Collectors.toList());
-    }
+	public int getViewedLeafCount() {
+		return getDirectory().getViewedtLeafCount();
+	}
 
-    public List<String> getStyles() {
-        return getDirectory().getStyles()
-                .stream()
-                .map(g -> g.getTag())
-                .collect(Collectors.toList());
-    }
+	public int getLoudnessAnalysisVersion() {
+		return getDirectory().getLoudnessAnalysisVersion();
+	}
 
-    public List<String> getMoods() {
-        return getDirectory().getMoods()
-                .stream()
-                .map(g -> g.getTag())
-                .collect(Collectors.toList());
-    }
+	public List<String> getGenres() {
+		return getDirectory().getGenres()
+				.stream()
+				.map(g -> g.getTag())
+				.collect(Collectors.toList());
+	}
 
-    @Override
-    public ArtistSection getSection() {
-        return new ArtistSection(getPlexClient(),
-                PlexUriBuilder.fromKey(getDirectory().getLibrarySectionKey(), null, getServer())
-                        .build(),
-                getServer());
-    }
+	public List<String> getDirectors() {
+		return getDirectory().getDirectors()
+				.stream()
+				.map(g -> g.getTag())
+				.collect(Collectors.toList());
+	}
+
+	public List<String> getStyles() {
+		return getDirectory().getStyles()
+				.stream()
+				.map(g -> g.getTag())
+				.collect(Collectors.toList());
+	}
+
+	public List<String> getMoods() {
+		return getDirectory().getMoods()
+				.stream()
+				.map(g -> g.getTag())
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public ArtistSection section() {
+		return new ArtistSection(getPlexClient(),
+				PlexUriBuilder.fromKey(getDirectory().getLibrarySectionKey(), null, getServer())
+						.build(),
+				getServer());
+	}
+
+	public List<Track> tracks() {
+		return getPlexClient().executeGet(PlexUriBuilder.fromKey(getDirectory().getKey(), null, getServer())
+				.build(), MediaContainer.class)
+				.getTracks()
+				.stream()
+				.map(t -> new Track(getPlexClient(),
+						PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
+								.build(t.getRatingKey()),
+						getServer()))
+				.collect(Collectors.toList());
+	}
+
+	public Artist artist() {
+		return new Artist(getPlexClient(), PlexUriBuilder.fromKey(getDirectory().getParentKey(), null, getServer())
+				.build(), getServer());
+	}
 }

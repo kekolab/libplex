@@ -22,10 +22,10 @@ public class TrackTests {
                 .setPlexVersion("v1.0")
                 .setPlexClientIdentifier("myPlexClientIdentifier")
                 .build();
-        track = client.remoteServers()
-                .getRemoteServers()
+        track = client.servers()
+                .getServers()
                 .get(0)
-                .server()
+                .content()
                 .library()
                 .sections()
                 .artistSections()
@@ -34,7 +34,7 @@ public class TrackTests {
                 .get(0)
                 .albums()
                 .get(0)
-                .getTracks()
+                .tracks()
                 .get(0);
     }
 

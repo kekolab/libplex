@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import kekolab.libplex.PlexService;
-import kekolab.libplex.entity.Server;
+import kekolab.libplex.entity.ServerContent;
 
 class LocalServerTest {
     private PlexService client;
@@ -25,7 +25,7 @@ class LocalServerTest {
 
     @Test
     void testLocalServer() throws Exception {
-        Server server = client.localServer(properties.getProperty("localServerHost"),
+        ServerContent server = client.localServer(properties.getProperty("localServerHost"),
                 Integer.parseInt(properties.getProperty("localServerPort")));
         assertNotNull(server);
     }

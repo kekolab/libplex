@@ -74,6 +74,7 @@ public class Directory {
 	@XmlAttribute private Integer librarySectionID;
 	@XmlAttribute private Integer leafCount;
 	@XmlAttribute private Integer viewedLeafCount;
+	@XmlAttribute private String librarySectionTitle;
 
 	public String getKey() {
 		return key;
@@ -289,5 +290,9 @@ public class Directory {
 
 	public Integer getViewedtLeafCount() {
 		return viewedLeafCount;
+	}
+
+	public String getLibrarySectionTitle() {
+		return librarySectionTitle;
 	}
 }

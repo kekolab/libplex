@@ -5,14 +5,14 @@ import java.net.URI;
 import kekolab.libplex.PlexService;
 
 public abstract class ServerMediaContainerPlexItem extends MediaContainerPlexItem {
-    private Server server;
+    private ServerContent server;
 
-    protected ServerMediaContainerPlexItem(PlexService plex, URI uri, Server server) {
+    protected ServerMediaContainerPlexItem(PlexService plex, URI uri, ServerContent server) {
         super(plex, uri);
         this.server = server;
     }
 
-    protected Server getServer() {
+    protected ServerContent getServer() {
         return server;
     }
 }

@@ -7,30 +7,33 @@ import java.util.stream.Collectors;
 import kekolab.libplex.PlexService;
 
 public class Servers extends MediaContainerPlexItem {
-    private List<RemoteServer> remoteServers;
+	private List<Server> servers;
 
-    public Servers(PlexService plex, URI uri) {
-        super(plex, uri);
-        remoteServers = getMediaContainer().getRemoteServers()
-                .stream()
-                .map(rs -> new RemoteServer(plex, rs))
-                .collect(Collectors.toList());
-    }
+	public Servers(PlexService plex, URI uri) {
+		super(plex, uri);
+		servers = getMediaContainer().getServers()
+				.stream()
+				.map(rs -> new Server(plex, rs))
+				.collect(Collectors.toList());
+	}
 
-    public String getFriendlyName() {
-        return getMediaContainer().getFriendlyName();
-    }
+	public String getFriendlyName() {
+		return getMediaContainer().getFriendlyName();
+	}
 
-    public String getMachineIdentifier() {
-        return getMediaContainer().getMachineIdentifier();
-    }
+	public String getMachineIdentifier() {
+		return getMediaContainer().getMachineIdentifier();
+	}
 
-    public String getIdentifier() {
-        return getMediaContainer().getIdentifier();
-    }
+	public String getIdentifier() {
+		return getMediaContainer().getIdentifier();
+	}
 
-    public List<RemoteServer> getRemoteServers() {
-        return remoteServers;
-    }
+	public int getSize() {
+		return getMediaContainer().getSize();
+	}
 
+	public List<Server> getServers() {
+		return servers;
+	}
 }

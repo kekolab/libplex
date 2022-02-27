@@ -11,7 +11,7 @@ import kekolab.libplex.plex.adapter.TimestampAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class RemoteServer {
+public class Server {
     @XmlAttribute private String accessToken;
     @XmlAttribute private String name;
     @XmlAttribute private String address;

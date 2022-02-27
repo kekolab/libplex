@@ -9,8 +9,12 @@ import kekolab.libplex.PlexUriBuilder;
 import kekolab.libplex.plex.tag.MediaContainer;
 
 public class ArtistSection extends MediaSection {
-	public ArtistSection(PlexService plex, URI uri, Server server) {
+	public ArtistSection(PlexService plex, URI uri, ServerContent server) {
 		super(plex, uri, server);
+	}
+
+	public Integer getNoCache() {
+		return getMediaContainer().getNocache();
 	}
 
 	public List<Artist> all() {
@@ -98,7 +102,7 @@ public class ArtistSection extends MediaSection {
 	}
 
 	/*
-	 * TODO by genre by decade by year by collection by folder
+	 * TODO by genre, by decade, by year, by collection, by folder
 	 */
 
 }

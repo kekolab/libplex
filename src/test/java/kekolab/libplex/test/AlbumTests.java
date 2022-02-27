@@ -22,10 +22,10 @@ public class AlbumTests {
                 .setPlexVersion("v1.0")
                 .setPlexClientIdentifier("myPlexClientIdentifier")
                 .build();
-        album = client.remoteServers()
-                .getRemoteServers()
+        album = client.servers()
+                .getServers()
                 .get(0)
-                .server()
+                .content()
                 .library()
                 .sections()
                 .artistSections()

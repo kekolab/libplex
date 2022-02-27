@@ -27,10 +27,10 @@ public class ArtistSectionTests {
                 .setPlexVersion("v1.0")
                 .setPlexClientIdentifier("myPlexClientIdentifier")
                 .build();
-        section = client.remoteServers()
-                .getRemoteServers()
+        section = client.servers()
+                .getServers()
                 .get(0)
-                .server()
+                .content()
                 .library()
                 .sections()
                 .artistSections()

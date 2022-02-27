@@ -7,6 +7,10 @@ public class Stream {
 		this.stream = stream;
 	}
 
+	public Integer getID() {
+		return stream.getId();
+	}
+
 	public int getStreamType() {
 		return stream.getStreamType();
 	}

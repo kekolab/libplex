@@ -8,59 +8,111 @@ import kekolab.libplex.PlexUriBuilder;
 import kekolab.libplex.plex.tag.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
-    private Directory directory;
+	private Directory directory;
 
-    protected MediaDirectory(PlexService plex, URI uri, Server server) {
-        super(plex, uri, server);
-        this.directory = getMediaContainer().getDirectories()
-                .get(0);
-    }
+	protected MediaDirectory(PlexService plex, URI uri, ServerContent server) {
+		super(plex, uri, server);
+		this.directory = getMediaContainer().getDirectories()
+				.get(0);
+	}
 
-    protected Directory getDirectory() {
-        return directory;
-    }
+	protected Directory getDirectory() {
+		return directory;
+	}
 
-    public String getTitle() {
-        return directory.getTitle();
-    }
+	public Integer getSize() {
+		return getMediaContainer().getSize();
+	}
 
-    public String getSummary() {
-        return directory.getSummary();
-    }
+	public Integer getAllowSync() {
+		return getMediaContainer().getAllowSync();
+	}
 
-    public int getViewCount() {
-        return directory.getViewCount();
-    }
+	public String getIdentifier() {
+		return getMediaContainer().getIdentifier();
+	}
 
-    public URI getArt() {
-        return PlexUriBuilder.fromKey(directory.getArt(), this, getServer())
-                .build();
-    }
+	public String getLibrarySectionUUID() {
+		return getMediaContainer().getLibrarySectionUUID();
+	}
 
-    public Date getUpdatedAt() {
-        return directory.getUpdatedAt();
-    }
+	public String getMediaTagPrefix() {
+		return getMediaContainer().getMediaTagPrefix();
+	}
 
-    public int getSkipCount() {
-        return directory.getSkipCount();
-    }
+	public Integer getMediaTagVersion() {
+		return getMediaContainer().getMediaTagVersion();
+	}
 
-    public Date getLastViewedAt() {
-        return directory.getLastViewedAt();
-    }
+	public Integer getRatingKey() {
+		return directory.getRatingKey();
+	}
 
-    public Date getAddedAt() {
-        return directory.getAddedAt();
-    }
+	public String getKey() {
+		return directory.getKey();
+	}
 
-    public URI getThumb() {
-        return PlexUriBuilder.fromKey(directory.getThumb(), this, getServer())
-                .build();
-    }
+	public String getGuid() {
+		return directory.getGuid();
+	}
 
-    public abstract MediaSection getSection();
+	public String getType() {
+		return directory.getType();
+	}
 
-    public Integer getAllowSync() {
-        return getMediaContainer().getAllowSync();
-    }
+	public String getTitle() {
+		return directory.getTitle();
+	}
+
+	public String getLibrarySectionTitle() {
+		return directory.getLibrarySectionTitle();
+	}
+
+	public Integer getLibrarySectionID() {
+		return directory.getLibrarySectionID();
+	}
+
+	public String getLibrarySectionKey() {
+		return directory.getLibrarySectionKey();
+	}
+
+	public String getSummary() {
+		return directory.getSummary();
+	}
+
+	public Integer getIndex() {
+		return directory.getIndex();
+	}
+
+	public Integer getViewCount() {
+		return directory.getViewCount();
+	}
+
+	public Integer getSkipCount() {
+		return directory.getSkipCount();
+	}
+
+	public Date getLastViewedAt() {
+		return directory.getLastViewedAt();
+	}
+
+	public URI getThumb() {
+		return PlexUriBuilder.fromKey(directory.getThumb(), this, getServer())
+				.build();
+	}
+
+	public URI getArt() {
+		return PlexUriBuilder.fromKey(directory.getArt(), this, getServer())
+				.build();
+	}
+
+	public Date getAddedAt() {
+		return directory.getAddedAt();
+	}
+
+	public Date getUpdatedAt() {
+		return directory.getUpdatedAt();
+	}
+
+	public abstract MediaSection section();
 }

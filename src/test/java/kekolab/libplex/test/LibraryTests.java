@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 
 import kekolab.libplex.PlexService;
 import kekolab.libplex.entity.Library;
-import kekolab.libplex.entity.Server;
+import kekolab.libplex.entity.ServerContent;
 
 public class LibraryTests {
     private static PlexService client;
-    private static Server server;
+    private static ServerContent server;
 
     @BeforeAll
     static void init() throws IOException {
@@ -26,10 +26,10 @@ public class LibraryTests {
                 .setPlexVersion("v1.0")
                 .setPlexClientIdentifier("myPlexClientIdentifier")
                 .build();
-        server = client.remoteServers()
-                .getRemoteServers()
+        server = client.servers()
+                .getServers()
                 .get(0)
-                .server();
+                .content();
     }
 
     @AfterAll

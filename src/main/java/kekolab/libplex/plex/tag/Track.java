@@ -44,6 +44,9 @@ public class Track {
 	@XmlAttribute private String type;
 	@XmlAttribute
 	@XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
+	@XmlAttribute private Integer viewCount;
+	@XmlAttribute
+	@XmlJavaTypeAdapter(TimestampAdapter.class) private Date lastViewedAt;
 
 	public Date getAddedAt() {
 		return addedAt;
@@ -171,6 +174,14 @@ public class Track {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public Integer getViewCount() {
+		return viewCount;
+	}
+
+	public Date getLastViewedAt() {
+		return lastViewedAt;
 	}
 
 }

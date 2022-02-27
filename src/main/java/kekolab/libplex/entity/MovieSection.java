@@ -6,7 +6,7 @@ import kekolab.libplex.PlexService;
 
 public class MovieSection extends MediaSection {
 
-    protected MovieSection(PlexService plex, URI uri, Server server) {
+    protected MovieSection(PlexService plex, URI uri, ServerContent server) {
         super(plex, uri, server);
         // TODO Auto-generated constructor stub
     }
