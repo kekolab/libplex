@@ -1,199 +1,239 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.PlexService;
 import kekolab.libplex.PlexUriBuilder;
+import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public class Track extends ServerMediaContainerPlexItem {
-	private List<Medium> media;
-	private kekolab.libplex.plex.tag.Track track;
+public class Track {
+    @XmlAttribute
+    @XmlJavaTypeAdapter(TimestampAdapter.class) private Date addedAt;
+    @XmlAttribute private String art;
+    @XmlAttribute private Integer duration;
+    @XmlAttribute private String grandparentArt;
+    @XmlAttribute private String grandparentGuid;
+    @XmlAttribute private String grandparentKey;
+    @XmlAttribute private Integer grandparentRatingKey;
+    @XmlAttribute private String grandparentThumb;
+    @XmlAttribute private String grandparentTitle;
+    @XmlAttribute private String guid;
+    @XmlAttribute private Integer hasPremiumLyrics;
+    @XmlAttribute private Integer index;
+    @XmlAttribute private String key;
+    @XmlAttribute private Integer librarySectionID;
+    @XmlAttribute private String librarySectionKey;
+    @XmlAttribute private String librarySectionTitle;
+    @XmlElement(name = "Media") private List<Media> media;
+    @XmlAttribute private String parentGuid;
+    @XmlAttribute private Integer parentIndex;
+    @XmlAttribute private String parentKey;
+    @XmlAttribute private Integer parentRatingKey;
+    @XmlAttribute private String parentStudio;
+    @XmlAttribute private String parentThumb;
+    @XmlAttribute private String parentTitle;
+    @XmlAttribute private Integer parentYear;
+    @XmlAttribute private Integer ratingCount;
+    @XmlAttribute private Integer ratingKey;
+    @XmlAttribute private String summary;
+    @XmlAttribute private String thumb;
+    @XmlAttribute private String title;
+    @XmlAttribute private String type;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
+    @XmlAttribute private Integer viewCount;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(TimestampAdapter.class) private Date lastViewedAt;
+    private PlexService plex;
+    private ServerContent server;
 
-	public Track(PlexService plex, URI uri, ServerContent server) {
-		super(plex, uri, server);
-		this.track = getMediaContainer().getTracks()
-				.get(0);
-		this.media = track.getMedia()
-				.stream()
-				.map(m -> new Medium(plex, server, m))
-				.collect(Collectors.toList());
-	}
+    public Date getAddedAt() {
+        return addedAt;
+    }
 
-	public Integer getSize() {
-		return getMediaContainer().getSize();
-	}
+    public String getArt() {
+        return art;
+    }
 
-	public Integer getAllowSync() {
-		return getMediaContainer().getAllowSync();
-	}
+    public Integer getDuration() {
+        return duration;
+    }
 
-	public String getIdentifier() {
-		return getMediaContainer().getIdentifier();
-	}
+    public String getGrandparentArt() {
+        return grandparentArt;
+    }
 
-	public String getLibrarySectionUUID() {
-		return getMediaContainer().getLibrarySectionUUID();
-	}
+    public String getGrandparentGuid() {
+        return grandparentGuid;
+    }
 
-	public String getMediaTagPrefix() {
-		return getMediaContainer().getMediaTagPrefix();
-	}
+    public String getGrandparentKey() {
+        return grandparentKey;
+    }
 
-	public Integer getMediaTagVersion() {
-		return getMediaContainer().getMediaTagVersion();
-	}
+    public Integer getGrandparentRatingKey() {
+        return grandparentRatingKey;
+    }
 
-	public Integer getRatingKey() {
-		return track.getRatingKey();
-	}
+    public String getGrandparentThumb() {
+        return grandparentThumb;
+    }
 
-	public String getKey() {
-		return track.getKey();
-	}
+    public String getGrandparentTitle() {
+        return grandparentTitle;
+    }
 
-	public Integer getParentRatingKey() {
-		return track.getParentRatingKey();
-	}
+    public String getGuid() {
+        return guid;
+    }
 
-	public Integer getGrandparentRatingKey() {
-		return track.getGrandparentRatingKey();
-	}
+    public Integer getHasPremiumLyrics() {
+        return hasPremiumLyrics;
+    }
 
-	public String getGuid() {
-		return track.getGuid();
-	}
+    public Integer getIndex() {
+        return index;
+    }
 
-	public String getParentGuid() {
-		return track.getParentGuid();
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public String getGrandparentGuid() {
-		return track.getGrandparentGuid();
-	}
+    public Integer getLibrarySectionID() {
+        return librarySectionID;
+    }
 
-	public String getParentStudio() {
-		return track.getParentStudio();
-	}
+    public String getLibrarySectionKey() {
+        return librarySectionKey;
+    }
 
-	public String getType() {
-		return track.getType();
-	}
+    public String getLibrarySectionTitle() {
+        return librarySectionTitle;
+    }
 
-	public String getGrandparentKey() {
-		return track.getGrandparentKey();
-	}
+    public List<Media> getMedia() {
+        if (media != null) {
+            media.forEach(m -> m.setServer(server));
+            return media;
+        }
+        return Collections.emptyList();
+    }
 
-	public String getParentKey() {
-		return track.getGrandparentKey();
-	}
+    public String getParentGuid() {
+        return parentGuid;
+    }
 
-	public String getLibrarySectionTitle() {
-		return track.getLibrarySectionKey();
-	}
+    public Integer getParentIndex() {
+        return parentIndex;
+    }
 
-	public Integer getLibrarySectionID() {
-		return track.getLibrarySectionID();
-	}
+    public String getParentKey() {
+        return parentKey;
+    }
 
-	public String getLibrarySectionKey() {
-		return track.getLibrarySectionKey();
-	}
+    public Integer getParentRatingKey() {
+        return parentRatingKey;
+    }
 
-	public String getGrandparentTitle() {
-		return track.getGrandparentTitle();
-	}
+    public String getParentStudio() {
+        return parentStudio;
+    }
 
-	public String getParentTitle() {
-		return track.getParentTitle();
-	}
+    public String getParentThumb() {
+        return parentThumb;
+    }
 
-	public Integer getParentIndex() {
-		return track.getParentIndex();
-	}
+    public String getParentTitle() {
+        return parentTitle;
+    }
 
-	public Integer getViewCount() {
-		return track.getViewCount();
-	}
+    public Integer getParentYear() {
+        return parentYear;
+    }
 
-	public Date getLastViewedAt() {
-		return track.getLastViewedAt();
-	}
+    public Integer getRatingCount() {
+        return ratingCount;
+    }
 
-	public Integer getParentYear() {
-		return track.getParentYear();
-	}
+    public Integer getRatingKey() {
+        return ratingKey;
+    }
 
-	public Date getAddedAt() {
-		return track.getAddedAt();
-	}
+    public String getSummary() {
+        return summary;
+    }
 
-	public URI getArt() {
-		return PlexUriBuilder.fromKey(track.getArt(), null, getServer())
-				.build();
-	}
+    public String getThumb() {
+        return thumb;
+    }
 
-	public URI getParentThumb() {
-		return PlexUriBuilder.fromKey(track.getParentThumb(), null, getServer())
-				.build();
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public URI getGrandparentThumb() {
-		return PlexUriBuilder.fromKey(track.getGrandparentThumb(), null, getServer())
-				.build();
-	}
+    public String getType() {
+        return type;
+    }
 
-	public URI getGrandparentArt() {
-		return PlexUriBuilder.fromKey(track.getGrandparentArt(), null, getServer())
-				.build();
-	}
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
 
-	public Integer getDuration() {
-		return track.getDuration();
-	}
+    public Integer getViewCount() {
+        return viewCount;
+    }
 
-	public Integer getHasPremiumLyrics() {
-		return track.getHasPremiumLyrics();
-	}
+    public Date getLastViewedAt() {
+        return lastViewedAt;
+    }
 
-	public Integer getIndex() {
-		return track.getIndex();
-	}
+    public URI getArtURI() {
+        return PlexUriBuilder.fromKey(art, null, server)
+                .build();
+    }
 
-	public Integer getRatingCount() {
-		return track.getRatingCount();
-	}
+    public URI getParentThumbURI() {
+        return PlexUriBuilder.fromKey(parentThumb, null, server)
+                .build();
+    }
 
-	public String getSummary() {
-		return track.getSummary();
-	}
+    public URI getGrandparentThumbURI() {
+        return PlexUriBuilder.fromKey(grandparentThumb, null, server)
+                .build();
+    }
 
-	public URI getThumb() {
-		return PlexUriBuilder.fromKey(track.getThumb(), null, getServer())
-				.build();
-	}
+    public URI getGrandparentArtURI() {
+        return PlexUriBuilder.fromKey(grandparentArt, null, server)
+                .build();
+    }
 
-	public String getTitle() {
-		return track.getTitle();
-	}
+    public URI getThumbURI() {
+        return PlexUriBuilder.fromKey(thumb, null, server)
+                .build();
+    }
 
-	public Date getUpdatedAt() {
-		return track.getUpdatedAt();
-	}
+    public void setPlex(PlexService plex) {
+        this.plex = plex;
+    }
 
-	public List<Medium> getMedia() {
-		return media;
-	}
+    public void setServer(ServerContent server) {
+        this.server = server;
+    }
 
-	public Album album() {
-		return new Album(getPlexClient(), PlexUriBuilder.fromKey(track.getParentKey(), null, getServer())
-				.build(), getServer());
-	}
+    public Album album() {
+        return new Album(plex, PlexUriBuilder.fromKey(parentKey, null, server)
+                .build(), server);
+    }
 
-	public Artist artist() {
-		return new Artist(getPlexClient(), PlexUriBuilder.fromKey(track.getGrandparentKey(), null, getServer())
-				.build(), getServer());
-	}
+    public Artist artist() {
+        return new Artist(plex, PlexUriBuilder.fromKey(grandparentKey, null, server)
+                .build(), server);
+    }
+
 }

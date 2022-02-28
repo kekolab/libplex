@@ -1,85 +1,106 @@
 package kekolab.libplex.entity;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class Stream {
-	private kekolab.libplex.plex.tag.Stream stream;
+    @XmlAttribute private Integer id;
+    @XmlAttribute private Integer streamType;
+    @XmlAttribute private Integer selected;
+    @XmlAttribute private String codec;
+    @XmlAttribute private Integer index;
+    @XmlAttribute private Integer channels;
+    @XmlAttribute private Integer bitrate;
+    @XmlAttribute private Double albumGain;
+    @XmlAttribute private Double albumPeak;
+    @XmlAttribute private Double albumRange;
+    @XmlAttribute private String audioChannelLayout;
+    @XmlAttribute private Integer bitDepth;
+    @XmlAttribute private Double gain;
+    @XmlAttribute private Double loudness;
+    @XmlAttribute private Double lra;
+    @XmlAttribute private Double peak;
+    @XmlAttribute private Integer samplingRate;
+    @XmlAttribute private String displayTitle;
+    @XmlAttribute private String extendedDisplayTitle;
 
-	public Stream(kekolab.libplex.plex.tag.Stream stream) {
-		this.stream = stream;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getID() {
-		return stream.getId();
-	}
+    public Integer getStreamType() {
+        return streamType;
+    }
 
-	public int getStreamType() {
-		return stream.getStreamType();
-	}
+    public Integer getSelected() {
+        return selected;
+    }
 
-	public int getSelected() {
-		return stream.getSelected();
-	}
+    public String getCodec() {
+        return codec;
+    }
 
-	public String getCodec() {
-		return stream.getCodec();
-	}
+    public Integer getIndex() {
+        return index;
+    }
 
-	public int getIndex() {
-		return stream.getIndex();
-	}
+    public Integer getChannels() {
+        return channels;
+    }
 
-	public int getChannels() {
-		return stream.getChannels();
-	}
+    public Integer getBitrate() {
+        return bitrate;
+    }
 
-	public int getBitrate() {
-		return stream.getBitrate();
-	}
+    public Double getAlbumGain() {
+        return albumGain;
+    }
 
-	public double getAlbumGain() {
-		return stream.getAlbumGain();
-	}
+    public Double getAlbumPeak() {
+        return albumPeak;
+    }
 
-	public double getAlbumPeak() {
-		return stream.getAlbumPeak();
-	}
+    public Double getAlbumRange() {
+        return albumRange;
+    }
 
-	public double getAlbumRange() {
-		return stream.getAlbumRange();
-	}
+    public String getAudioChannelLayout() {
+        return audioChannelLayout;
+    }
 
-	public String getAudioChannelLayout() {
-		return stream.getAudioChannelLayout();
-	}
+    public Integer getBitDepth() {
+        return bitDepth;
+    }
 
-	public int getBitDepth() {
-		return stream.getBitDepth();
-	}
+    public Double getGain() {
+        return gain;
+    }
 
-	public double getGain() {
-		return stream.getGain();
-	}
+    public Double getLoudness() {
+        return loudness;
+    }
 
-	public double getLoudness() {
-		return stream.getLoudness();
-	}
+    public Double getLra() {
+        return lra;
+    }
 
-	public double getLra() {
-		return stream.getLra();
-	}
+    public Double getPeak() {
+        return peak;
+    }
 
-	public double getPeak() {
-		return stream.getPeak();
-	}
+    public Integer getSamplingRate() {
+        return samplingRate;
+    }
 
-	public int getSamplingRate() {
-		return stream.getSamplingRate();
-	}
+    public String getDisplayTitle() {
+        return displayTitle;
+    }
 
-	public String getDisplayTitle() {
-		return stream.getDisplayTitle();
-	}
-
-	public String getExtendedDisplayTitle() {
-		return stream.getExtendedDisplayTitle();
-	}
+    public String getExtendedDisplayTitle() {
+        return extendedDisplayTitle;
+    }
 }

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import kekolab.libplex.PlexService;
 import kekolab.libplex.PlexUriBuilder;
-import kekolab.libplex.plex.tag.MediaContainer;
 
 public class Artist extends MediaDirectory {
 	public Artist(PlexService plex, URI uri, ServerContent server) {

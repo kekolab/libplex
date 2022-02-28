@@ -1,4 +1,4 @@
-package kekolab.libplex.plex.adapter;
+package kekolab.libplex.xmladapter;
 
 import java.util.Date;
 

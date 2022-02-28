@@ -1,4 +1,4 @@
-package kekolab.libplex.plex.tag;
+package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;

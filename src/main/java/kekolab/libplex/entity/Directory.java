@@ -1,4 +1,4 @@
-package kekolab.libplex.plex.tag;
+package kekolab.libplex.entity;
 
 import java.util.Collections;
 import java.util.Date;
@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import kekolab.libplex.plex.adapter.TimestampAdapter;
+import kekolab.libplex.xmladapter.TimestampAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)

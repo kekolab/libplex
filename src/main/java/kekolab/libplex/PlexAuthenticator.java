@@ -3,8 +3,8 @@ package kekolab.libplex;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.Form;
 import jakarta.ws.rs.core.UriBuilder;
-import kekolab.libplex.plex.tag.Pin;
-import kekolab.libplex.plex.tag.User;
+import kekolab.libplex.entity.Pin;
+import kekolab.libplex.entity.User;
 
 public class PlexAuthenticator implements AutoCloseable {
     private PlexService service;

@@ -1,4 +1,4 @@
-package kekolab.libplex.plex.tag;
+package kekolab.libplex.entity;
 
 import java.util.Date;
 

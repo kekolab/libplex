@@ -1,44 +1,67 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.Collections;
+import java.util.List;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import kekolab.libplex.PlexUriBuilder;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class Part {
-	private kekolab.libplex.plex.tag.Part part;
-	private ServerContent server;
+    @XmlAttribute private Integer id;
+    @XmlAttribute private String key;
+    @XmlAttribute private Integer duration;
+    @XmlAttribute private String file;
+    @XmlAttribute private Integer size;
+    @XmlAttribute private String container;
+    @XmlAttribute private Integer hasThumbnail;
+    @XmlElement(name = "Stream") private List<Stream> streams;
+    private ServerContent server;
 
-	public Part(ServerContent server, kekolab.libplex.plex.tag.Part part) {
-		this.server = server;
-		this.part = part;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getID() {
-		return part.getId();
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public URI getURI() {
-		return PlexUriBuilder.fromKey(part.getKey(), null, server)
-				.build();
-	}
+    public Integer getDuration() {
+        return duration;
+    }
 
-	public int getDuration() {
-		return part.getDuration();
-	}
+    public String getFile() {
+        return file;
+    }
 
-	public String getFile() {
-		return part.getFile();
-	}
+    public Integer getSize() {
+        return size;
+    }
 
-	public int getSize() {
-		return part.getSize();
-	}
+    public String getContainer() {
+        return container;
+    }
 
-	public String getContainer() {
-		return part.getContainer();
-	}
+    public Integer getHasThumbnail() {
+        return hasThumbnail;
+    }
 
-	public int getHasThumbnail() {
-		return part.getHasThumbnail();
-	}
+    public List<Stream> getStreams() {
+        return streams != null ? streams : Collections.emptyList();
+    }
+
+    public void setServer(ServerContent server) {
+        this.server = server;
+    }
+
+    public URI getURI() {
+        return PlexUriBuilder.fromKey(key, null, server)
+                .build();
+    }
 }

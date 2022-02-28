@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import kekolab.libplex.PlexAuthenticator;
-import kekolab.libplex.plex.tag.Pin;
+import kekolab.libplex.entity.Pin;
 
 public class PlexAuthenticatorTests {
 	private PlexAuthenticator authenticator;

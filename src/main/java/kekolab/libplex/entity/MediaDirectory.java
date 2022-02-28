@@ -5,7 +5,6 @@ import java.util.Date;
 
 import kekolab.libplex.PlexService;
 import kekolab.libplex.PlexUriBuilder;
-import kekolab.libplex.plex.tag.Directory;
 
 public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
 	private Directory directory;

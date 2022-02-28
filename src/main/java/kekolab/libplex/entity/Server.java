@@ -10,90 +10,106 @@ import javax.net.ssl.HttpsURLConnection;
 import jakarta.ws.rs.core.UriBuilder;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.PlexService;
+import kekolab.libplex.xmladapter.TimestampAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Server {
-	private kekolab.libplex.plex.tag.Server server;
-	private PlexService plex;
+    @XmlAttribute private String accessToken;
+    @XmlAttribute private String name;
+    @XmlAttribute private String address;
+    @XmlAttribute private Integer port;
+    @XmlAttribute private String version;
+    @XmlAttribute private String scheme;
+    @XmlAttribute private String host;
+    @XmlAttribute private String localAddresses;
+    @XmlAttribute private String machineIdentifier;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(TimestampAdapter.class) private Date createdAt;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
+    @XmlAttribute private Integer owned;
+    @XmlAttribute private Integer synced;
+    private PlexService plex;
 
-	public Server(PlexService plex, kekolab.libplex.plex.tag.Server server) {
-		this.plex = plex;
-		this.server = server;
-	}
+    public String getAccessToken() {
+        return accessToken;
+    }
 
-	public ServerContent content() throws IOException {
-		HttpsURLConnection connection = (HttpsURLConnection) UriBuilder.newInstance()
-				.scheme("https")
-				.host(getHost())
-				.port(getPort())
-				.build()
-				.toURL()
-				.openConnection();
-		connection.setHostnameVerifier((hostname, session) -> true);
-		connection.connect();
-		X509Certificate serverCertificate = (X509Certificate) connection.getServerCertificates()[0];
-		String cn = serverCertificate.getSubjectX500Principal()
-				.getName();
-		return new ServerContent(plex, UriBuilder.newInstance()
-				.scheme("https")
-				.host(getHost().replaceAll(Pattern.quote("."), "-")
-						.concat(cn.substring(4)))
-				.port(getPort())
-				.build());
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getAccessToken() {
-		return server.getAccessToken();
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getName() {
-		return server.getName();
-	}
+    public Integer getPort() {
+        return port;
+    }
 
-	public String getAddress() {
-		return server.getAddress();
-	}
+    public String getVersion() {
+        return version;
+    }
 
-	public Integer getPort() {
-		return server.getPort();
-	}
+    public String getScheme() {
+        return scheme;
+    }
 
-	public String getVersion() {
-		return server.getVersion();
-	}
+    public String getHost() {
+        return host;
+    }
 
-	public String getScheme() {
-		return server.getScheme();
-	}
+    public String getLocalAddresses() {
+        return localAddresses;
+    }
 
-	public String getHost() {
-		return server.getHost();
-	}
+    public String getMachineIdentifier() {
+        return machineIdentifier;
+    }
 
-	public String getLocalAddresses() {
-		return server.getLocalAddresses();
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public String getMachineIdentifier() {
-		return server.getMachineIdentifier();
-	}
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
 
-	public Date getCreatedAt() {
-		return server.getCreatedAt();
-	}
+    public Integer getOwned() {
+        return owned;
+    }
 
-	public Date getUpdatedAt() {
-		return server.getUpdatedAt();
-	}
+    public Integer getSynced() {
+        return synced;
+    }
 
-	public Integer getOwned() {
-		return server.getOwned();
-	}
+    public void setPlexService(PlexService plex) {
+        this.plex = plex;
+    }
 
-	public Integer getSynced() {
-		return server.getSynced();
-	}
+    public ServerContent content() throws IOException {
+        HttpsURLConnection connection = (HttpsURLConnection) UriBuilder.newInstance()
+                .scheme("https")
+                .host(getHost())
+                .port(getPort())
+                .build()
+                .toURL()
+                .openConnection();
+        connection.setHostnameVerifier((hostname, session) -> true);
+        connection.connect();
+        X509Certificate serverCertificate = (X509Certificate) connection.getServerCertificates()[0];
+        String cn = serverCertificate.getSubjectX500Principal()
+                .getName();
+        return new ServerContent(plex, UriBuilder.newInstance()
+                .scheme("https")
+                .host(getHost().replaceAll(Pattern.quote("."), "-")
+                        .concat(cn.substring(4)))
+                .port(getPort())
+                .build());
+    }
 }

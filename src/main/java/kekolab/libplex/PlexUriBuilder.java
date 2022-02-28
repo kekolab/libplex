@@ -3,11 +3,11 @@ package kekolab.libplex;
 import java.util.Arrays;
 
 import jakarta.ws.rs.core.UriBuilder;
-import kekolab.libplex.entity.PlexItem;
+import kekolab.libplex.entity.MediaContainerPlexItem;
 import kekolab.libplex.entity.ServerContent;
 
 public class PlexUriBuilder {
-    public static UriBuilder fromKey(String key, PlexItem parent, ServerContent server) {
+    public static UriBuilder fromKey(String key, MediaContainerPlexItem parent, ServerContent server) {
         UriBuilder delegate;
         if (key.startsWith("/"))
             delegate = UriBuilder.fromUri(server.getUri());
