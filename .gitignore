@@ -8,3 +8,4 @@ build
 /.vscode/
 /bin/
 /.classpath
+/gradle.properties
