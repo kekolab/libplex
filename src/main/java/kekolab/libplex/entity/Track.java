@@ -31,6 +31,7 @@ public class Track {
     @XmlAttribute private String librarySectionKey;
     @XmlAttribute private String librarySectionTitle;
     @XmlElement(name = "Media") private List<Media> media;
+    @XmlAttribute private String originalTitle;
     @XmlAttribute private String parentGuid;
     @XmlAttribute private Integer parentIndex;
     @XmlAttribute private String parentKey;
@@ -234,6 +235,18 @@ public class Track {
     public Artist artist() {
         return new Artist(plex, PlexUriBuilder.fromKey(grandparentKey, null, server)
                 .build(), server);
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public PlexService getPlex() {
+        return plex;
+    }
+
+    public ServerContent getServer() {
+        return server;
     }
 
 }
