@@ -1,28 +1,18 @@
 package kekolab.libplex.test;
 
 import java.io.IOException;
-import java.util.Properties;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
-import kekolab.libplex.PlexService;
 import kekolab.libplex.entity.Artist;
 
-public class ArtistTests {
-    private static PlexService client;
-    private static Artist artist;
+public class ArtistTests extends WithPlexClientTests {
+    private Artist artist;
 
-    @BeforeAll
-    static void init() throws IOException {
-        Properties props = new Properties();
-        props.load(ArtistTests.class.getResourceAsStream("/testVariables.properties"));
-        client = new PlexService.Builder().setPlexToken(props.getProperty("authToken"))
-                .setPlexProduct("myPlexProduct")
-                .setPlexVersion("v1.0")
-                .setPlexClientIdentifier("myPlexClientIdentifier")
-                .build();
-        artist = client.servers()
+    @Override
+    @BeforeEach
+    public void init() throws IOException {
+        artist = getClient().servers()
                 .getServers()
                 .get(0)
                 .content()
@@ -34,9 +24,5 @@ public class ArtistTests {
                 .get(0);
     }
 
-    @AfterAll
-    static void close() throws Exception {
-        client.close();
-    }
     // TODO
 }

@@ -3,10 +3,10 @@ package kekolab.libplex.entity;
 import java.net.URI;
 import java.util.List;
 
-import kekolab.libplex.PlexService;
+import kekolab.libplex.PlexClient;
 
 public class Servers extends MediaContainerPlexItem {
-    public Servers(PlexService plex, URI uri) {
+    public Servers(PlexClient plex, URI uri) {
         super(plex, uri);
         getMediaContainer().getServers()
                 .forEach(server -> server.setPlexService(plex));

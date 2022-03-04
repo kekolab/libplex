@@ -8,8 +8,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import kekolab.libplex.PlexService;
-import kekolab.libplex.PlexUriBuilder;
+import kekolab.libplex.PlexClient;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
 public class Track {
@@ -51,7 +50,7 @@ public class Track {
     @XmlAttribute private Integer viewCount;
     @XmlAttribute
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date lastViewedAt;
-    private PlexService plex;
+    private PlexClient plex;
     private ServerContent server;
 
     public Date getAddedAt() {
@@ -195,31 +194,36 @@ public class Track {
     }
 
     public URI getArtURI() {
-        return PlexUriBuilder.fromKey(art, null, server)
+        return plex.uriBuilder()
+                .fromKey(art, null, server)
                 .build();
     }
 
     public URI getParentThumbURI() {
-        return PlexUriBuilder.fromKey(parentThumb, null, server)
+        return plex.uriBuilder()
+                .fromKey(parentThumb, null, server)
                 .build();
     }
 
     public URI getGrandparentThumbURI() {
-        return PlexUriBuilder.fromKey(grandparentThumb, null, server)
+        return plex.uriBuilder()
+                .fromKey(grandparentThumb, null, server)
                 .build();
     }
 
     public URI getGrandparentArtURI() {
-        return PlexUriBuilder.fromKey(grandparentArt, null, server)
+        return plex.uriBuilder()
+                .fromKey(grandparentArt, null, server)
                 .build();
     }
 
     public URI getThumbURI() {
-        return PlexUriBuilder.fromKey(thumb, null, server)
+        return plex.uriBuilder()
+                .fromKey(thumb, null, server)
                 .build();
     }
 
-    public void setPlex(PlexService plex) {
+    public void setPlex(PlexClient plex) {
         this.plex = plex;
     }
 
@@ -228,12 +232,14 @@ public class Track {
     }
 
     public Album album() {
-        return new Album(plex, PlexUriBuilder.fromKey(parentKey, null, server)
+        return new Album(plex, plex.uriBuilder()
+                .fromKey(parentKey, null, server)
                 .build(), server);
     }
 
     public Artist artist() {
-        return new Artist(plex, PlexUriBuilder.fromKey(grandparentKey, null, server)
+        return new Artist(plex, plex.uriBuilder()
+                .fromKey(grandparentKey, null, server)
                 .build(), server);
     }
 
@@ -241,7 +247,7 @@ public class Track {
         return originalTitle;
     }
 
-    public PlexService getPlex() {
+    public PlexClient getPlex() {
         return plex;
     }
 

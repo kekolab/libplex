@@ -7,7 +7,7 @@ import kekolab.libplex.entity.MediaContainerPlexItem;
 import kekolab.libplex.entity.ServerContent;
 
 public class PlexUriBuilder {
-    public static UriBuilder fromKey(String key, MediaContainerPlexItem parent, ServerContent server) {
+    public UriBuilder fromKey(String key, MediaContainerPlexItem parent, ServerContent server) {
         UriBuilder delegate;
         if (key.startsWith("/"))
             delegate = UriBuilder.fromUri(server.getUri());

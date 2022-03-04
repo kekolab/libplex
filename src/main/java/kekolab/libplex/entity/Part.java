@@ -60,8 +60,8 @@ public class Part {
         this.server = server;
     }
 
-    public URI getURI() {
-        return PlexUriBuilder.fromKey(key, null, server)
+    public URI getURI(PlexUriBuilder uriBuilder) {
+        return uriBuilder.fromKey(key, null, server)
                 .build();
     }
 }

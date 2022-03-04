@@ -4,11 +4,10 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kekolab.libplex.PlexService;
-import kekolab.libplex.PlexUriBuilder;
+import kekolab.libplex.PlexClient;
 
 public class ArtistSection extends MediaSection {
-    public ArtistSection(PlexService plex, URI uri, ServerContent server) {
+    public ArtistSection(PlexClient plex, URI uri, ServerContent server) {
         super(plex, uri, server);
     }
 
@@ -19,84 +18,85 @@ public class ArtistSection extends MediaSection {
     public List<Artist> all() {
         String key = directoriesByKey("all").get(0)
                 .getKey();
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(key, this, getServer())
+        return getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(key, this, getServer())
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Artist(getPlexClient(),
-                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
-                                .build(d.getRatingKey()),
-                        getServer()))
+                .map(d -> new Artist(getPlexClient(), getPlexClient().uriBuilder()
+                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
+                        .build(d.getRatingKey()), getServer()))
                 .collect(Collectors.toList());
     }
 
     public List<Album> albums() {
         String key = directoriesByKey("albums").get(0)
                 .getKey();
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(key, this, getServer())
+        return getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(key, this, getServer())
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Album(getPlexClient(),
-                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
-                                .build(d.getRatingKey()),
-                        getServer()))
+                .map(d -> new Album(getPlexClient(), getPlexClient().uriBuilder()
+                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
+                        .build(d.getRatingKey()), getServer()))
                 .collect(Collectors.toList());
     }
 
     public List<Album> recentlyAdded() {
         String key = directoriesByKey("recentlyAdded").get(0)
                 .getKey();
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(key, this, getServer())
+        return getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(key, this, getServer())
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Album(getPlexClient(),
-                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
-                                .build(d.getRatingKey()),
-                        getServer()))
+                .map(d -> new Album(getPlexClient(), getPlexClient().uriBuilder()
+                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
+                        .build(d.getRatingKey()), getServer()))
                 .collect(Collectors.toList());
     }
 
     public List<Artist> searchForArtists(String query) {
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(directoriesByPrompt("Search for Artists").get(0)
-                .getKey(), this, getServer())
+        return getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(directoriesByPrompt("Search for Artists").get(0)
+                        .getKey(), this, getServer())
                 .queryParam("query", query)
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Artist(getPlexClient(),
-                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
-                                .build(d.getRatingKey()),
-                        getServer()))
+                .map(d -> new Artist(getPlexClient(), getPlexClient().uriBuilder()
+                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
+                        .build(d.getRatingKey()), getServer()))
                 .collect(Collectors.toList());
     }
 
     public List<Album> searchForAlbums(String query) {
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(directoriesByPrompt("Search for Albums").get(0)
-                .getKey(), this, getServer())
+        return getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(directoriesByPrompt("Search for Albums").get(0)
+                        .getKey(), this, getServer())
                 .queryParam("query", query)
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Album(getPlexClient(),
-                        PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", this, getServer())
-                                .build(d.getRatingKey()),
-                        getServer()))
+                .map(d -> new Album(getPlexClient(), getPlexClient().uriBuilder()
+                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
+                        .build(d.getRatingKey()), getServer()))
                 .collect(Collectors.toList());
     }
 
     public List<Track> searchForTracks(String query) {
-        return getPlexClient().executeGet(PlexUriBuilder.fromKey(directoriesByPrompt("Search for Tracks").get(0)
-                .getKey(), this, getServer())
+        return getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(directoriesByPrompt("Search for Tracks").get(0)
+                        .getKey(), this, getServer())
                 .queryParam("query", query)
                 .build(), MediaContainer.class)
                 .getTracks()
                 .stream()
                 .map(t -> {
-                    Track track = getPlexClient()
-                            .executeGet(PlexUriBuilder.fromKey("/library/metadata/{ratingKey}", null, getServer())
-                                    .build(t.getRatingKey()), MediaContainer.class)
+                    Track track = getPlexClient().executeGet(getPlexClient().uriBuilder()
+                            .fromKey("/library/metadata/{ratingKey}", null, getServer())
+                            .build(t.getRatingKey()), MediaContainer.class)
                             .getTracks()
                             .get(0);
                     track.setPlex(getPlexClient());

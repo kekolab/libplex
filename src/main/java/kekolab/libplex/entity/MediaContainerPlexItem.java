@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import kekolab.libplex.PlexService;
+import kekolab.libplex.PlexClient;
 
 public abstract class MediaContainerPlexItem {
-    private PlexService plexClient;
+    private PlexClient plexClient;
     private MediaContainer mediaContainer;
     private URI uri;
 
-    protected MediaContainerPlexItem(PlexService plex, URI uri) {
+    protected MediaContainerPlexItem(PlexClient plex, URI uri) {
         this.plexClient = plex;
         this.uri = uri;
         this.mediaContainer = plex.executeGet(uri, MediaContainer.class);
@@ -47,7 +47,7 @@ public abstract class MediaContainerPlexItem {
         return Collections.emptyList();
     }
 
-    protected PlexService getPlexClient() {
+    protected PlexClient getPlexClient() {
         return plexClient;
     }
 

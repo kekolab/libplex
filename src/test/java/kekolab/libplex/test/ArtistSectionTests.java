@@ -5,29 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.util.Properties;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kekolab.libplex.PlexService;
 import kekolab.libplex.entity.ArtistSection;
 
-public class ArtistSectionTests {
-    private static PlexService client;
-    private static ArtistSection section;
+public class ArtistSectionTests extends WithPlexClientTests {
+    private ArtistSection section;
 
-    @BeforeAll
-    static void init() throws IOException {
-        Properties props = new Properties();
-        props.load(ArtistSectionTests.class.getResourceAsStream("/testVariables.properties"));
-        client = new PlexService.Builder().setPlexToken(props.getProperty("authToken"))
-                .setPlexProduct("myPlexProduct")
-                .setPlexVersion("v1.0")
-                .setPlexClientIdentifier("myPlexClientIdentifier")
-                .build();
-        section = client.servers()
+    @Override
+    @BeforeEach
+    public void init() throws IOException {
+        super.init();
+        section = getClient().servers()
                 .getServers()
                 .get(0)
                 .content()
@@ -35,11 +26,6 @@ public class ArtistSectionTests {
                 .sections()
                 .artistSections()
                 .get(0);
-    }
-
-    @AfterAll
-    static void close() throws Exception {
-        client.close();
     }
 
     @Test

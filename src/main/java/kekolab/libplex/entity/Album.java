@@ -5,12 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kekolab.libplex.PlexService;
-import kekolab.libplex.PlexUriBuilder;
+import kekolab.libplex.PlexClient;
 
 public class Album extends MediaDirectory {
 
-    public Album(PlexService plex, URI uri, ServerContent server) {
+    public Album(PlexClient plex, URI uri, ServerContent server) {
         super(plex, uri, server);
     }
 
@@ -43,7 +42,8 @@ public class Album extends MediaDirectory {
     }
 
     public URI getParentThumb() {
-        return PlexUriBuilder.fromKey(getDirectory().getParentThumb(), null, getServer())
+        return getPlexClient().uriBuilder()
+                .fromKey(getDirectory().getParentThumb(), null, getServer())
                 .build();
     }
 
@@ -93,16 +93,15 @@ public class Album extends MediaDirectory {
 
     @Override
     public ArtistSection section() {
-        return new ArtistSection(getPlexClient(),
-                PlexUriBuilder.fromKey(getDirectory().getLibrarySectionKey(), null, getServer())
-                        .build(),
-                getServer());
+        return new ArtistSection(getPlexClient(), getPlexClient().uriBuilder()
+                .fromKey(getDirectory().getLibrarySectionKey(), null, getServer())
+                .build(), getServer());
     }
 
     public List<Track> tracks() {
-        List<Track> tracks = getPlexClient()
-                .executeGet(PlexUriBuilder.fromKey(getDirectory().getKey(), null, getServer())
-                        .build(), MediaContainer.class)
+        List<Track> tracks = getPlexClient().executeGet(getPlexClient().uriBuilder()
+                .fromKey(getDirectory().getKey(), null, getServer())
+                .build(), MediaContainer.class)
                 .getTracks();
         tracks.forEach(t -> {
             t.setPlex(getPlexClient());
@@ -112,7 +111,8 @@ public class Album extends MediaDirectory {
     }
 
     public Artist artist() {
-        return new Artist(getPlexClient(), PlexUriBuilder.fromKey(getDirectory().getParentKey(), null, getServer())
+        return new Artist(getPlexClient(), getPlexClient().uriBuilder()
+                .fromKey(getDirectory().getParentKey(), null, getServer())
                 .build(), getServer());
     }
 }

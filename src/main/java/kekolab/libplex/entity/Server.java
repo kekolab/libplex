@@ -13,7 +13,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import kekolab.libplex.PlexService;
+import kekolab.libplex.PlexClient;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
 @XmlRootElement
@@ -34,7 +34,7 @@ public class Server {
     @XmlJavaTypeAdapter(TimestampAdapter.class) private Date updatedAt;
     @XmlAttribute private Integer owned;
     @XmlAttribute private Integer synced;
-    private PlexService plex;
+    private PlexClient plex;
 
     public String getAccessToken() {
         return accessToken;
@@ -88,7 +88,7 @@ public class Server {
         return synced;
     }
 
-    public void setPlexService(PlexService plex) {
+    public void setPlexService(PlexClient plex) {
         this.plex = plex;
     }
 
