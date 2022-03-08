@@ -14,14 +14,17 @@ import kekolab.libplex.PlexUriBuilder;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Part {
-    @XmlAttribute private Integer id;
-    @XmlAttribute private String key;
-    @XmlAttribute private Integer duration;
-    @XmlAttribute private String file;
-    @XmlAttribute private Integer size;
-    @XmlAttribute private String container;
-    @XmlAttribute private Integer hasThumbnail;
-    @XmlElement(name = "Stream") private List<Stream> streams;
+    @XmlAttribute private Integer id; // Track, Video, Episode
+    @XmlAttribute private String key; // Track, Video, Episode
+    @XmlAttribute private Integer duration; // Track, Video, Episode
+    @XmlAttribute private String file; // Track, Video, Episode
+    @XmlAttribute private Integer size; // Track, Video, Episode
+    @XmlAttribute private String container; // Track, Video, Episode
+    @XmlAttribute private Integer hasThumbnail; // Track
+    @XmlElement(name = "Stream") private List<Stream> streams; // Track, Episode
+    @XmlAttribute private String audioProfile; // Video
+    @XmlAttribute private String videoProfile; // Video, Episode
+
     private ServerContent server;
 
     public Integer getId() {
@@ -63,5 +66,13 @@ public class Part {
     public URI getURI(PlexUriBuilder uriBuilder) {
         return uriBuilder.fromKey(key, null, server)
                 .build();
+    }
+
+    public String getAudioProfile() {
+        return audioProfile;
+    }
+
+    public String getVideoProfile() {
+        return videoProfile;
     }
 }

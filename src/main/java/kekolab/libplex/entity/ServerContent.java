@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import kekolab.libplex.PlexClient;
+import kekolab.libplex.misc.Search;
 
 public class ServerContent extends MediaContainerPlexItem {
     public ServerContent(PlexClient plex, URI uri) {
@@ -223,5 +224,9 @@ public class ServerContent extends MediaContainerPlexItem {
                 .fromKey(directoriesByKey("library").get(0)
                         .getKey(), this, this)
                 .build(), this);
+    }
+
+    public Search search() {
+        return new Search(getPlexClient(), getUri(), this);
     }
 }

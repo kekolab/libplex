@@ -23,9 +23,7 @@ public class ArtistSection extends MediaSection {
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Artist(getPlexClient(), getPlexClient().uriBuilder()
-                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
-                        .build(d.getRatingKey()), getServer()))
+                .map(d -> new Artist(getPlexClient(), d, getServer()))
                 .collect(Collectors.toList());
     }
 
@@ -65,9 +63,7 @@ public class ArtistSection extends MediaSection {
                 .build(), MediaContainer.class)
                 .getDirectories()
                 .stream()
-                .map(d -> new Artist(getPlexClient(), getPlexClient().uriBuilder()
-                        .fromKey("/library/metadata/{ratingKey}", this, getServer())
-                        .build(d.getRatingKey()), getServer()))
+                .map(d -> new Artist(getPlexClient(), d, getServer()))
                 .collect(Collectors.toList());
     }
 

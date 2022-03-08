@@ -94,13 +94,21 @@ public abstract class MediaDirectory extends ServerMediaContainerPlexItem {
         return directory.getLastViewedAt();
     }
 
-    public URI getThumb() {
+    public String getThumb() {
+        return directory.getThumb();
+    }
+
+    public URI getThumbURI() {
         return getPlexClient().uriBuilder()
                 .fromKey(directory.getThumb(), this, getServer())
                 .build();
     }
 
-    public URI getArt() {
+    public String getArt() {
+        return directory.getArt();
+    }
+
+    public URI getArtURI() {
         return getPlexClient().uriBuilder()
                 .fromKey(directory.getArt(), this, getServer())
                 .build();

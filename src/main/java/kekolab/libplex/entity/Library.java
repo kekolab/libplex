@@ -13,7 +13,11 @@ public class Library extends ServerMediaContainerPlexItem {
         return getMediaContainer().getSize();
     }
 
-    public URI getArt() {
+    public String getArt() {
+        return getMediaContainer().getArt();
+    }
+
+    public URI getArtURI() {
         return getPlexClient().uriBuilder()
                 .fromKey(getMediaContainer().getArt(), this, getServer())
                 .build();

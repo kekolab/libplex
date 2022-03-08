@@ -1,6 +1,5 @@
 package kekolab.libplex.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,10 +8,10 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kekolab.libplex.entity.ArtistSection;
+import kekolab.libplex.entity.MovieSection;
 
-public class ArtistSectionTests extends WithPlexClientTests {
-    private ArtistSection section;
+public class MovieSectionTests extends WithPlexClientTests {
+    private MovieSection section;
 
     @Override
     @BeforeEach
@@ -24,7 +23,7 @@ public class ArtistSectionTests extends WithPlexClientTests {
                 .content()
                 .library()
                 .sections()
-                .artistSections()
+                .movieSections()
                 .get(0);
     }
 
@@ -40,13 +39,7 @@ public class ArtistSectionTests extends WithPlexClientTests {
     }
 
     @Test
-    void allAlbumsTest() {
-        assertTrue(section.albums()
-                .size() > 0);
-    }
-
-    @Test
-    void allArtistsTest() {
+    void allMoviesTest() {
         assertTrue(section.all()
                 .size() > 0);
     }
@@ -58,38 +51,20 @@ public class ArtistSectionTests extends WithPlexClientTests {
     }
 
     @Test
-    void searchExistentAlbumTest() {
-        assertTrue(section.searchForAlbums("sumness")
+    void recentlyReleasedTest() {
+        assertTrue(section.recentlyReleased()
                 .size() > 0);
     }
 
     @Test
-    void searchNonExistentAlbumTest() {
-        assertEquals(0, section.searchForAlbums("90rufoisdcj")
-                .size());
-    }
-
-    @Test
-    void searchExistentArtistTest() {
-        assertTrue(section.searchForArtists("Alanis")
+    void onDeckTest() {
+        assertTrue(section.onDeck()
                 .size() > 0);
     }
 
     @Test
-    void searchNonExistentArtistTest() {
-        assertEquals(0, section.searchForArtists("dscjldk")
-                .size());
-    }
-
-    @Test
-    void searchExistentTrackTest() {
-        assertTrue(section.searchForTracks("Inside")
+    void recentlyViewedTest() {
+        assertTrue(section.recentlyViewed()
                 .size() > 0);
-    }
-
-    @Test
-    void searchNonExistentTrackTest() {
-        assertEquals(0, section.searchForTracks("ldksjcdlkf")
-                .size());
     }
 }
