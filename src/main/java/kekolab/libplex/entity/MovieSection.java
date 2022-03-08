@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import kekolab.libplex.PlexClient;
+import kekolab.libplex.misc.Search;
+import kekolab.libplex.misc.SearchType;
 
 public class MovieSection extends MediaSection {
 
@@ -49,7 +51,14 @@ public class MovieSection extends MediaSection {
         return videos;
     }
 
+    public List<Video> searchMovies(String query) {
+        return new Search(getPlexClient(), getUri(), getServer()).withType(SearchType.MOVIE)
+                .withQuery(query)
+                .results()
+                .movies();
+    }
+
     // TODO byCollectio, byYear, byGenre, byDecade, byDirector, byStarringActor,
-    // byContentRating, byCountry, byResolution, byFirstLetter, byFolder, searchFilm
+    // byContentRating, byCountry, byResolution, byFirstLetter, byFolder
 
 }

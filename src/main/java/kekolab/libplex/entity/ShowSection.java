@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kekolab.libplex.PlexClient;
+import kekolab.libplex.misc.Search;
+import kekolab.libplex.misc.SearchType;
 
 public class ShowSection extends MediaSection {
 
@@ -54,7 +56,19 @@ public class ShowSection extends MediaSection {
                 .collect(Collectors.toList());
     }
 
-    // TODO byCollection, byFirstLetter, byGenre, byYear, byContentRating, byFolder,
-    // search for Shows, search For Episodes
+    public List<Show> searchShows(String query) {
+        return new Search(getPlexClient(), getUri(), getServer()).withType(SearchType.SHOW)
+                .withQuery(query)
+                .results()
+                .shows();
+    }
+
+    public List<Video> searchEpisodes(String query) {
+        return new Search(getPlexClient(), getUri(), getServer()).withType(SearchType.EPISODE)
+                .results()
+                .episodes();
+    }
+
+    // TODO byCollection, byFirstLetter, byGenre, byYear, byContentRating, byFolder
 
 }

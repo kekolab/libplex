@@ -19,7 +19,7 @@ public class SearchResult extends ServerMediaContainerPlexItem {
         super(plex, uri, server);
     }
 
-    public List<Video> getMovies() {
+    public List<Video> movies() {
         return getMediaContainer().getVideos()
                 .stream()
                 .filter(video -> video.getType()
@@ -32,13 +32,13 @@ public class SearchResult extends ServerMediaContainerPlexItem {
                 .collect(Collectors.toList());
     }
 
-    public List<Show> getShows() {
+    public List<Show> shows() {
         return directoriesByType("show").stream()
                 .map(d -> new Show(getPlexClient(), d, getServer()))
                 .collect(Collectors.toList());
     }
 
-    public List<Video> getEpisodes() {
+    public List<Video> episodes() {
         return getMediaContainer().getVideos()
                 .stream()
                 .filter(video -> video.getType()
@@ -51,19 +51,19 @@ public class SearchResult extends ServerMediaContainerPlexItem {
                 .collect(Collectors.toList());
     }
 
-    public List<Artist> getArtists() {
+    public List<Artist> artists() {
         return directoriesByType("artist").stream()
                 .map(d -> new Artist(getPlexClient(), d, getServer()))
                 .collect(Collectors.toList());
     }
 
-    public List<Album> getAlbums() {
+    public List<Album> albums() {
         return directoriesByType("album").stream()
                 .map(d -> new Album(getPlexClient(), d, getServer()))
                 .collect(Collectors.toList());
     }
 
-    public List<Track> getTracks() {
+    public List<Track> tracks() {
         return getMediaContainer().getTracks()
                 .stream()
                 .map(track -> {

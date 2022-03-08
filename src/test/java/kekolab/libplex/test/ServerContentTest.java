@@ -32,7 +32,7 @@ class ServerContentTest extends WithPlexClientTests {
         List<Artist> results = server.search()
                 .withQuery("alanis")
                 .results()
-                .getArtists();
+                .artists();
         assertEquals(1, results.size());
         Artist artist = results.get(0);
         assertEquals("Alanis Morissette", artist.getTitle());
@@ -43,7 +43,7 @@ class ServerContentTest extends WithPlexClientTests {
         assertEquals(0, server.search()
                 .withQuery("pippo")
                 .results()
-                .getArtists()
+                .artists()
                 .size());
     }
 
@@ -53,7 +53,7 @@ class ServerContentTest extends WithPlexClientTests {
                 .withType(SearchType.ARTIST)
                 .withQuery("alanis")
                 .results()
-                .getArtists();
+                .artists();
         assertEquals(1, results.size());
         Artist artist = results.get(0);
         assertEquals("Alanis Morissette", artist.getTitle());
@@ -65,7 +65,7 @@ class ServerContentTest extends WithPlexClientTests {
                 .withType(SearchType.ARTIST)
                 .withQuery("pippo")
                 .results()
-                .getArtists()
+                .artists()
                 .size());
     }
 
@@ -75,7 +75,7 @@ class ServerContentTest extends WithPlexClientTests {
                 .withType(SearchType.ALBUM)
                 .withQuery("jagged little")
                 .results()
-                .getAlbums();
+                .albums();
         assertEquals(1, results.size());
         Album album = results.get(0);
         assertEquals("Jagged Little Pill", album.getTitle());
@@ -87,7 +87,7 @@ class ServerContentTest extends WithPlexClientTests {
                 .withType(SearchType.ALBUM)
                 .withQuery("giagghed little pill")
                 .results()
-                .getAlbums()
+                .albums()
                 .size());
     }
 
@@ -97,7 +97,7 @@ class ServerContentTest extends WithPlexClientTests {
                 .withType(SearchType.TRACK)
                 .withQuery("All I really want")
                 .results()
-                .getTracks();
+                .tracks();
         assertEquals(1, results.size());
         Track track = results.get(0);
         assertEquals("Jagged Little Pill", track.album()
@@ -110,7 +110,7 @@ class ServerContentTest extends WithPlexClientTests {
                 .withType(SearchType.TRACK)
                 .withQuery("giagghed little pill")
                 .results()
-                .getTracks()
+                .tracks()
                 .size());
     }
 }

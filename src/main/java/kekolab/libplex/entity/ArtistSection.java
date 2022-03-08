@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kekolab.libplex.PlexClient;
+import kekolab.libplex.misc.Search;
+import kekolab.libplex.misc.SearchType;
 
 public class ArtistSection extends MediaSection {
     public ArtistSection(PlexClient plex, URI uri, ServerContent server) {
@@ -100,6 +102,27 @@ public class ArtistSection extends MediaSection {
                     return track;
                 })
                 .collect(Collectors.toList());
+    }
+
+    public List<Artist> searchArtists(String query) {
+        return new Search(getPlexClient(), getUri(), getServer()).withType(SearchType.ARTIST)
+                .withQuery(query)
+                .results()
+                .artists();
+    }
+
+    public List<Album> searchAlbums(String query) {
+        return new Search(getPlexClient(), getUri(), getServer()).withType(SearchType.ALBUM)
+                .withQuery(query)
+                .results()
+                .albums();
+    }
+
+    public List<Track> searchTracks(String query) {
+        return new Search(getPlexClient(), getUri(), getServer()).withType(SearchType.TRACK)
+                .withQuery(query)
+                .results()
+                .tracks();
     }
 
     /*
