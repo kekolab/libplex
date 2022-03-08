@@ -1,13 +1,34 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.List;
 
 import kekolab.libplex.PlexClient;
 
-public class OnDeck {
+public class OnDeck extends ServerMediaContainerPlexItem {
 
     public OnDeck(PlexClient plex, URI uri, ServerContent server) {
-        // TODO Auto-generated constructor stub
+        super(plex, uri, server);
     }
 
+    public List<Video> movies() {
+        return videosByType("movie");
+    }
+
+    public List<Video> episodes() {
+        return videosByType("episode");
+    }
+
+    private List<Video> videosByType(String videoType) {
+        return getMediaContainer().getVideos()
+                .stream()
+                .filter(video -> video.getType()
+                        .equals(videoType))
+                .map(video -> {
+                    video.setPlex(getPlexClient());
+                    video.setServer(getServer());
+                    return video;
+                })
+                .toList();
+    }
 }

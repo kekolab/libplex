@@ -3,6 +3,7 @@ package kekolab.libplex.entity;
 import java.net.URI;
 
 import kekolab.libplex.PlexClient;
+import kekolab.libplex.misc.SearchResult;
 
 public class Library extends ServerMediaContainerPlexItem {
     public Library(PlexClient plex, URI uri, ServerContent server) {
@@ -61,7 +62,10 @@ public class Library extends ServerMediaContainerPlexItem {
                 .build(), getServer());
     }
 
-    /*
-     * TODO - recentlyAdded
-     */
+    public SearchResult recentlyAdded() {
+        return new SearchResult(getPlexClient(), getPlexClient().uriBuilder()
+                .fromKey(directoriesByKey("recentlyAdded").get(0)
+                        .getKey(), this, getServer())
+                .build(), getServer());
+    }
 }

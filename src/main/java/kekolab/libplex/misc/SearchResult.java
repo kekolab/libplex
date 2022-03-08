@@ -15,7 +15,7 @@ import kekolab.libplex.entity.Video;
 
 public class SearchResult extends ServerMediaContainerPlexItem {
 
-    protected SearchResult(PlexClient plex, URI uri, ServerContent server) {
+    public SearchResult(PlexClient plex, URI uri, ServerContent server) {
         super(plex, uri, server);
     }
 
