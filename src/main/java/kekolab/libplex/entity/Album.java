@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
 import kekolab.libplex.PlexClient;
 
 public class Album extends MediaDirectory {
+    public Album(PlexClient plex, Directory d, ServerContent server) {
+        this(plex, plex.uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}", null, server)
+                .build(d.getRatingKey()), server);
+    }
 
     public Album(PlexClient plex, URI uri, ServerContent server) {
         super(plex, uri, server);
@@ -41,7 +46,11 @@ public class Album extends MediaDirectory {
         return getDirectory().getYear();
     }
 
-    public URI getParentThumb() {
+    public String getParentThumb() {
+        return getDirectory().getParentThumb();
+    }
+
+    public URI getParentThumbURI() {
         return getPlexClient().uriBuilder()
                 .fromKey(getDirectory().getParentThumb(), null, getServer())
                 .build();

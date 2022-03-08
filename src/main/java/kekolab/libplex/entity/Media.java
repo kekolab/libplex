@@ -7,13 +7,21 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
 public class Media {
-    @XmlAttribute private Integer id;
-    @XmlAttribute private Integer duration;
-    @XmlAttribute private Integer bitrate;
-    @XmlAttribute private Integer audioChannels;
-    @XmlAttribute private String audioCodec;
-    @XmlAttribute private String container;
-    @XmlElement(name = "Part") private List<Part> parts;
+    @XmlAttribute private Integer id; // Track, Video, Episode
+    @XmlAttribute private Integer duration; // Track, Video, Episode
+    @XmlAttribute private Integer bitrate; // Track, Video, Episode
+    @XmlAttribute private Integer audioChannels; // Track, Video, Episode
+    @XmlAttribute private String audioCodec; // Track, Video, Episode
+    @XmlAttribute private String container; // Track, Video, Episode
+    @XmlAttribute private Integer width; // Video, Episode
+    @XmlAttribute private Integer height; // Video, Episode
+    @XmlAttribute private Double aspectRatio; // Video, Episode
+    @XmlAttribute private String videoCodec; // Video, Episode
+    @XmlAttribute private String videoResolution; // String in Video, Integer in Episode
+    @XmlAttribute private String videoFrameRate; // Video, Episode
+    @XmlAttribute private String audioProfile; // Video
+    @XmlAttribute private String videoProfile; // Video, Episode
+    @XmlElement(name = "Part") private List<Part> parts; // Track, Video
     private ServerContent server;
 
     public Integer getId() {
@@ -50,5 +58,37 @@ public class Media {
             return parts;
         }
         return Collections.emptyList();
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public Double getAspectRatio() {
+        return aspectRatio;
+    }
+
+    public String getVideoCodec() {
+        return videoCodec;
+    }
+
+    public String getVideoResolution() {
+        return videoResolution;
+    }
+
+    public String getVideoFrameRate() {
+        return videoFrameRate;
+    }
+
+    public String getAudioProfile() {
+        return audioProfile;
+    }
+
+    public String getVideoProfile() {
+        return videoProfile;
     }
 }

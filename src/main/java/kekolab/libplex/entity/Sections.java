@@ -51,6 +51,14 @@ public class Sections extends ServerMediaContainerPlexItem {
                 .collect(Collectors.toList());
     }
 
+    public List<ShowSection> showSections() {
+        return directoriesByType("show").stream()
+                .map(d -> new ShowSection(getPlexClient(), getPlexClient().uriBuilder()
+                        .fromKey(d.getKey(), this, getServer())
+                        .build(), getServer()))
+                .collect(Collectors.toList());
+    }
+
     /*
      * TODO - TVShow Sections
      */

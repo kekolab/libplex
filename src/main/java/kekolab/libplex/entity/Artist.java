@@ -7,6 +7,12 @@ import java.util.stream.Collectors;
 import kekolab.libplex.PlexClient;
 
 public class Artist extends MediaDirectory {
+    public Artist(PlexClient plex, Directory d, ServerContent server) {
+        this(plex, plex.uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}", null, server)
+                .build(d.getRatingKey()), server);
+    }
+
     public Artist(PlexClient plex, URI uri, ServerContent server) {
         super(plex, uri, server);
     }
@@ -46,9 +52,8 @@ public class Artist extends MediaDirectory {
                 .collect(Collectors.toList());
     }
 
-    public String getPath() {
-        return getDirectory().getLocation()
-                .getPath();
+    public List<Location> getLocations() {
+        return getDirectory().getLocations();
     }
 
     public List<Album> albums() {

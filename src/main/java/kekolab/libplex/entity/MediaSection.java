@@ -17,7 +17,11 @@ public abstract class MediaSection extends ServerMediaContainerPlexItem {
         return getMediaContainer().getAllowSync();
     }
 
-    public URI getArt() {
+    public String getArt() {
+        return getMediaContainer().getArt();
+    }
+
+    public URI getArtURI() {
         return getPlexClient().uriBuilder()
                 .fromKey(getMediaContainer().getArt(), this, getServer())
                 .build();
@@ -43,21 +47,21 @@ public abstract class MediaSection extends ServerMediaContainerPlexItem {
         return getMediaContainer().getMediaTagVersion();
     }
 
-    public URI getThumb() {
+    public URI getThumbURI() {
         return getPlexClient().uriBuilder()
                 .fromKey(getMediaContainer().getThumb(), this, getServer())
                 .build();
     }
 
-    public String getTitle() {
-        return getTitle1();
+    public String getThumb() {
+        return getMediaContainer().getThumb();
     }
 
     public String getTitle1() {
         return getMediaContainer().getTitle1();
     }
 
-    public String viewGroup() {
+    public String getViewGroup() {
         return getMediaContainer().getViewGroup();
     }
 
