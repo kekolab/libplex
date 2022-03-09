@@ -2,6 +2,7 @@ package kekolab.libplex.entity;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import kekolab.libplex.PlexClient;
 
@@ -29,6 +30,6 @@ public class OnDeck extends ServerMediaContainerPlexItem {
                     video.setServer(getServer());
                     return video;
                 })
-                .toList();
+                .collect(Collectors.toList());
     }
 }
