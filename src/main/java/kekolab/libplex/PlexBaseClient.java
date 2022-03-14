@@ -65,7 +65,6 @@ public class PlexBaseClient implements AutoCloseable {
                                 .put("X-Plex-Provides", Arrays.stream(provides)
                                         .map(pp -> pp.getPlexProvides())
                                         .collect(Collectors.toList()));
-
                 })
                 .register((ClientResponseFilter) (requestContext, responseContext) -> {
                     LOGGER.debug("REQUEST");

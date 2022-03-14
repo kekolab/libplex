@@ -1,19 +1,23 @@
 package kekolab.libplex;
 
+import java.net.URI;
 import java.util.Arrays;
 
 import jakarta.ws.rs.core.UriBuilder;
-import kekolab.libplex.entity.MediaContainerPlexItem;
-import kekolab.libplex.entity.ServerContent;
+import kekolab.libplex.entity.PMSItem;
+import kekolab.libplex.entity.PlexMediaServer;
 
 public class PlexUriBuilder {
-    public UriBuilder fromKey(String key, MediaContainerPlexItem parent, ServerContent server) {
+    public UriBuilder fromKey(String key, PMSItem parent, PlexMediaServer server) {
+        return fromKey(key, parent.getUri(), server.getUri());
+    }
+
+    public UriBuilder fromKey(String key, URI parentUri, URI serverUri) {
         UriBuilder delegate;
         if (key.startsWith("/"))
-            delegate = UriBuilder.fromUri(server.getUri());
+            delegate = UriBuilder.fromUri(serverUri);
         else
-            delegate = UriBuilder.fromUri(parent.getUri());
-
+            delegate = UriBuilder.fromUri(parentUri);
         int index = key.indexOf("?");
         if (index == -1) {
             delegate.path(key);
@@ -28,4 +32,7 @@ public class PlexUriBuilder {
         }
         return delegate;
     }
+//    public UriBuilder fromKey(String key, MediaContainerPlexItem parent, ServerContent server) {
+//        return fromKey(key, parent.getUri(), server.getUri());
+//    }
 }
