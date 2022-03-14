@@ -17,5 +17,4 @@ public class PMSServerSearchAlbumResultContainer extends PMSSimpleContainer {
     public void setResults(List<PMSAlbumDirectory> results) {
         this.results = results;
     }
-
 }

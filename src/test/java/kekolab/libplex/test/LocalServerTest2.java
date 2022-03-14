@@ -46,6 +46,10 @@ public class LocalServerTest2 {
                 .get(0)
                 .content()
                 .getTrack();
+
+        pms.searchAlbum("pretty");
+        pms.searchArtist("alanis");
+        pms.searchTrack("encanto");
     }
 
     @AfterEach
