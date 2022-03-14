@@ -4,7 +4,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSTrack extends PMSSectionContentContainer {
+public class PMSTrack extends PMSMusicSectionContent {
     private PMSDetailedTrackDirectory track;
 
     public PMSDetailedTrackDirectory getTrack() {

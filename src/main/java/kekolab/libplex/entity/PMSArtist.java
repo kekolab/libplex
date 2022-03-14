@@ -4,7 +4,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSArtist extends PMSSectionContentContainer {
+public class PMSArtist extends PMSMusicSectionContent {
     private PMSArtistDetailsDirectory artist;
 
     public PMSArtistDetailsDirectory getArtist() {

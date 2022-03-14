@@ -1,10 +1,20 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
+
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSSectionContentContainer extends PMSContainer {
+public abstract class PMSSectionContent extends PMSContainer {
     private Integer librarySectionID;
     private String librarySectionTitle, librarySectionUUID;
+
+    public abstract PMSSection section();
+
+    protected URI sectionUri() {
+        return getClient().uriBuilder()
+                .fromKey("/library/sections/{sectionId}", this, getServer())
+                .build(librarySectionID);
+    }
 
     public Integer getLibrarySectionID() {
         return librarySectionID;

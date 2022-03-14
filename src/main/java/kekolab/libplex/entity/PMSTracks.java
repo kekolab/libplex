@@ -8,7 +8,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSTracks extends PMSSectionContentContainer {
+public class PMSTracks extends PMSMusicSectionContent {
     private Integer grandparentRatingKey, key, nocache, parentIdex, parentYear, viewMode;
     private String art, grandparentThumb, grandparentTitle, parentTitle, summary, thumb, title1, title2, viewGroup;
     private List<PMSTrackDirectory> tracks;

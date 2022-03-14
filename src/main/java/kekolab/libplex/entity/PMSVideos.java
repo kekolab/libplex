@@ -5,30 +5,11 @@ import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "MediaContainer")
-public class PMSArtists extends PMSMusicSectionContent {
-    private Integer nocache, viewMode;
+public class PMSVideos extends PMSMovieSectionContent {
+    private Integer viewMode;
     private String art, thumb, title1, title2, viewGroup;
-    private List<PMSArtistDirectory> artists;
-
-    public List<PMSArtistDirectory> getArtists() {
-        if (artists != null)
-            setArtists(artists.stream()
-                    .map(a -> {
-                        a.setClient(getClient());
-                        a.setParent(this);
-                        a.setServer(getServer());
-                        return a;
-                    })
-                    .collect(Collectors.toList()));
-        return artists;
-    }
-
-    public Integer getNocache() {
-        return nocache;
-    }
+    private List<PMSVideoDirectory> videos;
 
     public Integer getViewMode() {
         return viewMode;
@@ -54,9 +35,17 @@ public class PMSArtists extends PMSMusicSectionContent {
         return viewGroup;
     }
 
-    @XmlAttribute
-    public void setNocache(Integer nocache) {
-        this.nocache = nocache;
+    public List<PMSVideoDirectory> getVideos() {
+        if (videos != null)
+            videos = videos.stream()
+                    .map(v -> {
+                        v.setClient(getClient());
+                        v.setParent(this);
+                        v.setServer(getServer());
+                        return v;
+                    })
+                    .collect(Collectors.toList());
+        return videos;
     }
 
     @XmlAttribute
@@ -89,8 +78,8 @@ public class PMSArtists extends PMSMusicSectionContent {
         this.viewGroup = viewGroup;
     }
 
-    @XmlElement(name = "Directory")
-    public void setArtists(List<PMSArtistDirectory> artists) {
-        this.artists = artists;
+    @XmlElement(name = "Video")
+    public void setVideos(List<PMSVideoDirectory> videos) {
+        this.videos = videos;
     }
 }

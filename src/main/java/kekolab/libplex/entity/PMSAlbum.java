@@ -1,8 +1,10 @@
 package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
-public abstract class PMSAlbum extends PMSSectionContentContainer {
+@XmlRootElement(name = "MediaContainer")
+public class PMSAlbum extends PMSMusicSectionContent {
     private PMSAlbumDirectory album;
 
     public PMSAlbumDirectory getAlbum() {
@@ -18,5 +20,4 @@ public abstract class PMSAlbum extends PMSSectionContentContainer {
     public void setAlbum(PMSAlbumDirectory album) {
         this.album = album;
     }
-
 }
