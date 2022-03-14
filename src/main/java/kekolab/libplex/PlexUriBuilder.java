@@ -4,11 +4,11 @@ import java.net.URI;
 import java.util.Arrays;
 
 import jakarta.ws.rs.core.UriBuilder;
-import kekolab.libplex.entity.PMSItem;
+import kekolab.libplex.entity.PlexItem;
 import kekolab.libplex.entity.PlexMediaServer;
 
 public class PlexUriBuilder {
-    public UriBuilder fromKey(String key, PMSItem parent, PlexMediaServer server) {
+    public UriBuilder fromKey(String key, PlexItem parent, PlexMediaServer server) {
         return fromKey(key, parent != null ? parent.getUri() : null, server != null ? server.getUri() : null);
     }
 
