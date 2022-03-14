@@ -36,7 +36,16 @@ public class LocalServerTest2 {
                 .all()
                 .getArtists()
                 .get(0)
-                .getTitle();
+                .details()
+                .getArtist()
+                .content()
+                .getAlbums()
+                .get(0)
+                .content()
+                .getTracks()
+                .get(0)
+                .content()
+                .getTrack();
     }
 
     @AfterEach

@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
 import kekolab.libplex.PlexClient;
 
 public abstract class PMSDirectory<A extends PMSItem> {
@@ -12,6 +13,7 @@ public abstract class PMSDirectory<A extends PMSItem> {
         return key;
     }
 
+    @XmlAttribute
     public void setKey(String key) {
         this.key = key;
     }

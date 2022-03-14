@@ -9,7 +9,7 @@ import kekolab.libplex.entity.PlexMediaServer;
 
 public class PlexUriBuilder {
     public UriBuilder fromKey(String key, PMSItem parent, PlexMediaServer server) {
-        return fromKey(key, parent.getUri(), server.getUri());
+        return fromKey(key, parent != null ? parent.getUri() : null, server != null ? server.getUri() : null);
     }
 
     public UriBuilder fromKey(String key, URI parentUri, URI serverUri) {

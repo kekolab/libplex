@@ -11,7 +11,7 @@ import kekolab.libplex.xmladapter.TimestampAdapter;
 public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirectory<A> {
     private SectionDirectoryXML xml;
 
-    public PMSSectionDirectory(SectionDirectoryXML xml) {
+    protected PMSSectionDirectory(SectionDirectoryXML xml) {
         this.xml = xml;
         super.setKey(xml.getKey());
     }
@@ -88,7 +88,7 @@ public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirec
         return xml.getScannedAt();
     }
 
-    public Location getLocation() {
+    public PMSLocation getLocation() {
         return xml.getLocation();
     }
 
@@ -164,7 +164,7 @@ public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirec
         xml.setScannedAt(scannedAt);
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(PMSLocation location) {
         xml.setLocation(location);
     }
 
@@ -172,7 +172,7 @@ public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirec
         private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
         private String art, composite, thumb, key, type, title, agent, scanner, language, uuid;
         private Date createdAt, scannedAt;
-        private Location location;
+        private PMSLocation location;
 
         public Integer getAllowSync() {
             return allowSync;
@@ -250,7 +250,7 @@ public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirec
             return scannedAt;
         }
 
-        public Location getLocation() {
+        public PMSLocation getLocation() {
             return location;
         }
 
@@ -347,7 +347,7 @@ public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirec
         }
 
         @XmlElement(name = "Location")
-        public void setLocation(Location location) {
+        public void setLocation(PMSLocation location) {
             this.location = location;
         }
 
@@ -369,17 +369,6 @@ public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirec
         public SectionDirectoryXML marshal(PMSSectionDirectory<?> v) throws Exception {
             // TODO Auto-generated method stub
             return null;
-        }
-    }
-
-    public static class PMSMusicSectionDirectory extends PMSSectionDirectory<PMSMusicSection> {
-        public PMSMusicSectionDirectory(SectionDirectoryXML xml) {
-            super(xml);
-        }
-
-        @Override
-        public PMSMusicSection content() {
-            return super.content(PMSMusicSection.class);
         }
     }
 }

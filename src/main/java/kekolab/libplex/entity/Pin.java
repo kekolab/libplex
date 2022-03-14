@@ -2,89 +2,93 @@ package kekolab.libplex.entity;
 
 import java.util.Date;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
 public class Pin {
-	@XmlElement private Integer id;
-	@XmlElement private String code;
-	@XmlElement(name = "expires-at") private Date expiresAt;
-	@XmlElement(name = "client-identifier") private String clientIdentifier;
-	@XmlElement private Boolean trusted;
-	@XmlElement(name = "user-id") private Integer userId;
-	@XmlElement(name = "auth-token") private String authToken;
-	@XmlElement(name = "auth_token") private String auth_Token;
+    private Integer id;
+    private String code;
+    private Date expiresAt;
+    private String clientIdentifier;
+    private Boolean trusted;
+    private Integer userId;
+    private String authToken;
+    private String auth_Token;
 
-	public Integer getId() {
-		return id;
-	}
+    public boolean isExpired() {
+        return new Date().after(expiresAt);
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Date getExpiresAt() {
-		return expiresAt;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public String getClientIdentifier() {
-		return clientIdentifier;
-	}
+    public Date getExpiresAt() {
+        return expiresAt;
+    }
 
-	public Boolean getTrusted() {
-		return trusted;
-	}
+    public String getClientIdentifier() {
+        return clientIdentifier;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Boolean getTrusted() {
+        return trusted;
+    }
 
-	public String getAuthToken() {
-		return authToken;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public String getAuth_Token() {
-		return auth_Token;
-	}
+    public String getAuthToken() {
+        return authToken;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public String getAuth_Token() {
+        return auth_Token;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    @XmlElement
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setExpiresAt(Date expiresAt) {
-		this.expiresAt = expiresAt;
-	}
+    @XmlElement
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public void setClientIdentifier(String clientIdentifier) {
-		this.clientIdentifier = clientIdentifier;
-	}
+    @XmlElement(name = "expires-at")
+    public void setExpiresAt(Date expiresAt) {
+        this.expiresAt = expiresAt;
+    }
 
-	public void setTrusted(Boolean trusted) {
-		this.trusted = trusted;
-	}
+    @XmlElement(name = "client-identifier")
+    public void setClientIdentifier(String clientIdentifier) {
+        this.clientIdentifier = clientIdentifier;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    @XmlElement
+    public void setTrusted(Boolean trusted) {
+        this.trusted = trusted;
+    }
 
-	public void setAuthToken(String authToken) {
-		this.authToken = authToken;
-	}
+    @XmlElement(name = "user-id")
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public void setAuth_Token(String auth_Token) {
-		this.auth_Token = auth_Token;
-	}
+    @XmlElement(name = "auth-token")
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
 
-	public boolean isExpired() {
-		return new Date().after(expiresAt);
-	}
-
+    @XmlElement(name = "auth_token")
+    public void setAuth_Token(String auth_Token) {
+        this.auth_Token = auth_Token;
+    }
 }

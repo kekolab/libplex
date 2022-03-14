@@ -8,26 +8,22 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSArtists extends PMSItem {
-    private Integer size, allowSync, librarySectionID, mediaTagVersion, nocache, viewMode;
-    private String art, identifier, librarySectionTitle, librarySectionUUID, mediaTagPrefix, thumb, title1, title2,
-            viewGroup;
+public class PMSArtists extends PMSSectionContentContainer {
+    private Integer nocache, viewMode;
+    private String art, thumb, title1, title2, viewGroup;
     private List<PMSArtistDirectory> artists;
 
-    public Integer getSize() {
-        return size;
-    }
-
-    public Integer getAllowSync() {
-        return allowSync;
-    }
-
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
-    }
-
-    public Integer getMediaTagVersion() {
-        return mediaTagVersion;
+    public List<PMSArtistDirectory> getArtists() {
+        if (artists != null)
+            setArtists(artists.stream()
+                    .map(a -> {
+                        a.setClient(getClient());
+                        a.setParent(this);
+                        a.setServer(getServer());
+                        return a;
+                    })
+                    .collect(Collectors.toList()));
+        return artists;
     }
 
     public Integer getNocache() {
@@ -40,22 +36,6 @@ public class PMSArtists extends PMSItem {
 
     public String getArt() {
         return art;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
-    }
-
-    public String getLibrarySectionUUID() {
-        return librarySectionUUID;
-    }
-
-    public String getMediaTagPrefix() {
-        return mediaTagPrefix;
     }
 
     public String getThumb() {
@@ -74,39 +54,6 @@ public class PMSArtists extends PMSItem {
         return viewGroup;
     }
 
-    public List<PMSArtistDirectory> getArtists() {
-        if (artists != null)
-            setArtists(artists.stream()
-                    .map(a -> {
-                        a.setClient(getClient());
-                        a.setParent(this);
-                        a.setServer(getServer());
-                        return a;
-                    })
-                    .collect(Collectors.toList()));
-        return artists;
-    }
-
-    @XmlAttribute
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    @XmlAttribute
-    public void setAllowSync(Integer allowSync) {
-        this.allowSync = allowSync;
-    }
-
-    @XmlAttribute
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
-    }
-
-    @XmlAttribute
-    public void setMediaTagVersion(Integer mediaTagVersion) {
-        this.mediaTagVersion = mediaTagVersion;
-    }
-
     @XmlAttribute
     public void setNocache(Integer nocache) {
         this.nocache = nocache;
@@ -120,26 +67,6 @@ public class PMSArtists extends PMSItem {
     @XmlAttribute
     public void setArt(String art) {
         this.art = art;
-    }
-
-    @XmlAttribute
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    @XmlAttribute
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
-    }
-
-    @XmlAttribute
-    public void setLibrarySectionUUID(String librarySectionUUID) {
-        this.librarySectionUUID = librarySectionUUID;
-    }
-
-    @XmlAttribute
-    public void setMediaTagPrefix(String mediaTagPrefix) {
-        this.mediaTagPrefix = mediaTagPrefix;
     }
 
     @XmlAttribute

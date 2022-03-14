@@ -13,12 +13,6 @@ import kekolab.libplex.xmladapter.TimestampAdapter;
 
 @XmlRootElement(name = "MediaContainer")
 public class PlexMediaServer extends PlexItem {
-    public PMSLibrary library() {
-        return new PMSItem.Builder<PMSLibrary>(getClient(), UriBuilder.fromUri(getUri())
-                .path("library")
-                .build(), this).build(PMSLibrary.class);
-    }
-
     private Integer size, allowCameraUpload, allowChannelAccess, allowMediaDeletion, allowSharing, allowSync,
             allowTuners, backgroundProcessing, certificate, companionProxy, eventStream, hubSearch, itemClusters,
             liveTv, mediaProviders, multiuser, myPlex, myPlexSubscription, offlineTranscode, photoAutoTag, pluginHost,
@@ -30,6 +24,12 @@ public class PlexMediaServer extends PlexItem {
     private List<String> diagnostics, ownerFeatures;
     private List<Integer> transcoderVideoBitrates, transcoderVideoQualities, transcoderVideoResolutions;
     private Date updatedAt;
+
+    public PMSLibrary library() {
+        return new PMSItem.Builder<PMSLibrary>(getClient(), UriBuilder.fromUri(getUri())
+                .path("library")
+                .build(), this).build(PMSLibrary.class);
+    }
 
     public Integer getSize() {
         return size;

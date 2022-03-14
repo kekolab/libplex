@@ -2,24 +2,12 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSSection extends PMSItem {
-    private Integer size, allowSync, librarySectionID, mediaTagVersion, viewMode;
-    private String art, content, identifier, mediaTagPrefix, thumb, title1, viewGroup;
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public Integer getAllowSync() {
-        return allowSync;
-    }
+public abstract class PMSSection extends PMSContainer {
+    private Integer librarySectionID, viewMode;
+    private String art, content, thumb, title1, viewGroup;
 
     public Integer getLibrarySectionID() {
         return librarySectionID;
-    }
-
-    public Integer getMediaTagVersion() {
-        return mediaTagVersion;
     }
 
     public Integer getViewMode() {
@@ -32,14 +20,6 @@ public abstract class PMSSection extends PMSItem {
 
     public String getContent() {
         return content;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public String getMediaTagPrefix() {
-        return mediaTagPrefix;
     }
 
     public String getThumb() {
@@ -55,23 +35,8 @@ public abstract class PMSSection extends PMSItem {
     }
 
     @XmlAttribute
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    @XmlAttribute
-    public void setAllowSync(Integer allowSync) {
-        this.allowSync = allowSync;
-    }
-
-    @XmlAttribute
     public void setLibrarySectionID(Integer librarySectionID) {
         this.librarySectionID = librarySectionID;
-    }
-
-    @XmlAttribute
-    public void setMediaTagVersion(Integer mediaTagVersion) {
-        this.mediaTagVersion = mediaTagVersion;
     }
 
     @XmlAttribute
@@ -87,16 +52,6 @@ public abstract class PMSSection extends PMSItem {
     @XmlAttribute
     public void setContent(String content) {
         this.content = content;
-    }
-
-    @XmlAttribute
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
-    @XmlAttribute
-    public void setMediaTagPrefix(String mediaTagPrefix) {
-        this.mediaTagPrefix = mediaTagPrefix;
     }
 
     @XmlAttribute
