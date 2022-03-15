@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.Date;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -8,164 +9,159 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class PMSSectionDirectory<A extends PMSSection> extends PMSDirectory<A> {
-    private SectionDirectoryXML xml;
+public abstract class PMSSectionDirectory<Content extends PMSSection> extends PMSDirectory<Content> {
+    private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
+    private String composite, agent, scanner, language, uuid;
+    private Date createdAt, scannedAt;
+    private PMSLocation location;
 
     protected PMSSectionDirectory(SectionDirectoryXML xml) {
-        this.xml = xml;
-        super.setKey(xml.getKey());
+        setAllowSync(xml.getAllowSync());
+        setFilters(xml.getFilters());
+        setRefreshing(xml.getRefreshing());
+        setContent(xml.getContent());
+        setDirectory(xml.getDirectory());
+        setContentChangedAt(xml.getContentChangedAt());
+        setHidden(xml.getHidden());
+        setArt(xml.getArt());
+        setComposite(xml.getComposite());
+        setThumb(xml.getThumb());
+        setKey(xml.getKey());
+        setType(xml.getType());
+        setTitle(xml.getTitle());
+        setAgent(xml.getAgent());
+        setScanner(xml.getScanner());
+        setLanguage(xml.getLanguage());
+        setUuid(xml.getUuid());
+        setCreatedAt(xml.getCreatedAt());
+        setScannedAt(xml.getScannedAt());
+        setLocation(xml.getLocation());
+    }
+
+    public URI compositeUri() {
+        return getClient().uriBuilder()
+                .fromKey(getComposite(), getParent(), getServer())
+                .build();
     }
 
     public Integer getAllowSync() {
-        return xml.getAllowSync();
+        return allowSync;
     }
 
     public Integer getFilters() {
-        return xml.getFilters();
+        return filters;
     }
 
     public Integer getRefreshing() {
-        return xml.getRefreshing();
+        return refreshing;
     }
 
     public Integer getContent() {
-        return xml.getContent();
+        return content;
     }
 
     public Integer getDirectory() {
-        return xml.getDirectory();
+        return directory;
     }
 
     public Integer getContentChangedAt() {
-        return xml.getContentChangedAt();
+        return contentChangedAt;
     }
 
     public Integer getHidden() {
-        return xml.getHidden();
-    }
-
-    public String getArt() {
-        return xml.getArt();
+        return hidden;
     }
 
     public String getComposite() {
-        return xml.getComposite();
-    }
-
-    public String getThumb() {
-        return xml.getThumb();
-    }
-
-    public String getType() {
-        return xml.getType();
-    }
-
-    public String getTitle() {
-        return xml.getTitle();
+        return composite;
     }
 
     public String getAgent() {
-        return xml.getAgent();
+        return agent;
     }
 
     public String getScanner() {
-        return xml.getScanner();
+        return scanner;
     }
 
     public String getLanguage() {
-        return xml.getLanguage();
+        return language;
     }
 
     public String getUuid() {
-        return xml.getUuid();
+        return uuid;
     }
 
     public Date getCreatedAt() {
-        return xml.getCreatedAt();
+        return createdAt;
     }
 
     public Date getScannedAt() {
-        return xml.getScannedAt();
+        return scannedAt;
     }
 
     public PMSLocation getLocation() {
-        return xml.getLocation();
+        return location;
     }
 
     public void setAllowSync(Integer allowSync) {
-        xml.setAllowSync(allowSync);
+        this.allowSync = allowSync;
     }
 
     public void setFilters(Integer filters) {
-        xml.setFilters(filters);
+        this.filters = filters;
     }
 
     public void setRefreshing(Integer refreshing) {
-        xml.setRefreshing(refreshing);
+        this.refreshing = refreshing;
     }
 
     public void setContent(Integer content) {
-        xml.setContent(content);
+        this.content = content;
     }
 
     public void setDirectory(Integer directory) {
-        xml.setDirectory(directory);
+        this.directory = directory;
     }
 
     public void setContentChangedAt(Integer contentChangedAt) {
-        xml.setContentChangedAt(contentChangedAt);
+        this.contentChangedAt = contentChangedAt;
     }
 
     public void setHidden(Integer hidden) {
-        xml.setHidden(hidden);
-    }
-
-    public void setArt(String art) {
-        xml.setArt(art);
+        this.hidden = hidden;
     }
 
     public void setComposite(String composite) {
-        xml.setComposite(composite);
-    }
-
-    public void setThumb(String thumb) {
-        xml.setThumb(thumb);
-    }
-
-    public void setType(String type) {
-        xml.setType(type);
-    }
-
-    public void setTitle(String title) {
-        xml.setTitle(title);
+        this.composite = composite;
     }
 
     public void setAgent(String agent) {
-        xml.setAgent(agent);
+        this.agent = agent;
     }
 
     public void setScanner(String scanner) {
-        xml.setScanner(scanner);
+        this.scanner = scanner;
     }
 
     public void setLanguage(String language) {
-        xml.setLanguage(language);
+        this.language = language;
     }
 
     public void setUuid(String uuid) {
-        xml.setUuid(uuid);
+        this.uuid = uuid;
     }
 
     public void setCreatedAt(Date createdAt) {
-        xml.setCreatedAt(createdAt);
+        this.createdAt = createdAt;
     }
 
     public void setScannedAt(Date scannedAt) {
-        xml.setScannedAt(scannedAt);
+        this.scannedAt = scannedAt;
     }
 
     public void setLocation(PMSLocation location) {
-        xml.setLocation(location);
+        this.location = location;
     }
 
     public static class SectionDirectoryXML {

@@ -1,6 +1,5 @@
 package kekolab.libplex.entity;
 
-import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -9,17 +8,15 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public class PMSArtistDirectory extends PMSMusicDirectory<PMSAlbums> {
+public class PMSArtistDirectory extends PMSMusicDirectory<PMSAlbums, PMSArtist> {
     private Integer viewCount, skipCount, albumSort;
     private Date lastViewedAt;
     private List<PMSTag> genres;
     private List<PMSTag> countries;
 
+    @Override
     public PMSArtist details() {
-        URI uri = getClient().uriBuilder()
-                .fromKey("/library/metadata/{ratingKey}", null, getServer())
-                .build(getRatingKey());
-        return new PMSItem.Builder<PMSArtist>(getClient(), uri, getServer()).build(PMSArtist.class);
+        return super.details(PMSArtist.class);
     }
 
     @Override

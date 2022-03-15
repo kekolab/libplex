@@ -15,7 +15,7 @@ public class PMSArtistDetailsDirectory extends PMSArtistDirectory {
 
     public PMSMusicSection section() {
         return new PMSItem.Builder<PMSMusicSection>(getClient(), getClient().uriBuilder()
-                .fromKey(librarySectionKey, null, getServer())
+                .fromKey(librarySectionKey, getParent(), getServer())
                 .build(), getServer()).build(PMSMusicSection.class);
     }
 
@@ -81,5 +81,4 @@ public class PMSArtistDetailsDirectory extends PMSArtistDirectory {
     public void setLocations(List<PMSLocation> locations) {
         this.locations = locations;
     }
-
 }

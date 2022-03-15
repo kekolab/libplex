@@ -6,7 +6,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSVideoDirectory extends PMSMediaDirectory<PMSVideoContainer> {
+public class PMSVideoDirectory extends PMSMediaDirectory<PMSVideoContainer, PMSVideoContainer> {
     private Integer year, hasPremiumExtra;
     private String studio, originalTitle, contentRating, tagline, audienceRatingImage, chapterSource, ratingImage;
     private Double rating, audienceRating;
@@ -21,6 +21,11 @@ public class PMSVideoDirectory extends PMSMediaDirectory<PMSVideoContainer> {
 
     @Override
     public PMSVideoContainer content() {
+        return super.content(PMSVideoContainer.class);
+    }
+
+    @Override
+    public PMSVideoContainer details() {
         return super.content(PMSVideoContainer.class);
     }
 

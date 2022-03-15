@@ -1,26 +1,28 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.Date;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class PMSMediaDirectory<A extends PMSItem> extends PMSDirectory<A> {
-
+public abstract class PMSMediaDirectory<Content extends PMSItem, Details extends PMSItem>
+        extends PMSDirectory<Content> {
     private Integer ratingKey;
     private String guid;
-    private String type;
-    private String title;
     private String summary;
-    private String thumb;
-    private String art;
     private Date addedAt;
     private Date updatedAt;
 
-    public PMSMediaDirectory() {
-        super();
+    protected Details details(Class<Details> cls) {
+        URI uri = getClient().uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
+                .build(getRatingKey());
+        return new PMSItem.Builder<Details>(getClient(), uri, getServer()).build(cls);
     }
+
+    public abstract Details details();
 
     public Integer getRatingKey() {
         return ratingKey;
@@ -30,24 +32,8 @@ public abstract class PMSMediaDirectory<A extends PMSItem> extends PMSDirectory<
         return guid;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
     public String getSummary() {
         return summary;
-    }
-
-    public String getThumb() {
-        return thumb;
-    }
-
-    public String getArt() {
-        return art;
     }
 
     public Date getAddedAt() {
@@ -69,28 +55,8 @@ public abstract class PMSMediaDirectory<A extends PMSItem> extends PMSDirectory<
     }
 
     @XmlAttribute
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @XmlAttribute
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @XmlAttribute
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    @XmlAttribute
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-
-    @XmlAttribute
-    public void setArt(String art) {
-        this.art = art;
     }
 
     @XmlAttribute

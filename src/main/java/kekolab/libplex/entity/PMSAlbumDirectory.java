@@ -6,7 +6,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSAlbumDirectory extends PMSMusicChildDirectory<PMSTracks> {
+public class PMSAlbumDirectory extends PMSMusicChildDirectory<PMSTracks, PMSAlbum> {
     private Integer year, loudnessAnalysisVersion;
     private String studio;
     private Double rating;
@@ -17,6 +17,11 @@ public class PMSAlbumDirectory extends PMSMusicChildDirectory<PMSTracks> {
     @Override
     public PMSTracks content() {
         return super.content(PMSTracks.class);
+    }
+
+    @Override
+    public PMSAlbum details() {
+        return super.details(PMSAlbum.class);
     }
 
     public Integer getYear() {

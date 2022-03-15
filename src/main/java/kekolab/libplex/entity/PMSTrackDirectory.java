@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSTrackDirectory extends PMSMusicChildDirectory<PMSTrack> {
+public class PMSTrackDirectory extends PMSMusicChildDirectory<PMSTrack, PMSTrack> {
     private Integer grandparentRatingKey, parentIndex, ratingCount, parentYear;
     private String grandparentGuid, parentStudio, grandparentKey, grandparentTitle, grandparentThumb, grandparentArt;
     private Long duration;
@@ -13,6 +13,11 @@ public class PMSTrackDirectory extends PMSMusicChildDirectory<PMSTrack> {
 
     @Override
     public PMSTrack content() {
+        return super.content(PMSTrack.class);
+    }
+
+    @Override
+    public PMSTrack details() {
         return super.content(PMSTrack.class);
     }
 

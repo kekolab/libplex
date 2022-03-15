@@ -2,8 +2,10 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSMusicDirectory<A extends PMSItem> extends PMSMediaDirectory<A> {
+public abstract class PMSMusicDirectory<Content extends PMSItem, Details extends PMSItem>
+        extends PMSMediaDirectory<Content, Details> {
     private Integer index;
+
     public Integer getIndex() {
         return index;
     }
