@@ -3,6 +3,7 @@ package kekolab.libplex.entity;
 import java.io.IOException;
 import java.net.URI;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -20,7 +21,7 @@ import kekolab.libplex.xmladapter.TimestampAdapter;
 @XmlRootElement(name = "MediaContainer")
 public class ServersContainer extends PlexItem {
     private String friendlyName, identifier, machineIdentifier, size;
-    private List<Server> servers;
+    private List<Server> servers = new ArrayList<>(0);
 
     public String getFriendlyName() {
         return friendlyName;
