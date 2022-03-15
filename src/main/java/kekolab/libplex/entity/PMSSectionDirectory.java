@@ -2,6 +2,7 @@ package kekolab.libplex.entity;
 
 import java.net.URI;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -13,7 +14,7 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
     private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
     private String composite, agent, scanner, language, uuid;
     private Date createdAt, scannedAt;
-    private PMSLocation location;
+    private List<PMSLocation> locations;
 
     protected PMSSectionDirectory(SectionDirectoryXML xml) {
         setAllowSync(xml.getAllowSync());
@@ -35,7 +36,7 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
         setUuid(xml.getUuid());
         setCreatedAt(xml.getCreatedAt());
         setScannedAt(xml.getScannedAt());
-        setLocation(xml.getLocation());
+        setLocations(xml.getLocations());
     }
 
     public URI compositeUri() {
@@ -100,8 +101,8 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
         return scannedAt;
     }
 
-    public PMSLocation getLocation() {
-        return location;
+    public List<PMSLocation> getLocations() {
+        return locations;
     }
 
     public void setAllowSync(Integer allowSync) {
@@ -160,15 +161,15 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
         this.scannedAt = scannedAt;
     }
 
-    public void setLocation(PMSLocation location) {
-        this.location = location;
+    public void setLocations(List<PMSLocation> locations) {
+        this.locations = locations;
     }
 
     public static class SectionDirectoryXML {
         private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
         private String art, composite, thumb, key, type, title, agent, scanner, language, uuid;
         private Date createdAt, scannedAt;
-        private PMSLocation location;
+        private List<PMSLocation> locations;
 
         public Integer getAllowSync() {
             return allowSync;
@@ -246,8 +247,8 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
             return scannedAt;
         }
 
-        public PMSLocation getLocation() {
-            return location;
+        public List<PMSLocation> getLocations() {
+            return locations;
         }
 
         @XmlAttribute
@@ -343,8 +344,8 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
         }
 
         @XmlElement(name = "Location")
-        public void setLocation(PMSLocation location) {
-            this.location = location;
+        public void setLocations(List<PMSLocation> locations) {
+            this.locations = locations;
         }
 
         @XmlAttribute
@@ -358,6 +359,8 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
         public PMSSectionDirectory<?> unmarshal(SectionDirectoryXML v) throws Exception {
             if ("artist".equals(v.getType()))
                 return new PMSMusicSectionDirectory(v);
+            else if ("movie".equals(v.getType()))
+                return new PMSMovieSectionDirectory(v);
             return null;
         }
 

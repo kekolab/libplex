@@ -46,6 +46,15 @@ public class PMSMusicSection extends PMSSection {
         return new PMSItem.Builder<PMSAlbums>(getClient(), uri, getServer()).build(PMSAlbums.class);
     }
 
+    public PMSTracks searchTrack(String query) {
+        URI uri = UriBuilder.fromUri(getUri())
+                .path("search")
+                .queryParam("type", 10)
+                .queryParam("query", query)
+                .build();
+        return new PMSItem.Builder<PMSTracks>(getClient(), uri, getServer()).build(PMSTracks.class);
+    }
+
     public Integer getNocache() {
         return nocache;
     }

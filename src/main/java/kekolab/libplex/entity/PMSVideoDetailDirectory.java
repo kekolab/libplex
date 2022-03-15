@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -8,7 +9,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 public class PMSVideoDetailDirectory extends PMSVideoDirectory {
     private Integer librarySectionID;
     private String librarySectionTitle, librarySectionKey;
-    private List<PMSTag> producers, similars;
+    private List<PMSTag> producers = new ArrayList<>(0), similars = new ArrayList<>(0);
 
     public Integer getLibrarySectionID() {
         return librarySectionID;

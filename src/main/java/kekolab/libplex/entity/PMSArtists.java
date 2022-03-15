@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class PMSArtists extends PMSMusicSectionContent {
     private Integer nocache, viewMode;
     private String art, thumb, title1, title2, viewGroup;
-    private List<PMSArtistDirectory> artists;
+    private List<PMSArtistDirectory> artists = new ArrayList<>(0);
 
     public List<PMSArtistDirectory> getArtists() {
         if (artists != null)

@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,12 +13,12 @@ public class PMSVideoDirectory extends PMSMediaDirectory<PMSVideoContainer, PMSV
     private Double rating, audienceRating;
     private Long duration;
     private Date originallyAvailableAt;
-    private List<PMSMedia> media;
-    private List<PMSTag> genres;
-    private List<PMSTag> directors;
-    private List<PMSTag> writers;
-    private List<PMSTag> countries;
-    private List<PMSRole> roles;
+    private List<PMSMedia> media = new ArrayList<>(0);
+    private List<PMSTag> genres = new ArrayList<>(0);
+    private List<PMSTag> directors = new ArrayList<>(0);
+    private List<PMSTag> writers = new ArrayList<>(0);
+    private List<PMSTag> countries = new ArrayList<>(0);
+    private List<PMSRole> roles = new ArrayList<>(0);
 
     @Override
     public PMSVideoContainer content() {

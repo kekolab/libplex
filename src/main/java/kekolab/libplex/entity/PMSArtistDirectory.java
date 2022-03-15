@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,8 @@ import kekolab.libplex.xmladapter.TimestampAdapter;
 public class PMSArtistDirectory extends PMSMusicDirectory<PMSAlbums, PMSArtist> {
     private Integer viewCount, skipCount, albumSort;
     private Date lastViewedAt;
-    private List<PMSTag> genres;
-    private List<PMSTag> countries;
+    private List<PMSTag> genres = new ArrayList<>(0);
+    private List<PMSTag> countries = new ArrayList<>(0);
 
     @Override
     public PMSArtist details() {

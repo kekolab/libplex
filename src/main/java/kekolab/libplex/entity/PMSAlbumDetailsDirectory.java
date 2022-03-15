@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,8 @@ public class PMSAlbumDetailsDirectory extends PMSAlbumDirectory {
     private Integer viewCount, leafCount;
     private String librarySectionTitle, librarySectionID, librarySectionKey;
     private Date lastViewedAt;
-    private List<PMSTag> styles;
-    private List<PMSTag> moods;
+    private List<PMSTag> styles = new ArrayList<>(0);
+    private List<PMSTag> moods = new ArrayList<>(0);
 
     public Integer getViewCount() {
         return viewCount;

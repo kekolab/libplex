@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,7 @@ public class PMSAlbumDirectory extends PMSMusicChildDirectory<PMSTracks, PMSAlbu
     private String studio;
     private Double rating;
     private Date originallyAvailableAt;
-    private List<PMSTag> genres;
-    private List<PMSTag> directors;
+    private List<PMSTag> genres = new ArrayList<>(0), directors = new ArrayList<>(0);
 
     @Override
     public PMSTracks content() {

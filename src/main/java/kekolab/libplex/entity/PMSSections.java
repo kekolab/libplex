@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,12 +13,19 @@ import kekolab.libplex.entity.PMSSectionDirectory.PMSSectionDirectoryAdapter;
 @XmlRootElement(name = "MediaContainer")
 public class PMSSections extends PMSContainer {
     private String title1;
-    private List<PMSSectionDirectory<?>> sections;
+    private List<PMSSectionDirectory<?>> sections = new ArrayList<>(0);
 
     public List<PMSMusicSectionDirectory> musicSections() {
         return getSections().stream()
                 .filter(d -> d instanceof PMSMusicSectionDirectory)
                 .map(d -> (PMSMusicSectionDirectory) d)
+                .collect(Collectors.toList());
+    }
+
+    public List<PMSMovieSectionDirectory> movieSections() {
+        return getSections().stream()
+                .filter(d -> d instanceof PMSMovieSectionDirectory)
+                .map(d -> (PMSMovieSectionDirectory) d)
                 .collect(Collectors.toList());
     }
 

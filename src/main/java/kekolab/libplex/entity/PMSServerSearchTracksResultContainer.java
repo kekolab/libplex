@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlElement;
@@ -7,7 +8,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
 public class PMSServerSearchTracksResultContainer extends PMSSimpleContainer {
-    private List<PMSTrackDirectory> results;
+    private List<PMSTrackDirectory> results = new ArrayList<>(0);
 
     public List<PMSTrackDirectory> getResults() {
         return results;
@@ -17,5 +18,4 @@ public class PMSServerSearchTracksResultContainer extends PMSSimpleContainer {
     public void setResults(List<PMSTrackDirectory> results) {
         this.results = results;
     }
-
 }

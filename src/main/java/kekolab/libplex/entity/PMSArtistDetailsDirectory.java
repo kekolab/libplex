@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -8,10 +9,10 @@ import jakarta.xml.bind.annotation.XmlElement;
 public class PMSArtistDetailsDirectory extends PMSArtistDirectory {
     private Integer librarySectionID;
     private String librarySectionTitle, librarySectionKey;
-    private List<PMSTag> styles;
-    private List<PMSTag> similars;
-    private List<PMSTag> moods;
-    private List<PMSLocation> locations;
+    private List<PMSTag> styles = new ArrayList<>(0);
+    private List<PMSTag> similars = new ArrayList<>(0);
+    private List<PMSTag> moods = new ArrayList<>(0);
+    private List<PMSLocation> locations = new ArrayList<>(0);
 
     public PMSMusicSection section() {
         return new PMSItem.Builder<PMSMusicSection>(getClient(), getClient().uriBuilder()

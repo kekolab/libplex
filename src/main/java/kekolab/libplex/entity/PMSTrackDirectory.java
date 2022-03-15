@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -9,7 +10,7 @@ public class PMSTrackDirectory extends PMSMusicChildDirectory<PMSTrack, PMSTrack
     private Integer grandparentRatingKey, parentIndex, ratingCount, parentYear;
     private String grandparentGuid, parentStudio, grandparentKey, grandparentTitle, grandparentThumb, grandparentArt;
     private Long duration;
-    private List<PMSMedia> media;
+    private List<PMSMedia> media = new ArrayList<>(0);
 
     @Override
     public PMSTrack content() {

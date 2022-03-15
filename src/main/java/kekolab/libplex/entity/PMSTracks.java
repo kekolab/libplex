@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class PMSTracks extends PMSMusicSectionContent {
     private Integer grandparentRatingKey, key, nocache, parentIdex, parentYear, viewMode;
     private String art, grandparentThumb, grandparentTitle, parentTitle, summary, thumb, title1, title2, viewGroup;
-    private List<PMSTrackDirectory> tracks;
+    private List<PMSTrackDirectory> tracks = new ArrayList<>(0);
 
     public Integer getGrandparentRatingKey() {
         return grandparentRatingKey;
