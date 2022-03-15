@@ -5,16 +5,13 @@ import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
-    private Integer ratingKey, year, hasPremiumExtra;
-    private String guid, studio, type, title, originalTitle, contentRating, summary, tagline, thumb, art,
-            audienceRatingImage, chapterSource, ratingImage;
+public class PMSVideoDirectory extends PMSMediaDirectory<PMSVideoContainer> {
+    private Integer year, hasPremiumExtra;
+    private String studio, originalTitle, contentRating, tagline, audienceRatingImage, chapterSource, ratingImage;
     private Double rating, audienceRating;
     private Long duration;
-    private Date originallyAvailableAt, addedAt, updatedAt;
+    private Date originallyAvailableAt;
     private List<PMSMedia> media;
     private List<PMSTag> genres;
     private List<PMSTag> directors;
@@ -27,10 +24,6 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
         return super.content(PMSVideoContainer.class);
     }
 
-    public Integer getRatingKey() {
-        return ratingKey;
-    }
-
     public Integer getYear() {
         return year;
     }
@@ -39,20 +32,8 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
         return hasPremiumExtra;
     }
 
-    public String getGuid() {
-        return guid;
-    }
-
     public String getStudio() {
         return studio;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getOriginalTitle() {
@@ -63,20 +44,8 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
         return contentRating;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
     public String getTagline() {
         return tagline;
-    }
-
-    public String getThumb() {
-        return thumb;
-    }
-
-    public String getArt() {
-        return art;
     }
 
     public String getAudienceRatingImage() {
@@ -107,14 +76,6 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
         return originallyAvailableAt;
     }
 
-    public Date getAddedAt() {
-        return addedAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
     public List<PMSMedia> getMedia() {
         return media;
     }
@@ -140,38 +101,13 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
     }
 
     @XmlAttribute
-    public void setRatingKey(Integer ratingKey) {
-        this.ratingKey = ratingKey;
-    }
-
-    @XmlAttribute
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    @XmlAttribute
     public void setHasPremiumExtra(Integer hasPremiumExtra) {
         this.hasPremiumExtra = hasPremiumExtra;
     }
 
     @XmlAttribute
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
-    @XmlAttribute
     public void setStudio(String studio) {
         this.studio = studio;
-    }
-
-    @XmlAttribute
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @XmlAttribute
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     @XmlAttribute
@@ -185,23 +121,8 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
     }
 
     @XmlAttribute
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    @XmlAttribute
     public void setTagline(String tagline) {
         this.tagline = tagline;
-    }
-
-    @XmlAttribute
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-
-    @XmlAttribute
-    public void setArt(String art) {
-        this.art = art;
     }
 
     @XmlAttribute
@@ -237,18 +158,6 @@ public class PMSVideoDirectory extends PMSDirectory<PMSVideoContainer> {
     @XmlAttribute
     public void setOriginallyAvailableAt(Date originallyAvailableAt) {
         this.originallyAvailableAt = originallyAvailableAt;
-    }
-
-    @XmlAttribute
-    @XmlJavaTypeAdapter(TimestampAdapter.class)
-    public void setAddedAt(Date addedAt) {
-        this.addedAt = addedAt;
-    }
-
-    @XmlAttribute
-    @XmlJavaTypeAdapter(TimestampAdapter.class)
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     @XmlElement(name = "Media")

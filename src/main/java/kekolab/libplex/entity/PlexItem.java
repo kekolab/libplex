@@ -12,6 +12,10 @@ public abstract class PlexItem {
         return client;
     }
 
+    protected void setClient(PlexClient client) {
+        this.client = client;
+    }
+
     public URI getUri() {
         return uri;
     }
@@ -27,7 +31,7 @@ public abstract class PlexItem {
 
         public A build(Class<A> target) {
             A item = client.executeGet(uri, target);
-            ((PlexItem) item).client = client;
+            ((PlexItem) item).setClient(client);
             ((PlexItem) item).uri = uri;
             return item;
         }

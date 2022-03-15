@@ -7,7 +7,7 @@ import kekolab.libplex.PlexClient;
 public abstract class PMSItem extends PlexItem {
     private PlexMediaServer server;
 
-    private void setServer(PlexMediaServer server) {
+    protected void setServer(PlexMediaServer server) {
         this.server = server;
     }
 
