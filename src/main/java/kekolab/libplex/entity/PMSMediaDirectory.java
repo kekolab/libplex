@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class PMSMediaDirectory<Content extends PMSItem, Details extends PMSItem>
+public abstract class PMSMediaDirectory<Content extends ServerItem, Details extends ServerItem>
         extends PMSDirectory<Content> {
     private Integer ratingKey;
     private String guid;
@@ -19,7 +19,7 @@ public abstract class PMSMediaDirectory<Content extends PMSItem, Details extends
         URI uri = getClient().uriBuilder()
                 .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
                 .build(getRatingKey());
-        return new PMSItem.Builder<Details>(getClient(), uri, getServer()).build(cls);
+        return new ServerItem.Builder<Details>(getClient(), uri, getServer()).build(cls);
     }
 
     public abstract Details details();

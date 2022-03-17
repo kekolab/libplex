@@ -7,23 +7,22 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSMusicSection extends PMSSection {
+public class MusicSection extends PMSSection {
     private Integer nocache;
 
     public PMSArtists all() {
-        return new PMSItem.Builder<PMSArtists>(getClient(), UriBuilder.fromUri(getUri())
-                .path("all")
-                .build(), getServer()).build(PMSArtists.class);
+    	URI uri = getClient().uriBuilder().fromKey("all", this, getServer()).build();
+    	return (PMSArtists) PMSArtists.build(PMSArtists.class, getClient(), uri, getServer());
     }
 
     public PMSAlbums albums() {
-        return new PMSItem.Builder<PMSAlbums>(getClient(), UriBuilder.fromUri(getUri())
+        return new ServerItem.Builder<PMSAlbums>(getClient(), UriBuilder.fromUri(getUri())
                 .path("albums")
                 .build(), getServer()).build(PMSAlbums.class);
     }
 
     public PMSAlbums recentlyAdded() {
-        return new PMSItem.Builder<PMSAlbums>(getClient(), UriBuilder.fromUri(getUri())
+        return new ServerItem.Builder<PMSAlbums>(getClient(), UriBuilder.fromUri(getUri())
                 .path("recentlyAdded")
                 .build(), getServer()).build(PMSAlbums.class);
     }
@@ -34,7 +33,7 @@ public class PMSMusicSection extends PMSSection {
                 .queryParam("type", 8)
                 .queryParam("query", query)
                 .build();
-        return new PMSItem.Builder<PMSArtists>(getClient(), uri, getServer()).build(PMSArtists.class);
+        return new ServerItem.Builder<PMSArtists>(getClient(), uri, getServer()).build(PMSArtists.class);
     }
 
     public PMSAlbums searchAlbums(String query) {
@@ -43,7 +42,7 @@ public class PMSMusicSection extends PMSSection {
                 .queryParam("type", 9)
                 .queryParam("query", query)
                 .build();
-        return new PMSItem.Builder<PMSAlbums>(getClient(), uri, getServer()).build(PMSAlbums.class);
+        return new ServerItem.Builder<PMSAlbums>(getClient(), uri, getServer()).build(PMSAlbums.class);
     }
 
     public Integer getNocache() {

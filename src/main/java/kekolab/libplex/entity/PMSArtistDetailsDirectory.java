@@ -13,10 +13,10 @@ public class PMSArtistDetailsDirectory extends PMSArtistDirectory {
     private List<PMSTag> moods;
     private List<PMSLocation> locations;
 
-    public PMSMusicSection section() {
-        return new PMSItem.Builder<PMSMusicSection>(getClient(), getClient().uriBuilder()
+    public MusicSection section() {
+        return new ServerItem.Builder<MusicSection>(getClient(), getClient().uriBuilder()
                 .fromKey(librarySectionKey, getParent(), getServer())
-                .build(), getServer()).build(PMSMusicSection.class);
+                .build(), getServer()).build(MusicSection.class);
     }
 
     public Integer getLibrarySectionID() {

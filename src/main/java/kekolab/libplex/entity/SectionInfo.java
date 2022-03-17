@@ -9,13 +9,13 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class PMSSectionDirectory<Content extends PMSSection> extends PMSDirectory<Content> {
+public abstract class SectionInfo<Content extends PMSSection> extends PMSDirectory<Content> {
     private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
     private String composite, agent, scanner, language, uuid;
     private Date createdAt, scannedAt;
     private PMSLocation location;
 
-    protected PMSSectionDirectory(SectionDirectoryXML xml) {
+    protected SectionInfo(SectionDirectoryXML xml) {
         setAllowSync(xml.getAllowSync());
         setFilters(xml.getFilters());
         setRefreshing(xml.getRefreshing());
@@ -353,16 +353,16 @@ public abstract class PMSSectionDirectory<Content extends PMSSection> extends PM
         }
     }
 
-    public static class PMSSectionDirectoryAdapter extends XmlAdapter<SectionDirectoryXML, PMSSectionDirectory<?>> {
+    public static class PMSSectionDirectoryAdapter extends XmlAdapter<SectionDirectoryXML, SectionInfo<?>> {
         @Override
-        public PMSSectionDirectory<?> unmarshal(SectionDirectoryXML v) throws Exception {
+        public SectionInfo<?> unmarshal(SectionDirectoryXML v) throws Exception {
             if ("artist".equals(v.getType()))
-                return new PMSMusicSectionDirectory(v);
+                return new MusicSectionInfo(v);
             return null;
         }
 
         @Override
-        public SectionDirectoryXML marshal(PMSSectionDirectory<?> v) throws Exception {
+        public SectionDirectoryXML marshal(SectionInfo<?> v) throws Exception {
             // TODO Auto-generated method stub
             return null;
         }

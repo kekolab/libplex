@@ -4,8 +4,14 @@ import java.net.URI;
 
 import kekolab.libplex.PlexClient;
 
-public abstract class PMSItem extends PlexItem {
+public abstract class ServerItem extends PlexItem {
     private PlexMediaServer server;
+    
+    protected static ServerItem build(Class<? extends ServerItem> cls, PlexClient client, URI uri, PlexMediaServer server) {
+    	ServerItem item =  (ServerItem) build(cls, client, uri);
+    	item.setServer(server);
+    	return item;
+    }
 
     protected void setServer(PlexMediaServer server) {
         this.server = server;
@@ -15,7 +21,8 @@ public abstract class PMSItem extends PlexItem {
         return server;
     }
 
-    public static class Builder<A extends PMSItem> extends PlexItem.Builder<A> {
+    @Deprecated
+    public static class Builder<A extends ServerItem> extends PlexItem.Builder<A> {
         private PlexMediaServer server;
 
         public Builder(PlexClient client, URI uri, PlexMediaServer server) {
@@ -25,9 +32,7 @@ public abstract class PMSItem extends PlexItem {
 
         @Override
         public A build(Class<A> target) {
-            A item = super.build(target);
-            ((PMSItem) item).setServer(server);
-            return item;
+        	return (A) ServerItem.build(target, getClient(), getUri(), server);
         }
     }
 }

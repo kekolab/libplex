@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSSimpleContainer extends PMSItem {
+public abstract class PMSSimpleContainer extends ServerItem {
     private Integer size;
     private Integer mediaTagVersion;
     private String identifier;

@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.ws.rs.core.UriBuilder;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -26,32 +25,12 @@ public class PlexMediaServer extends PlexItem {
     private List<Integer> transcoderVideoBitrates, transcoderVideoQualities, transcoderVideoResolutions;
     private Date updatedAt;
 
-    public PMSLibrary library() {
-        return new PMSItem.Builder<PMSLibrary>(getClient(), UriBuilder.fromUri(getUri())
-                .path("library")
-                .build(), this).build(PMSLibrary.class);
-    }
+    public Library library() {
+    	URI uri = getClient().uriBuilder().fromKey("library", this, this).build();
+    	return (Library) Library.build(Library.class, getClient(), uri, this);
+        }
 
-    public PMSServerSearchArtistsResultContainer searchArtist(String query) {
-        return search(query, 8, PMSServerSearchArtistsResultContainer.class);
-    }
 
-    public PMSServerSearchAlbumResultContainer searchAlbum(String query) {
-        return search(query, 9, PMSServerSearchAlbumResultContainer.class);
-    }
-
-    public PMSServerSearchTracksResultContainer searchTrack(String query) {
-        return search(query, 10, PMSServerSearchTracksResultContainer.class);
-    }
-
-    private <A extends PMSSimpleContainer> A search(String query, int searchType, Class<A> cls) {
-        URI uri = getClient().uriBuilder()
-                .fromKey("search", this, this)
-                .queryParam("type", searchType)
-                .queryParam("query", query)
-                .build();
-        return new PMSItem.Builder<A>(getClient(), uri, this).build(cls);
-    }
 
     public Integer getSize() {
         return size;

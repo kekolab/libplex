@@ -4,20 +4,20 @@ import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSDirectory<Content extends PMSItem> extends PMSItem {
+public abstract class PMSDirectory<Content extends ServerItem> extends ServerItem {
     private String key, art, thumb, title, type;
-    private PMSItem parent;
+    private ServerItem parent;
 
-    protected void setParent(PMSItem parent) {
+    protected void setParent(ServerItem parent) {
         this.parent = parent;
     }
 
-    protected PMSItem getParent() {
+    protected ServerItem getParent() {
         return parent;
     }
 
     protected Content content(Class<Content> target) {
-        return new PMSItem.Builder<Content>(getClient(), getClient().uriBuilder()
+        return new ServerItem.Builder<Content>(getClient(), getClient().uriBuilder()
                 .fromKey(getKey(), getParent(), getServer())
                 .build(), getServer()).build(target);
     }

@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSMusicChildDirectory<Content extends PMSItem, Details extends PMSItem>
+public abstract class PMSMusicChildDirectory<Content extends ServerItem, Details extends ServerItem>
         extends PMSMusicDirectory<Content, Details> {
     private Integer parentRatingKey;
     private String parentGuid, parentKey, parentTitle, parentThumb;

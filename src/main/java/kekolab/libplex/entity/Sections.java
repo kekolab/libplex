@@ -7,21 +7,21 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import kekolab.libplex.entity.PMSSectionDirectory.PMSSectionDirectoryAdapter;
+import kekolab.libplex.entity.SectionInfo.PMSSectionDirectoryAdapter;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSSections extends PMSContainer {
+public class Sections extends PMSContainer {
     private String title1;
-    private List<PMSSectionDirectory<?>> sections;
+    private List<SectionInfo<?>> sections;
 
-    public List<PMSMusicSectionDirectory> musicSections() {
+    public List<MusicSectionInfo> musicSections() {
         return getSections().stream()
-                .filter(d -> d instanceof PMSMusicSectionDirectory)
-                .map(d -> (PMSMusicSectionDirectory) d)
+                .filter(d -> d instanceof MusicSectionInfo)
+                .map(d -> (MusicSectionInfo) d)
                 .collect(Collectors.toList());
     }
 
-    public List<PMSSectionDirectory<?>> getSections() {
+    public List<SectionInfo<?>> getSections() {
         if (sections != null)
             setSections(sections.stream()
                     .filter(s -> s != null)
@@ -46,7 +46,7 @@ public class PMSSections extends PMSContainer {
 
     @XmlElement(name = "Directory")
     @XmlJavaTypeAdapter(value = PMSSectionDirectoryAdapter.class)
-    public void setSections(List<PMSSectionDirectory<?>> sections) {
+    public void setSections(List<SectionInfo<?>> sections) {
         this.sections = sections;
     }
 }
