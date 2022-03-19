@@ -1,6 +1,7 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,9 @@ public class PlexMediaServer extends PlexItem {
             transcoderPhoto, transcoderSubtitles, transcoderVideo, updater, voiceSearch;
     private String countryCode, friendlyName, machineIdentifier, myPlexMappingState, myPlexSigninState, myPlexUsername,
             platform, platformVersion, version;
-    private List<String> diagnostics, ownerFeatures;
-    private List<Integer> transcoderVideoBitrates, transcoderVideoQualities, transcoderVideoResolutions;
+    private List<String> diagnostics = new ArrayList<>(0), ownerFeatures = new ArrayList<>(0);
+    private List<Integer> transcoderVideoBitrates = new ArrayList<>(0), transcoderVideoQualities = new ArrayList<>(0),
+            transcoderVideoResolutions = new ArrayList<>(0);
     private Date updatedAt;
 
     public Library library() {

@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "MediaContainer")
 public class PMSVideos extends PMSMovieSectionContent {
     private Integer viewMode;
     private String art, thumb, title1, title2, viewGroup;
