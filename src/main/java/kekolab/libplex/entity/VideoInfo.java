@@ -1,32 +1,33 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSVideoDirectory extends PMSMediaDirectory<PMSVideoContainer, PMSVideoContainer> {
+public class VideoInfo extends MediaInfo {
     private Integer year, hasPremiumExtra;
     private String studio, originalTitle, contentRating, tagline, audienceRatingImage, chapterSource, ratingImage;
     private Double rating, audienceRating;
     private Long duration;
     private Date originallyAvailableAt;
-    private List<PMSMedia> media;
-    private List<PMSTag> genres;
-    private List<PMSTag> directors;
-    private List<PMSTag> writers;
-    private List<PMSTag> countries;
-    private List<PMSRole> roles;
+    private List<PMSMedia> media = new ArrayList<>(0);
+    private List<PMSTag> genres = new ArrayList<>(0);
+    private List<PMSTag> directors = new ArrayList<>(0);
+    private List<PMSTag> writers = new ArrayList<>(0);
+    private List<PMSTag> countries = new ArrayList<>(0);
+    private List<PMSRole> roles = new ArrayList<>(0);
 
     @Override
     public PMSVideoContainer content() {
-        return super.content(PMSVideoContainer.class);
+    	return (PMSVideoContainer) PMSVideoContainer.build(PMSVideoContainer.class, getClient(), contentUri(), getServer());
     }
 
     @Override
     public PMSVideoContainer details() {
-        return super.content(PMSVideoContainer.class);
+    	return (PMSVideoContainer) PMSVideoContainer.build(PMSVideoContainer.class, getClient(), contentUri(), getServer());
     }
 
     public Integer getYear() {

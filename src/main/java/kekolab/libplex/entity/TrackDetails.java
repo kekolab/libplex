@@ -2,14 +2,9 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public class PMSDetailedTrackDirectory extends PMSTrackDirectory {
+public class TrackDetails extends TrackInfo {
     private Integer librarySectionID, hasPremiumLyrics;
     private String librarySectionTitle, librarySectionKey;
-
-    @Override
-    public PMSTrack content() {
-        return super.content(PMSTrack.class);
-    }
 
     public Integer getLibrarySectionID() {
         return librarySectionID;

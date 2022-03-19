@@ -7,6 +7,6 @@ public class MusicSectionInfo extends SectionInfo<MusicSection> {
 
     @Override
     public MusicSection content() {
-        return super.content(MusicSection.class);
+    	return (MusicSection) MusicSection.build(MusicSection.class, getClient(), contentUri(), getServer());
     }
 }

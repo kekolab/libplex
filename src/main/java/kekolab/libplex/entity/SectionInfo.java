@@ -9,7 +9,7 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class SectionInfo<Content extends PMSSection> extends PMSDirectory<Content> {
+public abstract class SectionInfo<Content extends PMSSection> extends PMSDirectory {
     private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
     private String composite, agent, scanner, language, uuid;
     private Date createdAt, scannedAt;

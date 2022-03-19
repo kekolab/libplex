@@ -1,23 +1,18 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSArtistDetailsDirectory extends PMSArtistDirectory {
+public class ArtistDetails extends ArtistInfo {
     private Integer librarySectionID;
     private String librarySectionTitle, librarySectionKey;
-    private List<PMSTag> styles;
-    private List<PMSTag> similars;
-    private List<PMSTag> moods;
-    private List<PMSLocation> locations;
-
-    public MusicSection section() {
-        return new ServerItem.Builder<MusicSection>(getClient(), getClient().uriBuilder()
-                .fromKey(librarySectionKey, getParent(), getServer())
-                .build(), getServer()).build(MusicSection.class);
-    }
+    private List<PMSTag> styles = new ArrayList<>(0);
+    private List<PMSTag> similars = new ArrayList<>(0);
+    private List<PMSTag> moods = new ArrayList<>(0);
+    private List<PMSLocation> locations = new ArrayList<>(0);
 
     public Integer getLibrarySectionID() {
         return librarySectionID;

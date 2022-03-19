@@ -1,27 +1,85 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSAlbumDirectory extends PMSMusicChildDirectory<PMSTracks, PMSAlbum> {
+public class AlbumInfo extends MediaInfo {
     private Integer year, loudnessAnalysisVersion;
     private String studio;
     private Double rating;
     private Date originallyAvailableAt;
-    private List<PMSTag> genres;
-    private List<PMSTag> directors;
+    private List<PMSTag> genres = new ArrayList<>(0);;
+    private List<PMSTag> directors = new ArrayList<>(0);;
+    private Integer index;
+    private Integer parentRatingKey;
+    private String parentGuid, parentKey, parentTitle, parentThumb;
+
+    public Integer getParentRatingKey() {
+        return parentRatingKey;
+    }
+
+    public String getParentGuid() {
+        return parentGuid;
+    }
+
+    public String getParentKey() {
+        return parentKey;
+    }
+
+    public String getParentTitle() {
+        return parentTitle;
+    }
+
+    public String getParentThumb() {
+        return parentThumb;
+    }
+
+    @XmlAttribute
+    public void setParentRatingKey(Integer parentRatingKey) {
+        this.parentRatingKey = parentRatingKey;
+    }
+
+    @XmlAttribute
+    public void setParentGuid(String parentGuid) {
+        this.parentGuid = parentGuid;
+    }
+
+    @XmlAttribute
+    public void setParentKey(String parentKey) {
+        this.parentKey = parentKey;
+    }
+
+    @XmlAttribute
+    public void setParentTitle(String parentTitle) {
+        this.parentTitle = parentTitle;
+    }
+
+    @XmlAttribute
+    public void setParentThumb(String parentThumb) {
+        this.parentThumb = parentThumb;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    @XmlAttribute
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 
     @Override
     public PMSTracks content() {
-        return super.content(PMSTracks.class);
+    	return (PMSTracks) PMSTracks.build(PMSTracks.class, getClient(), contentUri(), getServer());
     }
 
     @Override
     public PMSAlbum details() {
-        return super.details(PMSAlbum.class);
+    	return (PMSAlbum) PMSAlbum.build(PMSAlbum.class, getClient(), detailsUri(), getServer());
     }
 
     public Integer getYear() {

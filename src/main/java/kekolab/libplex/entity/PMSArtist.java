@@ -5,9 +5,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
 public class PMSArtist extends PMSMusicSectionContent {
-    private PMSArtistDetailsDirectory artist;
+    private ArtistDetails artist;
 
-    public PMSArtistDetailsDirectory getArtist() {
+    public ArtistDetails getArtist() {
         if (artist != null) {
             artist.setClient(getClient());
             artist.setParent(this);
@@ -17,7 +17,7 @@ public class PMSArtist extends PMSMusicSectionContent {
     }
 
     @XmlElement(name = "Directory")
-    public void setArtist(PMSArtistDetailsDirectory artist) {
+    public void setArtist(ArtistDetails artist) {
         this.artist = artist;
     }
 }

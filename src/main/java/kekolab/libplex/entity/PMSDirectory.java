@@ -4,7 +4,7 @@ import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSDirectory<Content extends ServerItem> extends ServerItem {
+public abstract class PMSDirectory extends ServerItem {
     private String key, art, thumb, title, type;
     private ServerItem parent;
 
@@ -16,11 +16,11 @@ public abstract class PMSDirectory<Content extends ServerItem> extends ServerIte
         return parent;
     }
 
-    protected Content content(Class<Content> target) {
-        return new ServerItem.Builder<Content>(getClient(), getClient().uriBuilder()
+	protected URI contentUri() {
+		return getClient().uriBuilder()
                 .fromKey(getKey(), getParent(), getServer())
-                .build(), getServer()).build(target);
-    }
+                .build();
+	}
 
     public URI artUri() {
         return getClient().uriBuilder()
@@ -34,7 +34,7 @@ public abstract class PMSDirectory<Content extends ServerItem> extends ServerIte
                 .build();
     }
 
-    public abstract Content content();
+    public abstract ServerItem content();
 
     public String getKey() {
         return key;

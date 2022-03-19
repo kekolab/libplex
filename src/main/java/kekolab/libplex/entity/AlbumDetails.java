@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +9,12 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public class PMSAlbumDetailsDirectory extends PMSAlbumDirectory {
+public class AlbumDetails extends AlbumInfo {
     private Integer viewCount, leafCount;
     private String librarySectionTitle, librarySectionID, librarySectionKey;
     private Date lastViewedAt;
-    private List<PMSTag> styles;
-    private List<PMSTag> moods;
+    private List<PMSTag> styles = new ArrayList<>(0);
+    private List<PMSTag> moods = new ArrayList<>(0);
 
     public Integer getViewCount() {
         return viewCount;

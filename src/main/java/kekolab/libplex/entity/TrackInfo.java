@@ -1,24 +1,82 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSTrackDirectory extends PMSMusicChildDirectory<PMSTrack, PMSTrack> {
+public class TrackInfo extends MediaInfo {
     private Integer grandparentRatingKey, parentIndex, ratingCount, parentYear;
     private String grandparentGuid, parentStudio, grandparentKey, grandparentTitle, grandparentThumb, grandparentArt;
     private Long duration;
-    private List<PMSMedia> media;
+    private List<PMSMedia> media = new ArrayList<>(0);
+    private Integer index;
+    private Integer parentRatingKey;
+    private String parentGuid, parentKey, parentTitle, parentThumb;
+
+    public Integer getParentRatingKey() {
+        return parentRatingKey;
+    }
+
+    public String getParentGuid() {
+        return parentGuid;
+    }
+
+    public String getParentKey() {
+        return parentKey;
+    }
+
+    public String getParentTitle() {
+        return parentTitle;
+    }
+
+    public String getParentThumb() {
+        return parentThumb;
+    }
+
+    @XmlAttribute
+    public void setParentRatingKey(Integer parentRatingKey) {
+        this.parentRatingKey = parentRatingKey;
+    }
+
+    @XmlAttribute
+    public void setParentGuid(String parentGuid) {
+        this.parentGuid = parentGuid;
+    }
+
+    @XmlAttribute
+    public void setParentKey(String parentKey) {
+        this.parentKey = parentKey;
+    }
+
+    @XmlAttribute
+    public void setParentTitle(String parentTitle) {
+        this.parentTitle = parentTitle;
+    }
+
+    @XmlAttribute
+    public void setParentThumb(String parentThumb) {
+        this.parentThumb = parentThumb;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    @XmlAttribute
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 
     @Override
     public PMSTrack content() {
-        return super.content(PMSTrack.class);
+    	return (PMSTrack) PMSTrack.build(PMSTrack.class, getClient(), contentUri(), getServer());
     }
 
     @Override
     public PMSTrack details() {
-        return super.content(PMSTrack.class);
+        return content();
     }
 
     public Integer getGrandparentRatingKey() {

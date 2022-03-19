@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,20 +9,30 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public class PMSArtistDirectory extends PMSMusicDirectory<PMSAlbums, PMSArtist> {
+public class ArtistInfo extends MediaInfo {
     private Integer viewCount, skipCount, albumSort;
     private Date lastViewedAt;
-    private List<PMSTag> genres;
-    private List<PMSTag> countries;
+    private List<PMSTag> genres = new ArrayList<>(0);
+    private List<PMSTag> countries = new ArrayList<>(0);
+    private Integer index;
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    @XmlAttribute
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 
     @Override
     public PMSArtist details() {
-        return super.details(PMSArtist.class);
+    	return (PMSArtist) PMSArtist.build(PMSArtist.class, getClient(), detailsUri(), getServer());
     }
 
     @Override
     public PMSAlbums content() {
-        return super.content(PMSAlbums.class);
+    	return (PMSAlbums) PMSArtist.build(PMSAlbums.class, getClient(), contentUri(), getServer());
     }
 
     public Integer getViewCount() {

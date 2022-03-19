@@ -5,9 +5,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
 public class PMSTrack extends PMSMusicSectionContent {
-    private PMSDetailedTrackDirectory track;
+    private TrackDetails track;
 
-    public PMSDetailedTrackDirectory getTrack() {
+    public TrackDetails getTrack() {
         if (track != null) {
             track.setClient(getClient());
             track.setParent(this);
@@ -17,7 +17,7 @@ public class PMSTrack extends PMSMusicSectionContent {
     }
 
     @XmlElement(name = "Track")
-    public void setTrack(PMSDetailedTrackDirectory track) {
+    public void setTrack(TrackDetails track) {
         this.track = track;
     }
 }

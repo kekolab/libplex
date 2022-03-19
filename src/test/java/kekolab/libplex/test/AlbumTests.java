@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeEach;
 
-import kekolab.libplex.entity.PMSAlbumDetailsDirectory;
+import kekolab.libplex.entity.AlbumDetails;
 
 public class AlbumTests extends WithPlexClientTests {
-    private PMSAlbumDetailsDirectory album;
+    private AlbumDetails album;
 
     @BeforeEach
     public void init() throws IOException {

@@ -1,13 +1,13 @@
 package kekolab.libplex.entity;
 
 public class PMSVideoContainer extends PMSMovieSectionContent {
-    private PMSVideoDetailDirectory video;
+    private VideoDetails video;
 
-    public PMSVideoDetailDirectory getVideo() {
+    public VideoDetails getVideo() {
         return video;
     }
 
-    public void setVideo(PMSVideoDetailDirectory video) {
+    public void setVideo(VideoDetails video) {
         this.video = video;
     }
 }
