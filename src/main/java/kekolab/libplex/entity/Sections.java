@@ -7,12 +7,12 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import kekolab.libplex.entity.SectionInfo.PMSSectionDirectoryAdapter;
+import kekolab.libplex.xmladapter.SectionInfoAdapter;
 
 @XmlRootElement(name = "MediaContainer")
 public class Sections extends PMSContainer {
     private String title1;
-    private List<SectionInfo<?>> sections;
+    private List<SectionInfo> sections;
 
     public List<MusicSectionInfo> musicSections() {
         return getSections().stream()
@@ -21,17 +21,15 @@ public class Sections extends PMSContainer {
                 .collect(Collectors.toList());
     }
 
-    public List<SectionInfo<?>> getSections() {
+    public List<SectionInfo> getSections() {
         if (sections != null)
-            setSections(sections.stream()
-                    .filter(s -> s != null)
-                    .map(s -> {
+            sections.stream()
+                    .filter(s -> s != null && s.getClient() == null)
+                    .forEach(s -> {
                         s.setClient(getClient());
                         s.setParent(this);
                         s.setServer(getServer());
-                        return s;
-                    })
-                    .collect(Collectors.toList()));
+                    });
         return sections;
     }
 
@@ -45,8 +43,8 @@ public class Sections extends PMSContainer {
     }
 
     @XmlElement(name = "Directory")
-    @XmlJavaTypeAdapter(value = PMSSectionDirectoryAdapter.class)
-    public void setSections(List<SectionInfo<?>> sections) {
+    @XmlJavaTypeAdapter(value = SectionInfoAdapter.class)
+    public void setSections(List<SectionInfo> sections) {
         this.sections = sections;
     }
 }

@@ -8,7 +8,7 @@ public abstract class PMSSectionContent extends PMSContainer {
     private Integer librarySectionID;
     private String librarySectionTitle, librarySectionUUID;
 
-    public abstract PMSSection section();
+    public abstract Section section();
 
     protected URI sectionUri() {
         return getClient().uriBuilder()

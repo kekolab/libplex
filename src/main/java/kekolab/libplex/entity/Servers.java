@@ -8,7 +8,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class ServersContainer extends PlexItem {
+public class Servers extends PlexItem {
     private String friendlyName, identifier, machineIdentifier, size;
     private List<Server> servers = new ArrayList<>(0);
 

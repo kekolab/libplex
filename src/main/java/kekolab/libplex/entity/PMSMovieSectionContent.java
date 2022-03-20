@@ -3,7 +3,6 @@ package kekolab.libplex.entity;
 public class PMSMovieSectionContent extends PMSSectionContent {
     @Override
     public PMSMovieSection section() {
-        return new ServerItem.Builder<PMSMovieSection>(getClient(), sectionUri(), getServer())
-                .build(PMSMovieSection.class);
+        return (PMSMovieSection) PMSMovieSection.build(PMSMovieSection.class, getClient(), sectionUri(), getServer());
     }
 }

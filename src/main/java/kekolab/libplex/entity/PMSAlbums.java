@@ -12,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class PMSAlbums extends PMSMusicSectionContent {
     private Integer nocache, parentIndex, viewMode;
     private String art, parentTitle, summary, thumb, title1, title2, viewGroup;
-    private List<AlbumInfo> albums = new ArrayList<>(0);
+    private List<Album> albums = new ArrayList<>(0);
 
     public Integer getNocache() {
         return nocache;
@@ -54,7 +54,7 @@ public class PMSAlbums extends PMSMusicSectionContent {
         return viewGroup;
     }
 
-    public List<AlbumInfo> getAlbums() {
+    public List<Album> getAlbums() {
         if (albums != null)
             setAlbums(albums.stream()
                     .map(a -> {
@@ -118,7 +118,7 @@ public class PMSAlbums extends PMSMusicSectionContent {
     }
 
     @XmlElement(name = "Directory")
-    public void setAlbums(List<AlbumInfo> albums) {
+    public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
 }

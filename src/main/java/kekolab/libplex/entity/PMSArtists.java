@@ -12,9 +12,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class PMSArtists extends PMSMusicSectionContent {
     private Integer nocache, viewMode;
     private String art, thumb, title1, title2, viewGroup;
-    private List<ArtistInfo> artists = new ArrayList<>(0);
+    private List<Artist> artists = new ArrayList<>(0);
 
-    public List<ArtistInfo> getArtists() {
+    public List<Artist> getArtists() {
         if (artists != null)
             setArtists(artists.stream()
                     .map(a -> {
@@ -91,7 +91,7 @@ public class PMSArtists extends PMSMusicSectionContent {
     }
 
     @XmlElement(name = "Directory")
-    public void setArtists(List<ArtistInfo> artists) {
+    public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
 }

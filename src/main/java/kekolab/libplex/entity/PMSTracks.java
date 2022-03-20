@@ -12,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class PMSTracks extends PMSMusicSectionContent {
     private Integer grandparentRatingKey, key, nocache, parentIdex, parentYear, viewMode;
     private String art, grandparentThumb, grandparentTitle, parentTitle, summary, thumb, title1, title2, viewGroup;
-    private List<TrackInfo> tracks = new ArrayList<>(0);
+    private List<Track> tracks = new ArrayList<>(0);
 
     public Integer getGrandparentRatingKey() {
         return grandparentRatingKey;
@@ -74,7 +74,7 @@ public class PMSTracks extends PMSMusicSectionContent {
         return viewGroup;
     }
 
-    public List<TrackInfo> getTracks() {
+    public List<Track> getTracks() {
         if (tracks != null)
             setTracks(tracks.stream()
                     .map(t -> {
@@ -163,7 +163,7 @@ public class PMSTracks extends PMSMusicSectionContent {
     }
 
     @XmlElement(name = "Track")
-    public void setTracks(List<TrackInfo> tracks) {
+    public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
 }

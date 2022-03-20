@@ -7,10 +7,10 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kekolab.libplex.entity.PMSLibrary;
+import kekolab.libplex.entity.Library;
 
 public class LibraryTests extends WithPlexClientTests {
-    private PMSLibrary library;
+    private Library library;
 
     @BeforeEach
     public void init() throws IOException {
@@ -28,6 +28,7 @@ public class LibraryTests extends WithPlexClientTests {
 //        assertNotNull(library.onDeck());
         assertNotNull(library.sections());
     }
+//
 //    @Test
 //    void recentlyAddedTest() {
 //        SearchResult recentlyAdded = library.recentlyAdded();

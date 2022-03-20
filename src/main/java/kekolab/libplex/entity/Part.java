@@ -2,15 +2,12 @@ package kekolab.libplex.entity;
 
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
-public class PMSPart {
+public class Part {
     private Integer id; // Track, Video, Episode
     private String key; // Track, Video, Episode
     private Integer duration; // Track, Video, Episode
@@ -18,7 +15,7 @@ public class PMSPart {
     private Integer size; // Track, Video, Episode
     private String container; // Track, Video, Episode
     private Integer hasThumbnail; // Track
-    private List<PMSStream> streams; // Track, Episode
+    private List<Stream> streams; // Track, Episode
     private String audioProfile; // Video
     private String videoProfile; // Video, Episode
 
@@ -50,7 +47,7 @@ public class PMSPart {
         return hasThumbnail;
     }
 
-    public List<PMSStream> getStreams() {
+    public List<Stream> getStreams() {
         return streams;
     }
 
@@ -98,7 +95,7 @@ public class PMSPart {
     }
 
     @XmlElement(name = "Stream")
-    public void setStreams(List<PMSStream> streams) {
+    public void setStreams(List<Stream> streams) {
         this.streams = streams;
     }
 
@@ -111,5 +108,4 @@ public class PMSPart {
     public void setVideoProfile(String videoProfile) {
         this.videoProfile = videoProfile;
     }
-
 }

@@ -3,17 +3,55 @@ package kekolab.libplex.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
+import kekolab.libplex.xmladapter.SectionItemXML;
 
-public class TrackInfo extends MediaInfo {
+public class Track extends SectionItem {
     private Integer grandparentRatingKey, parentIndex, ratingCount, parentYear;
     private String grandparentGuid, parentStudio, grandparentKey, grandparentTitle, grandparentThumb, grandparentArt;
     private Long duration;
-    private List<PMSMedia> media = new ArrayList<>(0);
+    private List<Media> media = new ArrayList<>(0);
     private Integer index;
     private Integer parentRatingKey;
     private String parentGuid, parentKey, parentTitle, parentThumb;
+    // Details
+    private Integer librarySectionID, hasPremiumLyrics;
+    private String librarySectionTitle, librarySectionKey, originalTitle;
+
+    public Track(SectionItemXML v) {
+        setAddedAt(v.getAddedAt());
+        setArt(v.getArt());
+        setDuration(v.getDuration());
+        setGrandparentArt(v.getGrandparentArt());
+        setGrandparentGuid(v.getGrandparentGuid());
+        setGrandparentKey(v.getGrandparentKey());
+        setGrandparentRatingKey(v.getGrandparentRatingKey());
+        setGrandparentThumb(v.getGrandparentThumb());
+        setGrandparentTitle(v.getGrandparentTitle());
+        setGuid(v.getGuid());
+        setIndex(v.getIndex());
+        setKey(v.getKey());
+        setMedia(v.getMedia());
+        setParentGuid(v.getParentGuid());
+        setParentIndex(v.getParentIndex());
+        setParentKey(v.getParentKey());
+        setParentRatingKey(v.getParentRatingKey());
+        setParentStudio(v.getParentStudio());
+        setParentThumb(v.getParentThumb());
+        setParentTitle(v.getParentTitle());
+        setParentYear(v.getParentYear());
+        setRatingCount(v.getRatingCount());
+        setRatingKey(v.getRatingKey());
+        setSummary(v.getSummary());
+        setThumb(v.getThumb());
+        setTitle(v.getTitle());
+        setType(v.getType());
+        setUpdatedAt(v.getUpdatedAt());
+        setLibrarySectionID(v.getLibrarySectionID());
+        setHasPremiumLyrics(v.getHasPremiumLyrics());
+        setLibrarySectionKey(v.getLibrarySectionKey());
+        setLibrarySectionTitle(v.getLibrarySectionTitle());
+        setOriginalTitle(v.getOriginalTitle());
+    }
 
     public Integer getParentRatingKey() {
         return parentRatingKey;
@@ -35,27 +73,22 @@ public class TrackInfo extends MediaInfo {
         return parentThumb;
     }
 
-    @XmlAttribute
     public void setParentRatingKey(Integer parentRatingKey) {
         this.parentRatingKey = parentRatingKey;
     }
 
-    @XmlAttribute
     public void setParentGuid(String parentGuid) {
         this.parentGuid = parentGuid;
     }
 
-    @XmlAttribute
     public void setParentKey(String parentKey) {
         this.parentKey = parentKey;
     }
 
-    @XmlAttribute
     public void setParentTitle(String parentTitle) {
         this.parentTitle = parentTitle;
     }
 
-    @XmlAttribute
     public void setParentThumb(String parentThumb) {
         this.parentThumb = parentThumb;
     }
@@ -64,19 +97,16 @@ public class TrackInfo extends MediaInfo {
         return index;
     }
 
-    @XmlAttribute
     public void setIndex(Integer index) {
         this.index = index;
     }
 
     @Override
-    public PMSTrack content() {
-    	return (PMSTrack) PMSTrack.build(PMSTrack.class, getClient(), contentUri(), getServer());
-    }
-
-    @Override
-    public PMSTrack details() {
-        return content();
+    public Track details() {
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), contentUri(),
+                getServer());
+        return (Track) mil.getItems()
+                .get(0);
     }
 
     public Integer getGrandparentRatingKey() {
@@ -123,67 +153,95 @@ public class TrackInfo extends MediaInfo {
         return duration;
     }
 
-    public List<PMSMedia> getMedia() {
+    public List<Media> getMedia() {
         return media;
     }
 
-    @XmlAttribute
     public void setGrandparentRatingKey(Integer grandparentRatingKey) {
         this.grandparentRatingKey = grandparentRatingKey;
     }
 
-    @XmlAttribute
     public void setParentIndex(Integer parentIndex) {
         this.parentIndex = parentIndex;
     }
 
-    @XmlAttribute
     public void setRatingCount(Integer ratingCount) {
         this.ratingCount = ratingCount;
     }
 
-    @XmlAttribute
     public void setParentYear(Integer parentYear) {
         this.parentYear = parentYear;
     }
 
-    @XmlAttribute
     public void setGrandparentGuid(String grandparentGuid) {
         this.grandparentGuid = grandparentGuid;
     }
 
-    @XmlAttribute
     public void setParentStudio(String parentStudio) {
         this.parentStudio = parentStudio;
     }
 
-    @XmlAttribute
     public void setGrandparentKey(String grandparentKey) {
         this.grandparentKey = grandparentKey;
     }
 
-    @XmlAttribute
     public void setGrandparentTitle(String grandparentTitle) {
         this.grandparentTitle = grandparentTitle;
     }
 
-    @XmlAttribute
     public void setGrandparentThumb(String grandparentThumb) {
         this.grandparentThumb = grandparentThumb;
     }
 
-    @XmlAttribute
     public void setGrandparentArt(String grandparentArt) {
         this.grandparentArt = grandparentArt;
     }
 
-    @XmlAttribute
     public void setDuration(Long duration) {
         this.duration = duration;
     }
 
-    @XmlElement(name = "Media")
-    public void setMedia(List<PMSMedia> media) {
+    public void setMedia(List<Media> media) {
         this.media = media;
+    }
+
+    public Integer getLibrarySectionID() {
+        return librarySectionID;
+    }
+
+    public Integer getHasPremiumLyrics() {
+        return hasPremiumLyrics;
+    }
+
+    public String getLibrarySectionTitle() {
+        return librarySectionTitle;
+    }
+
+    public String getLibrarySectionKey() {
+        return librarySectionKey;
+    }
+
+    public void setLibrarySectionID(Integer librarySectionID) {
+        this.librarySectionID = librarySectionID;
+    }
+
+    public void setHasPremiumLyrics(Integer hasPremiumLyrics) {
+        this.hasPremiumLyrics = hasPremiumLyrics;
+    }
+
+    public void setLibrarySectionTitle(String librarySectionTitle) {
+        this.librarySectionTitle = librarySectionTitle;
+    }
+
+    public void setLibrarySectionKey(String librarySectionKey) {
+        this.librarySectionKey = librarySectionKey;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
     }
 }

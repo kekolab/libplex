@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public class PMSTag {
+public class Tag {
     private Integer id;
     private String filter;
     private String tag;

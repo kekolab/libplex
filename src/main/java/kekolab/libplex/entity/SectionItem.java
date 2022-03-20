@@ -7,22 +7,21 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class MediaInfo extends PMSDirectory {
+public abstract class SectionItem extends Directory {
     private Integer ratingKey;
     private String guid;
     private String summary;
     private Date addedAt;
     private Date updatedAt;
 
-
-	protected URI detailsUri() {
-		URI uri = getClient().uriBuilder()
+    protected URI detailsUri() {
+        URI uri = getClient().uriBuilder()
                 .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
                 .build(getRatingKey());
-		return uri;
-	}
+        return uri;
+    }
 
-    public abstract ServerItem details();
+    public abstract PlexMediaServerItem details();
 
     public Integer getRatingKey() {
         return ratingKey;
@@ -70,5 +69,4 @@ public abstract class MediaInfo extends PMSDirectory {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }

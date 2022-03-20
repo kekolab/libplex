@@ -1,13 +1,10 @@
 package kekolab.libplex.entity;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
-public class PMSStream {
+public class Stream {
     private Integer id;
     private Integer streamType;
     private Integer _default;
@@ -348,5 +345,4 @@ public class PMSStream {
     public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
     }
-
 }

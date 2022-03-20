@@ -8,6 +8,8 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import kekolab.libplex.misc.SearchType;
+import kekolab.libplex.misc.Searcher;
 import kekolab.libplex.xmladapter.IntegerListAdapter;
 import kekolab.libplex.xmladapter.StringListAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
@@ -26,13 +28,30 @@ public class PlexMediaServer extends PlexItem {
     private List<Integer> transcoderVideoBitrates = new ArrayList<>(0), transcoderVideoQualities = new ArrayList<>(0),
             transcoderVideoResolutions = new ArrayList<>(0);
     private Date updatedAt;
+    private Searcher searcher;
 
     public Library library() {
-    	URI uri = getClient().uriBuilder().fromKey("library", this, this).build();
-    	return (Library) Library.build(Library.class, getClient(), uri, this);
-        }
+        URI uri = getClient().uriBuilder()
+                .fromKey("library", this, this)
+                .build();
+        return (Library) Library.build(Library.class, getClient(), uri, this);
+    }
 
+    public List<Artist> searchArtist(String query) {
+        return getSearcher().searchArtists(query);
+    }
 
+    public List<Album> searchAlbums(String query) {
+        return getSearcher().searchAlbums(query);
+    }
+
+    public List<Track> searchTracks(String query) {
+        return getSearcher().searchTracks(query);
+    }
+
+    public List<? extends SectionItem> search(String query) {
+        return getSearcher().search(query, SearchType.ANYTHING);
+    }
 
     public Integer getSize() {
         return size;
@@ -488,5 +507,15 @@ public class PlexMediaServer extends PlexItem {
     @XmlAttribute
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    private Searcher getSearcher() {
+        if (searcher == null)
+            setSearcher(new Searcher(getClient(), this, this));
+        return searcher;
+    }
+
+    private void setSearcher(Searcher searcher) {
+        this.searcher = searcher;
     }
 }

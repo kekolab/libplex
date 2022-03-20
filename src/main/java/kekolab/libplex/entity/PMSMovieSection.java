@@ -1,13 +1,15 @@
 package kekolab.libplex.entity;
 
-import jakarta.ws.rs.core.UriBuilder;
+import java.net.URI;
+
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class PMSMovieSection extends PMSSection {
+public class PMSMovieSection extends Section {
     public PMSVideos all() {
-        return new ServerItem.Builder<PMSVideos>(getClient(), UriBuilder.fromUri(getUri())
-                .path("all")
-                .build(), getServer()).build(PMSVideos.class);
+        URI uri = getClient().uriBuilder()
+                .fromKey("all", this, getServer())
+                .build();
+        return (PMSVideos) PMSVideos.build(PMSVideos.class, getClient(), uri, getServer());
     }
 }

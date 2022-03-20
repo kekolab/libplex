@@ -1,48 +1,67 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import jakarta.ws.rs.core.UriBuilder;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import kekolab.libplex.misc.SearchType;
+import kekolab.libplex.misc.Searcher;
 
 @XmlRootElement(name = "MediaContainer")
-public class MusicSection extends PMSSection {
+public class MusicSection extends Section {
     private Integer nocache;
+    private Searcher searcher;
 
-    public PMSArtists all() {
-    	URI uri = getClient().uriBuilder().fromKey("all", this, getServer()).build();
-    	return (PMSArtists) PMSArtists.build(PMSArtists.class, getClient(), uri, getServer());
-    }
-
-    public PMSAlbums albums() {
-        return new ServerItem.Builder<PMSAlbums>(getClient(), UriBuilder.fromUri(getUri())
-                .path("albums")
-                .build(), getServer()).build(PMSAlbums.class);
-    }
-
-    public PMSAlbums recentlyAdded() {
-        return new ServerItem.Builder<PMSAlbums>(getClient(), UriBuilder.fromUri(getUri())
-                .path("recentlyAdded")
-                .build(), getServer()).build(PMSAlbums.class);
-    }
-
-    public PMSArtists searchArtist(String query) {
-        URI uri = UriBuilder.fromUri(getUri())
-                .path("search")
-                .queryParam("type", 8)
-                .queryParam("query", query)
+    public List<Artist> all() {
+        URI uri = getClient().uriBuilder()
+                .fromKey("all", this, getServer())
                 .build();
-        return new ServerItem.Builder<PMSArtists>(getClient(), uri, getServer()).build(PMSArtists.class);
+        SectionItemList mediaInfoList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
+                getServer());
+        return mediaInfoList.getItems()
+                .stream()
+                .map(mediaInfo -> (Artist) mediaInfo)
+                .collect(Collectors.toList());
     }
 
-    public PMSAlbums searchAlbums(String query) {
-        URI uri = UriBuilder.fromUri(getUri())
-                .path("search")
-                .queryParam("type", 9)
-                .queryParam("query", query)
+    public List<Album> albums() {
+        URI uri = getClient().uriBuilder()
+                .fromKey("albums", this, getServer())
                 .build();
-        return new ServerItem.Builder<PMSAlbums>(getClient(), uri, getServer()).build(PMSAlbums.class);
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer());
+        return mil.getItems()
+                .stream()
+                .map(mi -> (Album) mi)
+                .collect(Collectors.toList());
+    }
+
+    public List<Album> recentlyAdded() {
+        URI uri = getClient().uriBuilder()
+                .fromKey("recentlyAdded", this, getServer())
+                .build();
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer());
+        return mil.getItems()
+                .stream()
+                .map(mi -> (Album) mi)
+                .collect(Collectors.toList());
+    }
+
+    public List<Artist> searchArtist(String query) {
+        return getSearcher().searchArtists(query);
+    }
+
+    public List<Album> searchAlbums(String query) {
+        return getSearcher().searchAlbums(query);
+    }
+
+    public List<Track> searchTracks(String query) {
+        return getSearcher().searchTracks(query);
+    }
+
+    public List<? extends SectionItem> search(String query) {
+        return getSearcher().search(query, SearchType.ANYTHING);
     }
 
     public Integer getNocache() {
@@ -52,5 +71,15 @@ public class MusicSection extends PMSSection {
     @XmlAttribute
     public void setNocache(Integer nocache) {
         this.nocache = nocache;
+    }
+
+    private Searcher getSearcher() {
+        if (searcher == null)
+            setSearcher(new Searcher(getClient(), this, getServer()));
+        return searcher;
+    }
+
+    private void setSearcher(Searcher searcher) {
+        this.searcher = searcher;
     }
 }

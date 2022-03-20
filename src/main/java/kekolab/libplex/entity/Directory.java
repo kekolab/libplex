@@ -4,23 +4,23 @@ import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSDirectory extends ServerItem {
+public abstract class Directory extends PlexMediaServerItem {
     private String key, art, thumb, title, type;
-    private ServerItem parent;
+    private PlexMediaServerItem parent;
 
-    protected void setParent(ServerItem parent) {
+    protected void setParent(PlexMediaServerItem parent) {
         this.parent = parent;
     }
 
-    protected ServerItem getParent() {
+    protected PlexMediaServerItem getParent() {
         return parent;
     }
 
-	protected URI contentUri() {
-		return getClient().uriBuilder()
+    protected URI contentUri() {
+        return getClient().uriBuilder()
                 .fromKey(getKey(), getParent(), getServer())
                 .build();
-	}
+    }
 
     public URI artUri() {
         return getClient().uriBuilder()
@@ -33,8 +33,6 @@ public abstract class PMSDirectory extends ServerItem {
                 .fromKey(getThumb(), getParent(), getServer())
                 .build();
     }
-
-    public abstract ServerItem content();
 
     public String getKey() {
         return key;

@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public class PMSLocation {
+public class Location {
     private Integer id;
     private String path;
 

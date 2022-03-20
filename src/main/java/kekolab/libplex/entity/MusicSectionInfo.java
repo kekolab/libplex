@@ -1,12 +1,13 @@
 package kekolab.libplex.entity;
 
-public class MusicSectionInfo extends SectionInfo<MusicSection> {
-    public MusicSectionInfo(SectionDirectoryXML xml) {
+import kekolab.libplex.xmladapter.SectionInfoXML;
+
+public class MusicSectionInfo extends SectionInfo {
+    public MusicSectionInfo(SectionInfoXML xml) {
         super(xml);
     }
 
-    @Override
     public MusicSection content() {
-    	return (MusicSection) MusicSection.build(MusicSection.class, getClient(), contentUri(), getServer());
+        return (MusicSection) MusicSection.build(MusicSection.class, getClient(), contentUri(), getServer());
     }
 }

@@ -11,7 +11,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 public class PMSVideos extends PMSMovieSectionContent {
     private Integer viewMode;
     private String art, thumb, title1, title2, viewGroup;
-    private List<VideoInfo> videos;
+    private List<Video> videos;
 
     public Integer getViewMode() {
         return viewMode;
@@ -37,7 +37,7 @@ public class PMSVideos extends PMSMovieSectionContent {
         return viewGroup;
     }
 
-    public List<VideoInfo> getVideos() {
+    public List<Video> getVideos() {
         if (videos != null)
             videos = videos.stream()
                     .map(v -> {
@@ -81,7 +81,7 @@ public class PMSVideos extends PMSMovieSectionContent {
     }
 
     @XmlElement(name = "Video")
-    public void setVideos(List<VideoInfo> videos) {
+    public void setVideos(List<Video> videos) {
         this.videos = videos;
     }
 }

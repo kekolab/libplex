@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class PMSMedia {
+public class Media {
     private Integer id; // Track, Video, Episode
     private Integer duration; // Track, Video, Episode
     private Integer bitrate; // Track, Video, Episode
@@ -20,7 +20,7 @@ public class PMSMedia {
     private String videoFrameRate; // Video, Episode
     private String audioProfile; // Video
     private String videoProfile; // Video, Episode
-    private List<PMSPart> parts; // Track, Video
+    private List<Part> parts; // Track, Video
 
     public Integer getId() {
         return id;
@@ -78,7 +78,7 @@ public class PMSMedia {
         return videoProfile;
     }
 
-    public List<PMSPart> getParts() {
+    public List<Part> getParts() {
         return parts;
     }
 
@@ -153,7 +153,7 @@ public class PMSMedia {
     }
 
     @XmlElement(name = "Part")
-    public void setParts(List<PMSPart> parts) {
+    public void setParts(List<Part> parts) {
         this.parts = parts;
     }
 

@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public class PMSRole extends PMSTag {
+public class Role extends Tag {
     private String role;
 
     public String getRole() {

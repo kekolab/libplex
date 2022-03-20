@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSSection extends PMSContainer {
+public abstract class Section extends PMSContainer {
     private Integer librarySectionID, viewMode;
     private String art, content, thumb, title1, viewGroup;
 
