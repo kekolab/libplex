@@ -13,6 +13,13 @@ public class Library extends PMSContainer {
     	URI uri = getClient().uriBuilder().fromKey("sections", this, getServer()).build();
     	return (Sections) Sections.build(Sections.class, getClient(), uri, getServer());
     }
+    
+    public URI artUri() {
+    	String art = getArt();
+    	if (art != null)
+    		return getClient().uriBuilder().fromKey(art, this, getServer()).build();
+    	return null;
+    }
 
     public String getArt() {
         return art;

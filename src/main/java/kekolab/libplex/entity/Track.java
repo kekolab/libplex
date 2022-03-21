@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,27 @@ public class Track extends SectionItem {
         setLibrarySectionKey(v.getLibrarySectionKey());
         setLibrarySectionTitle(v.getLibrarySectionTitle());
         setOriginalTitle(v.getOriginalTitle());
+    }
+    
+    public URI grandparentArtUri() {
+    	String grandparentArt = getGrandparentArt();
+    	if (grandparentArt != null)
+    		return getClient().uriBuilder().fromKey(grandparentArt, null, getServer()).build();
+    	return null;
+    }
+    
+    public URI grandparentThumbUri() {
+    	String grandparentThumb = getGrandparentThumb();
+    	if (grandparentThumb != null)
+    		return getClient().uriBuilder().fromKey(grandparentThumb, null, getServer()).build();
+    	return null;
+    }
+    
+    public URI parentThumbUri() {
+    	String parentThumb = getParentThumb();
+    	if (parentThumb != null)
+    		return getClient().uriBuilder().fromKey(parentThumb, null, getServer()).build();
+    	return null;
     }
 
     public Integer getParentRatingKey() {

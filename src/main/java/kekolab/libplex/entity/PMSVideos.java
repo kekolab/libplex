@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,20 @@ public class PMSVideos extends PMSMovieSectionContent {
     private Integer viewMode;
     private String art, thumb, title1, title2, viewGroup;
     private List<Video> videos;
+    
+    public URI artUri() {
+    	String art = getArt();
+    	if (art != null)
+    		return getClient().uriBuilder().fromKey(art, this, getServer()).build();
+    	return null;
+    }
+    
+    public URI thumbUri() {
+    	String thumb = getThumb();
+    	if (thumb != null)
+    		return getClient().uriBuilder().fromKey(thumb, this, getServer()).build();
+    	return null;
+    }
 
     public Integer getViewMode() {
         return viewMode;

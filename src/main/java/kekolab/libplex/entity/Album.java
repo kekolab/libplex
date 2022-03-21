@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +58,13 @@ public class Album extends SectionItem {
         setLastViewedAt(v.getLastViewedAt());
         setStyles(v.getStyles());
         setMoods(v.getMoods());
+    }
+    
+    public URI parentThumbUri() {
+    	String parentThumb = getParentThumb();
+    	if (parentThumb != null)
+    		return getClient().uriBuilder().fromKey(parentThumb, null, getServer()).build();
+    	return null;
     }
 
     public Integer getParentRatingKey() {

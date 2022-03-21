@@ -1,11 +1,27 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
+
 import jakarta.xml.bind.annotation.XmlAttribute;
 
 public abstract class Section extends PMSContainer {
     private Integer librarySectionID, viewMode;
     private String art, content, thumb, title1, viewGroup;
 
+    public URI artUri() {
+    	String art = getArt();
+    	if (art != null)
+    		return getClient().uriBuilder().fromKey(art, this, getServer()).build();
+    	return null;
+    }
+    
+    public URI thumbUri() {
+    	String thumb = getThumb();
+    	if (thumb != null)
+    		return getClient().uriBuilder().fromKey(thumb, this, getServer()).build();
+    	return null;
+    }
+    
     public Integer getLibrarySectionID() {
         return librarySectionID;
     }
