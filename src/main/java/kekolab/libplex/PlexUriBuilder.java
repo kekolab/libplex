@@ -32,7 +32,4 @@ public class PlexUriBuilder {
         }
         return delegate;
     }
-//    public UriBuilder fromKey(String key, MediaContainerPlexItem parent, ServerContent server) {
-//        return fromKey(key, parent.getUri(), server.getUri());
-//    }
 }
