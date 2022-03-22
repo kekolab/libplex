@@ -52,7 +52,7 @@ public class Video extends SectionItem {
     private Long viewOffset;
     private List<Tag> writers = new ArrayList<>(0);
     private Integer year;
-    private List<Tag> guids;
+    private List<Guid> guids;
 
     public Video(SectionItemXML v) {
         setAddedAt(v.getAddedAt());
@@ -479,11 +479,11 @@ public class Video extends SectionItem {
         this.year = year;
     }
 
-    public List<Tag> getGuids() {
+    public List<Guid> getGuids() {
         return guids;
     }
 
-    public void setGuids(List<Tag> guids) {
+    public void setGuids(List<Guid> guids) {
         this.guids = guids;
     }
 }

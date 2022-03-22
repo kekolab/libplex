@@ -15,7 +15,7 @@ public class Show extends SectionItem {
     private Long duration;
     private Date lastViewedAt, originallyAvailableAt;
     private List<Tag> genres;
-    private List<Tag> guids;
+    private List<Guid> guids;
     private List<Role> roles;
     private List<Tag> similars;
     private List<Location> locations;
@@ -171,7 +171,7 @@ public class Show extends SectionItem {
         return genres;
     }
 
-    public List<Tag> getGuids() {
+    public List<Guid> getGuids() {
         return guids;
     }
 
@@ -271,7 +271,7 @@ public class Show extends SectionItem {
         this.genres = genres;
     }
 
-    public void setGuids(List<Tag> guids) {
+    public void setGuids(List<Guid> guids) {
         this.guids = guids;
     }
 

@@ -13,7 +13,7 @@ public class Season extends SectionItem {
     private String parentGuid, parentStudio, titleSort, parentKey, parentTitle, parentThumb, parentTheme,
             librarySectionKey, librarySectionTitle;
     private Date lastViewedAt;
-    private List<Tag> guids;
+    private List<Guid> guids;
 
     public Season(SectionItemXML v) {
         setAddedAt(v.getAddedAt());
@@ -156,7 +156,7 @@ public class Season extends SectionItem {
         return lastViewedAt;
     }
 
-    public List<Tag> getGuids() {
+    public List<Guid> getGuids() {
         return guids;
     }
 
@@ -236,7 +236,7 @@ public class Season extends SectionItem {
         this.lastViewedAt = lastViewedAt;
     }
 
-    public void setGuids(List<Tag> guids) {
+    public void setGuids(List<Guid> guids) {
         this.guids = guids;
     }
 }
