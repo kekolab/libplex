@@ -3,10 +3,12 @@ package kekolab.libplex.entity;
 import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
+import kekolab.libplex.misc.Searcher;
 
 public class Section extends SyncableMediaContainer {
     private Integer librarySectionID, viewMode;
     private String art, content, thumb, title1, viewGroup;
+    private Searcher searcher;
 
     public URI artUri() {
     	String art = getArt();
@@ -83,5 +85,15 @@ public class Section extends SyncableMediaContainer {
     @XmlAttribute
     public void setViewGroup(String viewGroup) {
         this.viewGroup = viewGroup;
+    }
+    
+    protected Searcher getSearcher() {
+        if (searcher == null)
+            setSearcher(new Searcher(getClient(), this, getServer()));
+        return searcher;
+    }
+
+    private void setSearcher(Searcher searcher) {
+        this.searcher = searcher;
     }
 }

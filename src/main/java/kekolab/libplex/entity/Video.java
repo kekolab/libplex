@@ -24,7 +24,7 @@ public class Video extends SectionItem {
     private String grandparentTheme; 
     private String grandparentThumb; 
     private String grandparentTitle;
-    private Integer  hasPremiumExtra;private Integer hasPremiumPrimaryExtra;
+    private Integer  hasPremiumExtras;private Integer hasPremiumPrimaryExtra;
     private Integer index;
     private Date lastViewedAt;
     private Integer librarySectionID;
@@ -54,6 +54,8 @@ public class Video extends SectionItem {
     private Integer year;    
 
     public Video(SectionItemXML v) {
+    	setAddedAt(v.getAddedAt());
+    	setArt(v.getArt());
         setAudienceRating(v.getAudienceRating());
         setAudienceRatingImage(v.getAudienceRatingImage());
         setChapterSource(v.getChapterSource());
@@ -65,19 +67,23 @@ public class Video extends SectionItem {
         setGrandparentArt(v.getGrandparentArt());
         setGrandparentGuid(v.getGrandparentGuid());
         setGrandparentKey(v.getGrandparentKey());
+        setGrandparentRatingKey(v.getGrandparentRatingKey());
         setGrandparentTheme(v.getGrandparentTheme());
         setGrandparentThumb(v.getGrandparentThumb());
         setGrandparentTitle(v.getGrandparentTitle());
-        setHasPremiumExtra(v.getHasPremiumExtra());
+        setGuid(v.getGuid());
+        setHasPremiumExtras(v.getHasPremiumExtras());
         setHasPremiumPrimaryExtra(v.getHasPremiumPrimaryExtra());
         setIndex(v.getIndex());
+        setKey(v.getKey());
         setLastViewedAt(v.getLastViewedAt());
         setLibrarySectionID(v.getLibrarySectionID());
         setLibrarySectionKey(v.getLibrarySectionKey());
         setLibrarySectionTitle(v.getLibrarySectionTitle());
         setMedia(v.getMedia());
-        setOriginalTitle(v.getOriginalTitle());
         setOriginallyAvailableAt(v.getOriginallyAvailableAt());
+        setOriginalTitle(v.getOriginalTitle());
+        setParentGuid(v.getParentGuid());
         setParentIndex(v.getParentIndex());
         setParentKey(v.getParentKey());
         setParentRatingKey(v.getParentRatingKey());
@@ -87,11 +93,18 @@ public class Video extends SectionItem {
         setProducers(v.getProducers());
         setRating(v.getRating());
         setRatingImage(v.getRatingImage());
+        setRatingKey(v.getRatingKey());
         setRoles(v.getRoles());
         setSimilars(v.getSimilars());
         setSkipCount(v.getSkipCount());
         setStudio(v.getStudio());
+        setSummary(v.getSummary());
         setTagline(v.getTagline());
+        setThumb(v.getThumb());
+        setTitle(v.getTitle());
+        setType(v.getType());
+        setViewCount(v.getViewCount());
+        setUpdatedAt(v.getUpdatedAt());
         setViewCount(v.getViewCount());
         setViewOffset(v.getViewOffset());
         setWriters(v.getWriters());
@@ -169,7 +182,7 @@ public class Video extends SectionItem {
 	}
 
     public Integer getHasPremiumExtra() {
-        return hasPremiumExtra;
+        return hasPremiumExtras;
     }
 
     public Integer getHasPremiumPrimaryExtra() {
@@ -344,8 +357,8 @@ public class Video extends SectionItem {
 		this.grandparentTitle = grandparentTitle;
 	}
 
-	public void setHasPremiumExtra(Integer hasPremiumExtra) {
-        this.hasPremiumExtra = hasPremiumExtra;
+	public void setHasPremiumExtras(Integer hasPremiumExtras) {
+        this.hasPremiumExtras = hasPremiumExtras;
     }
 
 	public void setHasPremiumPrimaryExtra(Integer hasPremiumPrimaryExtra) {

@@ -12,7 +12,6 @@ import kekolab.libplex.misc.Searcher;
 @XmlRootElement(name = "MediaContainer")
 public class MusicSection extends Section {
     private Integer nocache;
-    private Searcher searcher;
 
     public List<Artist> all() {
         URI uri = getClient().uriBuilder()
@@ -71,15 +70,5 @@ public class MusicSection extends Section {
     @XmlAttribute
     public void setNocache(Integer nocache) {
         this.nocache = nocache;
-    }
-
-    private Searcher getSearcher() {
-        if (searcher == null)
-            setSearcher(new Searcher(getClient(), this, getServer()));
-        return searcher;
-    }
-
-    private void setSearcher(Searcher searcher) {
-        this.searcher = searcher;
     }
 }

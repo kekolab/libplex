@@ -30,7 +30,7 @@ public class SectionsTest extends WithPlexClientTests {
         assertNotNull(sections.getUri());
         assertTrue(sections.musicSections()
                 .size() > 0);
-//        assertTrue(sections.movieSections()
-//                .size() > 0);
+        assertTrue(sections.movieSections()
+                .size() > 0);
     }
 }

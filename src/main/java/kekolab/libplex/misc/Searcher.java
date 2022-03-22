@@ -7,11 +7,12 @@ import jakarta.ws.rs.core.UriBuilder;
 import kekolab.libplex.PlexClient;
 import kekolab.libplex.entity.Album;
 import kekolab.libplex.entity.Artist;
-import kekolab.libplex.entity.SectionItem;
-import kekolab.libplex.entity.SectionItemList;
 import kekolab.libplex.entity.PlexItem;
 import kekolab.libplex.entity.PlexMediaServer;
+import kekolab.libplex.entity.SectionItem;
+import kekolab.libplex.entity.SectionItemList;
 import kekolab.libplex.entity.Track;
+import kekolab.libplex.entity.Video;
 
 public class Searcher {
     private PlexClient client;
@@ -51,6 +52,12 @@ public class Searcher {
     public List<Track> searchTracks(String query) {
         return search(query, SearchType.TRACK).stream()
                 .map(mi -> (Track) mi)
+                .collect(Collectors.toList());
+    }
+    
+    public List<Video> searchMovies(String query) {
+        return search(query, SearchType.MOVIE).stream()
+                .map(mi -> (Video) mi)
                 .collect(Collectors.toList());
     }
 

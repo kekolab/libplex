@@ -1,14 +1,19 @@
 package kekolab.libplex.xmladapter;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import kekolab.libplex.entity.MovieSectionInfo;
 import kekolab.libplex.entity.MusicSectionInfo;
 import kekolab.libplex.entity.SectionInfo;
 
 public class SectionInfoAdapter extends XmlAdapter<SectionInfoXML, SectionInfo> {
     @Override
     public SectionInfo unmarshal(SectionInfoXML v) throws Exception {
-        if ("artist".equals(v.getType()))
+    	switch (v.getType().toLowerCase()) {
+    	case "artist":
             return new MusicSectionInfo(v);
+    	case "movie":
+            return new MovieSectionInfo(v);
+    	}
         return null;
     }
 

@@ -4,13 +4,13 @@ import java.net.URI;
 
 import kekolab.libplex.xmladapter.SectionInfoXML;
 
-public class MusicSectionInfo extends SectionInfo {
-    public MusicSectionInfo(SectionInfoXML xml) {
+public class MovieSectionInfo extends SectionInfo {
+    public MovieSectionInfo(SectionInfoXML xml) {
         super(xml);
     }
 
-    public MusicSection section() {
+    public MovieSection section() {
     	URI uri = getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
-        return (MusicSection) MusicSection.build(MusicSection.class, getClient(), uri, getServer());
+        return (MovieSection) MusicSection.build(MovieSection.class, getClient(), uri, getServer());
     }
 }

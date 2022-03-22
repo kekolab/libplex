@@ -19,7 +19,7 @@ public class AlbumTests extends WithPlexClientTests {
                 .sections()
                 .musicSections()
                 .get(0)
-                .content()
+                .section()
                 .albums()
                 .get(0);
     }

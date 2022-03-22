@@ -23,7 +23,7 @@ public class ArtistTests extends WithPlexClientTests {
                 .sections()
                 .musicSections()
                 .get(0)
-                .content()
+                .section()
                 .all()
                 .get(0);
     }

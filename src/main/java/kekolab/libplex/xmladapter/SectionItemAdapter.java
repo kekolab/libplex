@@ -5,6 +5,7 @@ import kekolab.libplex.entity.Album;
 import kekolab.libplex.entity.Artist;
 import kekolab.libplex.entity.SectionItem;
 import kekolab.libplex.entity.Track;
+import kekolab.libplex.entity.Video;
 
 public class SectionItemAdapter extends XmlAdapter<SectionItemXML, SectionItem> {
     @Override
@@ -17,6 +18,8 @@ public class SectionItemAdapter extends XmlAdapter<SectionItemXML, SectionItem> 
             return new Album(v);
         case "track":
             return new Track(v);
+        case "movie":
+        	return new Video(v);
         }
         return null;
     }

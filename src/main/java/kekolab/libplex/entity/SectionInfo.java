@@ -5,7 +5,7 @@ import java.util.Date;
 
 import kekolab.libplex.xmladapter.SectionInfoXML;
 
-public class SectionInfo extends SectionItemDirectory {
+public abstract class SectionInfo extends SectionItemDirectory {
 	private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
 	private String composite, agent, scanner, language, uuid;
 	private Date createdAt, scannedAt;
@@ -33,6 +33,8 @@ public class SectionInfo extends SectionItemDirectory {
 		setScannedAt(xml.getScannedAt());
 		setLocation(xml.getLocation());
 	}
+	
+	public abstract Section section();
 
 	public URI compositeUri() {
 		String composite = getComposite();

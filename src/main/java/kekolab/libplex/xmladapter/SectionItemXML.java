@@ -46,7 +46,7 @@ public class SectionItemXML {
     private Integer hasPremiumLyrics;
     private String originalTitle;
     private List<Tag> producers = new ArrayList<>(0);
-    private Integer hasPremiumExtra;
+    private Integer hasPremiumExtras;
     private String contentRating, tagline, audienceRatingImage, chapterSource, ratingImage;
     private Double audienceRating;
     private List<Tag> writers = new ArrayList<>(0);
@@ -517,8 +517,8 @@ public class SectionItemXML {
         this.producers = producers;
     }
 
-    public Integer getHasPremiumExtra() {
-        return hasPremiumExtra;
+    public Integer getHasPremiumExtras() {
+        return hasPremiumExtras;
     }
 
     public String getContentRating() {
@@ -554,8 +554,8 @@ public class SectionItemXML {
     }
 
     @XmlAttribute
-    public void setHasPremiumExtra(Integer hasPremiumExtra) {
-        this.hasPremiumExtra = hasPremiumExtra;
+    public void setHasPremiumExtras(Integer hasPremiumExtras) {
+        this.hasPremiumExtras = hasPremiumExtras;
     }
 
     @XmlAttribute
