@@ -54,6 +54,10 @@ public class SectionItemXML {
     private Integer hasPremiumPrimaryExtra;// Movie
     private Long viewOffset; // Movie, Episode
     private String grandparentTheme; // Episode
+	private Integer viewedLeafCount, childCount;
+	private String theme;
+	private List<Tag> guids;
+
 
     public String getKey() {
         return key;
@@ -621,5 +625,39 @@ public class SectionItemXML {
 	@XmlAttribute
 	public void setGrandparentTheme(String grandparentTheme) {
 		this.grandparentTheme = grandparentTheme;
+	}
+
+	public Integer getViewedLeafCount() {
+		return viewedLeafCount;
+	}
+
+	public Integer getChildCount() {
+		return childCount;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public List<Tag> getGuids() {
+		return guids;
+	}
+	@XmlAttribute
+	public void setViewedLeafCount(Integer viewedLeafCount) {
+		this.viewedLeafCount = viewedLeafCount;
+	}
+	@XmlAttribute
+	public void setChildCount(Integer childCount) {
+		this.childCount = childCount;
+	}
+	
+@XmlAttribute
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	@XmlElement(name = "Guid")
+	public void setGuids(List<Tag> guids) {
+		this.guids = guids;
 	}
 }

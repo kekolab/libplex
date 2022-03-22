@@ -11,6 +11,7 @@ import kekolab.libplex.entity.PlexItem;
 import kekolab.libplex.entity.PlexMediaServer;
 import kekolab.libplex.entity.SectionItem;
 import kekolab.libplex.entity.SectionItemList;
+import kekolab.libplex.entity.Show;
 import kekolab.libplex.entity.Track;
 import kekolab.libplex.entity.Video;
 
@@ -40,6 +41,14 @@ public class Searcher {
     public List<Video> searchMovies(String query) {
     	return searchAndMap(query, SearchType.MOVIE, Video.class);
     }
+    
+	public List<Video> searchEpisodes(String query) {
+		return searchAndMap(query, SearchType.EPISODE, Video.class);
+	}
+	
+	public List<Show> searchShows(String query) {
+		return searchAndMap(query, SearchType.SHOW, Show.class);
+	}
     
     private <A extends SectionItem> List<A> searchAndMap(String query, SearchType searchType, Class<A> cls) {
     	return search(query, searchType).stream()
@@ -83,4 +92,6 @@ public class Searcher {
     private void setClient(PlexClient client) {
         this.client = client;
     }
+
+
 }
