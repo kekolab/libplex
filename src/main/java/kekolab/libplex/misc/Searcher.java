@@ -25,6 +25,28 @@ public class Searcher {
         setServer(server);
     }
 
+    public List<Artist> searchArtists(String query) {
+    	return searchAndMap(query, SearchType.ARTIST, Artist.class);
+    }
+
+    public List<Album> searchAlbums(String query) {
+    	return searchAndMap(query, SearchType.ALBUM, Album.class);
+    }
+
+    public List<Track> searchTracks(String query) {
+    	return searchAndMap(query, SearchType.TRACK, Track.class);
+    }
+    
+    public List<Video> searchMovies(String query) {
+    	return searchAndMap(query, SearchType.MOVIE, Video.class);
+    }
+    
+    private <A extends SectionItem> List<A> searchAndMap(String query, SearchType searchType, Class<A> cls) {
+    	return search(query, searchType).stream()
+                .map(mi -> cls.cast(mi))
+                .collect(Collectors.toList());
+    }
+    
     public List<? extends SectionItem> search(String query, SearchType type) {
         UriBuilder uri = getClient().uriBuilder()
                 .fromKey("search", getParent(), getServer());
@@ -37,29 +59,6 @@ public class Searcher {
         return mil.getItems();
     }
 
-    public List<Artist> searchArtists(String query) {
-        return search(query, SearchType.ARTIST).stream()
-                .map(mi -> (Artist) mi)
-                .collect(Collectors.toList());
-    }
-
-    public List<Album> searchAlbums(String query) {
-        return search(query, SearchType.ALBUM).stream()
-                .map(mi -> (Album) mi)
-                .collect(Collectors.toList());
-    }
-
-    public List<Track> searchTracks(String query) {
-        return search(query, SearchType.TRACK).stream()
-                .map(mi -> (Track) mi)
-                .collect(Collectors.toList());
-    }
-    
-    public List<Video> searchMovies(String query) {
-        return search(query, SearchType.MOVIE).stream()
-                .map(mi -> (Video) mi)
-                .collect(Collectors.toList());
-    }
 
     private PlexItem getParent() {
         return parent;

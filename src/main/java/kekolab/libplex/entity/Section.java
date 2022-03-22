@@ -1,6 +1,7 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import kekolab.libplex.misc.Searcher;
@@ -9,6 +10,15 @@ public class Section extends SyncableMediaContainer {
     private Integer librarySectionID, viewMode;
     private String art, content, thumb, title1, viewGroup;
     private Searcher searcher;
+    
+    protected List<? extends SectionItem> itemListByKey(String key) {
+        URI uri = getClient().uriBuilder()
+                .fromKey(key, this, getServer())
+                .build();
+        SectionItemList mediaInfoList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
+                getServer());
+        return mediaInfoList.getItems();
+    }
 
     public URI artUri() {
     	String art = getArt();
