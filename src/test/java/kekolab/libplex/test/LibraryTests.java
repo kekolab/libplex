@@ -1,13 +1,18 @@
 package kekolab.libplex.test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import kekolab.libplex.entity.Album;
 import kekolab.libplex.entity.Library;
+import kekolab.libplex.entity.SectionItem;
+import kekolab.libplex.entity.Video;
 
 public class LibraryTests extends WithPlexClientTests {
     private Library library;
@@ -28,16 +33,15 @@ public class LibraryTests extends WithPlexClientTests {
 //        assertNotNull(library.onDeck());
         assertNotNull(library.sections());
     }
-//
-//    @Test
-//    void recentlyAddedTest() {
-//        SearchResult recentlyAdded = library.recentlyAdded();
-//        assertNotNull(recentlyAdded);
-//        assertTrue(recentlyAdded.albums()
-//                .size() > 0);
-//        assertTrue(recentlyAdded.movies()
-//                .size() > 0);
-//        assertEquals(0, recentlyAdded.artists()
-//                .size());
-//    }
+
+    @Test
+    void recentlyAddedTest() {
+        List<? extends SectionItem> recentlyAddedItems = library.recentlyAdded();
+        assertTrue(recentlyAddedItems.size() > 0);
+        assertTrue(recentlyAddedItems.stream()
+                .anyMatch(item -> item instanceof Album));
+        assertTrue(recentlyAddedItems.stream()
+                .anyMatch(item -> item instanceof Video && item.getType()
+                        .equals("movie")));
+    }
 }

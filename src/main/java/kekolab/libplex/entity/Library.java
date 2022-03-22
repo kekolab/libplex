@@ -1,6 +1,7 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -10,15 +11,27 @@ public class Library extends SyncableMediaContainer {
     private String art, content, title1, title2;
 
     public Sections sections() {
-    	URI uri = getClient().uriBuilder().fromKey("sections", this, getServer()).build();
-    	return (Sections) Sections.build(Sections.class, getClient(), uri, getServer());
+        URI uri = getClient().uriBuilder()
+                .fromKey("sections", this, getServer())
+                .build();
+        return (Sections) Sections.build(Sections.class, getClient(), uri, getServer());
     }
-    
+
+    public List<? extends SectionItem> recentlyAdded() {
+        URI uri = getClient().uriBuilder()
+                .fromKey("recentlyAdded", this, getServer())
+                .build();
+        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer()))
+                .getItems();
+    }
+
     public URI artUri() {
-    	String art = getArt();
-    	if (art != null)
-    		return getClient().uriBuilder().fromKey(art, this, getServer()).build();
-    	return null;
+        String art = getArt();
+        if (art != null)
+            return getClient().uriBuilder()
+                    .fromKey(art, this, getServer())
+                    .build();
+        return null;
     }
 
     public String getArt() {
