@@ -2,6 +2,7 @@ package kekolab.libplex.entity;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -23,6 +24,17 @@ public class Library extends SyncableMediaContainer {
                 .build();
         return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer()))
                 .getItems();
+    }
+
+    public List<Video> onDeck() {
+        URI uri = getClient().uriBuilder()
+                .fromKey("onDeck", this, getServer())
+                .build();
+        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer()))
+                .getItems()
+                .stream()
+                .map(item -> (Video) item)
+                .collect(Collectors.toList());
     }
 
     public URI artUri() {

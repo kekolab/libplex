@@ -44,4 +44,16 @@ public class LibraryTests extends WithPlexClientTests {
                 .anyMatch(item -> item instanceof Video && item.getType()
                         .equals("movie")));
     }
+
+    @Test
+    void onDeckTest() {
+        List<Video> onDeckItems = library.onDeck();
+        assertTrue(onDeckItems.size() > 0);
+        assertTrue(onDeckItems.stream()
+                .anyMatch(item -> item.getType()
+                        .equals("episode")));
+        assertTrue(onDeckItems.stream()
+                .anyMatch(item -> item.getType()
+                        .equals("movie")));
+    }
 }
