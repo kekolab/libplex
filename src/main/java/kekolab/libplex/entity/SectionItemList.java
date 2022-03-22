@@ -13,7 +13,7 @@ import kekolab.libplex.xmladapter.SectionItemAdapter;
 
 @XmlRootElement(name = "MediaContainer")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class SectionItemList extends PMSSimpleContainer {
+public class SectionItemList extends GenericMediaContainer {
     private List<? extends SectionItem> items = new ArrayList<>(0);
 
     public List<? extends SectionItem> getItems() {

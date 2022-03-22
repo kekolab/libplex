@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.SectionInfoAdapter;
 
 @XmlRootElement(name = "MediaContainer")
-public class Sections extends PMSContainer {
+public class Sections extends SyncableMediaContainer {
     private String title1;
     private List<SectionInfo> sections;
 

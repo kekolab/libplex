@@ -51,6 +51,9 @@ public class SectionItemXML {
     private Double audienceRating;
     private List<Tag> writers = new ArrayList<>(0);
     private List<Role> roles = new ArrayList<>(0);
+    private Integer hasPremiumPrimaryExtra;// Movie
+    private Long viewOffset; // Movie, Episode
+    private String grandparentTheme; // Episode
 
     public String getKey() {
         return key;
@@ -594,4 +597,29 @@ public class SectionItemXML {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+	public Integer getHasPremiumPrimaryExtra() {
+		return hasPremiumPrimaryExtra;
+	}
+
+	public Long getViewOffset() {
+		return viewOffset;
+	}
+
+	public String getGrandparentTheme() {
+		return grandparentTheme;
+	}
+	@XmlAttribute
+	public void setHasPremiumPrimaryExtra(Integer hasPremiumPrimaryExtra) {
+		this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
+	}
+	@XmlAttribute
+	public void setViewOffset(Long viewOffset) {
+		this.viewOffset = viewOffset;
+	}
+
+	@XmlAttribute
+	public void setGrandparentTheme(String grandparentTheme) {
+		this.grandparentTheme = grandparentTheme;
+	}
 }

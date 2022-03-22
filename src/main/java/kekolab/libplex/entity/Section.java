@@ -4,7 +4,7 @@ import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class Section extends PMSContainer {
+public abstract class Section extends SyncableMediaContainer {
     private Integer librarySectionID, viewMode;
     private String art, content, thumb, title1, viewGroup;
 

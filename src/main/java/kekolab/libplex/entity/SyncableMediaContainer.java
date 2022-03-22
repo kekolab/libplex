@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class PMSContainer extends PMSSimpleContainer {
+public abstract class SyncableMediaContainer extends GenericMediaContainer {
     private Integer allowSync;
 
     public Integer getAllowSync() {

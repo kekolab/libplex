@@ -6,7 +6,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class Library extends PMSContainer {
+public class Library extends SyncableMediaContainer {
     private String art, content, title1, title2;
 
     public Sections sections() {
