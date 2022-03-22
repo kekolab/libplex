@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import kekolab.libplex.entity.Album;
 import kekolab.libplex.entity.Artist;
 import kekolab.libplex.entity.SectionItem;
+import kekolab.libplex.entity.Show;
 import kekolab.libplex.entity.Track;
 import kekolab.libplex.entity.Video;
 
@@ -20,6 +21,8 @@ public class SectionItemAdapter extends XmlAdapter<SectionItemXML, SectionItem> 
             return new Track(v);
         case "movie":
         	return new Video(v);
+        case "show":
+        	return new Show(v);
         }
         return null;
     }
