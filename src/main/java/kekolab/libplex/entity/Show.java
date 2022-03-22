@@ -3,261 +3,287 @@ package kekolab.libplex.entity;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import kekolab.libplex.xmladapter.SectionItemXML;
 
 public class Show extends SectionItem {
-	private Integer index, viewCount, skipCount, year, leafCount, viewedLeafCount, childCount, librarySectionID;
-	private String studio, originalTitle, contentRating, tagline, theme, audienceRatingImage, librarySectionTitle, librarySectionKey;
-	private Double audienceRating;
-	private Long duration;
-	private Date lastViewedAt, originallyAvailableAt;
-	private List<Tag> genres;
-	private List<Tag> guids;
-	private List<Role> roles;
-	private List<Tag> similars;
-	private List<Location> locations;
-	
-    public Show(SectionItemXML v) {  
-    	setAddedAt(v.getAddedAt());
-    	setArt(v.getArt());
-    	setAudienceRating(v.getAudienceRating());
-    	setAudienceRatingImage(v.getAudienceRatingImage());
-    	setChildCount(v.getChildCount());
-    	setContentRating(v.getContentRating());
-    	setDuration(v.getDuration());
-    	setGenres(v.getGenres());
-    	setGuid(v.getGuid());
-    	setGuids(v.getGuids());
-    	setIndex(v.getIndex());
-    	setKey(v.getKey());
-    	setLastViewedAt(v.getLastViewedAt());
-    	setLeafCount(v.getLeafCount());
-    	setLibrarySectionID(v.getLibrarySectionID());
-    	setLibrarySectionKey(v.getLibrarySectionKey());
-    	setLibrarySectionTitle(v.getLibrarySectionTitle());
-    	setLocations(v.getLocations());
-    	setOriginallyAvailableAt(v.getOriginallyAvailableAt());
-    	setOriginalTitle(v.getOriginalTitle());
-    	setRatingKey(v.getRatingKey());
-    	setRoles(v.getRoles());
-    	setTagline(v.getTagline());
-    	setTheme(v.getTheme());
-    	setThumb(v.getThumb());
-    	setTitle(v.getTitle());
-    	setType(v.getType());
-    	setUpdatedAt(v.getUpdatedAt());
-    	setViewCount(v.getViewCount());
-    	setViewedLeafCount(v.getViewedLeafCount());
-    	setYear(v.getYear());
+    private Integer index, viewCount, skipCount, year, leafCount, viewedLeafCount, childCount, librarySectionID;
+    private String studio, originalTitle, contentRating, tagline, theme, audienceRatingImage, librarySectionTitle,
+            librarySectionKey;
+    private Double audienceRating;
+    private Long duration;
+    private Date lastViewedAt, originallyAvailableAt;
+    private List<Tag> genres;
+    private List<Tag> guids;
+    private List<Role> roles;
+    private List<Tag> similars;
+    private List<Location> locations;
+
+    public Show(SectionItemXML v) {
+        setAddedAt(v.getAddedAt());
+        setArt(v.getArt());
+        setAudienceRating(v.getAudienceRating());
+        setAudienceRatingImage(v.getAudienceRatingImage());
+        setChildCount(v.getChildCount());
+        setContentRating(v.getContentRating());
+        setDuration(v.getDuration());
+        setGenres(v.getGenres());
+        setGuid(v.getGuid());
+        setGuids(v.getGuids());
+        setIndex(v.getIndex());
+        setKey(v.getKey());
+        setLastViewedAt(v.getLastViewedAt());
+        setLeafCount(v.getLeafCount());
+        setLibrarySectionID(v.getLibrarySectionID());
+        setLibrarySectionKey(v.getLibrarySectionKey());
+        setLibrarySectionTitle(v.getLibrarySectionTitle());
+        setLocations(v.getLocations());
+        setOriginallyAvailableAt(v.getOriginallyAvailableAt());
+        setOriginalTitle(v.getOriginalTitle());
+        setRatingKey(v.getRatingKey());
+        setRoles(v.getRoles());
+        setTagline(v.getTagline());
+        setTheme(v.getTheme());
+        setThumb(v.getThumb());
+        setTitle(v.getTitle());
+        setType(v.getType());
+        setUpdatedAt(v.getUpdatedAt());
+        setViewCount(v.getViewCount());
+        setViewedLeafCount(v.getViewedLeafCount());
+        setYear(v.getYear());
     }
 
     @Override
     public Show details() {
-    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
-        SectionItem mediaInfo = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
-                uri, getServer())).getItems()
+        URI uri = getClient().uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
+                .build(getRatingKey());
+        SectionItem item = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
+                getServer())).getItems()
                         .get(0);
-        return (Show) mediaInfo;
+        return (Show) item;
     }
 
-	public Integer getIndex() {
-		return index;
-	}
+    public List<Season> seasons() {
+        URI uri = getClient().uriBuilder()
+                .fromKey(getKey(), this, getServer())
+                .build();
+        SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri);
+        return itemList.getItems()
+                .stream()
+                .map(item -> (Season) item)
+                .collect(Collectors.toList());
+    }
 
-	public Integer getViewCount() {
-		return viewCount;
-	}
+    public List<Video> allEpisodes() {
+        URI uri = getClient().uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}/allLeaves", null, getServer())
+                .build(getRatingKey());
+        List<? extends SectionItem> mis = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
+                uri, getServer())).getItems();
+        return mis.stream()
+                .map(item -> (Video) item)
+                .collect(Collectors.toList());
+    }
 
-	public Integer getSkipCount() {
-		return skipCount;
-	}
+    public Integer getIndex() {
+        return index;
+    }
 
-	public Integer getYear() {
-		return year;
-	}
+    public Integer getViewCount() {
+        return viewCount;
+    }
 
-	public Integer getLeafCount() {
-		return leafCount;
-	}
+    public Integer getSkipCount() {
+        return skipCount;
+    }
 
-	public Integer getViewedLeafCount() {
-		return viewedLeafCount;
-	}
+    public Integer getYear() {
+        return year;
+    }
 
-	public Integer getChildCount() {
-		return childCount;
-	}
+    public Integer getLeafCount() {
+        return leafCount;
+    }
 
-	public Integer getLibrarySectionID() {
-		return librarySectionID;
-	}
+    public Integer getViewedLeafCount() {
+        return viewedLeafCount;
+    }
 
-	public String getStudio() {
-		return studio;
-	}
+    public Integer getChildCount() {
+        return childCount;
+    }
 
-	public String getOriginalTitle() {
-		return originalTitle;
-	}
+    public Integer getLibrarySectionID() {
+        return librarySectionID;
+    }
 
-	public String getContentRating() {
-		return contentRating;
-	}
+    public String getStudio() {
+        return studio;
+    }
 
-	public String getTagline() {
-		return tagline;
-	}
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
 
-	public String getTheme() {
-		return theme;
-	}
+    public String getContentRating() {
+        return contentRating;
+    }
 
-	public String getAudienceRatingImage() {
-		return audienceRatingImage;
-	}
+    public String getTagline() {
+        return tagline;
+    }
 
-	public String getLibrarySectionTitle() {
-		return librarySectionTitle;
-	}
+    public String getTheme() {
+        return theme;
+    }
 
-	public String getLibrarySectionKey() {
-		return librarySectionKey;
-	}
+    public String getAudienceRatingImage() {
+        return audienceRatingImage;
+    }
 
-	public Double getAudienceRating() {
-		return audienceRating;
-	}
+    public String getLibrarySectionTitle() {
+        return librarySectionTitle;
+    }
 
-	public Long getDuration() {
-		return duration;
-	}
+    public String getLibrarySectionKey() {
+        return librarySectionKey;
+    }
 
-	public Date getLastViewedAt() {
-		return lastViewedAt;
-	}
+    public Double getAudienceRating() {
+        return audienceRating;
+    }
 
-	public Date getOriginallyAvailableAt() {
-		return originallyAvailableAt;
-	}
+    public Long getDuration() {
+        return duration;
+    }
 
-	public List<Tag> getGenres() {
-		return genres;
-	}
+    public Date getLastViewedAt() {
+        return lastViewedAt;
+    }
 
-	public List<Tag> getGuids() {
-		return guids;
-	}
+    public Date getOriginallyAvailableAt() {
+        return originallyAvailableAt;
+    }
 
-	public List<Role> getRoles() {
-		return roles;
-	}
+    public List<Tag> getGenres() {
+        return genres;
+    }
 
-	public List<Tag> getSimilars() {
-		return similars;
-	}
+    public List<Tag> getGuids() {
+        return guids;
+    }
 
-	public List<Location> getLocations() {
-		return locations;
-	}
+    public List<Role> getRoles() {
+        return roles;
+    }
 
-	public void setIndex(Integer index) {
-		this.index = index;
-	}
+    public List<Tag> getSimilars() {
+        return similars;
+    }
 
-	public void setViewCount(Integer viewCount) {
-		this.viewCount = viewCount;
-	}
+    public List<Location> getLocations() {
+        return locations;
+    }
 
-	public void setSkipCount(Integer skipCount) {
-		this.skipCount = skipCount;
-	}
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 
-	public void setYear(Integer year) {
-		this.year = year;
-	}
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
 
-	public void setLeafCount(Integer leafCount) {
-		this.leafCount = leafCount;
-	}
+    public void setSkipCount(Integer skipCount) {
+        this.skipCount = skipCount;
+    }
 
-	public void setViewedLeafCount(Integer viewedLeafCount) {
-		this.viewedLeafCount = viewedLeafCount;
-	}
+    public void setYear(Integer year) {
+        this.year = year;
+    }
 
-	public void setChildCount(Integer childCount) {
-		this.childCount = childCount;
-	}
+    public void setLeafCount(Integer leafCount) {
+        this.leafCount = leafCount;
+    }
 
-	public void setLibrarySectionID(Integer librarySectionID) {
-		this.librarySectionID = librarySectionID;
-	}
+    public void setViewedLeafCount(Integer viewedLeafCount) {
+        this.viewedLeafCount = viewedLeafCount;
+    }
 
-	public void setStudio(String studio) {
-		this.studio = studio;
-	}
+    public void setChildCount(Integer childCount) {
+        this.childCount = childCount;
+    }
 
-	public void setOriginalTitle(String originalTitle) {
-		this.originalTitle = originalTitle;
-	}
+    public void setLibrarySectionID(Integer librarySectionID) {
+        this.librarySectionID = librarySectionID;
+    }
 
-	public void setContentRating(String contentRating) {
-		this.contentRating = contentRating;
-	}
+    public void setStudio(String studio) {
+        this.studio = studio;
+    }
 
-	public void setTagline(String tagline) {
-		this.tagline = tagline;
-	}
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
 
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
+    public void setContentRating(String contentRating) {
+        this.contentRating = contentRating;
+    }
 
-	public void setAudienceRatingImage(String audienceRatingImage) {
-		this.audienceRatingImage = audienceRatingImage;
-	}
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
+    }
 
-	public void setLibrarySectionTitle(String librarySectionTitle) {
-		this.librarySectionTitle = librarySectionTitle;
-	}
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 
-	public void setLibrarySectionKey(String librarySectionKey) {
-		this.librarySectionKey = librarySectionKey;
-	}
+    public void setAudienceRatingImage(String audienceRatingImage) {
+        this.audienceRatingImage = audienceRatingImage;
+    }
 
-	public void setAudienceRating(Double audienceRating) {
-		this.audienceRating = audienceRating;
-	}
+    public void setLibrarySectionTitle(String librarySectionTitle) {
+        this.librarySectionTitle = librarySectionTitle;
+    }
 
-	public void setDuration(Long duration) {
-		this.duration = duration;
-	}
+    public void setLibrarySectionKey(String librarySectionKey) {
+        this.librarySectionKey = librarySectionKey;
+    }
 
-	public void setLastViewedAt(Date lastViewedAt) {
-		this.lastViewedAt = lastViewedAt;
-	}
+    public void setAudienceRating(Double audienceRating) {
+        this.audienceRating = audienceRating;
+    }
 
-	public void setOriginallyAvailableAt(Date originallyAvailableAt) {
-		this.originallyAvailableAt = originallyAvailableAt;
-	}
+    public void setDuration(Long duration) {
+        this.duration = duration;
+    }
 
-	public void setGenres(List<Tag> genres) {
-		this.genres = genres;
-	}
+    public void setLastViewedAt(Date lastViewedAt) {
+        this.lastViewedAt = lastViewedAt;
+    }
 
-	public void setGuids(List<Tag> guids) {
-		this.guids = guids;
-	}
+    public void setOriginallyAvailableAt(Date originallyAvailableAt) {
+        this.originallyAvailableAt = originallyAvailableAt;
+    }
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+    public void setGenres(List<Tag> genres) {
+        this.genres = genres;
+    }
 
-	public void setSimilars(List<Tag> similars) {
-		this.similars = similars;
-	}
+    public void setGuids(List<Tag> guids) {
+        this.guids = guids;
+    }
 
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}   
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setSimilars(List<Tag> similars) {
+        this.similars = similars;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
 }
