@@ -4,18 +4,8 @@ import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public class Directory extends PlexMediaServerItem {
-	private String key, art, thumb, title, type;
-	private PlexMediaServerItem parent;
-
-	protected void setParent(PlexMediaServerItem parent) {
-		this.parent = parent;
-	}
-
-	protected PlexMediaServerItem getParent() {
-		return parent;
-	}
-
+public class SectionItemDirectory extends BaseDirectory {
+	private String art, thumb;
 	public URI artUri() {
 		String art = getArt();
 		if (art != null)    		
@@ -34,29 +24,12 @@ public class Directory extends PlexMediaServerItem {
 		return null;
 	}
 
-	public String getKey() {
-		return key;
-	}
-
 	public String getArt() {
 		return art;
 	}
 
 	public String getThumb() {
 		return thumb;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	@XmlAttribute
-	public void setKey(String key) {
-		this.key = key;
 	}
 
 	@XmlAttribute
@@ -67,15 +40,5 @@ public class Directory extends PlexMediaServerItem {
 	@XmlAttribute
 	public void setThumb(String thumb) {
 		this.thumb = thumb;
-	}
-
-	@XmlAttribute
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	@XmlAttribute
-	public void setType(String type) {
-		this.type = type;
 	}
 }

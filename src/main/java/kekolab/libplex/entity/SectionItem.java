@@ -6,7 +6,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
-public abstract class SectionItem extends Directory {
+public abstract class SectionItem extends SectionItemDirectory {
     private Integer ratingKey;
     private String guid;
     private String summary;
