@@ -26,8 +26,7 @@ public class SectionItemXML {
     private Double rating;
     private Date originallyAvailableAt;
     private Integer grandparentRatingKey, parentIndex, ratingCount, parentYear;
-    private String grandparentGuid, parentStudio, grandparentKey, grandparentTitle, grandparentThumb,
-            grandparentArt;
+    private String grandparentGuid, parentStudio, grandparentKey, grandparentTitle, grandparentThumb, grandparentArt;
     private Long duration;
     private Integer index;
     private Integer parentRatingKey;
@@ -54,10 +53,10 @@ public class SectionItemXML {
     private Integer hasPremiumPrimaryExtra;// Movie
     private Long viewOffset; // Movie, Episode
     private String grandparentTheme; // Episode
-	private Integer viewedLeafCount, childCount;
-	private String theme;
-	private List<Tag> guids;
-
+    private Integer viewedLeafCount, childCount;
+    private String theme;
+    private List<Tag> guids;
+    private String titleSort, parentTheme;
 
     public String getKey() {
         return key;
@@ -602,62 +601,84 @@ public class SectionItemXML {
         this.roles = roles;
     }
 
-	public Integer getHasPremiumPrimaryExtra() {
-		return hasPremiumPrimaryExtra;
-	}
+    public Integer getHasPremiumPrimaryExtra() {
+        return hasPremiumPrimaryExtra;
+    }
 
-	public Long getViewOffset() {
-		return viewOffset;
-	}
+    public Long getViewOffset() {
+        return viewOffset;
+    }
 
-	public String getGrandparentTheme() {
-		return grandparentTheme;
-	}
-	@XmlAttribute
-	public void setHasPremiumPrimaryExtra(Integer hasPremiumPrimaryExtra) {
-		this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
-	}
-	@XmlAttribute
-	public void setViewOffset(Long viewOffset) {
-		this.viewOffset = viewOffset;
-	}
+    public String getGrandparentTheme() {
+        return grandparentTheme;
+    }
 
-	@XmlAttribute
-	public void setGrandparentTheme(String grandparentTheme) {
-		this.grandparentTheme = grandparentTheme;
-	}
+    @XmlAttribute
+    public void setHasPremiumPrimaryExtra(Integer hasPremiumPrimaryExtra) {
+        this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
+    }
 
-	public Integer getViewedLeafCount() {
-		return viewedLeafCount;
-	}
+    @XmlAttribute
+    public void setViewOffset(Long viewOffset) {
+        this.viewOffset = viewOffset;
+    }
 
-	public Integer getChildCount() {
-		return childCount;
-	}
+    @XmlAttribute
+    public void setGrandparentTheme(String grandparentTheme) {
+        this.grandparentTheme = grandparentTheme;
+    }
 
-	public String getTheme() {
-		return theme;
-	}
+    public Integer getViewedLeafCount() {
+        return viewedLeafCount;
+    }
 
-	public List<Tag> getGuids() {
-		return guids;
-	}
-	@XmlAttribute
-	public void setViewedLeafCount(Integer viewedLeafCount) {
-		this.viewedLeafCount = viewedLeafCount;
-	}
-	@XmlAttribute
-	public void setChildCount(Integer childCount) {
-		this.childCount = childCount;
-	}
-	
-@XmlAttribute
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
+    public Integer getChildCount() {
+        return childCount;
+    }
 
-	@XmlElement(name = "Guid")
-	public void setGuids(List<Tag> guids) {
-		this.guids = guids;
-	}
+    public String getTheme() {
+        return theme;
+    }
+
+    public List<Tag> getGuids() {
+        return guids;
+    }
+
+    @XmlAttribute
+    public void setViewedLeafCount(Integer viewedLeafCount) {
+        this.viewedLeafCount = viewedLeafCount;
+    }
+
+    @XmlAttribute
+    public void setChildCount(Integer childCount) {
+        this.childCount = childCount;
+    }
+
+    @XmlAttribute
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    @XmlElement(name = "Guid")
+    public void setGuids(List<Tag> guids) {
+        this.guids = guids;
+    }
+
+    public String getTitleSort() {
+        return titleSort;
+    }
+
+    public String getParentTheme() {
+        return parentTheme;
+    }
+
+    @XmlAttribute
+    public void setTitleSort(String titleSort) {
+        this.titleSort = titleSort;
+    }
+
+    @XmlAttribute
+    public void setParentTheme(String parentTheme) {
+        this.parentTheme = parentTheme;
+    }
 }

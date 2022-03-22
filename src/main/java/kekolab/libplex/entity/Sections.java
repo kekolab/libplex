@@ -20,11 +20,18 @@ public class Sections extends SyncableMediaContainer {
                 .map(d -> (MusicSectionInfo) d)
                 .collect(Collectors.toList());
     }
-    
+
     public List<MovieSectionInfo> movieSections() {
         return getSections().stream()
                 .filter(d -> d instanceof MovieSectionInfo)
                 .map(d -> (MovieSectionInfo) d)
+                .collect(Collectors.toList());
+    }
+
+    public List<ShowSectionInfo> showSections() {
+        return getSections().stream()
+                .filter(d -> d instanceof ShowSectionInfo)
+                .map(d -> (ShowSectionInfo) d)
                 .collect(Collectors.toList());
     }
 

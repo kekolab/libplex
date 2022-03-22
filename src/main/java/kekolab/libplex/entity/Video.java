@@ -5,57 +5,58 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import kekolab.libplex.xmladapter.SectionItemXML;
 
 public class Video extends SectionItem {
     private Double audienceRating;
-    private String  audienceRatingImage;
-    private String  chapterSource;
-    private String  contentRating;
-    private List<Tag> countries = new ArrayList<>(0); 
-    private List<Tag> directors = new ArrayList<>(0); 
-    private Long duration; 
+    private String audienceRatingImage;
+    private String chapterSource;
+    private String contentRating;
+    private List<Tag> countries = new ArrayList<>(0);
+    private List<Tag> directors = new ArrayList<>(0);
+    private Long duration;
     private List<Tag> genres = new ArrayList<>(0);
-    private String grandparentArt; 
-    private String grandparentGuid; 
-    private String grandparentKey; 
+    private String grandparentArt;
+    private String grandparentGuid;
+    private String grandparentKey;
     private Integer grandparentRatingKey;
-    private String grandparentTheme; 
-    private String grandparentThumb; 
+    private String grandparentTheme;
+    private String grandparentThumb;
     private String grandparentTitle;
-    private Integer  hasPremiumExtras;private Integer hasPremiumPrimaryExtra;
+    private Integer hasPremiumExtras;
+    private Integer hasPremiumPrimaryExtra;
     private Integer index;
     private Date lastViewedAt;
     private Integer librarySectionID;
-    private String  librarySectionKey; 
-    private String librarySectionTitle; 
+    private String librarySectionKey;
+    private String librarySectionTitle;
     private List<Media> media = new ArrayList<>(0);
-    private Date originallyAvailableAt; 
-    private String  originalTitle; 
-    private String parentGuid; 
+    private Date originallyAvailableAt;
+    private String originalTitle;
+    private String parentGuid;
     private Integer parentIndex;
     private String parentKey;
     private Integer parentRatingKey;
     private String parentThumb;
     private String parentTitle;
-    private Integer parentYear; 
+    private Integer parentYear;
     private List<Tag> producers = new ArrayList<>(0);
     private Double rating;
-    private String  ratingImage;
+    private String ratingImage;
     private List<Role> roles = new ArrayList<>(0);
     private List<Tag> similars = new ArrayList<>(0);
     private Integer skipCount;
     private String studio;
-    private String  tagline; 
-    private Integer viewCount; 
+    private String tagline;
+    private Integer viewCount;
     private Long viewOffset;
     private List<Tag> writers = new ArrayList<>(0);
-    private Integer year;    
+    private Integer year;
+    private List<Tag> guids;
 
     public Video(SectionItemXML v) {
-    	setAddedAt(v.getAddedAt());
-    	setArt(v.getArt());
+        setAddedAt(v.getAddedAt());
+        setArt(v.getArt());
         setAudienceRating(v.getAudienceRating());
         setAudienceRatingImage(v.getAudienceRatingImage());
         setChapterSource(v.getChapterSource());
@@ -72,6 +73,7 @@ public class Video extends SectionItem {
         setGrandparentThumb(v.getGrandparentThumb());
         setGrandparentTitle(v.getGrandparentTitle());
         setGuid(v.getGuid());
+        setGuids(v.getGuids());
         setHasPremiumExtras(v.getHasPremiumExtras());
         setHasPremiumPrimaryExtra(v.getHasPremiumPrimaryExtra());
         setIndex(v.getIndex());
@@ -108,16 +110,20 @@ public class Video extends SectionItem {
         setViewCount(v.getViewCount());
         setViewOffset(v.getViewOffset());
         setWriters(v.getWriters());
-        setYear(v.getYear());        
+        setYear(v.getYear());
     }
 
     @Override
     public Video details() {
-    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
+        URI uri = getClient().uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
+                .build(getRatingKey());
         SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
                 getServer());
-        if (mil.getItems().size() > 0)
-        	return (Video) mil.getItems().get(0);
+        if (mil.getItems()
+                .size() > 0)
+            return (Video) mil.getItems()
+                    .get(0);
         return null;
     }
 
@@ -154,48 +160,48 @@ public class Video extends SectionItem {
     }
 
     public String getGrandparentArt() {
-		return grandparentArt;
-	}
+        return grandparentArt;
+    }
 
     public String getGrandparentGuid() {
-		return grandparentGuid;
-	}
+        return grandparentGuid;
+    }
 
     public String getGrandparentKey() {
-		return grandparentKey;
-	}
+        return grandparentKey;
+    }
 
     public Integer getGrandparentRatingKey() {
-		return grandparentRatingKey;
-	}
+        return grandparentRatingKey;
+    }
 
     public String getGrandparentTheme() {
-		return grandparentTheme;
-	}
+        return grandparentTheme;
+    }
 
     public String getGrandparentThumb() {
-		return grandparentThumb;
-	}
+        return grandparentThumb;
+    }
 
     public String getGrandparentTitle() {
-		return grandparentTitle;
-	}
+        return grandparentTitle;
+    }
 
-    public Integer getHasPremiumExtra() {
+    public Integer getHasPremiumExtras() {
         return hasPremiumExtras;
     }
 
     public Integer getHasPremiumPrimaryExtra() {
-		return hasPremiumPrimaryExtra;
-	}
+        return hasPremiumPrimaryExtra;
+    }
 
     public Integer getIndex() {
-		return index;
-	}
+        return index;
+    }
 
     public Date getLastViewedAt() {
-		return lastViewedAt;
-	}
+        return lastViewedAt;
+    }
 
     public Integer getLibrarySectionID() {
         return librarySectionID;
@@ -222,32 +228,32 @@ public class Video extends SectionItem {
     }
 
     public String getParentGuid() {
-		return parentGuid;
-	}
+        return parentGuid;
+    }
 
     public Integer getParentIndex() {
-		return parentIndex;
-	}
+        return parentIndex;
+    }
 
     public String getParentKey() {
-		return parentKey;
-	}
+        return parentKey;
+    }
 
     public Integer getParentRatingKey() {
-		return parentRatingKey;
-	}
+        return parentRatingKey;
+    }
 
     public String getParentThumb() {
-		return parentThumb;
-	}
+        return parentThumb;
+    }
 
     public String getParentTitle() {
-		return parentTitle;
-	}
+        return parentTitle;
+    }
 
     public Integer getParentYear() {
-		return parentYear;
-	}
+        return parentYear;
+    }
 
     public List<Tag> getProducers() {
         return producers;
@@ -270,8 +276,8 @@ public class Video extends SectionItem {
     }
 
     public Integer getSkipCount() {
-		return skipCount;
-	}
+        return skipCount;
+    }
 
     public String getStudio() {
         return studio;
@@ -282,12 +288,12 @@ public class Video extends SectionItem {
     }
 
     public Integer getViewCount() {
-		return viewCount;
-	}
+        return viewCount;
+    }
 
     public Long getViewOffset() {
-		return viewOffset;
-	}
+        return viewOffset;
+    }
 
     public List<Tag> getWriters() {
         return writers;
@@ -313,163 +319,171 @@ public class Video extends SectionItem {
         this.contentRating = contentRating;
     }
 
-	public void setCountries(List<Tag> countries) {
+    public void setCountries(List<Tag> countries) {
         this.countries = countries;
     }
 
-	public void setDirectors(List<Tag> directors) {
+    public void setDirectors(List<Tag> directors) {
         this.directors = directors;
     }
 
-	public void setDuration(Long duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
-	public void setGenres(List<Tag> genres) {
+    public void setGenres(List<Tag> genres) {
         this.genres = genres;
     }
 
-	public void setGrandparentArt(String grandparentArt) {
-		this.grandparentArt = grandparentArt;
-	}
+    public void setGrandparentArt(String grandparentArt) {
+        this.grandparentArt = grandparentArt;
+    }
 
-	public void setGrandparentGuid(String grandparentGuid) {
-		this.grandparentGuid = grandparentGuid;
-	}
+    public void setGrandparentGuid(String grandparentGuid) {
+        this.grandparentGuid = grandparentGuid;
+    }
 
-	public void setGrandparentKey(String grandparentKey) {
-		this.grandparentKey = grandparentKey;
-	}
+    public void setGrandparentKey(String grandparentKey) {
+        this.grandparentKey = grandparentKey;
+    }
 
-	public void setGrandparentRatingKey(Integer grandparentRatingKey) {
-		this.grandparentRatingKey = grandparentRatingKey;
-	}
+    public void setGrandparentRatingKey(Integer grandparentRatingKey) {
+        this.grandparentRatingKey = grandparentRatingKey;
+    }
 
-	public void setGrandparentTheme(String grandparentTheme) {
-		this.grandparentTheme = grandparentTheme;
-	}
+    public void setGrandparentTheme(String grandparentTheme) {
+        this.grandparentTheme = grandparentTheme;
+    }
 
-	public void setGrandparentThumb(String grandparentThumb) {
-		this.grandparentThumb = grandparentThumb;
-	}
+    public void setGrandparentThumb(String grandparentThumb) {
+        this.grandparentThumb = grandparentThumb;
+    }
 
-	public void setGrandparentTitle(String grandparentTitle) {
-		this.grandparentTitle = grandparentTitle;
-	}
+    public void setGrandparentTitle(String grandparentTitle) {
+        this.grandparentTitle = grandparentTitle;
+    }
 
-	public void setHasPremiumExtras(Integer hasPremiumExtras) {
+    public void setHasPremiumExtras(Integer hasPremiumExtras) {
         this.hasPremiumExtras = hasPremiumExtras;
     }
 
-	public void setHasPremiumPrimaryExtra(Integer hasPremiumPrimaryExtra) {
-		this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
-	}
+    public void setHasPremiumPrimaryExtra(Integer hasPremiumPrimaryExtra) {
+        this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
+    }
 
-	public void setIndex(Integer index) {
-		this.index = index;
-	}
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 
-	public void setLastViewedAt(Date lastViewedAt) {
-		this.lastViewedAt = lastViewedAt;
-	}
+    public void setLastViewedAt(Date lastViewedAt) {
+        this.lastViewedAt = lastViewedAt;
+    }
 
-	public void setLibrarySectionID(Integer librarySectionID) {
+    public void setLibrarySectionID(Integer librarySectionID) {
         this.librarySectionID = librarySectionID;
     }
 
-	public void setLibrarySectionKey(String librarySectionKey) {
+    public void setLibrarySectionKey(String librarySectionKey) {
         this.librarySectionKey = librarySectionKey;
     }
 
-	public void setLibrarySectionTitle(String librarySectionTitle) {
+    public void setLibrarySectionTitle(String librarySectionTitle) {
         this.librarySectionTitle = librarySectionTitle;
     }
 
-	public void setMedia(List<Media> media) {
+    public void setMedia(List<Media> media) {
         this.media = media;
     }
 
-	public void setOriginallyAvailableAt(Date originallyAvailableAt) {
+    public void setOriginallyAvailableAt(Date originallyAvailableAt) {
         this.originallyAvailableAt = originallyAvailableAt;
     }
 
-	public void setOriginalTitle(String originalTitle) {
+    public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
-	public void setParentGuid(String parentGuid) {
-		this.parentGuid = parentGuid;
-	}
+    public void setParentGuid(String parentGuid) {
+        this.parentGuid = parentGuid;
+    }
 
-	public void setParentIndex(Integer parentIndex) {
-		this.parentIndex = parentIndex;
-	}
+    public void setParentIndex(Integer parentIndex) {
+        this.parentIndex = parentIndex;
+    }
 
-	public void setParentKey(String parentKey) {
-		this.parentKey = parentKey;
-	}
+    public void setParentKey(String parentKey) {
+        this.parentKey = parentKey;
+    }
 
-	public void setParentRatingKey(Integer parentRatingKey) {
-		this.parentRatingKey = parentRatingKey;
-	}
+    public void setParentRatingKey(Integer parentRatingKey) {
+        this.parentRatingKey = parentRatingKey;
+    }
 
-	public void setParentThumb(String parentThumb) {
-		this.parentThumb = parentThumb;
-	}
+    public void setParentThumb(String parentThumb) {
+        this.parentThumb = parentThumb;
+    }
 
-	public void setParentTitle(String parentTitle) {
-		this.parentTitle = parentTitle;
-	}
+    public void setParentTitle(String parentTitle) {
+        this.parentTitle = parentTitle;
+    }
 
-	public void setParentYear(Integer parentYear) {
-		this.parentYear = parentYear;
-	}
+    public void setParentYear(Integer parentYear) {
+        this.parentYear = parentYear;
+    }
 
-	public void setProducers(List<Tag> producers) {
+    public void setProducers(List<Tag> producers) {
         this.producers = producers;
     }
 
-	public void setRating(Double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
-	public void setRatingImage(String ratingImage) {
+    public void setRatingImage(String ratingImage) {
         this.ratingImage = ratingImage;
     }
 
-	public void setRoles(List<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-	public void setSimilars(List<Tag> similars) {
+    public void setSimilars(List<Tag> similars) {
         this.similars = similars;
     }
 
-	public void setSkipCount(Integer skipCount) {
-		this.skipCount = skipCount;
-	}
+    public void setSkipCount(Integer skipCount) {
+        this.skipCount = skipCount;
+    }
 
-	public void setStudio(String studio) {
+    public void setStudio(String studio) {
         this.studio = studio;
     }
 
-	public void setTagline(String tagline) {
+    public void setTagline(String tagline) {
         this.tagline = tagline;
     }
 
-	public void setViewCount(Integer viewCount) {
-		this.viewCount = viewCount;
-	}
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
 
-	public void setViewOffset(Long viewOffset) {
-		this.viewOffset = viewOffset;
-	}
+    public void setViewOffset(Long viewOffset) {
+        this.viewOffset = viewOffset;
+    }
 
-	public void setWriters(List<Tag> writers) {
+    public void setWriters(List<Tag> writers) {
         this.writers = writers;
     }
 
-	public void setYear(Integer year) {
+    public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public List<Tag> getGuids() {
+        return guids;
+    }
+
+    public void setGuids(List<Tag> guids) {
+        this.guids = guids;
     }
 }

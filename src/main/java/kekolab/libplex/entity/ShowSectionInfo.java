@@ -9,8 +9,11 @@ public class ShowSectionInfo extends SectionInfo {
         super(xml);
     }
 
+    @Override
     public ShowSection section() {
-    	URI uri = getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
-        return (ShowSection) ShowSection.build(MovieSection.class, getClient(), uri, getServer());
+        URI uri = getClient().uriBuilder()
+                .fromKey(getKey(), getParent(), getServer())
+                .build();
+        return (ShowSection) ShowSection.build(ShowSection.class, getClient(), uri, getServer());
     }
 }
