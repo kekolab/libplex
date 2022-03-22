@@ -65,10 +65,20 @@ public class Album extends SectionItem {
         setYear(v.getYear());
     }
     
+    public List<Track> tracks() {
+    	URI uri = getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
+        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer()))
+                .getItems()
+                .stream()
+                .map(mi -> (Track) mi)
+                .collect(Collectors.toList());
+    }
+    
     @Override
     public Album details() {
+    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
         List<? extends SectionItem> mis = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
-                detailsUri(), getServer())).getItems();
+        		uri, getServer())).getItems();
         return mis.size() > 0 ? (Album) mis.get(0) : null;
     }
 
@@ -245,13 +255,5 @@ public class Album extends SectionItem {
 
     public void setYear(Integer year) {
         this.year = year;
-    }
-
-    public List<Track> tracks() {
-        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), contentUri(), getServer()))
-                .getItems()
-                .stream()
-                .map(mi -> (Track) mi)
-                .collect(Collectors.toList());
     }
 }

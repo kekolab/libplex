@@ -4,7 +4,7 @@ import java.net.URI;
 
 import kekolab.libplex.PlexClient;
 
-public abstract class PlexItem {
+public class PlexItem {
     private PlexClient client;
     private URI uri;
 

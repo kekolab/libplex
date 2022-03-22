@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,14 +60,16 @@ public class Artist extends SectionItem {
 
     @Override
     public Artist details() {
+    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
         SectionItem mediaInfo = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
-                detailsUri(), getServer())).getItems()
+                uri, getServer())).getItems()
                         .get(0);
         return (Artist) mediaInfo;
     }
 
-    public List<Album> content() {
-        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), contentUri(),
+    public List<Album> albums() {
+    	URI uri = getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
                 getServer());
         return mil.getItems()
                 .stream()

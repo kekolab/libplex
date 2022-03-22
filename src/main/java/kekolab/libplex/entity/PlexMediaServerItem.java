@@ -4,7 +4,7 @@ import java.net.URI;
 
 import kekolab.libplex.PlexClient;
 
-public abstract class PlexMediaServerItem extends PlexItem {
+public class PlexMediaServerItem extends PlexItem {
     private PlexMediaServer server;
 
     public static PlexMediaServerItem build(Class<? extends PlexMediaServerItem> cls, PlexClient client, URI uri,

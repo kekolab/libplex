@@ -1,6 +1,5 @@
 package kekolab.libplex.entity;
 
-import java.net.URI;
 import java.util.Date;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -14,14 +13,7 @@ public abstract class SectionItem extends Directory {
     private Date addedAt;
     private Date updatedAt;
 
-    protected URI detailsUri() {
-        URI uri = getClient().uriBuilder()
-                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
-                .build(getRatingKey());
-        return uri;
-    }
-
-    public abstract PlexMediaServerItem details();
+    public abstract SectionItem details();
 
     public Integer getRatingKey() {
         return ratingKey;

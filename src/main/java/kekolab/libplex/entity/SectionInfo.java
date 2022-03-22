@@ -5,7 +5,7 @@ import java.util.Date;
 
 import kekolab.libplex.xmladapter.SectionInfoXML;
 
-public abstract class SectionInfo extends Directory {
+public class SectionInfo extends Directory {
 	private Integer allowSync, filters, refreshing, content, directory, contentChangedAt, hidden;
 	private String composite, agent, scanner, language, uuid;
 	private Date createdAt, scannedAt;

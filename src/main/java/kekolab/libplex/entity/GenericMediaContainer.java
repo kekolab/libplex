@@ -2,7 +2,7 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class GenericMediaContainer extends PlexMediaServerItem {
+public class GenericMediaContainer extends PlexMediaServerItem {
     private Integer size;
     private Integer mediaTagVersion;
     private String identifier;

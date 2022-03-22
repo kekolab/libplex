@@ -4,7 +4,7 @@ import java.net.URI;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public abstract class Directory extends PlexMediaServerItem {
+public class Directory extends PlexMediaServerItem {
 	private String key, art, thumb, title, type;
 	private PlexMediaServerItem parent;
 
@@ -14,12 +14,6 @@ public abstract class Directory extends PlexMediaServerItem {
 
 	protected PlexMediaServerItem getParent() {
 		return parent;
-	}
-
-	protected URI contentUri() {
-		return getClient().uriBuilder()
-				.fromKey(getKey(), getParent(), getServer())
-				.build();
 	}
 
 	public URI artUri() {

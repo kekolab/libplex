@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -99,7 +100,8 @@ public class Video extends SectionItem {
 
     @Override
     public Video details() {
-        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), detailsUri(),
+    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
                 getServer());
         if (mil.getItems().size() > 0)
         	return (Video) mil.getItems().get(0);

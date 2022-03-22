@@ -69,7 +69,8 @@ public class Track extends SectionItem {
     
     @Override
     public Track details() {
-        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), contentUri(),
+    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
                 getServer());
         return (Track) mil.getItems()
                 .get(0);
