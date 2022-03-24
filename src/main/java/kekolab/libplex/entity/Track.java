@@ -66,20 +66,22 @@ public class Track extends SectionItem {
         setLibrarySectionTitle(v.getLibrarySectionTitle());
         setOriginalTitle(v.getOriginalTitle());
     }
-    
+
     @Override
     public Track details() {
-    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
+        URI uri = getClient().uriBuilder()
+                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
+                .build(getRatingKey());
         SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
                 getServer());
         return (Track) mil.getItems()
                 .get(0);
     }
-    
+
     public Long getDuration() {
         return duration;
     }
-    
+
     public String getGrandparentArt() {
         return grandparentArt;
     }
@@ -125,6 +127,10 @@ public class Track extends SectionItem {
     }
 
     public List<Media> getMedia() {
+        media.forEach(medium -> {
+            medium.setServer(getServer());
+            medium.setClient(getClient());
+        });
         return media;
     }
 
@@ -169,24 +175,30 @@ public class Track extends SectionItem {
     }
 
     public URI grandparentArtUri() {
-    	String grandparentArt = getGrandparentArt();
-    	if (grandparentArt != null)
-    		return getClient().uriBuilder().fromKey(grandparentArt, null, getServer()).build();
-    	return null;
+        String grandparentArt = getGrandparentArt();
+        if (grandparentArt != null)
+            return getClient().uriBuilder()
+                    .fromKey(grandparentArt, null, getServer())
+                    .build();
+        return null;
     }
 
     public URI grandparentThumbUri() {
-    	String grandparentThumb = getGrandparentThumb();
-    	if (grandparentThumb != null)
-    		return getClient().uriBuilder().fromKey(grandparentThumb, null, getServer()).build();
-    	return null;
+        String grandparentThumb = getGrandparentThumb();
+        if (grandparentThumb != null)
+            return getClient().uriBuilder()
+                    .fromKey(grandparentThumb, null, getServer())
+                    .build();
+        return null;
     }
 
     public URI parentThumbUri() {
-    	String parentThumb = getParentThumb();
-    	if (parentThumb != null)
-    		return getClient().uriBuilder().fromKey(parentThumb, null, getServer()).build();
-    	return null;
+        String parentThumb = getParentThumb();
+        if (parentThumb != null)
+            return getClient().uriBuilder()
+                    .fromKey(parentThumb, null, getServer())
+                    .build();
+        return null;
     }
 
     public void setDuration(Long duration) {

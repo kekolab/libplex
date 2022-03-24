@@ -1,9 +1,11 @@
 package kekolab.libplex.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
+import kekolab.libplex.PlexClient;
 
 public class Media {
     private Integer id; // Track, Video, Episode
@@ -20,7 +22,9 @@ public class Media {
     private String videoFrameRate; // Video, Episode
     private String audioProfile; // Video
     private String videoProfile; // Video, Episode
-    private List<Part> parts; // Track, Video
+    private List<Part> parts = new ArrayList<>(0); // Track, Video
+    private PlexMediaServer server;
+    private PlexClient client;
 
     public Integer getId() {
         return id;
@@ -79,6 +83,10 @@ public class Media {
     }
 
     public List<Part> getParts() {
+        parts.forEach(part -> {
+            part.setServer(server);
+            part.setClient(client);
+        });
         return parts;
     }
 
@@ -157,4 +165,11 @@ public class Media {
         this.parts = parts;
     }
 
+    protected void setServer(PlexMediaServer server) {
+        this.server = server;
+    }
+
+    protected void setClient(PlexClient client) {
+        this.client = client;
+    }
 }

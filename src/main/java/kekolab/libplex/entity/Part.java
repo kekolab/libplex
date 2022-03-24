@@ -1,10 +1,12 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import kekolab.libplex.PlexClient;
 
 @XmlRootElement
 public class Part {
@@ -18,6 +20,18 @@ public class Part {
     private List<Stream> streams; // Track, Episode
     private String audioProfile; // Video
     private String videoProfile; // Video, Episode
+    private PlexMediaServer server;
+    private PlexClient client;
+
+    public URI uri() {
+        return client.uriBuilder()
+                .fromKey(getKey(), null, getServer())
+                .build();
+    }
+
+    private PlexMediaServer getServer() {
+        return server;
+    }
 
     public Integer getId() {
         return id;
@@ -107,5 +121,13 @@ public class Part {
     @XmlAttribute
     public void setVideoProfile(String videoProfile) {
         this.videoProfile = videoProfile;
+    }
+
+    protected void setServer(PlexMediaServer server) {
+        this.server = server;
+    }
+
+    protected void setClient(PlexClient client) {
+        this.client = client;
     }
 }
