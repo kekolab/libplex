@@ -9,115 +9,124 @@ import kekolab.libplex.xmladapter.SectionItemXML;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
 public abstract class SectionItem extends SectionItemDirectory {
-    private Integer ratingKey;
-    private String guid;
-    private String summary;
-    private Date addedAt;
-    private Date updatedAt;
+	private Integer ratingKey;
+	private String guid;
+	private String summary;
+	private Date addedAt;
+	private Date updatedAt;
 	private Integer librarySectionID;
 	private String librarySectionKey;
 	private String librarySectionTitle;
 	private Integer index;
 
-    public abstract SectionItem details();
-    
-    protected SectionItem(SectionItemXML v) {
-    	setAddedAt(v.getAddedAt());
-    	setArt(v.getArt());
-    	setGuid(v.getGuid());
-    	setIndex(v.getIndex());
-    	setKey(v.getKey());
-    	setLibrarySectionID(v.getLibrarySectionID());
-    	setLibrarySectionKey(v.getLibrarySectionKey());
-    	setLibrarySectionTitle(v.getLibrarySectionTitle());
-    	setRatingKey(v.getRatingKey());
-    	setSummary(v.getSummary());
-    	setThumb(v.getThumb());
-    	setTitle(v.getTitle());
-    	setType(v.getType());
-    	setUpdatedAt(v.getUpdatedAt());
-    }
-    
-    public URI ratingKeyUri() {
-    	return getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
-    }
+	public abstract SectionItem details();
 
-    public Integer getRatingKey() {
-        return ratingKey;
-    }
+	protected SectionItem(SectionItemXML v) {
+		setAddedAt(v.getAddedAt());
+		setArt(v.getArt());
+		setGuid(v.getGuid());
+		setIndex(v.getIndex());
+		setKey(v.getKey());
+		setLibrarySectionID(v.getLibrarySectionID());
+		setLibrarySectionKey(v.getLibrarySectionKey());
+		setLibrarySectionTitle(v.getLibrarySectionTitle());
+		setRatingKey(v.getRatingKey());
+		setSummary(v.getSummary());
+		setThumb(v.getThumb());
+		setTitle(v.getTitle());
+		setType(v.getType());
+		setUpdatedAt(v.getUpdatedAt());
+	}
 
-    public String getGuid() {
-        return guid;
-    }
+	public URI sectionUri() {
+		String librarySectionKey = getLibrarySectionKey();
+		if (librarySectionKey != null)
+			return getClient().uriBuilder().fromKey(librarySectionKey, null, getServer()).build();
+		return null;
+	}
 
-    public String getSummary() {
-        return summary;
-    }
+	public abstract Section section();
 
-    public Date getAddedAt() {
-        return addedAt;
-    }
+	public URI ratingKeyUri() {
+		return getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public Integer getRatingKey() {
+		return ratingKey;
+	}
 
-    @XmlAttribute
-    public void setRatingKey(Integer ratingKey) {
-        this.ratingKey = ratingKey;
-    }
+	public String getGuid() {
+		return guid;
+	}
 
-    @XmlAttribute
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
+	public String getSummary() {
+		return summary;
+	}
 
-    @XmlAttribute
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
+	public Date getAddedAt() {
+		return addedAt;
+	}
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(TimestampAdapter.class)
-    public void setAddedAt(Date addedAt) {
-        this.addedAt = addedAt;
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(TimestampAdapter.class)
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	@XmlAttribute
+	public void setRatingKey(Integer ratingKey) {
+		this.ratingKey = ratingKey;
+	}
+
+	@XmlAttribute
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+
+	@XmlAttribute
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	@XmlAttribute
+	@XmlJavaTypeAdapter(TimestampAdapter.class)
+	public void setAddedAt(Date addedAt) {
+		this.addedAt = addedAt;
+	}
+
+	@XmlAttribute
+	@XmlJavaTypeAdapter(TimestampAdapter.class)
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
 	public Integer getLibrarySectionID() {
-	    return librarySectionID;
+		return librarySectionID;
 	}
 
 	public String getLibrarySectionKey() {
-	    return librarySectionKey;
+		return librarySectionKey;
 	}
 
 	public String getLibrarySectionTitle() {
-	    return librarySectionTitle;
+		return librarySectionTitle;
 	}
 
 	public void setLibrarySectionID(Integer librarySectionID) {
-	    this.librarySectionID = librarySectionID;
+		this.librarySectionID = librarySectionID;
 	}
 
 	public void setLibrarySectionKey(String librarySectionKey) {
-	    this.librarySectionKey = librarySectionKey;
+		this.librarySectionKey = librarySectionKey;
 	}
 
 	public void setLibrarySectionTitle(String librarySectionTitle) {
-	    this.librarySectionTitle = librarySectionTitle;
+		this.librarySectionTitle = librarySectionTitle;
 	}
 
 	public Integer getIndex() {
-	    return index;
+		return index;
 	}
 
 	public void setIndex(Integer index) {
-	    this.index = index;
+		this.index = index;
 	}
 }

@@ -42,12 +42,24 @@ public class Show extends SectionItem {
     }
 
     @Override
+    public ShowSection section() {
+    	return (ShowSection) MusicSection.build(ShowSection.class, getClient(), sectionUri());
+    }
+    
+    @Override
     public Show details() {
         SectionItem item = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(),
                 getServer())).getItems()
                         .get(0);
         return (Show) item;
     }
+    
+	public URI themeUri() {
+		String key = getTheme();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
 
     public List<Season> seasons() {
         SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri());

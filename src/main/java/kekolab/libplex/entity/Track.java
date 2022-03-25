@@ -7,237 +7,284 @@ import java.util.List;
 import kekolab.libplex.xmladapter.SectionItemXML;
 
 public class Track extends SectionItem {
-    private Long duration;
-    private String grandparentArt;
-    private String grandparentGuid;
-    private String grandparentKey;
-    private Integer grandparentRatingKey;
-    private String grandparentThumb;
-    private String grandparentTitle;
-    private Integer hasPremiumLyrics;
-    private List<Media> media = new ArrayList<>(0);
-    private String originalTitle;
-    private String parentGuid;
-    private Integer parentIndex;
-    private String parentKey;
-    private Integer parentRatingKey;
-    private String parentStudio;
-    private String parentThumb;
-    private String parentTitle;
-    private Integer parentYear;
-    private Integer ratingCount;
+	private Long duration;
+	private String grandparentArt;
+	private String grandparentGuid;
+	private String grandparentKey;
+	private Integer grandparentRatingKey;
+	private String grandparentThumb;
+	private String grandparentTitle;
+	private Integer hasPremiumLyrics;
+	private List<Media> media = new ArrayList<>(0);
+	private String originalTitle;
+	private String parentGuid;
+	private Integer parentIndex;
+	private String parentKey;
+	private Integer parentRatingKey;
+	private String parentStudio;
+	private String parentThumb;
+	private String parentTitle;
+	private Integer parentYear;
+	private Integer ratingCount;
 
-    public Track(SectionItemXML v) {
-    	super(v);
-        setDuration(v.getDuration());
-        setGrandparentArt(v.getGrandparentArt());
-        setGrandparentGuid(v.getGrandparentGuid());
-        setGrandparentKey(v.getGrandparentKey());
-        setGrandparentRatingKey(v.getGrandparentRatingKey());
-        setGrandparentThumb(v.getGrandparentThumb());
-        setGrandparentTitle(v.getGrandparentTitle());
-        setHasPremiumLyrics(v.getHasPremiumLyrics());
-        setMedia(v.getMedia());
-        setOriginalTitle(v.getOriginalTitle());
-        setParentGuid(v.getParentGuid());
-        setParentIndex(v.getParentIndex());
-        setParentKey(v.getParentKey());
-        setParentRatingKey(v.getParentRatingKey());
-        setParentStudio(v.getParentStudio());
-        setParentThumb(v.getParentThumb());
-        setParentTitle(v.getParentTitle());
-        setParentYear(v.getParentYear());
-        setRatingCount(v.getRatingCount());        
-    }
+	public Track(SectionItemXML v) {
+		super(v);
+		setDuration(v.getDuration());
+		setGrandparentArt(v.getGrandparentArt());
+		setGrandparentGuid(v.getGrandparentGuid());
+		setGrandparentKey(v.getGrandparentKey());
+		setGrandparentRatingKey(v.getGrandparentRatingKey());
+		setGrandparentThumb(v.getGrandparentThumb());
+		setGrandparentTitle(v.getGrandparentTitle());
+		setHasPremiumLyrics(v.getHasPremiumLyrics());
+		setMedia(v.getMedia());
+		setOriginalTitle(v.getOriginalTitle());
+		setParentGuid(v.getParentGuid());
+		setParentIndex(v.getParentIndex());
+		setParentKey(v.getParentKey());
+		setParentRatingKey(v.getParentRatingKey());
+		setParentStudio(v.getParentStudio());
+		setParentThumb(v.getParentThumb());
+		setParentTitle(v.getParentTitle());
+		setParentYear(v.getParentYear());
+		setRatingCount(v.getRatingCount());        
+	}
 
-    @Override
-    public Track details() {
-        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(),
-                getServer());
-        return (Track) mil.getItems()
-                .get(0);
-    }
 
-    public Long getDuration() {
-        return duration;
-    }
+	public URI artistUri() {
+		String key = getGrandparentKey();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+		return null;
+	}
 
-    public String getGrandparentArt() {
-        return grandparentArt;
-    }
+	public Artist artist() {
+		URI uri = artistUri();
+		if (uri != null) 
+			return (Artist) Artist.build(Artist.class, getClient(), uri, getServer());
+		return null;
+	}
 
-    public String getGrandparentGuid() {
-        return grandparentGuid;
-    }
+	public URI albumUri() {
+		String key = getParentKey();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+		return null;
+	}
 
-    public String getGrandparentKey() {
-        return grandparentKey;
-    }
+	public Album album() {
+		URI uri = albumUri();
+		if (uri != null) 
+			return (Album) Album.build(Artist.class, getClient(), uri, getServer());
+		return null;
+	}
 
-    public Integer getGrandparentRatingKey() {
-        return grandparentRatingKey;
-    }
 
-    public String getGrandparentThumb() {
-        return grandparentThumb;
-    }
+	@Override
+	public MusicSection section() {
+		return (MusicSection) MusicSection.build(MusicSection.class, getClient(), sectionUri());
+	}
 
-    public String getGrandparentTitle() {
-        return grandparentTitle;
-    }
+	@Override
+	public Track details() {
+		SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(),
+				getServer());
+		return (Track) mil.getItems()
+				.get(0);
+	}
 
-    public Integer getHasPremiumLyrics() {
-        return hasPremiumLyrics;
-    }
+	public Long getDuration() {
+		return duration;
+	}
 
-    public List<Media> getMedia() {
-        media.forEach(medium -> {
-            medium.setServer(getServer());
-            medium.setClient(getClient());
-        });
-        return media;
-    }
+	public String getGrandparentArt() {
+		return grandparentArt;
+	}
 
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
+	public String getGrandparentGuid() {
+		return grandparentGuid;
+	}
 
-    public String getParentGuid() {
-        return parentGuid;
-    }
+	public String getGrandparentKey() {
+		return grandparentKey;
+	}
 
-    public Integer getParentIndex() {
-        return parentIndex;
-    }
+	public Integer getGrandparentRatingKey() {
+		return grandparentRatingKey;
+	}
 
-    public String getParentKey() {
-        return parentKey;
-    }
+	public String getGrandparentThumb() {
+		return grandparentThumb;
+	}
 
-    public Integer getParentRatingKey() {
-        return parentRatingKey;
-    }
+	public String getGrandparentTitle() {
+		return grandparentTitle;
+	}
 
-    public String getParentStudio() {
-        return parentStudio;
-    }
+	public Integer getHasPremiumLyrics() {
+		return hasPremiumLyrics;
+	}
 
-    public String getParentThumb() {
-        return parentThumb;
-    }
+	public List<Media> getMedia() {
+		media.forEach(medium -> {
+			medium.setServer(getServer());
+			medium.setClient(getClient());
+		});
+		return media;
+	}
 
-    public String getParentTitle() {
-        return parentTitle;
-    }
+	public String getOriginalTitle() {
+		return originalTitle;
+	}
 
-    public Integer getParentYear() {
-        return parentYear;
-    }
+	public String getParentGuid() {
+		return parentGuid;
+	}
 
-    public Integer getRatingCount() {
-        return ratingCount;
-    }
+	public Integer getParentIndex() {
+		return parentIndex;
+	}
 
-    public URI grandparentArtUri() {
-        String grandparentArt = getGrandparentArt();
-        if (grandparentArt != null)
-            return getClient().uriBuilder()
-                    .fromKey(grandparentArt, null, getServer())
-                    .build();
-        return null;
-    }
+	public String getParentKey() {
+		return parentKey;
+	}
 
-    public URI grandparentThumbUri() {
-        String grandparentThumb = getGrandparentThumb();
-        if (grandparentThumb != null)
-            return getClient().uriBuilder()
-                    .fromKey(grandparentThumb, null, getServer())
-                    .build();
-        return null;
-    }
+	public Integer getParentRatingKey() {
+		return parentRatingKey;
+	}
 
-    public URI parentThumbUri() {
-        String parentThumb = getParentThumb();
-        if (parentThumb != null)
-            return getClient().uriBuilder()
-                    .fromKey(parentThumb, null, getServer())
-                    .build();
-        return null;
-    }
+	public String getParentStudio() {
+		return parentStudio;
+	}
 
-    public void setDuration(Long duration) {
-        this.duration = duration;
-    }
+	public String getParentThumb() {
+		return parentThumb;
+	}
 
-    public void setGrandparentArt(String grandparentArt) {
-        this.grandparentArt = grandparentArt;
-    }
+	public String getParentTitle() {
+		return parentTitle;
+	}
 
-    public void setGrandparentGuid(String grandparentGuid) {
-        this.grandparentGuid = grandparentGuid;
-    }
+	public Integer getParentYear() {
+		return parentYear;
+	}
 
-    public void setGrandparentKey(String grandparentKey) {
-        this.grandparentKey = grandparentKey;
-    }
+	public Integer getRatingCount() {
+		return ratingCount;
+	}
 
-    public void setGrandparentRatingKey(Integer grandparentRatingKey) {
-        this.grandparentRatingKey = grandparentRatingKey;
-    }
+	public URI grandparentArtUri() {
+		String grandparentArt = getGrandparentArt();
+		if (grandparentArt != null)
+			return getClient().uriBuilder()
+					.fromKey(grandparentArt, null, getServer())
+					.build();
+		return null;
+	}
 
-    public void setGrandparentThumb(String grandparentThumb) {
-        this.grandparentThumb = grandparentThumb;
-    }
+	public URI grandparentThumbUri() {
+		String grandparentThumb = getGrandparentThumb();
+		if (grandparentThumb != null)
+			return getClient().uriBuilder()
+					.fromKey(grandparentThumb, null, getServer())
+					.build();
+		return null;
+	}
 
-    public void setGrandparentTitle(String grandparentTitle) {
-        this.grandparentTitle = grandparentTitle;
-    }
+	public URI albumThumbUri() {
+		String key = getParentThumb();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
+	
+	public URI artistThumbUri() {
+		String key = getGrandparentThumb();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
+	
+	public URI artistArtUri() {
+		String key = getGrandparentArt();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
 
-    public void setHasPremiumLyrics(Integer hasPremiumLyrics) {
-        this.hasPremiumLyrics = hasPremiumLyrics;
-    }
+	public void setDuration(Long duration) {
+		this.duration = duration;
+	}
 
-    public void setMedia(List<Media> media) {
-        this.media = media;
-    }
+	public void setGrandparentArt(String grandparentArt) {
+		this.grandparentArt = grandparentArt;
+	}
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
-    }
+	public void setGrandparentGuid(String grandparentGuid) {
+		this.grandparentGuid = grandparentGuid;
+	}
 
-    public void setParentGuid(String parentGuid) {
-        this.parentGuid = parentGuid;
-    }
+	public void setGrandparentKey(String grandparentKey) {
+		this.grandparentKey = grandparentKey;
+	}
 
-    public void setParentIndex(Integer parentIndex) {
-        this.parentIndex = parentIndex;
-    }
+	public void setGrandparentRatingKey(Integer grandparentRatingKey) {
+		this.grandparentRatingKey = grandparentRatingKey;
+	}
 
-    public void setParentKey(String parentKey) {
-        this.parentKey = parentKey;
-    }
+	public void setGrandparentThumb(String grandparentThumb) {
+		this.grandparentThumb = grandparentThumb;
+	}
 
-    public void setParentRatingKey(Integer parentRatingKey) {
-        this.parentRatingKey = parentRatingKey;
-    }
+	public void setGrandparentTitle(String grandparentTitle) {
+		this.grandparentTitle = grandparentTitle;
+	}
 
-    public void setParentStudio(String parentStudio) {
-        this.parentStudio = parentStudio;
-    }
+	public void setHasPremiumLyrics(Integer hasPremiumLyrics) {
+		this.hasPremiumLyrics = hasPremiumLyrics;
+	}
 
-    public void setParentThumb(String parentThumb) {
-        this.parentThumb = parentThumb;
-    }
+	public void setMedia(List<Media> media) {
+		this.media = media;
+	}
 
-    public void setParentTitle(String parentTitle) {
-        this.parentTitle = parentTitle;
-    }
+	public void setOriginalTitle(String originalTitle) {
+		this.originalTitle = originalTitle;
+	}
 
-    public void setParentYear(Integer parentYear) {
-        this.parentYear = parentYear;
-    }
+	public void setParentGuid(String parentGuid) {
+		this.parentGuid = parentGuid;
+	}
 
-    public void setRatingCount(Integer ratingCount) {
-        this.ratingCount = ratingCount;
-    }
+	public void setParentIndex(Integer parentIndex) {
+		this.parentIndex = parentIndex;
+	}
+
+	public void setParentKey(String parentKey) {
+		this.parentKey = parentKey;
+	}
+
+	public void setParentRatingKey(Integer parentRatingKey) {
+		this.parentRatingKey = parentRatingKey;
+	}
+
+	public void setParentStudio(String parentStudio) {
+		this.parentStudio = parentStudio;
+	}
+
+	public void setParentThumb(String parentThumb) {
+		this.parentThumb = parentThumb;
+	}
+
+	public void setParentTitle(String parentTitle) {
+		this.parentTitle = parentTitle;
+	}
+
+	public void setParentYear(Integer parentYear) {
+		this.parentYear = parentYear;
+	}
+
+	public void setRatingCount(Integer ratingCount) {
+		this.ratingCount = ratingCount;
+	}
 }

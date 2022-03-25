@@ -31,13 +31,38 @@ public class Season extends SectionItem {
         setViewedLeafCount(v.getViewedLeafCount());
         setYear(v.getYear());
     }
-
-    public List<Track> tracks() {
-        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri(), getServer()))
-                .getItems()
-                .stream()
-                .map(mi -> (Track) mi)
-                .collect(Collectors.toList());
+    
+	public URI showThumbUri() {
+		String key = getParentThumb();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
+	
+	public URI showThemeUri() {
+		String key = getParentTheme();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
+    
+    @Override
+    public ShowSection section() {
+    	return (ShowSection) MusicSection.build(ShowSection.class, getClient(), sectionUri());
+    }
+    
+    public URI showUri() {
+    	String key  = getParentKey();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
+    
+    public Show show() {
+    	URI showuUri = showUri();
+    	if (showuUri != null)
+    		return (Show) Show.build(Show.class, getClient(), showuUri, getServer());
+    	return null;
     }
 
     @Override
@@ -48,11 +73,8 @@ public class Season extends SectionItem {
     }
 
     public List<Video> episodes() {
-        URI uri = getClient().uriBuilder()
-                .fromKey("/library/metadata/{ratingKey}", this, getServer())
-                .build(getRatingKey());
         List<? extends SectionItem> mis = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
-                uri, getServer())).getItems();
+                keyUri(), getServer())).getItems();
         return mis.stream()
                 .map(item -> (Video) item)
                 .collect(Collectors.toList());

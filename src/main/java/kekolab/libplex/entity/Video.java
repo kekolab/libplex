@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -94,7 +95,68 @@ public class Video extends SectionItem {
         setWriters(v.getWriters());
         setYear(v.getYear());
     }
+    
+    public URI showArtUri() {
+    	String key  = getGrandparentArt();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
+    
+    public URI showThemeUri() {
+    	String key  = getGrandparentTheme();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
+    
+    public URI showThumbUri() {
+    	String key  = getGrandparentThumb();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
 
+    public URI seasonThumbUri() {
+    	String key  = getParentThumb();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
+    
+    public URI showUri() {
+    	String key  = getGrandparentKey();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
+    
+    public Show show() {
+    	URI uri = showUri();
+    	if (uri != null)
+    		return (Show) Show.build(Show.class, getClient(), uri, getServer());
+    	return null;
+    }
+    
+    public URI seasonUri() {
+    	String key  = getParentKey();
+    	if (key != null) 
+    		return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+    	return null;
+    }
+    
+    public Season season() {
+    	URI uri = seasonUri();
+    	if (uri != null)
+    		return (Season) Show.build(Season.class, getClient(), uri, getServer());
+    	return null;
+    }
+    
+    @Override
+    public MovieSection section() {
+    	return (MovieSection) MusicSection.build(MovieSection.class, getClient(), sectionUri());
+    }
+    
     @Override
     public Video details() {
         SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(),

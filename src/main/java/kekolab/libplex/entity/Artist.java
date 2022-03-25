@@ -30,6 +30,11 @@ public class Artist extends SectionItem {
         setStyles(v.getStyles());
         setViewCount(v.getViewCount());
     }
+    
+    @Override
+    public MusicSection section() {
+    	return (MusicSection) MusicSection.build(MusicSection.class, getClient(), sectionUri());
+    }
 
     @Override
     public Artist details() {

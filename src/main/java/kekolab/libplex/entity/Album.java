@@ -9,201 +9,219 @@ import java.util.stream.Collectors;
 import kekolab.libplex.xmladapter.SectionItemXML;
 
 public class Album extends SectionItem {
-    private List<Tag> directors = new ArrayList<>(0);
-    private List<Tag> genres = new ArrayList<>(0);
-    private Date lastViewedAt;
-    private Integer leafCount;
-    private Integer loudnessAnalysisVersion;
-    private List<Tag> moods = new ArrayList<>(0);
-    private Date originallyAvailableAt;
-    private String parentGuid;
-    private String parentKey;
-    private Integer parentRatingKey;
-    private String parentThumb;
-    private String parentTitle;
-    private Double rating;
-    private String studio;
-    private List<Tag> styles = new ArrayList<>(0);
-    private Integer viewCount;
-    private Integer year;
+	private List<Tag> directors = new ArrayList<>(0);
+	private List<Tag> genres = new ArrayList<>(0);
+	private Date lastViewedAt;
+	private Integer leafCount;
+	private Integer loudnessAnalysisVersion;
+	private List<Tag> moods = new ArrayList<>(0);
+	private Date originallyAvailableAt;
+	private String parentGuid;
+	private String parentKey;
+	private Integer parentRatingKey;
+	private String parentThumb;
+	private String parentTitle;
+	private Double rating;
+	private String studio;
+	private List<Tag> styles = new ArrayList<>(0);
+	private Integer viewCount;
+	private Integer year;
 
-    public Album(SectionItemXML v) {
-    	super(v);
-        setDirectors(v.getDirectors());
-        setGenres(v.getGenres());
-        setLastViewedAt(v.getLastViewedAt());
-        setLeafCount(v.getLeafCount());
-        setLoudnessAnalysisVersion(v.getLoudnessAnalysisVersion());
-        setMoods(v.getMoods());
-        setOriginallyAvailableAt(v.getOriginallyAvailableAt());
-        setParentGuid(v.getParentGuid());
-        setParentKey(v.getParentKey());
-        setParentRatingKey(v.getParentRatingKey());
-        setParentThumb(v.getParentThumb());
-        setParentTitle(v.getParentTitle());
-        setRating(v.getRating());
-        setStudio(v.getStudio());
-        setStyles(v.getStyles());
-        setViewCount(v.getViewCount());
-        setYear(v.getYear());
-    }
-    
-    public List<Track> tracks() {
-        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(), getServer()))
-                .getItems()
-                .stream()
-                .map(mi -> (Track) mi)
-                .collect(Collectors.toList());
-    }
-    
-    @Override
-    public Album details() {
-    	URI uri = getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
-        List<? extends SectionItem> mis = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
-        		uri, getServer())).getItems();
-        return mis.size() > 0 ? (Album) mis.get(0) : null;
-    }
+	public Album(SectionItemXML v) {
+		super(v);
+		setDirectors(v.getDirectors());
+		setGenres(v.getGenres());
+		setLastViewedAt(v.getLastViewedAt());
+		setLeafCount(v.getLeafCount());
+		setLoudnessAnalysisVersion(v.getLoudnessAnalysisVersion());
+		setMoods(v.getMoods());
+		setOriginallyAvailableAt(v.getOriginallyAvailableAt());
+		setParentGuid(v.getParentGuid());
+		setParentKey(v.getParentKey());
+		setParentRatingKey(v.getParentRatingKey());
+		setParentThumb(v.getParentThumb());
+		setParentTitle(v.getParentTitle());
+		setRating(v.getRating());
+		setStudio(v.getStudio());
+		setStyles(v.getStyles());
+		setViewCount(v.getViewCount());
+		setYear(v.getYear());
+	}
 
-    public List<Tag> getDirectors() {
-        return directors;
-    }
+	public List<Track> tracks() {
+		return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri(), getServer()))
+				.getItems()
+				.stream()
+				.map(mi -> (Track) mi)
+				.collect(Collectors.toList());
+	}
+	
+	public URI artistThumbUri() {
+		String key = getParentThumb();
+		if (key != null)
+			return getClient().uriBuilder().fromKey(key, null, getServer()).build();
+		return null;
+	}
 
-    public List<Tag> getGenres() {
-        return genres;
-    }
+	@Override
+	public Album details() {
+		List<? extends SectionItem> mis = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
+				ratingKeyUri(), getServer())).getItems();
+		return mis.size() > 0 ? (Album) mis.get(0) : null;
+	}
 
-    public Date getLastViewedAt() {
-        return lastViewedAt;
-    }
+	public URI artistUri() {    	
+		String key = getParentKey();
+		if (key != null) 
+			return getClient().uriBuilder().fromKey(key, getParent(), getServer()).build();
+		return null;
+	}
 
-    public Integer getLeafCount() {
-        return leafCount;
-    }
+	public Artist artist() {    	
+		URI uri = artistUri();
+		if (uri != null)
+			return (Artist) Artist.build(Artist.class, getClient(), uri, getServer());
+		return null;
+	}
 
-    public Integer getLoudnessAnalysisVersion() {
-        return loudnessAnalysisVersion;
-    }
+	@Override
+	public MusicSection section() {
+		return (MusicSection) MusicSection.build(MusicSection.class, getClient(), sectionUri());
+	}
 
-    public List<Tag> getMoods() {
-        return moods;
-    }
+	public List<Tag> getDirectors() {
+		return directors;
+	}
 
-    public Date getOriginallyAvailableAt() {
-        return originallyAvailableAt;
-    }
+	public List<Tag> getGenres() {
+		return genres;
+	}
 
-    public String getParentGuid() {
-        return parentGuid;
-    }
+	public Date getLastViewedAt() {
+		return lastViewedAt;
+	}
 
-    public String getParentKey() {
-        return parentKey;
-    }
+	public Integer getLeafCount() {
+		return leafCount;
+	}
 
-    public Integer getParentRatingKey() {
-        return parentRatingKey;
-    }
+	public Integer getLoudnessAnalysisVersion() {
+		return loudnessAnalysisVersion;
+	}
 
-    public String getParentThumb() {
-        return parentThumb;
-    }
+	public List<Tag> getMoods() {
+		return moods;
+	}
 
-    public String getParentTitle() {
-        return parentTitle;
-    }
+	public Date getOriginallyAvailableAt() {
+		return originallyAvailableAt;
+	}
 
-    public Double getRating() {
-        return rating;
-    }
+	public String getParentGuid() {
+		return parentGuid;
+	}
 
-    public String getStudio() {
-        return studio;
-    }
+	public String getParentKey() {
+		return parentKey;
+	}
 
-    public List<Tag> getStyles() {
-        return styles;
-    }
+	public Integer getParentRatingKey() {
+		return parentRatingKey;
+	}
 
-    public Integer getViewCount() {
-        return viewCount;
-    }
+	public String getParentThumb() {
+		return parentThumb;
+	}
 
-    public Integer getYear() {
-        return year;
-    }
+	public String getParentTitle() {
+		return parentTitle;
+	}
 
-    public URI parentThumbUri() {
-    	String parentThumb = getParentThumb();
-    	if (parentThumb != null)
-    		return getClient().uriBuilder().fromKey(parentThumb, null, getServer()).build();
-    	return null;
-    }
+	public Double getRating() {
+		return rating;
+	}
 
-    public void setDirectors(List<Tag> directors) {
-        this.directors = directors;
-    }
+	public String getStudio() {
+		return studio;
+	}
 
-    public void setGenres(List<Tag> genres) {
-        this.genres = genres;
-    }
+	public List<Tag> getStyles() {
+		return styles;
+	}
 
-    public void setLastViewedAt(Date lastViewedAt) {
-        this.lastViewedAt = lastViewedAt;
-    }
+	public Integer getViewCount() {
+		return viewCount;
+	}
 
-    public void setLeafCount(Integer leafCount) {
-        this.leafCount = leafCount;
-    }
+	public Integer getYear() {
+		return year;
+	}
 
-    public void setLoudnessAnalysisVersion(Integer loudnessAnalysisVersion) {
-        this.loudnessAnalysisVersion = loudnessAnalysisVersion;
-    }
+	public void setDirectors(List<Tag> directors) {
+		this.directors = directors;
+	}
 
-    public void setMoods(List<Tag> moods) {
-        this.moods = moods;
-    }
+	public void setGenres(List<Tag> genres) {
+		this.genres = genres;
+	}
 
-    public void setOriginallyAvailableAt(Date originallyAvailableAt) {
-        this.originallyAvailableAt = originallyAvailableAt;
-    }
+	public void setLastViewedAt(Date lastViewedAt) {
+		this.lastViewedAt = lastViewedAt;
+	}
 
-    public void setParentGuid(String parentGuid) {
-        this.parentGuid = parentGuid;
-    }
+	public void setLeafCount(Integer leafCount) {
+		this.leafCount = leafCount;
+	}
 
-    public void setParentKey(String parentKey) {
-        this.parentKey = parentKey;
-    }
+	public void setLoudnessAnalysisVersion(Integer loudnessAnalysisVersion) {
+		this.loudnessAnalysisVersion = loudnessAnalysisVersion;
+	}
 
-    public void setParentRatingKey(Integer parentRatingKey) {
-        this.parentRatingKey = parentRatingKey;
-    }
+	public void setMoods(List<Tag> moods) {
+		this.moods = moods;
+	}
 
-    public void setParentThumb(String parentThumb) {
-        this.parentThumb = parentThumb;
-    }
+	public void setOriginallyAvailableAt(Date originallyAvailableAt) {
+		this.originallyAvailableAt = originallyAvailableAt;
+	}
 
-    public void setParentTitle(String parentTitle) {
-        this.parentTitle = parentTitle;
-    }
+	public void setParentGuid(String parentGuid) {
+		this.parentGuid = parentGuid;
+	}
 
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
+	public void setParentKey(String parentKey) {
+		this.parentKey = parentKey;
+	}
 
-    public void setStudio(String studio) {
-        this.studio = studio;
-    }
+	public void setParentRatingKey(Integer parentRatingKey) {
+		this.parentRatingKey = parentRatingKey;
+	}
 
-    public void setStyles(List<Tag> styles) {
-        this.styles = styles;
-    }
+	public void setParentThumb(String parentThumb) {
+		this.parentThumb = parentThumb;
+	}
 
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
-    }
+	public void setParentTitle(String parentTitle) {
+		this.parentTitle = parentTitle;
+	}
 
-    public void setYear(Integer year) {
-        this.year = year;
-    }
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+
+	public void setStudio(String studio) {
+		this.studio = studio;
+	}
+
+	public void setStyles(List<Tag> styles) {
+		this.styles = styles;
+	}
+
+	public void setViewCount(Integer viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
 }
