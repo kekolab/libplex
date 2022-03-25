@@ -11,12 +11,8 @@ import kekolab.libplex.xmladapter.SectionItemXML;
 public class Album extends SectionItem {
     private List<Tag> directors = new ArrayList<>(0);
     private List<Tag> genres = new ArrayList<>(0);
-    private Integer index;
     private Date lastViewedAt;
     private Integer leafCount;
-    private Integer librarySectionID;
-    private String librarySectionKey;
-    private String librarySectionTitle;
     private Integer loudnessAnalysisVersion;
     private List<Tag> moods = new ArrayList<>(0);
     private Date originallyAvailableAt;
@@ -32,18 +28,11 @@ public class Album extends SectionItem {
     private Integer year;
 
     public Album(SectionItemXML v) {
-        setAddedAt(v.getAddedAt());
-        setArt(v.getArt());
+    	super(v);
         setDirectors(v.getDirectors());
         setGenres(v.getGenres());
-        setGuid(v.getGuid());
-        setIndex(v.getIndex());
-        setKey(v.getKey());
         setLastViewedAt(v.getLastViewedAt());
         setLeafCount(v.getLeafCount());
-        setLibrarySectionID(v.getLibrarySectionID());
-        setLibrarySectionKey(v.getLibrarySectionKey());
-        setLibrarySectionTitle(v.getLibrarySectionTitle());
         setLoudnessAnalysisVersion(v.getLoudnessAnalysisVersion());
         setMoods(v.getMoods());
         setOriginallyAvailableAt(v.getOriginallyAvailableAt());
@@ -53,14 +42,8 @@ public class Album extends SectionItem {
         setParentThumb(v.getParentThumb());
         setParentTitle(v.getParentTitle());
         setRating(v.getRating());
-        setRatingKey(v.getRatingKey());
         setStudio(v.getStudio());
         setStyles(v.getStyles());
-        setSummary(v.getSummary());
-        setThumb(v.getThumb());
-        setTitle(v.getTitle());
-        setType(v.getType());
-        setUpdatedAt(v.getUpdatedAt());
         setViewCount(v.getViewCount());
         setYear(v.getYear());
     }
@@ -89,28 +72,12 @@ public class Album extends SectionItem {
         return genres;
     }
 
-    public Integer getIndex() {
-        return index;
-    }
-
     public Date getLastViewedAt() {
         return lastViewedAt;
     }
 
     public Integer getLeafCount() {
         return leafCount;
-    }
-
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
-    }
-
-    public String getLibrarySectionKey() {
-        return librarySectionKey;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
     }
 
     public Integer getLoudnessAnalysisVersion() {
@@ -180,28 +147,12 @@ public class Album extends SectionItem {
         this.genres = genres;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
     public void setLastViewedAt(Date lastViewedAt) {
         this.lastViewedAt = lastViewedAt;
     }
 
     public void setLeafCount(Integer leafCount) {
         this.leafCount = leafCount;
-    }
-
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
-    }
-
-    public void setLibrarySectionKey(String librarySectionKey) {
-        this.librarySectionKey = librarySectionKey;
-    }
-
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
     }
 
     public void setLoudnessAnalysisVersion(Integer loudnessAnalysisVersion) {

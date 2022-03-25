@@ -12,49 +12,23 @@ public class Artist extends SectionItem {
     private Date lastViewedAt;
     private List<Tag> genres = new ArrayList<>(0);
     private List<Tag> countries = new ArrayList<>(0);
-    private Integer index;
-    // Details
-    private Integer librarySectionID;
-    private String librarySectionTitle, librarySectionKey;
     private List<Tag> styles = new ArrayList<>(0);
     private List<Tag> similars = new ArrayList<>(0);
     private List<Tag> moods = new ArrayList<>(0);
     private List<Location> locations = new ArrayList<>(0);
 
     public Artist(SectionItemXML v) {
-        setAddedAt(v.getAddedAt());
+    	super(v);
         setAlbumSort(v.getAlbumSort());
-        setArt(v.getArt());
         setCountries(v.getCountries());
         setGenres(v.getGenres());
-        setGuid(v.getGuid());
-        setIndex(v.getIndex());
-        setKey(v.getKey());
         setLastViewedAt(v.getLastViewedAt());
-        setRatingKey(v.getRatingKey());
-        setSkipCount(v.getSkipCount());
-        setSummary(v.getSummary());
-        setThumb(v.getThumb());
-        setTitle(v.getTitle());
-        setType(v.getType());
-        setUpdatedAt(v.getUpdatedAt());
-        setViewCount(v.getViewCount());
-        // Details
-        setLibrarySectionID(v.getLibrarySectionID());
-        setLibrarySectionKey(v.getLibrarySectionKey());
-        setLibrarySectionTitle(v.getLibrarySectionTitle());
-        setStyles(v.getStyles());
-        setSimilars(v.getSimilars());
-        setMoods(v.getMoods());
         setLocations(v.getLocations());
-    }
-
-    public Integer getIndex() {
-        return index;
-    }
-
-    public void setIndex(Integer index) {
-        this.index = index;
+        setMoods(v.getMoods());
+        setSimilars(v.getSimilars());
+        setSkipCount(v.getSkipCount());
+        setStyles(v.getStyles());
+        setViewCount(v.getViewCount());
     }
 
     @Override
@@ -122,18 +96,6 @@ public class Artist extends SectionItem {
         this.countries = countries;
     }
 
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
-    }
-
-    public String getLibrarySectionKey() {
-        return librarySectionKey;
-    }
-
     public List<Tag> getStyles() {
         return styles;
     }
@@ -148,18 +110,6 @@ public class Artist extends SectionItem {
 
     public List<Location> getLocations() {
         return locations;
-    }
-
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
-    }
-
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
-    }
-
-    public void setLibrarySectionKey(String librarySectionKey) {
-        this.librarySectionKey = librarySectionKey;
     }
 
     public void setStyles(List<Tag> styles) {

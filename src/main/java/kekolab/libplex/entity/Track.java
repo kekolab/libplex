@@ -15,10 +15,6 @@ public class Track extends SectionItem {
     private String grandparentThumb;
     private String grandparentTitle;
     private Integer hasPremiumLyrics;
-    private Integer index;
-    private Integer librarySectionID;
-    private String librarySectionKey;
-    private String librarySectionTitle;
     private List<Media> media = new ArrayList<>(0);
     private String originalTitle;
     private String parentGuid;
@@ -32,8 +28,7 @@ public class Track extends SectionItem {
     private Integer ratingCount;
 
     public Track(SectionItemXML v) {
-        setAddedAt(v.getAddedAt());
-        setArt(v.getArt());
+    	super(v);
         setDuration(v.getDuration());
         setGrandparentArt(v.getGrandparentArt());
         setGrandparentGuid(v.getGrandparentGuid());
@@ -41,10 +36,9 @@ public class Track extends SectionItem {
         setGrandparentRatingKey(v.getGrandparentRatingKey());
         setGrandparentThumb(v.getGrandparentThumb());
         setGrandparentTitle(v.getGrandparentTitle());
-        setGuid(v.getGuid());
-        setIndex(v.getIndex());
-        setKey(v.getKey());
+        setHasPremiumLyrics(v.getHasPremiumLyrics());
         setMedia(v.getMedia());
+        setOriginalTitle(v.getOriginalTitle());
         setParentGuid(v.getParentGuid());
         setParentIndex(v.getParentIndex());
         setParentKey(v.getParentKey());
@@ -53,18 +47,7 @@ public class Track extends SectionItem {
         setParentThumb(v.getParentThumb());
         setParentTitle(v.getParentTitle());
         setParentYear(v.getParentYear());
-        setRatingCount(v.getRatingCount());
-        setRatingKey(v.getRatingKey());
-        setSummary(v.getSummary());
-        setThumb(v.getThumb());
-        setTitle(v.getTitle());
-        setType(v.getType());
-        setUpdatedAt(v.getUpdatedAt());
-        setLibrarySectionID(v.getLibrarySectionID());
-        setHasPremiumLyrics(v.getHasPremiumLyrics());
-        setLibrarySectionKey(v.getLibrarySectionKey());
-        setLibrarySectionTitle(v.getLibrarySectionTitle());
-        setOriginalTitle(v.getOriginalTitle());
+        setRatingCount(v.getRatingCount());        
     }
 
     @Override
@@ -105,22 +88,6 @@ public class Track extends SectionItem {
 
     public Integer getHasPremiumLyrics() {
         return hasPremiumLyrics;
-    }
-
-    public Integer getIndex() {
-        return index;
-    }
-
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
-    }
-
-    public String getLibrarySectionKey() {
-        return librarySectionKey;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
     }
 
     public List<Media> getMedia() {
@@ -228,22 +195,6 @@ public class Track extends SectionItem {
 
     public void setHasPremiumLyrics(Integer hasPremiumLyrics) {
         this.hasPremiumLyrics = hasPremiumLyrics;
-    }
-
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
-    }
-
-    public void setLibrarySectionKey(String librarySectionKey) {
-        this.librarySectionKey = librarySectionKey;
-    }
-
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
     }
 
     public void setMedia(List<Media> media) {

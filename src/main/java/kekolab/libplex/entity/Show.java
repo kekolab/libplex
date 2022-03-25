@@ -8,9 +8,8 @@ import java.util.stream.Collectors;
 import kekolab.libplex.xmladapter.SectionItemXML;
 
 public class Show extends SectionItem {
-    private Integer index, viewCount, skipCount, year, leafCount, viewedLeafCount, childCount, librarySectionID;
-    private String studio, originalTitle, contentRating, tagline, theme, audienceRatingImage, librarySectionTitle,
-            librarySectionKey;
+    private Integer viewCount, skipCount, year, leafCount, viewedLeafCount, childCount;
+    private String studio, originalTitle, contentRating, tagline, theme, audienceRatingImage;
     private Double audienceRating;
     private Long duration;
     private Date lastViewedAt, originallyAvailableAt;
@@ -21,34 +20,22 @@ public class Show extends SectionItem {
     private List<Location> locations;
 
     public Show(SectionItemXML v) {
-        setAddedAt(v.getAddedAt());
-        setArt(v.getArt());
+    	super(v);
         setAudienceRating(v.getAudienceRating());
         setAudienceRatingImage(v.getAudienceRatingImage());
         setChildCount(v.getChildCount());
         setContentRating(v.getContentRating());
         setDuration(v.getDuration());
         setGenres(v.getGenres());
-        setGuid(v.getGuid());
         setGuids(v.getGuids());
-        setIndex(v.getIndex());
-        setKey(v.getKey());
         setLastViewedAt(v.getLastViewedAt());
         setLeafCount(v.getLeafCount());
-        setLibrarySectionID(v.getLibrarySectionID());
-        setLibrarySectionKey(v.getLibrarySectionKey());
-        setLibrarySectionTitle(v.getLibrarySectionTitle());
         setLocations(v.getLocations());
         setOriginallyAvailableAt(v.getOriginallyAvailableAt());
         setOriginalTitle(v.getOriginalTitle());
-        setRatingKey(v.getRatingKey());
         setRoles(v.getRoles());
         setTagline(v.getTagline());
         setTheme(v.getTheme());
-        setThumb(v.getThumb());
-        setTitle(v.getTitle());
-        setType(v.getType());
-        setUpdatedAt(v.getUpdatedAt());
         setViewCount(v.getViewCount());
         setViewedLeafCount(v.getViewedLeafCount());
         setYear(v.getYear());
@@ -81,10 +68,6 @@ public class Show extends SectionItem {
                 .collect(Collectors.toList());
     }
 
-    public Integer getIndex() {
-        return index;
-    }
-
     public Integer getViewCount() {
         return viewCount;
     }
@@ -109,10 +92,6 @@ public class Show extends SectionItem {
         return childCount;
     }
 
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
-    }
-
     public String getStudio() {
         return studio;
     }
@@ -135,14 +114,6 @@ public class Show extends SectionItem {
 
     public String getAudienceRatingImage() {
         return audienceRatingImage;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
-    }
-
-    public String getLibrarySectionKey() {
-        return librarySectionKey;
     }
 
     public Double getAudienceRating() {
@@ -181,10 +152,6 @@ public class Show extends SectionItem {
         return locations;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
     public void setViewCount(Integer viewCount) {
         this.viewCount = viewCount;
     }
@@ -209,10 +176,6 @@ public class Show extends SectionItem {
         this.childCount = childCount;
     }
 
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
-    }
-
     public void setStudio(String studio) {
         this.studio = studio;
     }
@@ -235,14 +198,6 @@ public class Show extends SectionItem {
 
     public void setAudienceRatingImage(String audienceRatingImage) {
         this.audienceRatingImage = audienceRatingImage;
-    }
-
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
-    }
-
-    public void setLibrarySectionKey(String librarySectionKey) {
-        this.librarySectionKey = librarySectionKey;
     }
 
     public void setAudienceRating(Double audienceRating) {

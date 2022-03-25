@@ -1,6 +1,5 @@
 package kekolab.libplex.entity;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +24,7 @@ public class Video extends SectionItem {
     private String grandparentTitle;
     private Integer hasPremiumExtras;
     private Integer hasPremiumPrimaryExtra;
-    private Integer index;
     private Date lastViewedAt;
-    private Integer librarySectionID;
-    private String librarySectionKey;
-    private String librarySectionTitle;
     private List<Media> media = new ArrayList<>(0);
     private Date originallyAvailableAt;
     private String originalTitle;
@@ -55,8 +50,7 @@ public class Video extends SectionItem {
     private List<Guid> guids;
 
     public Video(SectionItemXML v) {
-        setAddedAt(v.getAddedAt());
-        setArt(v.getArt());
+    	super(v);
         setAudienceRating(v.getAudienceRating());
         setAudienceRatingImage(v.getAudienceRatingImage());
         setChapterSource(v.getChapterSource());
@@ -72,16 +66,10 @@ public class Video extends SectionItem {
         setGrandparentTheme(v.getGrandparentTheme());
         setGrandparentThumb(v.getGrandparentThumb());
         setGrandparentTitle(v.getGrandparentTitle());
-        setGuid(v.getGuid());
         setGuids(v.getGuids());
         setHasPremiumExtras(v.getHasPremiumExtras());
         setHasPremiumPrimaryExtra(v.getHasPremiumPrimaryExtra());
-        setIndex(v.getIndex());
-        setKey(v.getKey());
         setLastViewedAt(v.getLastViewedAt());
-        setLibrarySectionID(v.getLibrarySectionID());
-        setLibrarySectionKey(v.getLibrarySectionKey());
-        setLibrarySectionTitle(v.getLibrarySectionTitle());
         setMedia(v.getMedia());
         setOriginallyAvailableAt(v.getOriginallyAvailableAt());
         setOriginalTitle(v.getOriginalTitle());
@@ -95,18 +83,12 @@ public class Video extends SectionItem {
         setProducers(v.getProducers());
         setRating(v.getRating());
         setRatingImage(v.getRatingImage());
-        setRatingKey(v.getRatingKey());
         setRoles(v.getRoles());
         setSimilars(v.getSimilars());
         setSkipCount(v.getSkipCount());
         setStudio(v.getStudio());
-        setSummary(v.getSummary());
         setTagline(v.getTagline());
-        setThumb(v.getThumb());
-        setTitle(v.getTitle());
-        setType(v.getType());
         setViewCount(v.getViewCount());
-        setUpdatedAt(v.getUpdatedAt());
         setViewCount(v.getViewCount());
         setViewOffset(v.getViewOffset());
         setWriters(v.getWriters());
@@ -192,24 +174,8 @@ public class Video extends SectionItem {
         return hasPremiumPrimaryExtra;
     }
 
-    public Integer getIndex() {
-        return index;
-    }
-
     public Date getLastViewedAt() {
         return lastViewedAt;
-    }
-
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
-    }
-
-    public String getLibrarySectionKey() {
-        return librarySectionKey;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
     }
 
     public List<Media> getMedia() {
@@ -368,24 +334,8 @@ public class Video extends SectionItem {
         this.hasPremiumPrimaryExtra = hasPremiumPrimaryExtra;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
     public void setLastViewedAt(Date lastViewedAt) {
         this.lastViewedAt = lastViewedAt;
-    }
-
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
-    }
-
-    public void setLibrarySectionKey(String librarySectionKey) {
-        this.librarySectionKey = librarySectionKey;
-    }
-
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
     }
 
     public void setMedia(List<Media> media) {

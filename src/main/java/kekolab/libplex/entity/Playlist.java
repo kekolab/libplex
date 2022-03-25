@@ -13,16 +13,19 @@ public class Playlist extends BaseDirectory {
 	private String guid, summary, playlistType, composite;
 	private Date lastViewedAt, addedAt, updatedAt;
 	private Long duration;
-	
+
 	public List<? extends SectionItem> items() {
 		SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri());
 		return itemList.getItems();
 	}
-	
+
 	public URI compositeUri() {
-		return getClient().uriBuilder().fromKey(getComposite(), getParent(), getServer()).build();
+		String composite = getComposite();
+		if (composite != null)
+			return getClient().uriBuilder().fromKey(composite, getParent(), getServer()).build();
+		return null;
 	}
-	
+
 	public Integer getRatingKey() {
 		return ratingKey;
 	}
@@ -110,6 +113,6 @@ public class Playlist extends BaseDirectory {
 	public void setDuration(Long duration) {
 		this.duration = duration;
 	}
-	
-	
+
+
 }

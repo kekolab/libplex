@@ -5,6 +5,7 @@ import java.util.Date;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import kekolab.libplex.xmladapter.SectionItemXML;
 import kekolab.libplex.xmladapter.TimestampAdapter;
 
 public abstract class SectionItem extends SectionItemDirectory {
@@ -13,8 +14,29 @@ public abstract class SectionItem extends SectionItemDirectory {
     private String summary;
     private Date addedAt;
     private Date updatedAt;
+	private Integer librarySectionID;
+	private String librarySectionKey;
+	private String librarySectionTitle;
+	private Integer index;
 
     public abstract SectionItem details();
+    
+    protected SectionItem(SectionItemXML v) {
+    	setAddedAt(v.getAddedAt());
+    	setArt(v.getArt());
+    	setGuid(v.getGuid());
+    	setIndex(v.getIndex());
+    	setKey(v.getKey());
+    	setLibrarySectionID(v.getLibrarySectionID());
+    	setLibrarySectionKey(v.getLibrarySectionKey());
+    	setLibrarySectionTitle(v.getLibrarySectionTitle());
+    	setRatingKey(v.getRatingKey());
+    	setSummary(v.getSummary());
+    	setThumb(v.getThumb());
+    	setTitle(v.getTitle());
+    	setType(v.getType());
+    	setUpdatedAt(v.getUpdatedAt());
+    }
     
     public URI ratingKeyUri() {
     	return getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
@@ -66,4 +88,36 @@ public abstract class SectionItem extends SectionItemDirectory {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+	public Integer getLibrarySectionID() {
+	    return librarySectionID;
+	}
+
+	public String getLibrarySectionKey() {
+	    return librarySectionKey;
+	}
+
+	public String getLibrarySectionTitle() {
+	    return librarySectionTitle;
+	}
+
+	public void setLibrarySectionID(Integer librarySectionID) {
+	    this.librarySectionID = librarySectionID;
+	}
+
+	public void setLibrarySectionKey(String librarySectionKey) {
+	    this.librarySectionKey = librarySectionKey;
+	}
+
+	public void setLibrarySectionTitle(String librarySectionTitle) {
+	    this.librarySectionTitle = librarySectionTitle;
+	}
+
+	public Integer getIndex() {
+	    return index;
+	}
+
+	public void setIndex(Integer index) {
+	    this.index = index;
+	}
 }

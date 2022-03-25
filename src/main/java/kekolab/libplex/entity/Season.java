@@ -8,25 +8,16 @@ import java.util.stream.Collectors;
 import kekolab.libplex.xmladapter.SectionItemXML;
 
 public class Season extends SectionItem {
-    private Integer parentRatingKey, index, parentIndex, viewCount, skipCount, year, leafCount, viewedLeafCount,
-            librarySectionID;
-    private String parentGuid, parentStudio, titleSort, parentKey, parentTitle, parentThumb, parentTheme,
-            librarySectionKey, librarySectionTitle;
+    private Integer parentRatingKey, parentIndex, viewCount, skipCount, year, leafCount, viewedLeafCount;
+    private String parentGuid, parentStudio, titleSort, parentKey, parentTitle, parentThumb, parentTheme;
     private Date lastViewedAt;
     private List<Guid> guids;
 
     public Season(SectionItemXML v) {
-        setAddedAt(v.getAddedAt());
-        setArt(v.getArt());
-        setGuid(v.getGuid());
+    	super(v);
         setGuids(v.getGuids());
-        setIndex(v.getIndex());
-        setKey(v.getKey());
         setLastViewedAt(v.getLastViewedAt());
         setLeafCount(v.getLeafCount());
-        setLibrarySectionID(v.getLibrarySectionID());
-        setLibrarySectionKey(v.getLibrarySectionKey());
-        setLibrarySectionTitle(v.getLibrarySectionTitle());
         setParentGuid(v.getParentGuid());
         setParentIndex(v.getParentIndex());
         setParentKey(v.getParentKey());
@@ -35,14 +26,7 @@ public class Season extends SectionItem {
         setParentTheme(v.getParentTheme());
         setParentThumb(v.getParentThumb());
         setParentTitle(v.getParentTitle());
-        setRatingKey(v.getRatingKey());
         setSkipCount(v.getSkipCount());
-        setSummary(v.getSummary());
-        setThumb(v.getThumb());
-        setTitle(v.getTitle());
-        setTitleSort(v.getTitleSort());
-        setType(v.getType());
-        setUpdatedAt(v.getUpdatedAt());
         setViewCount(v.getViewCount());
         setViewedLeafCount(v.getViewedLeafCount());
         setYear(v.getYear());
@@ -74,10 +58,6 @@ public class Season extends SectionItem {
                 .collect(Collectors.toList());
     }
 
-    public Integer getIndex() {
-        return index;
-    }
-
     public Integer getParentIndex() {
         return parentIndex;
     }
@@ -100,10 +80,6 @@ public class Season extends SectionItem {
 
     public Integer getViewedLeafCount() {
         return viewedLeafCount;
-    }
-
-    public Integer getLibrarySectionID() {
-        return librarySectionID;
     }
 
     public Integer getParentRatingKey() {
@@ -138,24 +114,12 @@ public class Season extends SectionItem {
         return parentTheme;
     }
 
-    public String getLibrarySectionKey() {
-        return librarySectionKey;
-    }
-
-    public String getLibrarySectionTitle() {
-        return librarySectionTitle;
-    }
-
     public Date getLastViewedAt() {
         return lastViewedAt;
     }
 
     public List<Guid> getGuids() {
         return guids;
-    }
-
-    public void setIndex(Integer index) {
-        this.index = index;
     }
 
     public void setParentIndex(Integer parentIndex) {
@@ -180,10 +144,6 @@ public class Season extends SectionItem {
 
     public void setViewedLeafCount(Integer viewedLeafCount) {
         this.viewedLeafCount = viewedLeafCount;
-    }
-
-    public void setLibrarySectionID(Integer librarySectionID) {
-        this.librarySectionID = librarySectionID;
     }
 
     public void setParentRatingKey(Integer parentRatingKey) {
@@ -216,14 +176,6 @@ public class Season extends SectionItem {
 
     public void setParentTheme(String parentTheme) {
         this.parentTheme = parentTheme;
-    }
-
-    public void setLibrarySectionKey(String librarySectionKey) {
-        this.librarySectionKey = librarySectionKey;
-    }
-
-    public void setLibrarySectionTitle(String librarySectionTitle) {
-        this.librarySectionTitle = librarySectionTitle;
     }
 
     public void setLastViewedAt(Date lastViewedAt) {
