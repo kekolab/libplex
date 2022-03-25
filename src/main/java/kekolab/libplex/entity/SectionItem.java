@@ -1,7 +1,9 @@
 package kekolab.libplex.entity;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -18,6 +20,7 @@ public abstract class SectionItem extends SectionItemDirectory {
 	private String librarySectionKey;
 	private String librarySectionTitle;
 	private Integer index;
+	private List<Collection> collections = new ArrayList<Collection>(0);
 
 	public abstract SectionItem details();
 
@@ -36,6 +39,7 @@ public abstract class SectionItem extends SectionItemDirectory {
 		setTitle(v.getTitle());
 		setType(v.getType());
 		setUpdatedAt(v.getUpdatedAt());
+		setCollections(v.getCollections());
 	}
 
 	public URI sectionUri() {
@@ -128,5 +132,13 @@ public abstract class SectionItem extends SectionItemDirectory {
 
 	public void setIndex(Integer index) {
 		this.index = index;
+	}
+
+	public List<Collection> getCollections() {
+		return collections;
+	}
+
+	public void setCollections(List<Collection> collections) {
+		this.collections = collections;
 	}
 }

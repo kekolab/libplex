@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import kekolab.libplex.entity.Collection;
 import kekolab.libplex.entity.Guid;
 import kekolab.libplex.entity.Location;
 import kekolab.libplex.entity.Media;
@@ -58,6 +59,7 @@ public class SectionItemXML {
     private String theme;
     private List<Guid> guids;
     private String titleSort, parentTheme;
+    private List<Collection> collections = new ArrayList<Collection>(0);
 
     public String getKey() {
         return key;
@@ -682,4 +684,13 @@ public class SectionItemXML {
     public void setParentTheme(String parentTheme) {
         this.parentTheme = parentTheme;
     }
+
+	public List<Collection> getCollections() {
+		return collections;
+	}
+
+	@XmlElement(name = "Collection")
+	public void setCollections(List<Collection> collections) {
+		this.collections = collections;
+	}
 }
