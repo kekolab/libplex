@@ -1,8 +1,10 @@
 package kekolab.libplex.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
+import kekolab.libplex.misc.Searcher;
 
 @XmlRootElement(name = "MediaContainer")
 public class ShowSection extends Section {
@@ -35,10 +37,36 @@ public class ShowSection extends Section {
     }
 
     public List<Show> searchShows(String query) {
-        return getSearcher().searchShows(query);
+        return searchShows(query, null);
     }
     
+	protected List<Show> searchShows(String query, Map<String, Object[]> queryParameters) {
+		Searcher searcher = getSearcher();
+		if (queryParameters != null)
+			queryParameters.forEach((name, values) -> searcher.addQueryParam(name, values));
+		return searcher.searchShows(query);
+	}
+    
     public List<Video> searchEpisodes(String query) {
-        return getSearcher().searchEpisodes(query);
+        return searchEpisodes(query, null);
     }    
+    
+	protected List<Video> searchEpisodes(String query, Map<String, Object[]> queryParameters) {
+		Searcher searcher = getSearcher();
+		if (queryParameters != null)
+			queryParameters.forEach((name, values) -> searcher.addQueryParam(name, values));
+		return searcher.searchEpisodes(query);
+	}
+	
+    public List<Season> searchSeasons(String query) {
+        return searchSeasons(query, null);
+    }    
+
+	public List<Season> searchSeasons(String query, Map<String, Object[]> queryParameters) {
+		Searcher searcher = getSearcher();
+		if (queryParameters != null)
+			queryParameters.forEach((name, values) -> searcher.addQueryParam(name, values));
+		return searcher.searchSeasons(query);
+	}
+    
 }

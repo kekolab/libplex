@@ -70,13 +70,13 @@ public class ArtistSectionTests extends WithPlexClientTests {
 
     @Test
     void searchExistentArtistTest() {
-        assertTrue(section.searchArtist("Alanis")
+        assertTrue(section.searchArtists("Alanis")
                 .size() > 0);
     }
 
     @Test
     void searchNonExistentArtistTest() {
-        assertEquals(0, section.searchArtist("dscjldk")
+        assertEquals(0, section.searchArtists("dscjldk")
                 .size());
     }
 

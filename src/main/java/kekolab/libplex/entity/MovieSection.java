@@ -1,8 +1,10 @@
 package kekolab.libplex.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
+import kekolab.libplex.misc.Searcher;
 
 @XmlRootElement(name = "MediaContainer")
 public class MovieSection extends Section {
@@ -32,6 +34,13 @@ public class MovieSection extends Section {
     
 
     public List<Video> searchMovies(String query) {
-        return getSearcher().searchMovies(query);
-    }    
+        return searchMovies(query, null);
+    }
+    
+	protected List<Video> searchMovies(String query, Map<String, Object[]> queryParameters) {
+		Searcher searcher = getSearcher();
+		if (queryParameters != null)
+			queryParameters.forEach((name, values) -> searcher.addQueryParam(name, values));
+		return searcher.searchMovies(query);
+	}
 }

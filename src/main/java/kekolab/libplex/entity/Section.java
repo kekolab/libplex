@@ -20,6 +20,14 @@ public class Section extends MediaContainerWithArt {
                 getServer());
     	return mediaInfoList.getItems().stream().map(item -> cls.cast(item)).collect(Collectors.toList());
     }
+    
+    public List<CollectionDirectory> collections() {
+    	URI uri = getClient().uriBuilder().fromKey("collection", this, getServer()).build();
+    	CollectionsContainer cc = (CollectionsContainer) CollectionsContainer.build(CollectionsContainer.class, getClient(), uri, getServer());
+    	List<CollectionDirectory> collections = cc.getCollections();
+		collections.forEach(collection -> collection.setParent(this));
+    	return collections;
+    }
 
     public URI thumbUri() {
     	String thumb = getThumb();
