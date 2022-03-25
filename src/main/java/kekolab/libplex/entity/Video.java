@@ -115,10 +115,7 @@ public class Video extends SectionItem {
 
     @Override
     public Video details() {
-        URI uri = getClient().uriBuilder()
-                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
-                .build(getRatingKey());
-        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
+        SectionItemList mil = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(),
                 getServer());
         if (mil.getItems()
                 .size() > 0)

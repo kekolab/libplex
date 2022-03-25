@@ -2,31 +2,25 @@ package kekolab.libplex.entity;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import kekolab.libplex.misc.Searcher;
 
-public class Section extends SyncableMediaContainer {
+public class Section extends MediaContainerWithArt {
     private Integer librarySectionID, viewMode;
-    private String art, content, thumb, title1, viewGroup;
+    private String content, thumb, title1, viewGroup;
     private Searcher searcher;
     
-    protected List<? extends SectionItem> itemListByKey(String key) {
+    protected <A extends SectionItem> List<A> listAndMap(String key, Class<A> cls) {
         URI uri = getClient().uriBuilder()
                 .fromKey(key, this, getServer())
                 .build();
         SectionItemList mediaInfoList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
                 getServer());
-        return mediaInfoList.getItems();
+    	return mediaInfoList.getItems().stream().map(item -> cls.cast(item)).collect(Collectors.toList());
     }
 
-    public URI artUri() {
-    	String art = getArt();
-    	if (art != null)
-    		return getClient().uriBuilder().fromKey(art, this, getServer()).build();
-    	return null;
-    }
-    
     public URI thumbUri() {
     	String thumb = getThumb();
     	if (thumb != null)
@@ -40,10 +34,6 @@ public class Section extends SyncableMediaContainer {
 
     public Integer getViewMode() {
         return viewMode;
-    }
-
-    public String getArt() {
-        return art;
     }
 
     public String getContent() {
@@ -70,11 +60,6 @@ public class Section extends SyncableMediaContainer {
     @XmlAttribute
     public void setViewMode(Integer viewMode) {
         this.viewMode = viewMode;
-    }
-
-    @XmlAttribute
-    public void setArt(String art) {
-        this.art = art;
     }
 
     @XmlAttribute

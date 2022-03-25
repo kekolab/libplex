@@ -1,16 +1,21 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
+
 import jakarta.xml.bind.annotation.XmlAttribute;
 
 public class BaseDirectory extends PlexMediaServerItem {
-
 	private String key;
 	private String title;
 	private String type;
 	private PlexMediaServerItem parent;
-
+	
 	public BaseDirectory() {
 		super();
+	}
+	
+	public URI keyUri() {
+		return getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
 	}
 
 	protected void setParent(PlexMediaServerItem parent) {

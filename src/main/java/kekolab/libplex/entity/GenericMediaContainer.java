@@ -2,15 +2,10 @@ package kekolab.libplex.entity;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 
-public class GenericMediaContainer extends PlexMediaServerItem {
-    private Integer size;
+public class GenericMediaContainer extends BaseMediaContainer {
     private Integer mediaTagVersion;
     private String identifier;
     private String mediaTagPrefix;
-
-    public Integer getSize() {
-        return size;
-    }
 
     public Integer getMediaTagVersion() {
         return mediaTagVersion;
@@ -22,11 +17,6 @@ public class GenericMediaContainer extends PlexMediaServerItem {
 
     public String getMediaTagPrefix() {
         return mediaTagPrefix;
-    }
-
-    
-    @XmlAttribute public void setSize(Integer size) {
-        this.size = size;
     }
 
     

@@ -49,10 +49,7 @@ public class Season extends SectionItem {
     }
 
     public List<Track> tracks() {
-        URI uri = getClient().uriBuilder()
-                .fromKey(getKey(), getParent(), getServer())
-                .build();
-        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer()))
+        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri(), getServer()))
                 .getItems()
                 .stream()
                 .map(mi -> (Track) mi)
@@ -61,11 +58,8 @@ public class Season extends SectionItem {
 
     @Override
     public Season details() {
-        URI uri = getClient().uriBuilder()
-                .fromKey("/library/metadata/{ratingKey}", this, getServer())
-                .build(getRatingKey());
         List<? extends SectionItem> mis = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(),
-                uri, getServer())).getItems();
+                ratingKeyUri(), getServer())).getItems();
         return mis.size() > 0 ? (Season) mis.get(0) : null;
     }
 

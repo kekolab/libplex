@@ -66,8 +66,7 @@ public class Album extends SectionItem {
     }
     
     public List<Track> tracks() {
-    	URI uri = getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
-        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri, getServer()))
+        return ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(), getServer()))
                 .getItems()
                 .stream()
                 .map(mi -> (Track) mi)

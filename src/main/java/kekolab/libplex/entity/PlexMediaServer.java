@@ -36,6 +36,12 @@ public class PlexMediaServer extends PlexItem {
                 .build();
         return (Library) Library.build(Library.class, getClient(), uri, this);
     }
+    
+    public List<Playlist> playlists() {
+    	URI uri = getClient().uriBuilder().fromKey("playlists", this, this).build();
+    	PlayListMediaContainer mc = (PlayListMediaContainer) PlayListMediaContainer.build(PlayListMediaContainer.class, getClient(), uri, this);
+    	return mc.getPlaylists();
+    }
 
     public List<Artist> searchArtist(String query) {
         return getSearcher().searchArtists(query);

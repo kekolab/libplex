@@ -56,20 +56,14 @@ public class Show extends SectionItem {
 
     @Override
     public Show details() {
-        URI uri = getClient().uriBuilder()
-                .fromKey("/library/metadata/{ratingKey}", getParent(), getServer())
-                .build(getRatingKey());
-        SectionItem item = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri,
+        SectionItem item = ((SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), ratingKeyUri(),
                 getServer())).getItems()
                         .get(0);
         return (Show) item;
     }
 
     public List<Season> seasons() {
-        URI uri = getClient().uriBuilder()
-                .fromKey(getKey(), this, getServer())
-                .build();
-        SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri);
+        SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri());
         return itemList.getItems()
                 .stream()
                 .map(item -> (Season) item)

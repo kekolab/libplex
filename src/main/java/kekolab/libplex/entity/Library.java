@@ -8,8 +8,8 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "MediaContainer")
-public class Library extends SyncableMediaContainer {
-    private String art, content, title1, title2;
+public class Library extends MediaContainerWithArt {
+    private String content, title1, title2;
 
     public Sections sections() {
         URI uri = getClient().uriBuilder()
@@ -37,19 +37,6 @@ public class Library extends SyncableMediaContainer {
                 .collect(Collectors.toList());
     }
 
-    public URI artUri() {
-        String art = getArt();
-        if (art != null)
-            return getClient().uriBuilder()
-                    .fromKey(art, this, getServer())
-                    .build();
-        return null;
-    }
-
-    public String getArt() {
-        return art;
-    }
-
     public String getContent() {
         return content;
     }
@@ -60,11 +47,6 @@ public class Library extends SyncableMediaContainer {
 
     public String getTitle2() {
         return title2;
-    }
-
-    @XmlAttribute
-    public void setArt(String art) {
-        this.art = art;
     }
 
     @XmlAttribute

@@ -15,13 +15,12 @@ public class Playlist extends BaseDirectory {
 	private Long duration;
 	
 	public List<? extends SectionItem> items() {
-		URI uri = getClient().uriBuilder().fromKey(getKey(), null, getServer()).build();
-		SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), uri);
+		SectionItemList itemList = (SectionItemList) SectionItemList.build(SectionItemList.class, getClient(), keyUri());
 		return itemList.getItems();
 	}
 	
 	public URI compositeUri() {
-		return getClient().uriBuilder().fromKey(getComposite(), null, getServer()).build();
+		return getClient().uriBuilder().fromKey(getComposite(), getParent(), getServer()).build();
 	}
 	
 	public Integer getRatingKey() {

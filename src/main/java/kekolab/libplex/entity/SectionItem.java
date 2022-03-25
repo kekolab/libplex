@@ -1,5 +1,6 @@
 package kekolab.libplex.entity;
 
+import java.net.URI;
 import java.util.Date;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -14,6 +15,10 @@ public abstract class SectionItem extends SectionItemDirectory {
     private Date updatedAt;
 
     public abstract SectionItem details();
+    
+    public URI ratingKeyUri() {
+    	return getClient().uriBuilder().fromKey("/library/metadata/{ratingKey}", getParent(), getServer()).build(getRatingKey());
+    }
 
     public Integer getRatingKey() {
         return ratingKey;

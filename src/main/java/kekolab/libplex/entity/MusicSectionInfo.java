@@ -1,7 +1,5 @@
 package kekolab.libplex.entity;
 
-import java.net.URI;
-
 import kekolab.libplex.xmladapter.SectionInfoXML;
 
 public class MusicSectionInfo extends SectionInfo {
@@ -10,7 +8,6 @@ public class MusicSectionInfo extends SectionInfo {
     }
 
     public MusicSection section() {
-    	URI uri = getClient().uriBuilder().fromKey(getKey(), getParent(), getServer()).build();
-        return (MusicSection) MusicSection.build(MusicSection.class, getClient(), uri, getServer());
+        return (MusicSection) MusicSection.build(MusicSection.class, getClient(), keyUri(), getServer());
     }
 }

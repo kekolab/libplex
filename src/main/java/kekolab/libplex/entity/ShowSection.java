@@ -1,7 +1,6 @@
 package kekolab.libplex.entity;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -34,13 +33,6 @@ public class ShowSection extends Section {
     public List<Show> onDeck() {
     	return listAndMap("onDeck", Show.class);
     }
-    
-	private <A extends SectionItem> List<A> listAndMap(String key, Class<A> cls) {
-		return super.itemListByKey(key)
-                .stream()
-                .map(mediaInfo -> cls.cast(mediaInfo))
-                .collect(Collectors.toList());
-	}
 
     public List<Show> searchShows(String query) {
         return getSearcher().searchShows(query);

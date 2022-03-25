@@ -1,7 +1,6 @@
 package kekolab.libplex.entity;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -20,13 +19,6 @@ public class MusicSection extends Section {
 
     public List<Album> recentlyAdded() {
     	return listAndMap("recentlyAdded", Album.class);
-    }
-
-    private <A extends SectionItem> List<A> listAndMap(String key, Class<A> cls) {
-    	return super.itemListByKey(key)
-                .stream()
-                .map(mi -> cls.cast(mi))
-                .collect(Collectors.toList());
     }
 
     public List<Artist> searchArtist(String query) {
